@@ -1,12 +1,4 @@
-// export async function GET() {
-//     return new Response(JSON.stringify({msg:'Hello world'}),{
-//         status:200,
-//         headers:{
-//             'Content-Type':'application/json'
-//         }
-//     })    
-// }
-
+export const prerender = false
 import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({request}) => {
