@@ -77,11 +77,11 @@
 
     })
 
-    const isObjectEmpty = (objectName) => {
+    const isObjectEmpty = (objectName:object) => {
         return JSON.stringify(objectName) === "{}";
     }
 
-    const handleError = (err) => {
+    const handleError = (err:object) => {
         console.log('***ERR***', JSON.stringify(err))
         if (err.error.includes('is already a list member')){
                 showNotification('warning', 'You have already subscribed!')
@@ -90,7 +90,7 @@
             showNotification('fail', 'Sorry! Something went wrong.')
     }
 
-    const showNotification = (status, message) => {
+    const showNotification = (status : string, message: string) => {
         const alertDiv = document.querySelector('.alert-div')
         
         if(status === 'success')
@@ -102,7 +102,7 @@
         if(status === 'warning')
             alertDiv?.classList.add('bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
         
-        alertDiv.innerHTML = message
+        alertDiv?.innerHTML = message
         alertDiv?.classList.remove('hidden', 'animate-fade-out-down')
         //alertDiv.classList.add('block', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
         alertDiv?.classList.add('block', 'animate-fade-in-down')
@@ -114,7 +114,7 @@
             //alertDiv.classList.add('hidden', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
             alertDiv?.classList.add('hidden', 'animate-fade-out-down')
             alertDiv?.classList.remove('block')
-            alertDiv.innerHTML = ''
+            alertDiv?.innerHTML = ''
             alertDiv?.classList.remove('bg-green-200', 'text-green-800', 'border-green-300', 'bg-red-200', 'text-red-800', 'border-red-300', 'bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
         },5000)
     }
