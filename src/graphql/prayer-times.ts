@@ -1,4 +1,5 @@
-import { gql } from '@apollo/client/core'
+import pkg from '@apollo/client'
+const { gql } = pkg
 import client  from './apollo-client'
 
 export type PrayerTime = {
