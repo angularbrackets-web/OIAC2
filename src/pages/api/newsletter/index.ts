@@ -14,11 +14,11 @@ export const POST: APIRoute = async ({request}) => {
             },
             body: JSON.stringify(subscriber)
         })
-        if(!apiResponse.ok){
-            throw new Error('Error',{
-                cause: { apiResponse }
-            })
-        }
+        // if(!apiResponse.ok){
+        //     throw new Error('Error',{
+        //         cause: { apiResponse }
+        //     })
+        // }
 
         const jsonResponse = await apiResponse.json()
         
