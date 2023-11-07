@@ -35,7 +35,7 @@
 </div>
 
 <script>
-    const newsletterEmail = document.querySelector("#newsletter-email")
+    const newsletterEmail = document.querySelector("#newsletter-email") as HTMLInputElement
     const emailSubscribeForm = document.querySelector(".email-subscribe-form")
     emailSubscribeForm?.addEventListener("submit", event =>{
         event.preventDefault()
@@ -43,7 +43,7 @@
         const formData = {
             members:[
                 {
-                    email_address: newsletterEmail && (newsletterEmail.value),
+                    email_address: newsletterEmail && (newsletterEmail?.value),
                     status:'subscribed'
                 }
             ]
