@@ -43,7 +43,7 @@
         const formData = {
             members:[
                 {
-                    email_address: newsletterEmail.value,
+                    email_address: newsletterEmail && (newsletterEmail.value),
                     status:'subscribed'
                 }
             ]
@@ -81,7 +81,11 @@
         return JSON.stringify(objectName) === "{}";
     }
 
-    const handleError = (err:object) => {
+    type mailchimpError = {
+        error: string
+    }
+
+    const handleError = (err:mailchimpError) => {
         console.log('***ERR***', JSON.stringify(err))
         if (err.error.includes('is already a list member')){
                 showNotification('warning', 'You have already subscribed!')
@@ -102,7 +106,12 @@
         if(status === 'warning')
             alertDiv?.classList.add('bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
         
-        alertDiv?.innerHTML = message
+        // if(alertDiv !== undefined){
+        //     alertDiv.innerHTML = message
+        // }
+
+        alertDiv && (alertDiv.innerHTML = message)
+        
         alertDiv?.classList.remove('hidden', 'animate-fade-out-down')
         //alertDiv.classList.add('block', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
         alertDiv?.classList.add('block', 'animate-fade-in-down')
@@ -114,7 +123,7 @@
             //alertDiv.classList.add('hidden', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
             alertDiv?.classList.add('hidden', 'animate-fade-out-down')
             alertDiv?.classList.remove('block')
-            alertDiv?.innerHTML = ''
+            alertDiv && (alertDiv.innerHTML = message)
             alertDiv?.classList.remove('bg-green-200', 'text-green-800', 'border-green-300', 'bg-red-200', 'text-red-800', 'border-red-300', 'bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
         },5000)
     }
