@@ -1,0 +1,132 @@
+---
+import {getPrayerTimesForCurrentDay} from '../graphql/prayer-times'
+import {type PrayerTime} from '../graphql/prayer-times'
+const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay()
+---
+<div class="bg-teal-100 p-2 text-xs md:hidden">
+    <div class="container flex justify-between">
+        <div class="p-1">
+            <h4 class="font-bold bg-emerald-500 text-gray-50 px-2 rounded-md text-center mb-1">Fajr</h4>
+            <h6 class="text-gray-500">{prayerTimesForCurrentDay.fajrBegins}</h6>
+            <h6 class="font-bold">{prayerTimesForCurrentDay.fajrJamah}</h6>
+        </div>
+        <div class="p-1">
+            <h4 class="font-bold bg-emerald-500 text-gray-50 px-2 rounded-md text-center mb-1">Dhuhr</h4>
+            <h6 class="text-gray-500">{prayerTimesForCurrentDay.zuhrBegins}</h6>
+            <h6 class="font-bold">{prayerTimesForCurrentDay.zuhrJamah}</h6>
+        </div>
+        <div class="p-1">
+            <h4 class="font-bold bg-emerald-500 text-gray-50 px-2 rounded-md text-center mb-1">Asr</h4>
+            <h6 class="text-gray-500">{prayerTimesForCurrentDay.asrBegins}</h6>
+            <h6 class="font-bold">{prayerTimesForCurrentDay.asrJamah}</h6>
+        </div>
+        <div class="p-1">
+            <h4 class="font-bold bg-emerald-500 text-gray-50 px-2 rounded-md text-center mb-1">Maghrib</h4>
+            <h6 class="text-gray-500">{prayerTimesForCurrentDay.maghribBegins}</h6>
+            <h6 class="font-bold">{prayerTimesForCurrentDay.maghribJamah}</h6>
+        </div>
+        <div class="p-1">
+            <h4 class="font-bold bg-emerald-500 text-gray-50 px-2 rounded-md text-center mb-1">Isha</h4>
+            <h6 class="text-gray-500">{prayerTimesForCurrentDay.ishaBegins}</h6>
+            <h6 class="font-bold">{prayerTimesForCurrentDay.ishaJamah}</h6>
+        </div>
+    </div>
+</div>
+
+<div class="bg-cyan-200 p-2 text-xs md:hidden">
+    <div class="container flex space-x-8">
+        <div class="p-1">
+            <h4 class="font-bold bg-cyan-500 text-gray-50 px-2 rounded-md text-center mb-1">Sunrise</h4>
+            <h6 class="text-gray-500">{prayerTimesForCurrentDay.sunrise}</h6>
+        </div>
+        <div class="p-1">
+            <h4 class="font-bold bg-cyan-500 text-gray-50 px-2 rounded-md text-center mb-1">Jummah 1</h4>
+            <h6 class="font-bold">02:00 PM</h6>
+        </div>
+        <div class="p-1">
+            <h4 class="font-bold bg-cyan-500 text-gray-50 px-2 rounded-md text-center mb-1">Jummah 2</h4>
+            <h6 class="font-bold">03:00 PM</h6>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-teal-100 mx-auto px-8 py-2 text-sm md:text-md lg:text-lg xl:text-xl hidden md:block">
+    <div class="container space-x-2 flex ">
+        <div class="flex border border-teal-500 rounded-lg w-full">
+            <div class="font-bold bg-teal-300 text-teal-700 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+                <h4 class="mt-2">Fajr</h4>
+            </div>
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-600">
+            <h6>{prayerTimesForCurrentDay.fajrBegins}</h6>
+            <h6 class="text-teal-800 font-bold">{prayerTimesForCurrentDay.fajrJamah}</h6>
+            </div>
+        </div>
+        <div class="flex border border-teal-500 rounded-lg w-full">
+            <div class="font-bold bg-teal-300 text-teal-700 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+                <h4 class="mt-2">Dhuhr</h4>
+            </div>
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-600">
+            <h6>{prayerTimesForCurrentDay.zuhrBegins}</h6>
+            <h6 class="text-teal-800 font-bold">{prayerTimesForCurrentDay.zuhrJamah}</h6>
+            </div>
+        </div>
+        <div class="flex border border-teal-500 rounded-lg w-full">
+            <div class="font-bold bg-teal-300 text-teal-700 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+                <h4 class="mt-2">Asr</h4>
+            </div>
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-600">
+            <h6>{prayerTimesForCurrentDay.asrBegins}</h6>
+            <h6 class="text-teal-800 font-bold">{prayerTimesForCurrentDay.asrJamah}</h6>
+            </div>
+        </div>
+        <div class="flex border border-teal-500 rounded-lg w-full">
+            <div class="font-bold bg-teal-300 text-teal-700 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+                <h4 class="mt-2">Maghrib</h4>
+            </div>
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-600">
+            <h6>{prayerTimesForCurrentDay.maghribBegins}</h6>
+            <h6 class="text-teal-800 font-bold">{prayerTimesForCurrentDay.maghribJamah}</h6>
+            </div>
+        </div>
+        <div class="flex border border-teal-500 rounded-lg w-full">
+            <div class="font-bold bg-teal-300 text-teal-700 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+                <h4 class="mt-2">Isha</h4>
+            </div>
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-600">
+            <h6>{prayerTimesForCurrentDay.ishaBegins}</h6>
+            <h6 class="text-teal-800 font-bold">{prayerTimesForCurrentDay.ishaJamah}</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="bg-cyan-200 mx-auto px-8 py-2 text-sm md:text-md lg:text-lg xl:text-xl hidden md:block">
+    <div class="container flex space-x-2">
+        <div class="flex border border-cyan-500 rounded-lg">
+            <div class="font-bold bg-cyan-300 text-cyan-700 px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
+                <h4 class="p-2">Sunrise</h4>
+            </div>
+            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-cyan-600">
+            <h6>{prayerTimesForCurrentDay.sunrise}</h6>
+            </div>
+        </div>
+        <div class="flex border border-teal-500 rounded-lg">
+            <div class="font-bold bg-cyan-300 text-cyan-700 px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
+                <h4 class="p-2">Jummah 1</h4>
+            </div>
+            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-cyan-600">
+            <h6 class="text-cyan-800 font-bold">02:00 PM</h6>
+            </div>
+        </div>
+        <div class="flex border border-cyan-500 rounded-lg">
+            <div class="font-bold bg-cyan-300 text-cyan-700 px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
+                <h4 class="p-2">Jummah 2</h4>
+            </div>
+            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-cyan-600">
+            <h6 class="text-cyan-800 font-bold">03:00 PM</h6>
+            </div>
+        </div>
+    </div>
+</div>

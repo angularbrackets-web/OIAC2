@@ -1,0 +1,84 @@
+---
+import oiacLogo from '../assets/oiac-logo-removebg-preview.webp'
+---
+
+<nav class="bg-teal-200 text-teal-700 text-sm md:text-md lg:text-lg xl:text-xl mx-auto px-8 py-2">
+    <div class='container flex items-center justify-between'>
+        <div class='min-w-18 w-18'>
+            <a href="#">
+                <img class=' w-18 h-16' src={oiacLogo.src} alt="OIAC Logo" />
+            </a>                            
+        </div>
+        <div class='hidden md:flex space-x-8 items-center justify-between transition duration-300'>
+            <div><a href="/" class=' hover:text-green-600'>Home</a></div>
+            <div><a href="#" class=' hover:text-green-600'>About Us</a></div>
+            <div><a href="/prayertimes" class=' hover:text-green-600'>Prayer Times</a></div>
+            <div><a href="#" class=' hover:text-green-600'>Programs</a></div>
+            <div><a href="#" class=' hover:text-green-600'>Events</a></div>
+            <div><a href="#" class=' hover:text-green-600'>Contact Us</a></div>
+        </div>
+        <div class='hidden md:block'>
+            <a class=' bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg px-4 py-2' href="#">Donate</a>
+        </div>
+        {/* Mobile Button */}
+        <div class='block md:hidden'>
+            <button class='mobile-menu-button'>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mobile-icon w-10 h-10 block hover:text-green-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                    </svg>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="close-mobile-icon w-10 h-10 hidden text-red-500">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                
+            </button>
+        </div>                        
+    </div>
+
+    {/* Mobile Menu */}
+    
+    <div class='mobile-menu hidden text-lg flex bottom-0 left-0 w-full h-screen px-6 py-6'>
+        <div class='flex flex-col gap-8'>
+            <a href="#" class='block hover:text-green-950'>Home</a>
+            <a href="#" class='block hover:text-green-950'>About Us</a>
+            <a href="#" class='block hover:text-green-950'>Prayer Times</a>
+            <a href="#" class='block hover:text-green-950'>Programs</a>
+            <a href="#" class='block hover:text-green-950'>Events</a>
+            <a href="#" class='block hover:text-green-950'>Contact Us</a>
+        </div>
+    </div>
+    
+</nav>
+
+<script>
+    let mobileMenuButton = document.querySelector('button.mobile-menu-button')
+    mobileMenuButton?.addEventListener('click', () => {
+        toggleShowMobileMenu()
+    })
+    let mobileMenu = document.querySelector('div.mobile-menu')
+    let mobileIcon = document.querySelector('svg.mobile-icon')
+    let closeMobileIcon = document.querySelector('svg.close-mobile-icon')
+
+
+    let showMobileMenu = false
+    let toggleShowMobileMenu = () => {
+        showMobileMenu = !showMobileMenu
+        if(showMobileMenu){
+            mobileMenu?.classList.remove('hidden')
+            mobileMenu?.classList.add('block')
+            mobileIcon?.classList.remove('block')
+            mobileIcon?.classList.add('hidden')
+            closeMobileIcon?.classList.remove('hidden')
+            closeMobileIcon?.classList.add('block')
+        }
+        else{
+            mobileMenu?.classList.remove('block')
+            mobileMenu?.classList.add('hidden')
+            closeMobileIcon?.classList.remove('block')
+            closeMobileIcon?.classList.add('hidden')
+            mobileIcon?.classList.remove('hidden')
+            mobileIcon?.classList.add('block')
+        }
+    }
+    </script>

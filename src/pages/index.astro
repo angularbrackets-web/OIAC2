@@ -1,6 +1,17 @@
 ---
-import PrayerTimes from "../components/PrayerTimes.astro";
-
+import Nav from "../components/Nav.astro"
+import NavPrayerTimes from "../components/NavPrayerTimes.astro"
+import Header from "../components/Header.astro"
+import Welcome from "../components/Welcome.astro"
+import LatestPosts from "../components/LatestPosts.astro"
+import Events from "../components/Events.astro"
+import PrayerTimes from "../components/PrayerTimes.astro"
+import Donate from "../components/Donate.astro"
+import Volunteer from "../components/Volunteer.astro"
+import Imams from "../components/Imams.astro"
+import Newsletter from "../components/Newsletter.astro"
+import Contact from "../components/Contact.astro"
+import Footer from "../components/Footer.astro"
 ---
 
 <html lang="en">
@@ -12,6 +23,15 @@ import PrayerTimes from "../components/PrayerTimes.astro";
 		<title>Astro</title>
 	</head>
 	<body>
-		<PrayerTimes></PrayerTimes>
+		<Header></Header>
+		<Welcome></Welcome>
+		<LatestPosts></LatestPosts>
+		<Events></Events>
+		<Donate></Donate>
+		<Volunteer></Volunteer>
+		<Imams></Imams>
+		<Newsletter></Newsletter>
+		<Contact></Contact>
+		<Footer></Footer>
 	</body>
 </html>

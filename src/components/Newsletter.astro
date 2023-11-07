@@ -1,0 +1,121 @@
+---
+
+---
+
+<div class="bg-blue-950 px-4 p-2 md:px-8 md:py-2 mx-auto">
+    <div class="container mt-5">
+        <div class="rounded-xl text-gray-100 p-5 md:p-20">
+            <h2 class="text-4xl font-bold mb-5">Sign up for our Newsletter</h2>
+            <p class="text-lg my-5">Be among the first to know our updates.</p>
+
+            <form class="email-subscribe-form w-full max-w-lg">
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full px-3">
+                        <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="newsletter-email">
+                            Email
+                        </label>
+                        <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="newsletter-email" required />
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="email-subscribe bg-emerald-500 hover:bg-emerald-700 text-white text-lg font-bold py-4 px-10 rounded">
+                        Submit
+                    </button>
+                    
+                </div>
+                <div class="h-[50px] py-5">
+                    <div class="alert-div hidden min-w-[20rem] text-center p-3 rounded-xl border-4">
+                        
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const newsletterEmail = document.querySelector("#newsletter-email")
+    const emailSubscribeForm = document.querySelector(".email-subscribe-form")
+    emailSubscribeForm?.addEventListener("submit", event =>{
+        event.preventDefault()
+
+        const formData = {
+            members:[
+                {
+                    email_address: newsletterEmail.value,
+                    status:'subscribed'
+                }
+            ]
+        }
+
+        fetch('/api/newsletter',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                Authorization: 'auth 2422ee7f7e8c82250b1375294d27fab9-us5'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.errors.length > 0)
+            {
+                handleError(data.errors[0])
+                return
+            }
+            showNotification('success', 'Thank you for subscribing.')
+        })
+        .catch(error => {
+            console.log('***ERROR***', JSON.stringify(error))
+            if(!isObjectEmpty(error))
+                handleError(error)
+        })
+        
+
+
+
+    })
+
+    const isObjectEmpty = (objectName) => {
+        return JSON.stringify(objectName) === "{}";
+    }
+
+    const handleError = (err) => {
+        console.log('***ERR***', JSON.stringify(err))
+        if (err.error.includes('is already a list member')){
+                showNotification('warning', 'You have already subscribed!')
+                return
+            }
+            showNotification('fail', 'Sorry! Something went wrong.')
+    }
+
+    const showNotification = (status, message) => {
+        const alertDiv = document.querySelector('.alert-div')
+        
+        if(status === 'success')
+            alertDiv?.classList.add('bg-green-200', 'text-green-800', 'border-green-300')
+
+        if(status === 'fail')
+            alertDiv?.classList.add('bg-red-200', 'text-red-800', 'border-red-300')
+
+        if(status === 'warning')
+            alertDiv?.classList.add('bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
+        
+        alertDiv.innerHTML = message
+        alertDiv.classList.remove('hidden', 'animate-fade-out-down')
+        //alertDiv.classList.add('block', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
+        alertDiv.classList.add('block', 'animate-fade-in-down')
+        
+        
+        //transition duration-700 ease-in-out
+        //alertDiv?.classList.add('hidden', 'transition', 'duration-700', 'ease-in-out')
+        setTimeout(()=>{
+            //alertDiv.classList.add('hidden', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
+            alertDiv.classList.add('hidden', 'animate-fade-out-down')
+            alertDiv.classList.remove('block')
+            alertDiv.innerHTML = ''
+            alertDiv.classList.remove('bg-green-200', 'text-green-800', 'border-green-300', 'bg-red-200', 'text-red-800', 'border-red-300', 'bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
+        },5000)
+    }
+</script>

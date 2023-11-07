@@ -1,0 +1,78 @@
+---
+import hifzImage from '../assets/OIAC-Hifz-Program.webp'
+import karateImage from '../assets/OIAC-KARATE-scaled.webp'
+import quranIntensiveImage from '../assets/OIAC-Quran-Intensive-1.webp'
+---
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+    <div class="container mt-5">
+        <div class="flex justify-between">
+            <h4 class="text-2xl">LATEST POSTS</h4>
+            <a class="text-lg" href="#">See all posts</a>
+        </div>
+        
+        <div class="flex flex-wrap justify-between mt-5">
+            <div class="border border-black-100 rounded-md w-full md:w-[50%] lg:w-[33%] h-[700px]">
+                <div>
+                    <img class="rounded-md h-[500px]" src={hifzImage.src} alt="OIAC Hifz Program"></img>
+                </div>
+                <div class="p-5">
+                    <h4 class="text-2xl">After School Hifz Program</h4>
+                    <ul>
+                        <li>Three Classes per week</li>
+                        <li>Kids will be taught Islamic Etiquettes and Adab</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border border-black-100 rounded-md w-full md:w-[50%] lg:w-[33%] h-[700px]">
+                <div>
+                    <img class="rounded-md h-[500px]" src={karateImage.src} alt="Karate Class"></img>
+                </div>
+                <div class="p-5">
+                    <h4 class="text-2xl">Karate Class</h4>
+                    <ul>
+                        <li>Ages - 6 years and up</li>
+                        <li>$100 per month</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border border-black-100 rounded-md w-full md:w-[50%] lg:w-[33%] h-[700px]">
+                <div>
+                    <img class="rounded-md h-[500px]" src={quranIntensiveImage.src} alt="Quran Summer Camp"></img>
+                </div>
+                <div class="p-5">
+                    <h4 class="text-2xl">Summer Quran Intensive Camp</h4>
+                    <ul>
+                        <li>Quran Memorization with proper Tajweed</li>
+                        <li>Full month of July and August</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="w-full h-[500px] bg-gray-800 rounded-xl my-5">
+            <img class="postImageContainer w-full h-[500px]" />
+        </div> -->
+
+    </div>
+</div>
+
+<!-- 
+<script>
+    let postImages = [
+    '../assets/OIAC-Hifz-Program.webp',
+    '../assets/OIAC-KARATE-scaled.webp',
+    '../assets/OIAC-Quran-Intensive-1.webp'
+    ]
+
+    let postImageContainer = document.querySelector('.postImageContainer')
+
+    let setImage = () => {
+        
+    }
+
+    postImages.map(postImage => {
+        postImageContainer.src = postImage
+    })
+
+</script> -->
