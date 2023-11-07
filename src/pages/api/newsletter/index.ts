@@ -11,7 +11,7 @@ import type { APIRoute } from "astro";
 
 export const POST: APIRoute = async ({request}) => {
     const subscriber = await request.json()
-    console.log('Request : ', JSON.stringify(subscriber))
+    // console.log('Request : ', JSON.stringify(subscriber))
 
     try{
         const apiResponse = await fetch('https://us5.api.mailchimp.com/3.0/lists/813c461f9a',{
@@ -22,15 +22,15 @@ export const POST: APIRoute = async ({request}) => {
             },
             body: JSON.stringify(subscriber)
         })
-        // if(!apiResponse.ok){
-        //     throw new Error('Error',{
-        //         cause: { apiResponse }
-        //     })
-        // }
+        if(!apiResponse.ok){
+            throw new Error('Error',{
+                cause: { apiResponse }
+            })
+        }
 
         const jsonResponse = await apiResponse.json()
         
-        console.log('Response : ', JSON.stringify(jsonResponse))
+        // console.log('Response : ', JSON.stringify(jsonResponse))
         if(jsonResponse.errors.length>0){
             return new Response(JSON.stringify(jsonResponse),{
                 status:500,
