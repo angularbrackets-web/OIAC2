@@ -19,8 +19,7 @@ export type MailChimpApiResponse = {
 
 export const POST: APIRoute = async ({request}) => {
     const subscriber = await request.json()
-    // console.log('Request : ', JSON.stringify(subscriber))
-    console.log('maichimp_api_key => ', JSON.stringify(maichimp_api_key))
+    
     try{
         const apiResponse = await fetch('https://us5.api.mailchimp.com/3.0/lists/813c461f9a',{
             method:'POST',
@@ -30,11 +29,11 @@ export const POST: APIRoute = async ({request}) => {
             },
             body: JSON.stringify(subscriber)
         })
-        console.log('API Response : ', JSON.stringify(apiResponse))
+        
         
         const jsonResponse = await apiResponse.json()
         
-        console.log('Response : ', JSON.stringify(jsonResponse))
+        
 
         if(jsonResponse.error_count > 0){
             let error_response : MailChimpApiResponse = {

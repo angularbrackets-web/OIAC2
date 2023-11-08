@@ -61,7 +61,7 @@
         })
         .then(res => res.json())
         .then(data => {
-            console.log('DATA.........', JSON.stringify(data))
+            
             let response = data as MailChimpApiResponse
             
             if(response.status === 'error')
@@ -69,13 +69,12 @@
                 handleError(response.error_message)
                 return
             }else{
-            console.log('SUCCESS..........')
+            
             showNotification('success', 'Thank you for subscribing.')
             }
         })
         .catch(error => {
-            console.log('ERROR............')
-            console.log('***ERROR***', JSON.stringify(error))
+            
             if(!isObjectEmpty(error))
                 handleError(error)
         })
@@ -92,7 +91,7 @@
     }
 
     const handleError = (err:string) => {
-        console.log('***ERR***', JSON.stringify(err))
+        
         if (err.includes('is already a list member')){
                 showNotification('warning', 'You have already subscribed!')
                 return
