@@ -35,6 +35,9 @@
 </div>
 
 <script>
+    import { isObjectEmpty } from "../helper"
+    import type { MailChimpApiResponse } from "../pages/api/newsletter"
+
     const newsletterEmail = document.querySelector("#newsletter-email") as HTMLInputElement
     const emailSubscribeForm = document.querySelector(".email-subscribe-form")
     emailSubscribeForm?.addEventListener("submit", event =>{
@@ -52,21 +55,26 @@
         fetch('/api/newsletter',{
             method:'POST',
             headers:{
-                'Content-Type':'application/json',
-                Authorization: 'auth 2422ee7f7e8c82250b1375294d27fab9-us5'
+                'Content-Type':'application/json'
             },
             body: JSON.stringify(formData)
         })
         .then(res => res.json())
         .then(data => {
-            if(data.errors.length > 0)
+            console.log('DATA.........', JSON.stringify(data))
+            let response = data as MailChimpApiResponse
+            
+            if(response.status === 'error')
             {
-                handleError(data.errors[0])
+                handleError(response.error_message)
                 return
-            }
+            }else{
+            console.log('SUCCESS..........')
             showNotification('success', 'Thank you for subscribing.')
+            }
         })
         .catch(error => {
+            console.log('ERROR............')
             console.log('***ERROR***', JSON.stringify(error))
             if(!isObjectEmpty(error))
                 handleError(error)
@@ -77,17 +85,15 @@
 
     })
 
-    const isObjectEmpty = (objectName:object) => {
-        return JSON.stringify(objectName) === "{}";
-    }
+    
 
     type mailchimpError = {
         error: string
     }
 
-    const handleError = (err:mailchimpError) => {
+    const handleError = (err:string) => {
         console.log('***ERR***', JSON.stringify(err))
-        if (err.error.includes('is already a list member')){
+        if (err.includes('is already a list member')){
                 showNotification('warning', 'You have already subscribed!')
                 return
             }
