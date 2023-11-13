@@ -1,24 +1,47 @@
 ---
 import oiacLogo from '../assets/oiac-logo-removebg-preview.webp'
+import facebookIcon from '../assets/facebook.png'
+import instagramIcon from '../assets/instagram.png'
+import youtubeIcon from '../assets/youtube.png'
 ---
 
-<nav class="bg-teal-200 text-teal-700 text-sm md:text-md lg:text-lg xl:text-xl mx-auto px-8 py-2">
+<nav class="bg-teal-200 text-teal-700 text-sm md:text-md lg:text-lg xl:text-xl mx-auto px-8 py-2 w-full fixed top-0 z-20">
     <div class='container flex items-center justify-between'>
-        <div class='min-w-18 w-18'>
+        <div class='min-w-18 w-18 flex md:block'>
             <a href="#">
-                <img class=' w-18 h-16' src={oiacLogo.src} alt="OIAC Logo" />
-            </a>                            
-        </div>
-        <div class='hidden md:flex space-x-8 items-center justify-between transition duration-300'>
-            <div><a href="/" class=' hover:text-green-600'>Home</a></div>
-            <div><a href="#" class=' hover:text-green-600'>About Us</a></div>
-            <div><a href="/prayertimes" class=' hover:text-green-600'>Prayer Times</a></div>
-            <div><a href="#" class=' hover:text-green-600'>Programs</a></div>
-            <div><a href="#" class=' hover:text-green-600'>Events</a></div>
-            <div><a href="#" class=' hover:text-green-600'>Contact Us</a></div>
+                <img class=' w-18 h-24' src={oiacLogo.src} alt="OIAC Logo" />
+            </a>
+            <div class="pl-5 block md:hidden">
+                <div class=""><h4 class="font-bold text-cyan-600 text-sm">Welcome To</h4></div>
+                <div class=""><h1 class="text-xl font-bold text-blue-950">Omar Ibn Al Khattab Centre</h1></div>
+                <p class="text-xs text-emerald-950">Striving to serve the best interests of Islam and the Muslims of Edmonton</p>
+                <p class="text-xs bg-emerald-950 rounded-xl px-5 w-fit text-teal-100">6005 103A St NW, Edmonton</p>
+            </div>                            
         </div>
         <div class='hidden md:block'>
-            <a class=' bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg px-4 py-2' href="#">Donate</a>
+            <div class=""><h4 class="font-bold text-cyan-600 text-sm">Welcome To</h4></div>
+            <div class=""><h1 class="text-4xl font-bold text-blue-950">Omar Ibn Al Khattab Centre</h1></div>
+            <p class="text-xs text-emerald-950">Striving to serve the best interests of Islam and the Muslims of Edmonton</p>
+            <p class="text-xs bg-emerald-950 rounded-xl px-5 w-fit text-teal-100">6005 103A St NW, Edmonton</p>
+            <div class="flex space-x-8 items-center justify-between transition duration-300 mt-3">
+                <div><a href="/" class=' hover:text-green-600'>Home</a></div>
+                <div><a href="#" class=' hover:text-green-600'>About Us</a></div>
+                <div><a href="/prayertimes" class=' hover:text-green-600'>Prayer Times</a></div>
+                <div><a href="#" class=' hover:text-green-600'>Programs</a></div>
+                <div><a href="#" class=' hover:text-green-600'>Events</a></div>
+                <div><a href="#" class=' hover:text-green-600'>Contact Us</a></div>
+            </div>
+            
+        </div>
+        <div class='hidden md:block mt-8'>
+            <div>
+                <a class=' bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg px-4 py-2' href="#">Donate</a>
+            </div>
+            <div class="flex mt-5 space-x-2">
+                <a href=""><img src={facebookIcon.src} alt="facebook"/></a>
+                <a href=""><img src={instagramIcon.src} alt="instagram"/></a>
+                <a href=""><img src={youtubeIcon.src} alt="youtube"/></a>
+            </div>
         </div>
         {/* Mobile Button */}
         <div class='block md:hidden'>
@@ -50,7 +73,7 @@ import oiacLogo from '../assets/oiac-logo-removebg-preview.webp'
     </div>
     
 </nav>
-
+<div class="h-[110px] md:h-[155px] bg-teal-100 md:bg-teal-950"></div>
 <script>
     let mobileMenuButton = document.querySelector('button.mobile-menu-button')
     mobileMenuButton?.addEventListener('click', () => {
