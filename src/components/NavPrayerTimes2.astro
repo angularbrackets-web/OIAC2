@@ -4,7 +4,7 @@ import {type PrayerTime} from '../graphql/prayer-times'
 const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay()
 ---
 <!-- Mobile View -->
-<div class="bg-teal-100 p-2 text-md md:hidden z-10">
+<div class="bg-teal-100 p-2 text-md md:hidden z-10 w-full">
     <div class="container flex justify-between">
         <div class="p-1">
             <h4 class="font-bold bg-emerald-900 text-gray-50 px-10 py-2 rounded-md text-center mb-1">Fajr</h4>
@@ -34,8 +34,8 @@ const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay(
     </div>
 </div>
 
-<div class="bg-cyan-200 p-2 text-md md:hidden z-10">
-    <div class="container flex space-x-8">
+<div class="bg-cyan-200 p-2 text-md md:hidden z-10 w-full">
+    <div class="container flex justify-between">
         <div class="p-1">
             <h4 class="font-bold bg-sky-900 text-gray-50 px-10 py-2 rounded-md text-center mb-1">Sunrise</h4>
             <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.sunrise}</h6>
