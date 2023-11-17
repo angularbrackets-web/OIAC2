@@ -1,4 +1,5 @@
 ---
+import OIACLayout from "../layouts/oiac-layout.astro"
 import Nav from "../components/Nav.astro"
 import NavPrayerTimes from "../components/NavPrayerTimes.astro"
 import Header from "../components/Header.astro"
@@ -15,24 +16,13 @@ import Footer from "../components/Footer.astro"
 import EventsAndPosts from "../components/EventsAndPosts.astro"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="../src/assets/OIAC.Logo.png" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Welcome to OIAC Edmonton</title>
-	</head>
-	<body>
-		<Header></Header>
-		<EventsAndPosts></EventsAndPosts>
-		
-		
-		<Donate></Donate>
-		<Volunteer></Volunteer>
-		<Imams></Imams>
-		<Newsletter></Newsletter>
-		<Contact></Contact>
-		<Footer></Footer>
-	</body>
-</html>
+<OIACLayout title="Welcome to OIAC">
+	<EventsAndPosts></EventsAndPosts>
+	
+	
+	<Donate></Donate>
+	<Volunteer></Volunteer>
+	<Imams></Imams>
+	<Newsletter></Newsletter>
+	<Contact></Contact>
+	</OIACLayout>

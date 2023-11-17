@@ -4,10 +4,61 @@ import {type PrayerTime} from '../graphql/prayer-times'
 const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay()
 ---
 <!-- Mobile View -->
-<div class="bg-teal-100 p-2 text-sm md:hidden z-10 w-full">
+
+<div class="text-teal-950 text-sm md:hidden z-10 w-full grid grid-cols-5">
+    <div class="bg-teal-500 border-r border-teal-300">
+        <h4 class="font-bold bg-teal-800 text-teal-300 text-center mb-1">Fajr</h4>
+        <h6 class="bg-teal-500 text-teal-100 text-center">{prayerTimesForCurrentDay.fajrBegins}</h6>
+        <h6 class="bg-teal-500 font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
+    </div>
+    <div class="bg-teal-500 border-r border-teal-300">
+        <h4 class="font-bold bg-teal-800 text-teal-300 text-center mb-1">Dhuhr</h4>
+        <h6 class="bg-teal-500 text-teal-100 text-center">{prayerTimesForCurrentDay.zuhrBegins}</h6>
+        <h6 class="bg-teal-500 font-bold text-center">{prayerTimesForCurrentDay.zuhrJamah}</h6>
+    </div>
+    <div class="bg-teal-500 border-r border-teal-300">
+        <h4 class="font-bold bg-teal-800 text-teal-300 text-center mb-1">Asr</h4>
+        <h6 class="bg-teal-500 text-teal-100 text-center">{prayerTimesForCurrentDay.asrBegins}</h6>
+        <h6 class="bg-teal-500 font-bold text-center">{prayerTimesForCurrentDay.asrJamah}</h6>
+    </div>
+    <div class="bg-teal-500 border-r border-teal-300">
+        <h4 class="font-bold bg-teal-800 text-teal-300 text-center mb-1">Maghrib</h4>
+        <h6 class="bg-teal-500 text-teal-100 text-center">{prayerTimesForCurrentDay.maghribBegins}</h6>
+        <h6 class="bg-teal-500 font-bold text-center">{prayerTimesForCurrentDay.maghribJamah}</h6>
+    </div>
+    <div class="bg-teal-500">
+        <h4 class="font-bold bg-teal-800 text-teal-300 text-center mb-1">Isha</h4>
+        <h6 class="bg-teal-500 text-teal-100 text-center">{prayerTimesForCurrentDay.ishaBegins}</h6>
+        <h6 class="bg-teal-500 font-bold text-center">{prayerTimesForCurrentDay.ishaJamah}</h6>
+    </div>
+    
+</div>
+<div class="text-cyan-950 text-sm md:hidden z-10 w-full grid grid-cols-5">
+    <div class="bg-cyan-500 border-r border-cyan-300">
+        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">Sunrise</h4>
+        <h6 class="bg-cyan-500 font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
+    </div>
+    <div class="bg-cyan-500 border-r border-cyan-300">
+        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">Jummah 1</h4>
+        <h6 class="bg-cyan-500 font-bold text-center">{prayerTimesForCurrentDay.zuhrJamah}</h6>
+    </div>
+    <div class="bg-cyan-500 border-r border-cyan-300">
+        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">Jummah 2</h4>
+        <h6 class="bg-cyan-500 font-bold text-center">{prayerTimesForCurrentDay.asrJamah}</h6>
+    </div>
+    <div class="bg-cyan-500 border-r border-cyan-300">
+        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">&nbsp;</h4>
+        <h6 class="bg-cyan-500 font-bold text-center">&nbsp;</h6>
+    </div>
+    <div class="bg-cyan-500">
+        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">&nbsp;</h4>
+        <h6 class="bg-cyan-500 font-bold text-center">&nbsp;</h6>
+    </div>
+</div>
+<!-- <div class="bg-teal-500 p-2 text-sm md:hidden z-10 w-full">
     <div class="container flex justify-between">
-        <div class="p-1">
-            <h4 class="font-bold bg-emerald-900 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Fajr</h4>
+        <div class="p-1 border border-teal-500 rounded-lg w-fit bg-teal-950">
+            <h4 class="font-bold bg-teal-800 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Fajr</h4>
             <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.fajrBegins}</h6>
             <h6 class="font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
         </div>
@@ -32,9 +83,9 @@ const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay(
             <h6 class="font-bold text-center">{prayerTimesForCurrentDay.ishaJamah}</h6>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="bg-cyan-200 p-2 text-sm md:hidden z-10 w-full">
+<!-- <div class="bg-cyan-200 p-2 text-sm md:hidden z-10 w-full">
     <div class="container flex justify-between">
         <div class="p-1">
             <h4 class="font-bold bg-sky-500 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Sunrise</h4>
@@ -49,7 +100,7 @@ const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay(
             <h6 class="font-bold text-center">03:00 PM</h6>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Web View -->
 <div class="bg-teal-950 text-teal-100 text-xs hidden md:flex space-x-5 mx-auto px-8 py-2 z-10 w-full">

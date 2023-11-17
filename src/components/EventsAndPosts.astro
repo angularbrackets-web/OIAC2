@@ -19,8 +19,8 @@ const year = date.getFullYear()
     <div class="container mt-5">
         <!-- Mobile View -->
         <div class="bg-cyan-100 border-cyan-400 md:hidden rounded-xl text-cyan-800 border border-cyan-200">
-            <div class="bg-cyan-200 p-10 font-semibold tracking-wide text-left rounded-t-2xl text-xl text-cyan-900 border-b-4 border-cyan-500">
-                <h4>Events at OIAC - October 2023</h4>
+            <div class="bg-cyan-200 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl text-cyan-900 border-b-4 border-cyan-500">
+                <h4>Events at OIAC - {monthName}&nbsp;{year}</h4>
             </div>
 
             {eventsForTheMonth.map(event => (
@@ -234,7 +234,7 @@ const year = date.getFullYear()
 
                     {posts.map(post => (
                         <div class="post-slide hidden">
-                            <h1 class="text-cyan-800 rounded-t-lg font-bold text-4xl py-5 px-3 mb-4">{post.title}</h1>
+                            <h1 class="text-cyan-800 rounded-t-lg font-bold text-2xl md:text-4xl py-5 px-3 mb-4">{post.title}</h1>
                             <img src={post.image[0].url} alt={post.title} class="rounded-3xl" />
                         </div>
                     ))}
