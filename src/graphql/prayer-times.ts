@@ -1,5 +1,5 @@
 import pkg from '@apollo/client'
-const { gql } = pkg
+const { gql, useMutation } = pkg
 import client  from './apollo-client'
 
 export type PrayerTime = {
@@ -55,7 +55,7 @@ export async function getPrayerTimesForCurrentMonth() {
     const result = await client.query({
         query: gql`
             query MyQuery($month:Int!) {
-                prayerTimes(where: {month: $month}) {
+                prayerTimes(where: {month: $month}, first:100) {
                 month
                 day
                 fajrBegins
@@ -76,11 +76,29 @@ export async function getPrayerTimesForCurrentMonth() {
   let prayerTimesForCurrentMonth : Array<PrayerTime> = []
 
   prayerTimesForCurrentMonth = result.data.prayerTimes
-  
+    // console.log('prayerTimesForCurrentMonth : ', JSON.stringify(prayerTimesForCurrentMonth))
   return prayerTimesForCurrentMonth
 }
 
+export async function addPrayerTime() {
+    console.log('$$$$$$ADD PRAYER TIME$$$$$$$$')
+    const ADD_PRAYERTIME = gql`
+    mutation AddPrayerTimes {
+        createPrayerTime(
+          data: 
+            {
+                month: 12, day: 3, fajrBegins: "06:21 AM", fajrJamah: "06:45 AM", sunrise: "08:30 AM", zuhrBegins: "12:28 PM", zuhrJamah: "01:00 PM", asrBegins: "02:00 PM", asrJamah: "02:30 PM", maghribBegins: "04:19 PM", maghribJamah: "04:24 PM", ishaBegins: "06:19 PM", ishaJamah: "07:30 PM"
+            }
+        ) {
+          id
+        }
+      }
+      
+    `
+    const result = await client.mutate({mutation:ADD_PRAYERTIME})
 
+    console.log('MUTATION RESULT: ', JSON.stringify(result))
+}
 
 // // export async function uploadPrayerTimes() {
     

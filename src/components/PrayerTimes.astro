@@ -1,9 +1,13 @@
 ---
-import {getPrayerTimesForCurrentDay, getPrayerTimesForCurrentMonth} from '../graphql/prayer-times'
+import {getPrayerTimesForCurrentDay, getPrayerTimesForCurrentMonth, addPrayerTime} from '../graphql/prayer-times'
 import {type PrayerTime} from '../graphql/prayer-times'
 const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay()
 
 const prayerTimesForCurrentMonth : Array<PrayerTime> = await getPrayerTimesForCurrentMonth()
+
+const addPrayerTimeResult = await addPrayerTime()
+console.log('******* addPrayerTimeResult => ', JSON.stringify(addPrayerTimeResult))
+
 ---
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
