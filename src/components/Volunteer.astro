@@ -15,13 +15,13 @@ import volunteerImage from '../assets/volunteer.jpg'
                     <p class="mb-3">Please fill in your details and let us get back to you.</p>
                     <p class="mb-16">Jazakumullah Khair.</p>
                     
-                    <form class="w-full max-w-lg">
+                    <form id="add-volunteer-form" class="w-full max-w-lg">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full px-3">
                                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="volunteer-name">
                                     Name
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="volunteer-name" />
+                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="volunteer-name" required />
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -29,7 +29,7 @@ import volunteerImage from '../assets/volunteer.jpg'
                                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="volunteer-phone">
                                     Phone
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="volunteer-phone" />
+                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="volunteer-phone" id="volunteer-phone" required />
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -37,7 +37,7 @@ import volunteerImage from '../assets/volunteer.jpg'
                                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="volunteer-email">
                                     Email
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="volunteer-email" />
+                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="volunteer-email" id="volunteer-email" required />
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -45,7 +45,7 @@ import volunteerImage from '../assets/volunteer.jpg'
                                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="volunteer-expertise">
                                     Your Expertise
                                 </label>
-                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="volunteer-expertise" />
+                                <input class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="volunteer-expertise" id="volunteer-expertise" />
                             </div>
                         </div>
                         <div class="flex flex-wrap -mx-3 mb-6">
@@ -53,12 +53,17 @@ import volunteerImage from '../assets/volunteer.jpg'
                                 <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="volunteer-message">
                                     Message
                                 </label>
-                                <textarea class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="volunteer-message" />
+                                <textarea class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="volunteer-message" id="volunteer-message" required />
                             </div>
                         </div>
-                        <button class="bg-emerald-500 hover:bg-emerald-700 text-white text-lg font-bold py-4 px-10 rounded">
-                            Submit
-                        </button>
+                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-700 text-white text-lg font-bold py-4 px-10 rounded" id="btn-submit-volunteer">Submit</button>
+                        
+
+                        <div class="h-[50px] py-5">
+                            <div class="alert-div-volunteer hidden min-w-[20rem] text-center p-3 rounded-xl border-4">
+                                
+                            </div>
+                        </div>
                     </form>
                     
                 </div>
@@ -66,3 +71,84 @@ import volunteerImage from '../assets/volunteer.jpg'
         </div>
     </div>
 </div>
+
+<script>
+    
+    
+import type { Volunteer, AddVolunteerApiResponse } from "../pages/api/volunteer"
+import { showNotification } from "../components/Alert"
+import { isObjectEmpty } from "../helper"
+    
+    const btnSubmitAddVolunteer = document.querySelector("#btn-submit-volunteer") as HTMLButtonElement
+    const addVolunteerForm = document.querySelector("#add-volunteer-form") as HTMLFormElement
+
+    addVolunteerForm?.addEventListener("submit", event => {
+        event.preventDefault()
+
+        const volunteerNameTextBox = document.querySelector("#volunteer-name") as HTMLInputElement
+        const volunteerPhoneTextBox = document.querySelector("#volunteer-phone") as HTMLInputElement
+        const volunteerEmailTextBox = document.querySelector("#volunteer-email") as HTMLInputElement
+        const volunteerExpertiseTextBox = document.querySelector("#volunteer-expertise") as HTMLInputElement
+        const volunteerMessageTextBox = document.querySelector("#volunteer-message") as HTMLInputElement
+        const volunteerName = volunteerNameTextBox.value
+        const volunteerPhone = volunteerPhoneTextBox.value
+        const volunteerEmail = volunteerEmailTextBox.value
+        const volunteerExpertise = volunteerExpertiseTextBox.value
+        const volunteerMessage = volunteerMessageTextBox.value
+
+        const newVolunteer: Volunteer = {
+            name : volunteerName,
+            email : volunteerEmail,
+            phone : volunteerPhone,
+            expertise : volunteerExpertise,
+            message : volunteerMessage
+        }
+
+        
+
+
+        fetch('/api/volunteer',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(newVolunteer)
+        })
+        .then(res => res.json())
+        .then(data => {
+            
+            let response = data as AddVolunteerApiResponse
+            
+            if(response.status === 'error')
+            {
+                handleError(response.error_message)
+                console.error(response.error_message)
+                return
+            }else{
+            
+            showNotification('success', 'Thank you for registering to volunteer.', 'alert-div-volunteer')
+            console.log(response.status)
+            addVolunteerForm.reset()
+            }
+        })
+        .catch(error => {
+            console.error(JSON.stringify(error))
+            if(!isObjectEmpty(error))
+                handleError(error)
+        })
+
+
+        
+    })
+
+    const handleError = (err:string) => {
+        
+        if (err.includes('already registered for volunteering')){
+                showNotification('warning', err, 'alert-div-volunteer')
+                return
+            }
+            showNotification('error', 'Sorry! Something went wrong.', 'alert-div-volunteer')
+    }
+
+    
+</script>

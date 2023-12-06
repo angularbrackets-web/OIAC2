@@ -12,11 +12,47 @@ import donateImage from "../assets/donate-image.jpg"
                     <h4 class="text-2xl md:text-4xl mb-10">Donate</h4>
                     <p class="mb-3">Help us to improve our services and to offer much more to our community by donating generously.</p>
                     <p class="mb-3">Your donations big or small makes a significant impact.</p>
-                    <p class="mb-16">Jazakumullah Khair for your continous donations and support.</p>
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white text-lg font-bold py-4 px-10 rounded">
-                        Donate
-                    </button>
+                    <p class="mb-9">Jazakumullah Khair for your continous donations and support.</p>
+
+                    <div class="">
+                        <div>
+                            <h4 class="text-xl">Choose amount</h4>
+                        </div>
+                        <div class="flex gap-6 mt-3">
+                            <div class="bg-cyan-500 text-white font-bold hover:bg-indigo-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount25" name="amount" value="25" class="radioDonateAmount" />
+                                <label for="donateAmount25" class="pl-1">25</label>
+                            </div>
+                            <div class="bg-cyan-500 text-white font-bold hover:bg-indigo-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount50" name="amount" value="50" class="radioDonateAmount" />
+                                <label for="donateAmount50" class="pl-1">50</label>
+                            </div>
+                            <div class="bg-cyan-500 text-white font-bold hover:bg-indigo-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount100" name="amount" value="100" class="radioDonateAmount" />
+                                <label for="donateAmount100" class="pl-1">100</label>
+                            </div>
+                            <div class="bg-cyan-500 text-white font-bold hover:bg-indigo-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount200" name="amount" value="200" class="radioDonateAmount" />
+                                <label for="donateAmount200" class="pl-1">200</label>
+                            </div>
+                            <div class="bg-cyan-500 text-white font-bold hover:bg-indigo-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmountCustom" name="amount" value="custom" class="radioDonateAmount" />
+                                <label for="donateAmountCustom" class="pl-1">Enter</label>
+                            </div>
+                        </div>
+                        <div class="h-[50px] py-5">
+                            <div class="alert-div-donate hidden text-center p-2 rounded-md w-fit">
+                                
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="mt-10 flex gap-6">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white text-lg font-bold py-4 px-10 rounded donate-once">Donate (One time)</button>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white text-lg font-bold py-4 px-10 rounded donate-monthly">Donate (Monthly)</button>
+                    </div>
                 </div>
+
                 <div class="hidden md:block flex-shrink-0">
                 <img class="resize-none rounded-3xl h-[400px]" src={donateImage.src} alt="Donate"></img>
                 </div>
@@ -24,3 +60,88 @@ import donateImage from "../assets/donate-image.jpg"
         </div>
     </div>
 </div>
+
+<script>
+    import { showNotification } from "../components/Alert"
+    const radioDonateAmount = document.querySelectorAll('.radioDonateAmount') as NodeList
+    const buttonDonateOnce = document.querySelector('.donate-once') as HTMLButtonElement
+    const buttonDonateMonthly = document.querySelector('.donate-monthly') as HTMLButtonElement
+    const divDonateAmount = document.querySelector('.divDonateAmount') as HTMLDivElement
+    const oneTimeDonation25 = 'https://donate.stripe.com/14k9E38sseqccpO6ou'
+    const monthlyDonation25 = 'https://buy.stripe.com/00g9E38ss3Ly61qdQR'
+    const oneTimeDonation50 = 'https://donate.stripe.com/aEUcQf9ww6XK61qdQX'
+    const monthlyDonation50 = 'https://buy.stripe.com/eVag2r38895S89yaEG'
+    const oneTimeDonation100 = 'https://donate.stripe.com/cN217xgYYeqcahG6ow'
+    const monthlyDonation100 = 'https://buy.stripe.com/aEU9E3eQQ81O61q28b'
+    const oneTimeDonation200 = 'https://donate.stripe.com/8wM9E3dMM81O4Xm14d'
+    const monthlyDonation200 = 'https://buy.stripe.com/00g8zZ8ss81O9dCbIN'
+    const oneTimeDonationCustom = 'https://donate.stripe.com/9AQ2bBeQQ95SblK9AA'
+
+    
+
+    buttonDonateOnce.addEventListener('click', event => {
+        event.preventDefault()
+        prepareDonation('once')
+    })
+
+    buttonDonateMonthly.addEventListener('click', event => {
+        event.preventDefault()
+        prepareDonation('monthly')
+    })
+
+    const getSelectedDonationAmount = () => {
+        const radioGroupDonateAmount = document.querySelector('input[name="amount"]:checked') as HTMLInputElement
+        return radioGroupDonateAmount?.value
+
+    }
+
+    const prepareDonation = (donationType:string) => {
+        const selectedDonationAmount = getSelectedDonationAmount()
+        if(selectedDonationAmount === undefined){
+            showNotification('warning', 'Select amount to donate', 'alert-div-donate')
+            return
+        }
+        if(donationType === 'monthly' && selectedDonationAmount === 'custom'){
+            showNotification('warning', 'Select fixed amount to donate monthly', 'alert-div-donate')
+            return
+        }
+        if(donationType === 'once'){
+            switch(selectedDonationAmount){
+                case "25":
+                    openStripePage(oneTimeDonation25)
+                    break
+                case "50":
+                    openStripePage(oneTimeDonation50)
+                    break 
+                case "100":
+                    openStripePage(oneTimeDonation100)
+                    break
+                case "200":
+                    openStripePage(oneTimeDonation200)
+                    break 
+                case "custom":
+                    openStripePage(oneTimeDonationCustom)
+                    break 
+            }
+        } else if(donationType === 'monthly'){
+            switch(selectedDonationAmount){
+                case "25":
+                    openStripePage(monthlyDonation25)
+                    break
+                case "50":
+                    openStripePage(monthlyDonation50)
+                    break 
+                case "100":
+                    openStripePage(monthlyDonation100)
+                    break
+                case "200":
+                    openStripePage(monthlyDonation200)
+                    break 
+            }
+        }
+    }
+
+    const openStripePage = (url:string) => {
+        window.open(url, '_blank')?.focus()
+    }
+</script>

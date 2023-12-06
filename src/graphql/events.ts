@@ -1,6 +1,6 @@
 import pkg from '@apollo/client'
 const { gql } = pkg
-import client  from './apollo-client'
+import {client}  from './apollo-client'
 import type { MarkdownContent } from 'astro'
 import type { HTMLString } from 'astro/runtime/server/escape.js'
 

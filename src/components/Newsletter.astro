@@ -24,7 +24,7 @@
                     
                 </div>
                 <div class="h-[50px] py-5">
-                    <div class="alert-div hidden min-w-[20rem] text-center p-3 rounded-xl border-4">
+                    <div class="alert-div-newsletter hidden min-w-[20rem] text-center p-3 rounded-xl border-4">
                         
                     </div>
                 </div>
@@ -35,11 +35,13 @@
 </div>
 
 <script>
+    
     import { isObjectEmpty } from "../helper"
     import type { MailChimpApiResponse } from "../pages/api/newsletter"
-
+    import { showNotification } from "../components/Alert"
+    
     const newsletterEmail = document.querySelector("#newsletter-email") as HTMLInputElement
-    const emailSubscribeForm = document.querySelector(".email-subscribe-form")
+    const emailSubscribeForm = document.querySelector(".email-subscribe-form") as HTMLFormElement
     emailSubscribeForm?.addEventListener("submit", event =>{
         event.preventDefault()
 
@@ -70,7 +72,8 @@
                 return
             }else{
             
-            showNotification('success', 'Thank you for subscribing.')
+            showNotification('success', 'Thank you for subscribing.', 'alert-div-newsletter')
+            emailSubscribeForm.reset()
             }
         })
         .catch(error => {
@@ -93,43 +96,11 @@
     const handleError = (err:string) => {
         
         if (err.includes('is already a list member')){
-                showNotification('warning', 'You have already subscribed!')
+                showNotification('warning', 'You have already subscribed!', 'alert-div-newsletter')
                 return
             }
-            showNotification('fail', 'Sorry! Something went wrong.')
+            showNotification('error', 'Sorry! Something went wrong.', 'alert-div-newsletter')
     }
 
-    const showNotification = (status : string, message: string) => {
-        const alertDiv = document.querySelector('.alert-div')
-        
-        if(status === 'success')
-            alertDiv?.classList.add('bg-green-200', 'text-green-800', 'border-green-300')
-
-        if(status === 'fail')
-            alertDiv?.classList.add('bg-red-200', 'text-red-800', 'border-red-300')
-
-        if(status === 'warning')
-            alertDiv?.classList.add('bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
-        
-        // if(alertDiv !== undefined){
-        //     alertDiv.innerHTML = message
-        // }
-
-        alertDiv && (alertDiv.innerHTML = message)
-        
-        alertDiv?.classList.remove('hidden', 'animate-fade-out-down')
-        //alertDiv.classList.add('block', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
-        alertDiv?.classList.add('block', 'animate-fade-in-down')
-        
-        
-        //transition duration-700 ease-in-out
-        //alertDiv?.classList.add('hidden', 'transition', 'duration-700', 'ease-in-out')
-        setTimeout(()=>{
-            //alertDiv.classList.add('hidden', 'transition-all', 'duration-[5000ms]', 'delay-[5000]', 'ease-in-out')
-            alertDiv?.classList.add('hidden', 'animate-fade-out-down')
-            alertDiv?.classList.remove('block')
-            alertDiv && (alertDiv.innerHTML = message)
-            alertDiv?.classList.remove('bg-green-200', 'text-green-800', 'border-green-300', 'bg-red-200', 'text-red-800', 'border-red-300', 'bg-yellow-200', 'text-yellow-800', 'border-yellow-300')
-        },5000)
-    }
+    
 </script>

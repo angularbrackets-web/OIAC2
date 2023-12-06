@@ -1,6 +1,6 @@
 import pkg from '@apollo/client'
 const { gql, useMutation } = pkg
-import client  from './apollo-client'
+import {client}  from './apollo-client'
 
 export type PrayerTime = {
     id:string,
@@ -21,6 +21,10 @@ export type PrayerTime = {
 
 let currentDay = new Date().getDate()
 let currentMonth = new Date().getMonth() + 1
+
+export const prayerTimeTest = () => {
+  return 'prayer time success'
+}
 
 export async function getPrayerTimesForCurrentDay() {
     const result = await client.query({
