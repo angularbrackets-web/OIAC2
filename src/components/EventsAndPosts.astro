@@ -15,7 +15,7 @@ const monthName = date.toLocaleString('default', { month: 'long' })
 const year = date.getFullYear()
 ---
 
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto bg-cyan-950">
     <div class="container mt-5">
         <!-- Mobile View -->
         <div class="bg-cyan-100 border-cyan-400 md:hidden rounded-xl text-cyan-800 border border-cyan-200">
@@ -37,50 +37,14 @@ const year = date.getFullYear()
                     </div>
                 </div>
             ))}
-
-            <!-- <div class="p-5 border-b border-cyan-300">
-                <h6 class="italic text-sm">SAT / SUN, 11:00 AM - 03:00 PM</h6>
-                <h4 class="text-xl font-bold">Weekend Islamic School</h4>
-                <p class="text-md">Students will learn Quran/ Arabic /Islamic Studies</p>
-            </div>
-            <div class="p-5 border-b border-cyan-300">
-                <h6 class="italic text-sm">OCT 14, 06:45 PM</h6>
-                <h4 class="text-xl font-bold">Family Potluck</h4>
-                <p class="text-md">Talk by Br Asif Followed by a potluck</p>
-            </div>
-            <div class="p-5 border-b border-cyan-300">
-                <h6 class="italic text-sm">CLASS 1 : SAT, SUN, 03:30 PM - 05:30 PM</h6>
-                <h6 class="italic text-sm">CLASS 2 : TUE, WED, THU, 05:30 PM - 07:30 PM</h6>
-                <h4 class="text-xl font-bold">After School Hifz</h4>
-                <p class="text-md">Memorization, revision of Quran with Shiekh Yousef or Sheikh Musab</p>
-            </div>
-            <div class="p-5 border-b border-cyan-300">
-                <h6 class="italic text-sm">CLASS 1 : SUN, 05:30 PM - 07:30 PM</h6>
-                <h6 class="italic text-sm">CLASS 2 : WED, 05:30 PM - 07:30 PM</h6>
-                <h4 class="text-xl font-bold">Quran Class for Women</h4>
-                <p class="text-md">Memorization, revision and Tajweed</p>
-                <p class="text-md text-italic">Free for dedicated sisters</p>
-            </div>
-            <div class="p-5 border-b border-cyan-300">
-                <h6 class="italic text-sm">CLASS 1 (Quran) : MON, 05:30 PM - 07:30 PM</h6>
-                <h6 class="italic text-sm">CLASS 2 (Arabic & Islamic Studies/Fiqh) : SAT, 05:30 PM - 07:30 PM</h6>
-                <h4 class="text-xl font-bold">Deen Class for Adults</h4>
-                <p class="text-md">For those who have always wanted to learn the Deen and Quran</p>
-                <p class="text-md text-italic">Free for dedicated brothers</p>
-            </div>
-            <div class="p-5 border-b border-cyan-300">
-                <h6 class="italic text-sm">SUN, TUE, THU, 05:30 PM - 07:30 PM</h6>
-                <h4 class="text-xl font-bold">Arabic Class</h4>
-                <p class="text-md">Students will learn to speak and communicate in Arabic</p>
-            </div> -->
             <div class="p-1"><p>&nbsp;</p></div>
         </div>
 
         <!-- Web View -->
         <div class="flex space-x-1">
 
-            <div class="bg-cyan-100 text-cyan-800 rounded-3xl my-3 hidden md:block w-full md:w-1/2 border border-cyan-500 flex flex-col">
-                <div class="bg-cyan-200 text-cyan-900 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center border-b-4 border-cyan-500">
+            <div class="bg-cyan-400 text-cyan-950 rounded-3xl my-3 hidden md:block w-full md:w-1/2 border border-cyan-500 flex flex-col">
+                <div class="bg-cyan-300 text-cyan-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center">
                     <h4 class="text-left pl-5">Events at OIAC - {monthName}&nbsp;{year}</h4>
                 </div>
                 
@@ -110,132 +74,20 @@ const year = date.getFullYear()
                 ))}
                 <p class="h-5"></p>
             </div>
-
-            <!-- <div class="bg-cyan-100 text-cyan-600 rounded-lg my-3 hidden md:block w-full md:w-[50%]">
-                <div class="bg-cyan-200 text-cyan-800 rounded-t-lg font-bold text-4xl py-10 px-3 text-center">
-                    <h4 class="text-left pl-5">Events at OIAC - October 2023</h4>
-                </div>
-                <div class="grid grid-cols-4 gap-5 text-xl my-2 border-b border-cyan-200">
-                    <div class="text-center p-1">
-                        <h4 class="text-xl font-bold">SAT / SUN</h4>
-                        <h4 class="text-lg">11:00 AM - 03:00 PM</h4>
-                    </div>
-                    <div class="text-left p-1 col-span-3">
-                        <h3 class="text-2xl font-bold">Weekend Islamic School</h3>
-                        <p class="text-lg">Students will learn Quran/ Arabic /Islamic Studies</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 gap-5 text-xl my-2 border-b border-cyan-200">
-                    <div class="text-center p-1">
-                        <h3><span class="text-4xl mr-2">14</span><span class="text-2xl">OCT</span></h3>
-                        <h4 class="text-lg">SAT</h4>
-                        <h4 class="text-lg">06:45 PM</h4>
-                    </div>
-                    <div class="text-left p-1 col-span-3">
-                        <h3 class="text-2xl font-bold">Family Potluck</h3>
-                        <p class="text-lg">Talk by Br Asif Followed by a potluck</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 gap-5 text-xl my-2 border-b border-cyan-200">
-                    <div class="text-center p-1">
-                        <div class="mb-3">
-                            <h4 class="text-xl font-bold">SAT, SUN</h4>
-                            <h4 class="text-lg">03:30 PM - 05:30 PM</h4>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold">TUE, WED, THU</h4>
-                            <h4 class="text-lg">05:30 PM - 07:30 PM</h4>
-                        </div>
-                    </div>
-                    <div class="text-left p-1 col-span-3">
-                        <h3 class="text-2xl font-bold">After School Hifz</h3>
-                        <p class="text-lg">Memorization, revision of Quran with Shiekh Yousef or Sheikh Musab</p>
-                        <div class="mt-5">
-                            <h4 class="text-xl">Class 1</h4>
-                            <h4 class="text-lg">SUN - 03:30 PM - 05:30 PM</h4>
-                            <h4 class="text-lg">TUE - 05:30 PM - 07:30 PM</h4>
-                            <h4 class="text-lg">THU - 05:30 PM - 07:30 PM</h4>
-                        </div>
-                        <div class="mt-5">
-                            <h4 class="text-xl">Class 2</h4>
-                            <h4 class="text-lg">SAT - 03:30 PM - 05:30 PM</h4>
-                            <h4 class="text-lg">SUN - 03:30 PM - 05:30 PM</h4>
-                            <h4 class="text-lg">WED - 05:30 PM - 07:30 PM</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 gap-5 text-xl my-2 border-b border-cyan-200">
-                    <div class="text-center p-1">
-                        <div class="mb-3">
-                            <h4 class="text-xl font-bold">SUN</h4>
-                            <h4 class="text-lg">05:30 PM - 07:30 PM</h4>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold">WED</h4>
-                            <h4 class="text-lg">05:30 PM - 07:30 PM</h4>
-                        </div>
-                    </div>
-                    <div class="text-left p-1 col-span-3">
-                        <h3 class="text-2xl font-bold">Quran Class for Women</h3>
-                        <p class="text-lg">Memorization, revision and Tajweed</p>
-                        <p class="text-lg">Free for dedicated sisters</p>
-                        <div class="mt-5">
-                            <h4 class="text-lg">SUN - 05:30 PM - 07:30 PM</h4>
-                            <h4 class="text-lg">WED - 05:30 PM - 07:30 PM</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 gap-5 text-xl my-2 border-b border-cyan-200">
-                    <div class="text-center p-1">
-                        <div class="mb-3">
-                            <h4 class="text-xl font-bold">MON</h4>
-                            <h4 class="text-lg">05:30 PM - 07:30 PM</h4>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold">SAT</h4>
-                            <h4 class="text-lg">05:30 PM - 07:30 PM</h4>
-                        </div>
-                    </div>
-                    <div class="text-left p-1 col-span-3">
-                        <h3 class="text-2xl font-bold">Deen Class for Adults</h3>
-                        <p class="text-lg">For those who have always wanted to learn the Deen and Quran</p>
-                        <p class="text-lg">Free for dedicated brothers</p>
-                        <div class="mt-5">
-                            <h4 class="text-lg">MON - 05:30 PM - 07:30 PM (Quran)</h4>
-                            <h4 class="text-lg">SAT - 05:30 PM - 07:30 PM (Arabic & Islamic Studies/Fiqh)</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-4 gap-5 text-xl my-2 border-b border-cyan-200">
-                    <div class="text-center p-1">
-                        <div class="mb-3">
-                            <h4 class="text-xl font-bold">SUN, TUE, THU</h4>
-                            <h4 class="text-lg">05:30 PM - 07:30 PM</h4>
-                        </div>
-                    </div>
-                    <div class="text-left p-1 col-span-3">
-                        <h3 class="text-2xl font-bold">Arabic Class</h3>
-                        <p class="text-lg">Students will learn to speak and communicate in Arabic</p>
-                    </div>
-                </div>
-                <div class="p-1 rounded-b-lg">
-                    
-                </div>
-            </div> -->
-
             <div class="w-full md:w-1/2 flex flex-col">
-                <!-- <div class="flex">
-                <button class="btn-navigate" data-direction="Prev">Prev</button>
-                <button class="btn-navigate" data-direction="Next">Next</button>
-                </div> -->
-                <div class="slide-container w-full rounded-3xl my-3 relative p-5 border border-teal-300 flex-1">
+                <div class="slide-container w-full rounded-3xl my-3 relative bg-lime-500 text-white flex-1">
                     <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
                     <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
 
                     {posts.map(post => (
                         <div class="post-slide hidden">
-                            <h1 class="text-cyan-800 rounded-t-lg font-bold text-2xl md:text-4xl py-5 px-3 mb-4 h-24">{post.title}</h1>
-                            <img src={post.image[0].url} alt={post.title} class="rounded-3xl" />
+                            <div class="bg-lime-400 text-cyan-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center min-h-24">
+                                <h4 class="text-left pl-5">{post.title}</h4>
+                            </div>
+                            <div class="p-5">
+                                <img src={post.image[0].url} alt={post.title} class="rounded-3xl" />
+                            </div>
+                            
                         </div>
                     ))}
                 </div>

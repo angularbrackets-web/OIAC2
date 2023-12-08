@@ -1,47 +1,11 @@
 ---
 import OIACLayout from "../layouts/oiac-layout.astro"
+import DonateComponent from "../components/Donate.astro";
 ---
-<OIACLayout title="Donate">
-    <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
-        <div class="container mt-5 border border-emerald-200 rounded-xl mb-72">
-            <div class="bg-emerald-200 rounded-t-xl p-5">
-                <h1 class="text-4xl">Donate</h1>
-            </div>
-            
-            
-
-            <div class="mt-10 p-10">
-                <div>
-                    <h4 class="text-xl">Choose amount</h4>
-                </div>
-                <div class="flex gap-6 mt-3">
-                    <div class="bg-emerald-100 hover:bg-lime-100 px-10 py-3 rounded-xl border border-emerald-200">
-                        <input type="radio" id="html" name="amount" value="HTML" />
-                        <label for="html" class="pl-5">25</label>
-                    </div>
-                    <div class="bg-emerald-100 hover:bg-lime-100 px-10 py-3 rounded-xl border border-emerald-200">
-                        <input type="radio" id="css" name="amount" value="CSS" />
-                        <label for="css" class="pl-5">50</label>
-                    </div>
-                    <div class="bg-emerald-100 hover:bg-lime-100 px-10 py-3 rounded-xl border border-emerald-200">
-                        <input type="radio" id="html" name="amount" value="HTML" />
-                        <label for="html" class="pl-5">100</label>
-                    </div>
-                    <div class="bg-emerald-100 hover:bg-lime-100 px-10 py-3 rounded-xl border border-emerald-200">
-                        <input type="radio" id="css" name="amount" value="CSS" />
-                        <label for="css" class="pl-5">200</label>
-                    </div>
-                    <div class="bg-emerald-100 hover:bg-lime-100 px-10 py-3 rounded-xl border border-emerald-200">
-                        <input type="radio" id="css" name="amount" value="CSS" disabled />
-                        <label for="css" class="pl-5">Enter amount</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-10 flex gap-6 p-5">
-                <button class="bg-emerald-700 text-white px-4 py-2 rounded-xl border-2 border-emerald-500">Donate (One time)</button>
-                <button class="bg-teal-600 text-white px-4 py-2 rounded-xl border-2 border-teal-400">Donate (Monthly)</button>
-            </div>
+<OIACLayout title="OIAC - Donate">
+    <div class="px-4 p-2 md:px-8 md:py-2 mx-auto bg-indigo-950">
+        <div class="container mt-5 mb-10">
+            <DonateComponent></DonateComponent>
             
         </div>
     </div>

@@ -1,10 +1,83 @@
 ---
+import {getPosts, type OIAC_Post} from '../graphql/posts'
+import {type OIAC_PostImage} from '../graphql/posts'
+import {getEventsForMonths} from '../graphql/events'
+import {type OIAC_Event} from '../graphql/events'
+
+const posts : Array<OIAC_Post> = await getPosts()
+
+
+let currentMonth = new Date().getMonth() + 1
+const eventsForTheMonth : Array<OIAC_Event> = await getEventsForMonths([currentMonth])
+
+const date = new Date()
+const monthName = date.toLocaleString('default', { month: 'long' })
+const year = date.getFullYear()
 ---
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
     <div class="container mt-5">
-        <div class="bg-cyan-100 border-cyan-400 md:hidden rounded-xl text-cyan-600">
-            <div class="bg-cyan-200 p-10 font-semibold tracking-wide text-left rounded-t-2xl text-xl text-cyan-800">
+
+        <!-- Mobile View -->
+        <div class="bg-cyan-400 text-cyan-950 md:hidden rounded-xl">
+            <div class="bg-cyan-300 text-cyan-950 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl">
+                <h4>Events at OIAC - {monthName}&nbsp;{year}</h4>
+            </div>
+
+            {eventsForTheMonth.map(event => (
+                <div class="p-5 border-b border-cyan-300">
+                    {event.schedules.length > 0 && (
+                        event.schedules.map(schedule => (
+                        <h6 class="italic text-sm font-bold">{schedule.date}</h6>
+                        <h6 class="italic text-sm">{schedule.time}</h6>                        
+                        ))
+                    )}
+                    <h4 class="text-xl font-bold text-cyan-900 mb-3">{event.title}</h4>
+                    <div class="text-sm">
+                        <Fragment set:html={event.description.html}  />   
+                    </div>
+                </div>
+            ))}
+            <div class="p-1"><p>&nbsp;</p></div>
+        </div>
+
+        <!-- Web View -->
+        <div class="bg-cyan-400 text-cyan-950 rounded-3xl my-3 hidden md:block w-full flex flex-col">
+            <div class="bg-cyan-300 text-cyan-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center">
+                <h4 class="text-left pl-5">Events at OIAC - {monthName}&nbsp;{year}</h4>
+            </div>
+            
+            {eventsForTheMonth.map(event => (
+                <div class="grid grid-cols-4 gap-5 text-xl border-b border-cyan-300">
+                    <div class="text-center p-1 pt-3">
+                        {event.schedules.length > 0 && (
+                            event.schedules.map(schedule => (
+                            <div class="mb-3">
+                                <h4 class="text-xl font-bold text-cyan-900">{schedule.date}</h4>
+                                <h4 class="text-sm italic">{schedule.time}</h4>
+                            </div>
+                            ))
+                        )}
+                    </div>
+                    <div class="text-left p-1 pt-3 pl-3 col-span-3 border-l border-cyan-300">
+                        <h3 class="text-2xl font-bold mb-5 text-cyan-900">{event.title}</h3>
+                        
+                        {event.description && (
+                            <div class="text-sm">
+                                <Fragment set:html={event.description.html}  />   
+                            </div>                             
+                        )}
+                        
+                    </div>
+                </div>
+            ))}
+            <p class="h-5"></p>
+        </div>
+
+
+
+        <!-- <div class="bg-cyan-400 text-cyan-950 md:hidden rounded-xl text-cyan-600">
+            <div class="bg-cyan-300 p-10 font-semibold tracking-wide text-left rounded-t-2xl text-xl text-cyan-950">
                 <h4>Events at OIAC - October 2023</h4>
             </div>
             <div class="p-5 border-b border-cyan-300">
@@ -45,8 +118,8 @@
             <div class="p-1"><p>&nbsp;</p></div>
         </div>
 
-        <div class="bg-cyan-100 text-cyan-600 rounded-lg my-3 hidden md:block">
-            <div class="bg-cyan-200 text-cyan-800 rounded-t-lg font-bold text-4xl mt-2 py-10 px-3 text-center">
+        <div class="bg-cyan-400 text-cyan-950 rounded-lg my-3 hidden md:block">
+            <div class="bg-cyan-300 text-cyan-950 rounded-t-lg font-bold text-4xl mt-2 py-10 px-3 text-center">
                 <h4 class="text-left pl-5">Events at OIAC - October 2023</h4>
             </div>
             <div class="grid grid-cols-[20vw_minmax(70vw,_1fr)_70vw] text-xl my-2 border-b border-cyan-200 py-5">
@@ -155,7 +228,7 @@
             <div class="p-1 rounded-b-lg">
                 
             </div>
-        </div>
+        </div> -->
 
         
     </div>
