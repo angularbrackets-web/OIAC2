@@ -15,7 +15,7 @@ const monthName = date.toLocaleString('default', { month: 'long' })
 const year = date.getFullYear()
 ---
 
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto bg-cyan-950">
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto bg-gray-50">
     <div class="container mt-5">
         <!-- Mobile View -->
         <div class="bg-cyan-100 border-cyan-400 md:hidden rounded-xl text-cyan-800 border border-cyan-200">
@@ -41,10 +41,10 @@ const year = date.getFullYear()
         </div>
 
         <!-- Web View -->
-        <div class="flex space-x-1">
+        <div class="flex gap-5">
 
-            <div class="bg-cyan-400 text-cyan-950 rounded-3xl my-3 hidden md:block w-full md:w-1/2 border border-cyan-500 flex flex-col">
-                <div class="bg-cyan-300 text-cyan-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center">
+            <div class="bg-cyan-400 text-cyan-950 rounded-3xl my-3 hidden md:block w-full md:w-1/2 flex flex-col">
+                <div class="bg-cyan-300 text-cyan-950 rounded-t-3xl font-bold text-2xl py-10 px-3 text-center">
                     <h4 class="text-left pl-5">Events at OIAC - {monthName}&nbsp;{year}</h4>
                 </div>
                 
@@ -75,13 +75,13 @@ const year = date.getFullYear()
                 <p class="h-5"></p>
             </div>
             <div class="w-full md:w-1/2 flex flex-col">
-                <div class="slide-container w-full rounded-3xl my-3 relative bg-lime-500 text-white flex-1">
+                <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-300 text-cyan-950 flex-1">
                     <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
                     <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
 
                     {posts.map(post => (
                         <div class="post-slide hidden">
-                            <div class="bg-lime-400 text-cyan-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center min-h-24">
+                            <div class="bg-gray-500 text-cyan-50 rounded-t-3xl font-bold text-2xl py-10 px-3 text-center min-h-24">
                                 <h4 class="text-left pl-5">{post.title}</h4>
                             </div>
                             <div class="p-5">
