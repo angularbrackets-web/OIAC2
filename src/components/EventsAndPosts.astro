@@ -15,34 +15,33 @@ const monthName = date.toLocaleString('default', { month: 'long' })
 const year = date.getFullYear()
 ---
 
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto bg-gray-50">
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
     <div class="container mt-5">
-        <!-- Mobile View -->
-        <div class="bg-gray-500 border-cyan-400 md:hidden rounded-xl text-gray-50">
-            <div class="bg-gray-600 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl text-gray-50">
-                <h4>Events at OIAC - {monthName}&nbsp;{year}</h4>
-            </div>
-
-            {eventsForTheMonth.map(event => (
-                <div class="p-5 border-b border-gray-700">
-                    {event.schedules.length > 0 && (
-                        event.schedules.map(schedule => (
-                        <h6 class="italic text-sm font-bold">{schedule.date}</h6>
-                        <h6 class="italic text-sm">{schedule.time}</h6>                        
-                        ))
-                    )}
-                    <h4 class="text-xl font-bold text-cyan-50 mb-3">{event.title}</h4>
-                    <div class="text-sm">
-                        <Fragment set:html={event.description.html}  />   
-                    </div>
-                </div>
-            ))}
-            <div class="p-1"><p>&nbsp;</p></div>
-        </div>
-
+        
         <!-- Web View -->
         <div class="flex gap-5">
 
+            <!-- Posts -->
+            <div class="w-full md:w-1/2 flex flex-col">
+                <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-200 text-cyan-950 flex-1">
+                    <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
+                    <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
+
+                    {posts.map(post => (
+                        <div class="post-slide hidden">
+                            
+                            <div class="">
+                                <img src={post.image[0].url} alt={post.title} class="rounded-t-3xl" />
+                            </div>
+                            <div class="text-cyan-950 font-bold text-2xl py-10 px-3 text-center min-h-24">
+                                <h4 class="text-left pl-5">{post.title}</h4>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Events -->
             <div class="bg-gray-500 text-gray-50 rounded-3xl my-3 hidden md:block w-full md:w-1/2 flex flex-col">
                 <div class="bg-gray-600 text-gray-50 rounded-t-3xl font-bold text-2xl py-10 px-3 text-center">
                     <h4 class="text-left pl-5">Events at OIAC - {monthName}&nbsp;{year}</h4>
@@ -74,32 +73,31 @@ const year = date.getFullYear()
                 ))}
                 <p class="h-5"></p>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col">
-                <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-300 text-cyan-950 flex-1">
-                    <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
-                    <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
-
-                    {posts.map(post => (
-                        <div class="post-slide hidden">
-                            <div class="bg-gray-400 text-cyan-950 rounded-t-3xl font-bold text-2xl py-10 px-3 text-center min-h-24">
-                                <h4 class="text-left pl-5">{post.title}</h4>
-                            </div>
-                            <div class="p-5">
-                                <img src={post.image[0].url} alt={post.title} class="rounded-3xl" />
-                            </div>
-                            
-                        </div>
-                    ))}
-                </div>
-                
-                
-                
-            </div>
-            
-
 
         </div>
         
+        <!-- Mobile View -->
+        <div class="bg-gray-500 border-cyan-400 md:hidden rounded-xl text-gray-50">
+            <div class="bg-gray-600 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl text-gray-50">
+                <h4>Events at OIAC - {monthName}&nbsp;{year}</h4>
+            </div>
+
+            {eventsForTheMonth.map(event => (
+                <div class="p-5 border-b border-gray-700">
+                    {event.schedules.length > 0 && (
+                        event.schedules.map(schedule => (
+                        <h6 class="italic text-sm font-bold">{schedule.date}</h6>
+                        <h6 class="italic text-sm">{schedule.time}</h6>                        
+                        ))
+                    )}
+                    <h4 class="text-xl font-bold text-cyan-50 mb-3">{event.title}</h4>
+                    <div class="text-sm">
+                        <Fragment set:html={event.description.html}  />   
+                    </div>
+                </div>
+            ))}
+            <div class="p-1"><p>&nbsp;</p></div>
+        </div>
 
         
     </div>

@@ -19,20 +19,20 @@ const year = date.getFullYear()
     <div class="container mt-5">
 
         <!-- Mobile View -->
-        <div class="bg-cyan-300 text-cyan-950 md:hidden rounded-xl">
-            <div class="bg-cyan-200 text-cyan-950 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl">
+        <div class="bg-emerald-300 text-emerald-950 md:hidden rounded-xl">
+            <div class="bg-emerald-200 text-emerald-950 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl">
                 <h4>Events at OIAC - {monthName}&nbsp;{year}</h4>
             </div>
 
             {eventsForTheMonth.map(event => (
-                <div class="p-5 border-b border-cyan-300">
+                <div class="p-5 border-b border-emerald-300">
                     {event.schedules.length > 0 && (
                         event.schedules.map(schedule => (
                         <h6 class="italic text-sm font-bold">{schedule.date}</h6>
                         <h6 class="italic text-sm">{schedule.time}</h6>                        
                         ))
                     )}
-                    <h4 class="text-xl font-bold text-cyan-900 mb-3">{event.title}</h4>
+                    <h4 class="text-xl font-bold text-emerald-900 mb-3">{event.title}</h4>
                     <div class="text-sm">
                         <Fragment set:html={event.description.html}  />   
                     </div>
@@ -42,25 +42,25 @@ const year = date.getFullYear()
         </div>
 
         <!-- Web View -->
-        <div class="bg-cyan-300 text-cyan-950 rounded-3xl my-3 hidden md:block w-full flex flex-col">
-            <div class="bg-cyan-200 text-cyan-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center">
+        <div class="bg-emerald-300 text-emerald-950 rounded-3xl my-3 hidden md:block w-full flex flex-col">
+            <div class="bg-emerald-200 text-emerald-950 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center">
                 <h4 class="text-left pl-5">Events at OIAC - {monthName}&nbsp;{year}</h4>
             </div>
             
             {eventsForTheMonth.map(event => (
-                <div class="grid grid-cols-4 gap-5 text-xl border-b border-cyan-300">
+                <div class="grid grid-cols-4 gap-5 text-xl border-b border-emerald-300">
                     <div class="text-center p-1 pt-3">
                         {event.schedules.length > 0 && (
                             event.schedules.map(schedule => (
                             <div class="mb-3">
-                                <h4 class="text-xl font-bold text-cyan-900">{schedule.date}</h4>
+                                <h4 class="text-xl font-bold text-emerald-900">{schedule.date}</h4>
                                 <h4 class="text-sm italic">{schedule.time}</h4>
                             </div>
                             ))
                         )}
                     </div>
-                    <div class="text-left p-1 pt-3 pl-3 col-span-3 border-l border-cyan-300">
-                        <h3 class="text-2xl font-bold mb-5 text-cyan-900">{event.title}</h3>
+                    <div class="text-left p-1 pt-3 pl-3 col-span-3 border-l border-emerald-300">
+                        <h3 class="text-2xl font-bold mb-5 text-emerald-900">{event.title}</h3>
                         
                         {event.description && (
                             <div class="text-sm">

@@ -10,12 +10,14 @@ import EventsAndPosts from "../components/EventsAndPosts.astro"
 ---
 
 <OIACLayout title="Welcome to OIAC">
-	<EventsAndPosts></EventsAndPosts>
-	
-	
-	<Donate></Donate>
-	<Volunteer></Volunteer>
-	<Imams></Imams>
-	<Newsletter></Newsletter>
-	<Contact></Contact>
-	</OIACLayout>
+	<div class="w-full mx-auto">
+        <div class="">
+            <EventsAndPosts></EventsAndPosts>
+			<Donate></Donate>
+			<Volunteer></Volunteer>
+			<Imams></Imams>
+			<Newsletter></Newsletter>
+			<Contact></Contact>
+        </div>
+    </div>
+</OIACLayout>

@@ -6,7 +6,7 @@ import {type OIAC_Event} from '../graphql/events'
 
 const posts : Array<OIAC_Post> = await getPosts()
 ---
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+<!-- <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
     <div class="container mt-5">
         <div class="w-full flex flex-col">
             <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-300 text-cyan-950 flex-1">
@@ -28,6 +28,25 @@ const posts : Array<OIAC_Post> = await getPosts()
             
             
         </div>
+    </div>
+</div> -->
+
+<div class="w-full md:w-1/2 md:mx-auto">
+    <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-200 text-cyan-950 flex-1">
+        <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
+        <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
+
+        {posts.map(post => (
+            <div class="post-slide hidden">
+                
+                <div class="">
+                    <img src={post.image[0].url} alt={post.title} class="rounded-t-3xl" />
+                </div>
+                <div class="text-cyan-950 font-bold text-2xl py-10 px-3 text-center min-h-24">
+                    <h4 class="text-left pl-5">{post.title}</h4>
+                </div>
+            </div>
+        ))}
     </div>
 </div>
 
