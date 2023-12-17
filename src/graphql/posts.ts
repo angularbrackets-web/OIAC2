@@ -6,11 +6,17 @@ export type OIAC_PostImage = {
     url:string
 }
 
+export type OIAC_Hyperlink = {
+  text: string,
+  url: string
+}
+
 export type OIAC_Post = {
     id:string,
     title:string,
-    description:string,
-    image:Array<OIAC_PostImage>
+    image:Array<OIAC_PostImage>,
+    link:OIAC_Hyperlink,
+    content: Array<string>
 }
 
 export async function getPosts() {
@@ -19,10 +25,14 @@ export async function getPosts() {
         query MyQuery {
             posts {
               title
-              description
               image {
                 url
               }
+              link {
+                text
+                url
+              }
+              content
             }
           }`
   })

@@ -3,6 +3,10 @@ import {getPosts, type OIAC_Post} from '../graphql/posts'
 import {type OIAC_PostImage} from '../graphql/posts'
 import {getEventsForMonths} from '../graphql/events'
 import {type OIAC_Event} from '../graphql/events'
+import { isObjectEmpty } from '../helper'
+//import {MarkdownBlock, MarkdownSpan, MarkdownElement} from "https://md-block.verou.me/md-block.js"
+// import {MarkdownBlock, MarkdownSpan, MarkdownElement} from "md-block"
+// import { marked } from 'marked'
 
 const posts : Array<OIAC_Post> = await getPosts()
 
@@ -24,8 +28,8 @@ const year = date.getFullYear()
             <!-- Posts -->
             <div class="w-full md:w-1/2 flex flex-col">
                 <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-200 text-cyan-950 flex-1">
-                    <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
-                    <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
+                    <button class="btn-navigate absolute left-5 top-[350px] text-emerald-300 text-6xl w-[75px] h-[75px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Prev">&#171;</button>
+                    <button class="btn-navigate absolute right-5 top-[350px] text-emerald-300 text-6xl w-[75px] h-[75px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Next">&#187;</button>
 
                     {posts.map(post => (
                         <div class="post-slide hidden">
@@ -33,8 +37,18 @@ const year = date.getFullYear()
                             <div class="">
                                 <img src={post.image[0].url} alt={post.title} class="rounded-t-3xl" />
                             </div>
-                            <div class="text-cyan-950 font-bold text-2xl py-10 px-3 text-center min-h-24">
-                                <h4 class="text-left pl-5">{post.title}</h4>
+                            <div class="text-emarald-800 py-10 px-3 min-h-24">
+                                <h4 class="text-emarald-950 font-bold text-center mb-5 text-2xl">{post.title}</h4>
+                                
+                                {post.content.length > 0 && (
+                                    post.content.map(content => (
+                                        <p class="my-5">{content}</p>
+                                    ))
+                                )}
+
+                                {!isObjectEmpty(post.link) && post.link !== null && (
+                                    <a href={post.link.url} target="_blank" class="my-5 bg-emerald-500 hover:bg-emerald-700 text-white p-2 px-5 rounded-lg">{post.link.text}</a>
+                                )}
                             </div>
                         </div>
                     ))}
@@ -184,7 +198,7 @@ const year = date.getFullYear()
             currentSlideIndex++
         else currentSlideIndex=0
 
-        timer = setTimeout(changeSlide, 3000)
+        timer = setTimeout(changeSlide, 5000)
 
     }
 
