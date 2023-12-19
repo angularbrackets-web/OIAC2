@@ -7,32 +7,7 @@ import { isObjectEmpty } from '../helper'
 
 const posts : Array<OIAC_Post> = await getPosts()
 ---
-<!-- <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
-    <div class="container mt-5">
-        <div class="w-full flex flex-col">
-            <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-300 text-cyan-950 flex-1">
-                <button class="btn-navigate absolute left-5 top-[50%] text-gray-400 text-6xl" data-direction="Prev">&#171;</button>
-                <button class="btn-navigate absolute right-5 top-[50%] text-gray-400 text-6xl" data-direction="Next">&#187;</button>
-
-                {posts.map(post => (
-                    <div class="post-slide hidden">
-                        <div class="bg-gray-500 text-cyan-50 rounded-t-3xl font-bold text-4xl py-10 px-3 text-center min-h-24">
-                                <h4 class="text-left pl-5">{post.title}</h4>
-                            </div>
-                            <div class="p-5">
-                                <img src={post.image[0].url} alt={post.title} class="rounded-3xl" />
-                            </div>
-                    </div>
-                ))}
-            </div>
-            
-            
-            
-        </div>
-    </div>
-</div> -->
-
-<div class="w-full md:w-1/2 md:mx-auto">
+<!-- <div class="w-full md:w-1/2 md:mx-auto">
     <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-200 text-cyan-950 flex-1">
         <button class="btn-navigate absolute left-5 top-[350px] text-emerald-300 text-6xl w-[75px] h-[75px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Prev">&#171;</button>
         <button class="btn-navigate absolute right-5 top-[350px] text-emerald-300 text-6xl w-[75px] h-[75px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Next">&#187;</button>
@@ -58,6 +33,18 @@ const posts : Array<OIAC_Post> = await getPosts()
                             </div>
             </div>
         ))}
+    </div>
+</div> -->
+
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+    <div class="container mt-5">
+        <div class="flex flex-wrap gap-10">
+        {posts.map(post => (
+            <div class="grow">
+                <img src={post.image[0].url} alt={post.title} class="rounded-lg w-[350px]" />
+            </div>
+        ))}
+        </div>
     </div>
 </div>
 

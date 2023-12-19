@@ -1,5 +1,5 @@
 export const prerender = false
-import type { APIRoute } from "astro";
+import type { APIRoute } from "astro"
 import { isObjectEmpty } from "../../../helper";
 const maichimp_api_key = (await import.meta.env.PUBLIC_MAILCHIMP_API_KEY) as string
     
