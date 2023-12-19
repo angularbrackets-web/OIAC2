@@ -1,6 +1,8 @@
 ---
-import type { TestEvents } from "../xata";
-const response = await fetch('http://localhost:4321/api/test')
+import type { TestEvents } from "../xata"
+import { GET } from "../pages/api/test"
+
+const response = await GET(Astro)
 
 const testEvents : Array<TestEvents> = await response.json()
 ---
