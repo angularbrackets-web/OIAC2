@@ -1,8 +1,8 @@
 ---
 import type { TestEvents } from "../xata"
-import { GET } from "../pages/api/test"
+const rootUrl = (await import.meta.env.ROOT_URL) as string
 
-const response = await GET(Astro)
+const response = await fetch(`${rootUrl}/api/test`)
 
 const testEvents : Array<TestEvents> = await response.json()
 ---
