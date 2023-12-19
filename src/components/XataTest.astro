@@ -1,36 +1,19 @@
 ---
 import type { TestEvents } from "../xata";
-// const testEvents = await fetch('http://localhost:4321/api/test')
+const response = await fetch('http://localhost:4321/api/test')
 
-
+const testEvents : Array<TestEvents> = await response.json()
 ---
 
-<!-- <p>{JSON.stringify(testEvents)}</p> -->
-<p class="testEvents">Test</p>
-<script>
-    import type { TestEvents } from "../xata"
-    
-    fetch('/api/test',{
-            method:'GET',
-            headers:{
-                'Content-Type':'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
-            
-            let response : Array<TestEvents> = data
-            //alert(JSON.stringify(response))
-            // let testEventsElement = document.querySelector("testEvents") as HTMLParagraphElement
-            // alert(JSON.stringify(testEventsElement))
-            // console.log('existing content : ', testEventsElement.innerHTML)
-            // testEventsElement.innerHTML = response[0].name as string
-
-            console.log('RESPONSE => ', JSON.stringify(response))
-            
-        })
-        .catch(error => {
-            console.error(JSON.stringify(error))
-            
-        })
-</script>
+{testEvents.map(ev => (
+    <div class="p-5 rounded-lg bg-blue-100 border border-blue-200">
+        <ul>
+            <li>Month : {ev.month}</li>
+            <li>Day : {ev.day}</li>
+            <li>Month : {ev.name}</li>
+            {ev.image_url && (
+                <img src={ev.image_url} alt={ev.name} class="w-[200px] rounded-lg" />
+            )}
+        </ul>
+    </div>
+))}
