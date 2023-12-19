@@ -13,6 +13,7 @@ const tables = [
       { name: "month", type: "int" },
       { name: "day", type: "int" },
       { name: "name", type: "string" },
+      { name: "image_url", type: "string" },
     ],
   },
 ] as const;

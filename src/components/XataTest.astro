@@ -1,0 +1,36 @@
+---
+import type { TestEvents } from "../xata";
+// const testEvents = await fetch('http://localhost:4321/api/test')
+
+
+---
+
+<!-- <p>{JSON.stringify(testEvents)}</p> -->
+<p class="testEvents">Test</p>
+<script>
+    import type { TestEvents } from "../xata"
+    
+    fetch('/api/test',{
+            method:'GET',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            
+            let response : Array<TestEvents> = data
+            //alert(JSON.stringify(response))
+            // let testEventsElement = document.querySelector("testEvents") as HTMLParagraphElement
+            // alert(JSON.stringify(testEventsElement))
+            // console.log('existing content : ', testEventsElement.innerHTML)
+            // testEventsElement.innerHTML = response[0].name as string
+
+            console.log('RESPONSE => ', JSON.stringify(response))
+            
+        })
+        .catch(error => {
+            console.error(JSON.stringify(error))
+            
+        })
+</script>
