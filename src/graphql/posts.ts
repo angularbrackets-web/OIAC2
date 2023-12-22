@@ -23,7 +23,7 @@ export async function getPosts() {
     const result = await client.query({
         query: gql`
         query MyQuery {
-            posts {
+            posts(orderBy: priority_ASC) {
               title
               image {
                 url

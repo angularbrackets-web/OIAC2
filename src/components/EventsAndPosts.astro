@@ -38,13 +38,7 @@ const year = date.getFullYear()
                                 <img src={post.image[0].url} alt={post.title} class="rounded-t-3xl" />
                             </div>
                             <div class="text-emarald-800 py-10 px-3 min-h-24">
-                                <h4 class="text-emarald-950 font-bold text-center mb-5 text-2xl">{post.title}</h4>
                                 
-                                {post.content.length > 0 && (
-                                    post.content.map(content => (
-                                        <p class="my-5">{content}</p>
-                                    ))
-                                )}
 
                                 {!isObjectEmpty(post.link) && post.link !== null && (
                                     <a href={post.link.url} target="_blank" class="my-5 bg-emerald-500 hover:bg-emerald-700 text-white p-2 px-5 rounded-lg">{post.link.text}</a>
