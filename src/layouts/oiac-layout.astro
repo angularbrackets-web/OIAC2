@@ -1,13 +1,13 @@
 ---
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
-import OIAC_Logo from "../assets/OIAC.Logo.DarkBg.Browser.Titlebar.png"
+import OIAC_Logo from "../assets/OIAC.Logo.DarkBg.Browser.Titlebar.ico"
 const { title } = Astro.props
 ---
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href={OIAC_Logo.src} />
+		<link rel="icon" type="image/x-icon" href={OIAC_Logo} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{ title }</title>

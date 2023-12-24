@@ -36,6 +36,18 @@ import donateImage from "../assets/donate-image.jpg"
                                 <label for="donateAmount200" class="pl-1">200</label>
                             </div>
                             <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount250" name="amount" value="250" class="radioDonateAmount" />
+                                <label for="donateAmount250" class="pl-1">250</label>
+                            </div>
+                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount500" name="amount" value="500" class="radioDonateAmount" />
+                                <label for="donateAmount500" class="pl-1">500</label>
+                            </div>
+                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
+                                <input type="radio" id="donateAmount1000" name="amount" value="1000" class="radioDonateAmount" />
+                                <label for="donateAmount1000" class="pl-1">1000</label>
+                            </div>
+                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
                                 <input type="radio" id="donateAmountCustom" name="amount" value="custom" class="radioDonateAmount" />
                                 <label for="donateAmountCustom" class="pl-1">Enter</label>
                             </div>
@@ -75,6 +87,12 @@ import donateImage from "../assets/donate-image.jpg"
     const monthlyDonation100 = 'https://buy.stripe.com/aEU9E3eQQ81O61q28b'
     const oneTimeDonation200 = 'https://donate.stripe.com/8wM9E3dMM81O4Xm14d'
     const monthlyDonation200 = 'https://buy.stripe.com/00g8zZ8ss81O9dCbIN'
+    const oneTimeDonation250 = 'https://donate.stripe.com/7sI8zZ5ggbe089y9AN'
+    const monthlyDonation250 = 'https://buy.stripe.com/cN27vVgYY2Hu89y5ku'
+    const oneTimeDonation500 = 'https://donate.stripe.com/9AQ8zZ6kk95S0H6aES'
+    const monthlyDonation500 = 'https://buy.stripe.com/28o03taAA5TGfC014f'
+    const oneTimeDonation1000 = 'https://donate.stripe.com/6oEeYnaAAci4fC014j'
+    const monthlyDonation1000 = 'https://buy.stripe.com/3cseYnbEEci44XmcMY'
     const oneTimeDonationCustom = 'https://donate.stripe.com/9AQ2bBeQQ95SblK9AA'
 
     
@@ -119,6 +137,15 @@ import donateImage from "../assets/donate-image.jpg"
                 case "200":
                     openStripePage(oneTimeDonation200)
                     break 
+                case "250":
+                    openStripePage(oneTimeDonation250)
+                    break 
+                case "500":
+                    openStripePage(oneTimeDonation500)
+                    break 
+                case "1000":
+                    openStripePage(oneTimeDonation1000)
+                    break 
                 case "custom":
                     openStripePage(oneTimeDonationCustom)
                     break 
@@ -136,6 +163,15 @@ import donateImage from "../assets/donate-image.jpg"
                     break
                 case "200":
                     openStripePage(monthlyDonation200)
+                    break 
+                case "250":
+                    openStripePage(monthlyDonation250)
+                    break 
+                case "500":
+                    openStripePage(monthlyDonation500)
+                    break 
+                case "1000":
+                    openStripePage(monthlyDonation1000)
                     break 
             }
         }
