@@ -19,6 +19,11 @@ export type PrayerTime = {
     ishaJamah:string
 }
 
+export type JummahTime = {
+  name:string,
+  time:string
+}
+
 let currentDay = new Date().getDate()
 let currentMonth = new Date().getMonth() + 1
 
@@ -80,7 +85,6 @@ export async function getPrayerTimesForCurrentMonth() {
   let prayerTimesForCurrentMonth : Array<PrayerTime> = []
 
   prayerTimesForCurrentMonth = result.data.prayerTimes
-    // console.log('prayerTimesForCurrentMonth : ', JSON.stringify(prayerTimesForCurrentMonth))
   return prayerTimesForCurrentMonth
 }
 
@@ -104,39 +108,19 @@ export async function addPrayerTime() {
     console.log('MUTATION RESULT: ', JSON.stringify(result))
 }
 
-// // export async function uploadPrayerTimes() {
-    
-// //     const addPrayerTime = gql`
-// //         mutation MyMutation {
-// //             createPrayerTime(
-// //             data: {
-// //                 month: 10, 
-// //                 day: 1, 
-// //                 fajrBegins: "05:30 AM", 
-// //                 fajrJamah: "06:30 AM", 
-// //                 sunrise: "08:00 AM", 
-// //                 zuhrBegins: "01:19 PM", 
-// //                 zuhrJamah: "02:00 PM", 
-// //                 asrBegins: "03:30 PM", 
-// //                 asrJamah: "04:30 PM", 
-// //                 maghribBegins: "06:05 PM", 
-// //                 maghribJamah: "06:10 PM", 
-// //                 ishaBegins: "08:00 PM", 
-// //                 ishaJamah: "08:30 PM"
-// //             }
-// //             ) {
-// //             id
-// //             }
-// //         }`
+export async function getJummahTimes() {
+  const result = await client.query({
+      query: gql`
+          query MyQuery {
+              jummahTimes {
+              name
+              time
+              }
+          }`
+})
 
-// //     const result = try{
-// //             await client.mutate({mutation:addPrayerTime,}),
-// //             throwErrorIfApolloErrorOccured(result)
-// //             return true
-// //         }catch(e){
-// //             return false
-// //         }
+let jummahTimes : Array<JummahTime> = []
 
-// //     console.log('newPrayerTime : ', JSON.stringify(result))
-
-// // }
+jummahTimes = result.data.jummahTimes
+return jummahTimes
+}
