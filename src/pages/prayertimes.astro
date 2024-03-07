@@ -2,21 +2,25 @@
 import OIACLayout from "../layouts/oiac-layout.astro"
 import {getPrayerTimesForCurrentDay, getPrayerTimesForCurrentMonth, addPrayerTime} from '../graphql/prayer-times'
 import {type PrayerTime} from '../graphql/prayer-times'
-import { getMonthShortName } from "../helper"
+import { getMonthShortName, getHijriDateAsString, getHijriShortDateAsString, getCurrentDateInEdmontonAsString, getWeekday, getWeekdayByDay, currentDay, currentMonth, currentYear, getMonthName } from "../helper"
 const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay()
 
 const prayerTimesForCurrentMonth : Array<PrayerTime> = await getPrayerTimesForCurrentMonth()
 const currentMonthNameShort = getMonthShortName()
+const getClassByDay = (day: number) => {
+    return day === currentDay ? "bg-green-500 text-white" : "bg-teal-50 text-teal-600"
+}
 ---
 <OIACLayout title="OIAC Prayer Times">
 
     <div class="md:px-8 md:py-2 md:mx-auto">
         <div class="md:container md:mt-5 md:mb-10 md:rounded-2xl md:p-10 md:bg-gray-200">
-    <h1 class="text-2xl md:text-4xl font-black my-5 md:text-teal-950">Monthly Prayer Times</h1>
-
-    <div class="bg-teal-700 font-bold text-teal-50 text-center text-sm z-10 w-full grid grid-cols-6">
+    <h1 class="text-2xl md:text-4xl font-black my-5 md:text-teal-800">{getMonthName} Prayer Times</h1>
+            <h6 class="text-lg text-teal-800">{getCurrentDateInEdmontonAsString}</h6>
+            <h6 class="text-lg text-teal-800">{getHijriDateAsString}</h6>
+    <div class="bg-teal-700 font-bold text-teal-50 text-center text-sm md:text-lg z-10 w-full grid grid-cols-6 mt-2">
         <div class="py-5 border-r border-teal-300">
-            <h4>{currentMonthNameShort}</h4>
+            <h4>Date</h4>
         </div>
         <div class="py-5 border-r border-teal-300">
             <h4>Fajr</h4>
@@ -36,9 +40,11 @@ const currentMonthNameShort = getMonthShortName()
     </div>
 
     {prayerTimesForCurrentMonth.map(prayerTime => (
-        <div class:list={['bg-teal-50 text-teal-600 text-xs text-center z-10 w-full grid grid-cols-6 border-b border-teal-100']}>
-        <div class="border-l border-r border-teal-100 row-span-2 py-3">
-            <h6 class="">{prayerTime.day}</h6>
+        <div class={`text-xs md:text-lg text-center z-10 w-full grid grid-cols-6 border-b border-teal-100 ${getClassByDay(prayerTime.day)}`}>
+        <div class={`border-l border-r border-teal-100 row-span-2 py-3 `}>
+            <h6 class="">{getMonthName}&nbsp;{prayerTime.day}</h6>
+            <h6>{getWeekdayByDay(prayerTime.day)}</h6>
+            <h6 class={`font-extrabold`}>{getHijriShortDateAsString(new Date(currentYear, currentMonth, prayerTime.day))}</h6>
         </div>
         <div class="py-3 border-r border-teal-100">
             <h6 class="">{prayerTime.fajrBegins}</h6>
@@ -67,59 +73,4 @@ const currentMonthNameShort = getMonthShortName()
     </div>  
     
 
-<!-- <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
-    <div class="container mt-5">
-        
-        <div class="bg-emerald-300 border-emerald-400 rounded-xl text-emerald-700 p-5">
-            <h4 class="text-2xl text-emerald-800">Prayer Times</h4>
-            <div class="bg-emerald-100 rounded-lg my-3">
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-500 font-bold text-2xl mt-2 py-5 text-center">
-                    <h4 class="text-left pl-5">Salaat</h4>
-                    <h4>Athan</h4>
-                    <h4>Iqama</h4>
-                </div>
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-300 text-xl my-2 text-center">
-                    <label class="font-bold text-left pl-5">Fajr</label>
-                    <label class="text-emerald-600">{prayerTimesForCurrentDay.fajrBegins}</label>
-                    <label class="text-emerald-800">{prayerTimesForCurrentDay.fajrJamah}</label>
-                </div>
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-300 text-xl my-2 text-center">
-                    <label class="font-bold text-left pl-5">Sunrise</label>
-                    <label class="text-emerald-600">{prayerTimesForCurrentDay.sunrise}</label>
-                    <label class="text-emerald-800"></label>
-                </div>
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-300 text-xl my-2 text-center">
-                    <label class="font-bold text-left pl-5">Dhuhr</label>
-                    <label class="text-emerald-600">{prayerTimesForCurrentDay.zuhrBegins}</label>
-                    <label class="text-emerald-800">{prayerTimesForCurrentDay.zuhrJamah}</label>
-                </div>
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-300 text-xl my-2 text-center">
-                    <label class="font-bold text-left pl-5">Asr</label>
-                    <label class="text-emerald-600">{prayerTimesForCurrentDay.asrBegins}</label>
-                    <label class="text-emerald-800">{prayerTimesForCurrentDay.asrJamah}</label>
-                </div>
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-300 text-xl my-2 text-center">
-                    <label class="font-bold text-left pl-5">Maghrib</label>
-                    <label class="text-emerald-600">{prayerTimesForCurrentDay.maghribBegins}</label>
-                    <label class="text-emerald-800">{prayerTimesForCurrentDay.maghribJamah}</label>
-                </div>
-                <div class="grid grid-cols-3 gap-1 border-b border-emerald-300 text-xl my-2 text-center">
-                    <label class="font-bold text-left pl-5">Isha</label>
-                    <label class="text-emerald-600">{prayerTimesForCurrentDay.ishaBegins}</label>
-                    <label class="text-emerald-800">{prayerTimesForCurrentDay.ishaJamah}</label>
-                </div>
-                <div class="grid grid-cols-2 gap-1 border-b border-emerald-500 font-bold text-2xl my-2 text-center">
-                    <h4 class="font-bold text-left pl-5">Jummah 1</h4>
-                    <h4>02:00 PM</h4>
-                </div>
-                <div class="grid grid-cols-2 gap-1 border-b border-emerald-500 font-bold text-2xl my-2 text-center">
-                    <h4 class="font-bold text-left pl-5">Jummah 2</h4>
-                    <h4>03:00 PM</h4>
-                </div>
-            </div>
-
-            
-        </div>
-    </div>
-</div> -->
 </OIACLayout>
