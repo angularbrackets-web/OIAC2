@@ -24,7 +24,7 @@ export async function getEventsForMonths(months: Array<number>) {
     const result = await client.query({
         query: gql`
         query MyQuery($month:[Int!]!) {
-            events(where: {month_contains_all: $month}) {
+            events(where: {month_contains_all: $month}, orderBy: priority_ASC) {
               title
               month
               day
