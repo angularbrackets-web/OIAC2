@@ -27,7 +27,10 @@ const year = date.getFullYear()
 
             <!-- Posts -->
             <div class="w-full md:w-1/2 flex flex-col">
-                <div class="slide-container w-full rounded-3xl my-3 relative bg-gray-200 text-cyan-950 flex-1">
+
+                <div style="position:relative; width:100%; height:0px; padding-bottom:56.250%" class="my-3"><iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://streamable.com/e/th9wf2?autoplay=1&muted=1" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;" class="rounded-3xl"></iframe></div>
+
+                <div class="slide-container w-full my-3 relative text-cyan-950 flex-1">
                     <button class="btn-navigate absolute left-5 top-[30vh] min-[400px]:top-[50vh] text-emerald-300 text-4xl w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Prev">&#171;</button>
                     <button class="btn-navigate absolute right-5 top-[30vh] min-[400px]:top-[50vh] text-emerald-300 text-4xl w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Next">&#187;</button>
 
@@ -35,7 +38,7 @@ const year = date.getFullYear()
                         <div class="post-slide hidden">
                             
                             <div class="">
-                                <img src={post.image[0].url} alt={post.title} class="rounded-t-3xl" />
+                                <img src={post.image[0].url} alt={post.title} class="rounded-3xl" />
                             </div>
                             <div class="text-emarald-800 py-10 px-3 min-h-24">
                                 
