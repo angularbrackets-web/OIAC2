@@ -1,5 +1,6 @@
 ---
 import donateImage from "../assets/donate-image.jpg"
+import interacLogo from "../assets/Interac.Logo.png"
 ---
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
@@ -62,6 +63,17 @@ import donateImage from "../assets/donate-image.jpg"
                     <div class="mt-10 flex flex-wrap gap-6">
                         <button class="grow bg-teal-600 hover:bg-emerald-600 text-white text-lg font-bold py-4 px-10 rounded donate-once">Donate (One time)</button>
                         <button class="grow bg-teal-600 hover:bg-emerald-600 text-white text-lg font-bold py-4 px-10 rounded donate-monthly">Donate (Monthly)</button>
+                    </div>
+
+                    <div class="mt-10 flex gap-6">
+                        <img src={interacLogo.src} width="200px" alt="Interac" />
+                        <div class="mt-10 text-xl">
+                            <p>To donate via Interac / e-Transfer, please send it to </p>
+                            <div class="font-bold bg-yellow-500 text-gray-800 p-2 rounded-lg my-2 text-center">
+                                <span>accounting@oiacentre.com</span>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
 
