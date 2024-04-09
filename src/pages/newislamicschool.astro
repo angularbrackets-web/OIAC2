@@ -1,5 +1,6 @@
 ---
 import OIACLayout from "../layouts/oiac-layout.astro"
+import interacLogo from "../assets/Interac.Logo1.png"
 ---
 <OIACLayout title="OIAC - New Centre">
     <div class="px-4 p-2 md:px-8 md:py-2 mx-auto text-gray-800">
@@ -21,7 +22,23 @@ import OIACLayout from "../layouts/oiac-layout.astro"
                     </p>
                     <p class="mb-3">
                     Donate now and be a part of something truly transformative, empowering our community, building our future.
-                    </p>   
+                    </p> 
+                    
+                    <div class="flex-row mt-10">
+                        
+                        <div>
+                            <a href="https://donate.stripe.com/8wMbLBgvxdIbcZG7ss" target="_blank" class="bg-emerald-600 text-white text-2xl rounded-xl px-24 py-2">Donate</a>
+                        </div>
+                        
+                        <div class="flex gap-3 py-8">
+                            <img src={interacLogo.src} width="40px" alt="Interac" />
+                            <div class="font-bold bg-teal-700 text-gray-50 rounded-lg text-center mt-3 w-fit px-3">
+                                <span>new.project@oiacedmonton.ca</span>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
                 </div>
             </div>
 
