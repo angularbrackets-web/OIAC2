@@ -1,6 +1,9 @@
 ---
 import donateImage from "../assets/donate-image.jpg"
 import interacLogo from "../assets/Interac.Logo1.png"
+import radioButtonIcon from "../assets/checkbox.unchecked.png"
+import radioButtonCheckedIcon from "../assets/icons8-choice-67.png"
+import radioButtonSelectedIcon from "../assets/checkbox.checked.png"
 ---
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
@@ -8,92 +11,164 @@ import interacLogo from "../assets/Interac.Logo1.png"
         <div class="bg-emerald-950 rounded-xl text-gray-100 p-5">
             
 
-            <div class="p-2 md:p-20 flex flex-wrap space-x-2 md:space-x-12 lg:space-x-24">
-                <div class="w-full md:w-[40%] lg:w-[50%] xl:w-[60%]">
+            <div class="p-2 md:p-20 flex flex-wrap gap-2 space-x-2 md:space-x-12 lg:space-x-24">
+                <div class="w-full md:w-[60%]">
                     <h4 class="text-4xl font-black mb-10">Donate</h4>
                     <p class="mb-3">Help us to improve our services and to offer much more to our community by donating generously.</p>
                     <p class="mb-3">Your donations big or small makes a significant impact.</p>
                     <p class="mb-9">Jazakumullah Khair for your continous donations and support.</p>
 
                     <div class="">
-                        <div>
-                            <h4 class="text-xl">Choose amount</h4>
-                        </div>
-                        <div class="flex flex-wrap gap-6 mt-3">
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount25" name="amount" value="25" class="radioDonateAmount" />
-                                <label for="donateAmount25" class="pl-1">25</label>
+                        <div class="mb-16">
+                            <div class="pb-2 border-b border-cyan-300 mb-3">
+                                <h4 class="text-xl font-black text-cyan-500">Choose Project</h4>
                             </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount50" name="amount" value="50" class="radioDonateAmount" />
-                                <label for="donateAmount50" class="pl-1">50</label>
-                            </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount100" name="amount" value="100" class="radioDonateAmount" />
-                                <label for="donateAmount100" class="pl-1">100</label>
-                            </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount200" name="amount" value="200" class="radioDonateAmount" />
-                                <label for="donateAmount200" class="pl-1">200</label>
-                            </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount250" name="amount" value="250" class="radioDonateAmount" />
-                                <label for="donateAmount250" class="pl-1">250</label>
-                            </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount500" name="amount" value="500" class="radioDonateAmount" />
-                                <label for="donateAmount500" class="pl-1">500</label>
-                            </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmount1000" name="amount" value="1000" class="radioDonateAmount" />
-                                <label for="donateAmount1000" class="pl-1">1000</label>
-                            </div>
-                            <div class="bg-emerald-500 text-white font-bold hover:bg-emerald-600 p-2 rounded-md divDonateAmount block">
-                                <input type="radio" id="donateAmountCustom" name="amount" value="custom" class="radioDonateAmount" />
-                                <label for="donateAmountCustom" class="pl-1">Enter</label>
+                            <div class="divDonationSelectionSummary"></div>
+                            <div class="flex flex-wrap gap-6 mt-5 divSelectProject">
+                                <div class="divProjectMasjid divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">Masjid</span>
+                                </div>
+                                <div class="divProjectNewCentre divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">New Islamic Centre</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="h-[50px] py-5">
-                            <div class="alert-div-donate hidden text-center p-2 rounded-md w-fit">
+                        
+                        <div class="mb-16">
+                            <div class="pb-2 border-b border-cyan-300 mb-3">
+                                <h4 class="text-xl font-black text-cyan-500">Choose amount</h4>
+                            </div>
+                            <div class="flex flex-wrap gap-6 mt-5 divSelectAmount">
+                                <div class="divAmount25 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">25</span>
+                                </div>
+                                <div class="divAmount50 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">50</span>
+                                </div>
+                                <div class="divAmount100 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">100</span>
+                                </div>
+                                <div class="divAmount200 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">200</span>
+                                </div>
+                                <div class="divAmount250 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">250</span>
+                                </div>
+                                <div class="divAmount500 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">500</span>
+                                </div>
+                                <div class="divAmount1000 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">1000</span>
+                                </div>
+                                <div class="divAmountEnter divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">Enter</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-1">
+                            <div class="pb-2 border-b border-cyan-300 mb-3">
+                                <h4 class="text-xl font-black text-cyan-500">Choose Frequency</h4>
+                            </div>
+                            <div class="flex flex-wrap gap-6 mt-5 divSelectFrequency">
+                                <div class="divFrequencyOneTime divFrequency bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">One Time</span>
+                                </div>
+                                <div class="divFrequencyMonthly divFrequency bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                    <span class="selectedText">Monthly</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="h-[50px] py-5 mb-10">
+                            <div class="alert-div-donate hidden text-center px-6 py-1 rounded-md w-fit">
                                 
                             </div>
                         </div>
                     </div>
-        
+                    
+                    
+
                     <div class="flex flex-wrap gap-6">
-                        <button class="grow bg-teal-600 hover:bg-emerald-600 text-white text-lg font-bold py-4 px-10 rounded donate-once">Donate (One time)</button>
-                        <button class="grow bg-teal-600 hover:bg-emerald-600 text-white text-lg font-bold py-4 px-10 rounded donate-monthly">Donate (Monthly)</button>
+                        <button class="bg-teal-500 hover:bg-teal-700 text-white text-lg font-bold py-2 px-24 rounded-xl btnDonate">Donate</button>
                     </div>
 
-                    <div class="mt-24 flex flex-wrap gap-6">
-                        <div>
-                            <img src={interacLogo.src} width="100px" alt="Interac" />
-                        </div>
-                        
-                        <div class="text-xl">
-                            <p>To donate via Interac / e-Transfer, please send it to </p>
-                            <div class="font-bold bg-yellow-500 text-gray-800 rounded-lg text-center mt-3 w-fit px-3">
-                                <span>accounting@oiacentre.com</span>
-                            </div>
-                        </div>
-                        
-                    </div>
+                    
                 </div>
 
-                <div class="hidden md:block flex-shrink-0">
-                <img class="resize-none rounded-3xl h-[400px]" src={donateImage.src} alt="Donate"></img>
+                <div class="hidden w-32 lg:w-48 xl:w-64 md:block flex-shrink-0">
+                    <img class="resize-none rounded-3xl object-cover" src={donateImage.src} alt="Donate"></img>
                 </div>
             </div>
+
+            <div class="p-2 md:p-20 mt-2 flex flex-wrap gap-6 text-sm md:text-md lg:text-lg xl:text-xl">
+                <div class="">
+                    <img src={interacLogo.src} width="100px" alt="Interac" />
+                </div>
+                
+                <div class="w-[75%] flex-row gap-3">
+                    <p>To donate via Interac / e-Transfer, please send it to </p>
+                    <div class="flex flex-wrap gap-1">
+                        <div class="font-bold mt-3">
+                            <span>For Masjid : </span>
+                        </div>
+                        <div class="font-bold bg-yellow-500 text-gray-800 rounded-lg text-center mt-3 px-3">
+                            <span>accounting@oiacentre.com</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1">
+                        <div class="font-bold mt-3"><span>For New Islamic School : </span></div>
+                        <div class="font-bold bg-yellow-500 text-gray-800 rounded-lg text-center mt-3 px-3">
+                            <span>new.project@oiacedmonton.ca</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
         </div>
     </div>
 </div>
 
 <script>
     import { showNotification } from "../components/Alert"
-    const radioDonateAmount = document.querySelectorAll('.radioDonateAmount') as NodeList
-    const buttonDonateOnce = document.querySelector('.donate-once') as HTMLButtonElement
-    const buttonDonateMonthly = document.querySelector('.donate-monthly') as HTMLButtonElement
-    const divDonateAmount = document.querySelector('.divDonateAmount') as HTMLDivElement
+    const btnDonate = document.querySelector('.btnDonate') as HTMLButtonElement
+    
+    let selectedProject = ''
+    let selectedAmount = ''
+    let selectedFrequency = ''
+
+    
+
     const oneTimeDonation25 = 'https://donate.stripe.com/14k9E38sseqccpO6ou'
     const monthlyDonation25 = 'https://buy.stripe.com/00g9E38ss3Ly61qdQR'
     const oneTimeDonation50 = 'https://donate.stripe.com/aEUcQf9ww6XK61qdQX'
@@ -110,87 +185,350 @@ import interacLogo from "../assets/Interac.Logo1.png"
     const monthlyDonation1000 = 'https://buy.stripe.com/3cseYnbEEci44XmcMY'
     const oneTimeDonationCustom = 'https://donate.stripe.com/9AQ2bBeQQ95SblK9AA'
 
-    
+    // school project donation links
+    const oneTimeDonation25School = 'https://donate.stripe.com/6oE9Dt4MPeMf9NufZ6'
+    const monthlyDonation25School = 'https://buy.stripe.com/28oeXNfrt9rVbVC5kl'
+    const oneTimeDonation50School = 'https://donate.stripe.com/14keXNa79bA35xe5kt'
+    const monthlyDonation50School = 'https://buy.stripe.com/5kA2b16UX7jN3p6fZ0'
+    const oneTimeDonation100School = 'https://donate.stripe.com/3cscPFgvxcE77Fm8wG'
+    const monthlyDonation100School = 'https://buy.stripe.com/cN28zpa79fQjgbS003'
+    const oneTimeDonation200School = 'https://donate.stripe.com/8wMaHxdjl0Vp1gYeV5'
+    const monthlyDonation200School = 'https://buy.stripe.com/7sI9Dta79fQj1gYfZ2'
+    const oneTimeDonation250School = 'https://donate.stripe.com/9AQ4j9a790VpbVC5kw'
+    const monthlyDonation250School = 'https://buy.stripe.com/6oE9Dt4MP6fJ3p6aEJ'
+    const oneTimeDonation500School = 'https://donate.stripe.com/bIY8zp3IL1Zt7Fm28l'
+    const monthlyDonation500School = 'https://buy.stripe.com/6oE2b1frt9rVcZGdQW'
+    const oneTimeDonation1000School = 'https://donate.stripe.com/6oEbLB4MPcE72l200e'
+    const monthlyDonation1000School = 'https://buy.stripe.com/3cseXN2EHavZ8JqfZ5'
+    const oneTimeDonationCustomSchool = 'https://donate.stripe.com/8wMbLBgvxdIbcZG7ss'
 
-    buttonDonateOnce.addEventListener('click', event => {
-        event.preventDefault()
-        prepareDonation('once')
-    })
 
-    buttonDonateMonthly.addEventListener('click', event => {
-        event.preventDefault()
-        prepareDonation('monthly')
-    })
+    const donationLinks = [
+        {
+            "project" : "Masjid",
+            "amount" : "25",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation25
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "25",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation25
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "50",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation50
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "50",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation50
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "100",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation100
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "100",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation100
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "200",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation200
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "200",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation200
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "250",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation250
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "250",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation250
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "500",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation500
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "500",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation500
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "1000",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation1000
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "1000",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation1000
+        },
+        {
+            "project" : "Masjid",
+            "amount" : "Enter",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonationCustom
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "25",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation25School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "25",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation25School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "50",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation50School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "50",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation50School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "100",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation100School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "100",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation100School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "200",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation200School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "200",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation200School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "250",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation250School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "250",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation250School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "500",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation500School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "500",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation500School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "1000",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonation1000School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "1000",
+            "frequency" : "Monthly",
+            "donationLink" : monthlyDonation1000School
+        },
+        {
+            "project" : "New Islamic Centre",
+            "amount" : "Enter",
+            "frequency" : "One Time",
+            "donationLink" : oneTimeDonationCustomSchool
+        }
+    ]
 
-    const getSelectedDonationAmount = () => {
-        const radioGroupDonateAmount = document.querySelector('input[name="amount"]:checked') as HTMLInputElement
-        return radioGroupDonateAmount?.value
 
+
+const divProjectMasjid = document.querySelector('.divProjectMasjid') as HTMLDivElement
+    const divProjectNewCentre = document.querySelector('.divProjectNewCentre') as HTMLDivElement
+
+    const divAmount25 = document.querySelector('.divAmount25') as HTMLDivElement
+    const divAmount50 = document.querySelector('.divAmount50') as HTMLDivElement
+    const divAmount100 = document.querySelector('.divAmount100') as HTMLDivElement
+    const divAmount200 = document.querySelector('.divAmount200') as HTMLDivElement
+    const divAmount250 = document.querySelector('.divAmount250') as HTMLDivElement
+    const divAmount500 = document.querySelector('.divAmount500') as HTMLDivElement
+    const divAmount1000 = document.querySelector('.divAmount1000') as HTMLDivElement
+    const divAmountEnter = document.querySelector('.divAmountEnter') as HTMLDivElement
+
+    const divFrequencyOneTime = document.querySelector('.divFrequencyOneTime') as HTMLDivElement
+    const divFrequencyMonthly = document.querySelector('.divFrequencyMonthly') as HTMLDivElement
+
+    const groupProjectOptions = [divProjectMasjid, divProjectNewCentre]
+    const groupAmountOptions = [divAmount25, divAmount50, divAmount100, divAmount200, divAmount250, divAmount500, divAmount1000, divAmountEnter]
+    const groupFrequencyOptions = [divFrequencyOneTime, divFrequencyMonthly]
+
+// Store the state of each option
+const optionStates = new Map();
+
+// Function to handle click event
+const handleClick = (event: MouseEvent) => {
+    const target = event.currentTarget as HTMLDivElement;
+    const unselectedImg = target.querySelector('.unselectedIcon') as HTMLImageElement;
+    const selectedImg = target.querySelector('.selectedIcon') as HTMLImageElement;
+    const label = target.querySelector('.selectedText') as HTMLSpanElement;
+
+    let selectedGroup = ''
+    let group : HTMLDivElement[] = []
+    if(target.classList.contains('divProject')){
+        selectedGroup = 'Project'
+        group = groupProjectOptions
     }
 
-    const prepareDonation = (donationType:string) => {
-        const selectedDonationAmount = getSelectedDonationAmount()
-        if(selectedDonationAmount === undefined){
-            showNotification('warning', 'Select amount to donate', 'alert-div-donate')
+    if(target.classList.contains('divAmount')){
+        selectedGroup = 'Amount'
+        group = groupAmountOptions
+    }
+
+    if(target.classList.contains('divFrequency')){
+        selectedGroup = 'Frequency'
+        group = groupFrequencyOptions
+    }
+
+    // Deselect any previously selected option in the same group
+    
+
+    group.forEach(option => {
+        if (option !== target && optionStates.get(option)) {
+            const optionUnselectedImg = option.querySelector('.unselectedIcon')  as HTMLImageElement;
+            const optionSelectedImg = option.querySelector('.selectedIcon')  as HTMLImageElement;
+            optionSelectedImg.classList.add('hidden')
+            optionSelectedImg.classList.remove('block')
+            optionUnselectedImg.classList.remove('hidden')
+            optionUnselectedImg.classList.add('block')
+
+            option.classList.remove('bg-emerald-400','shadow-xl', 'shadow-emerald-500/50')
+            option.classList.add('bg-gray-200')
+            optionStates.set(option, false);
+        }
+    });
+
+    // Toggle visibility of images
+    const isSelected = optionStates.get(target) || false;
+
+    if(isSelected){
+
+        selectedImg.classList.add('hidden')
+        selectedImg.classList.remove('block')
+        unselectedImg.classList.remove('hidden')
+        unselectedImg.classList.add('block')
+        target.classList.remove('bg-emerald-400','shadow-xl', 'shadow-emerald-500/50')
+        target.classList.add('bg-gray-200')
+        if(selectedGroup === 'Project'){
+            selectedProject = ''
+        }else if(selectedGroup === 'Amount'){
+            selectedAmount = ''
+        }
+    }else{
+
+        selectedImg.classList.remove('hidden')
+        selectedImg.classList.add('block')
+        unselectedImg.classList.remove('block')
+        unselectedImg.classList.add('hidden')
+        target.classList.remove('bg-gray-200')
+        target.classList.add('bg-emerald-400','shadow-xl', 'shadow-emerald-500/50')
+        if(selectedGroup === 'Project'){
+            selectedProject = label.innerText
+        }else if(selectedGroup === 'Amount'){
+            selectedAmount = label.innerText
+        }else if(selectedGroup === 'Frequency'){
+            selectedFrequency = label.innerText
+        }
+    }
+
+    // Update the state
+    optionStates.set(target, !isSelected);
+};
+
+
+groupProjectOptions.forEach(g => g.addEventListener('click', handleClick))
+groupAmountOptions.forEach(g => g.addEventListener('click', handleClick))
+groupFrequencyOptions.forEach(g => g.addEventListener('click', handleClick))
+
+
+
+    btnDonate.addEventListener('click', event => {
+        event.preventDefault()
+        
+        if(selectedProject === ''){
+            showNotification('warning', 'Select a Project to donate', 'alert-div-donate')
             return
         }
-        if(donationType === 'monthly' && selectedDonationAmount === 'custom'){
+
+        if(selectedAmount === ''){
+            showNotification('warning', 'Select an Amount to donate', 'alert-div-donate')
+            return
+        }
+
+        if(selectedFrequency === ''){
+            showNotification('warning', 'Select a Payment Frequency (One Time/ Monthly)', 'alert-div-donate')
+            return
+        }
+
+        if(selectedAmount === "Enter" && selectedFrequency === "Monthly"){
             showNotification('warning', 'Select fixed amount to donate monthly', 'alert-div-donate')
             return
         }
-        if(donationType === 'once'){
-            switch(selectedDonationAmount){
-                case "25":
-                    openStripePage(oneTimeDonation25)
-                    break
-                case "50":
-                    openStripePage(oneTimeDonation50)
-                    break 
-                case "100":
-                    openStripePage(oneTimeDonation100)
-                    break
-                case "200":
-                    openStripePage(oneTimeDonation200)
-                    break 
-                case "250":
-                    openStripePage(oneTimeDonation250)
-                    break 
-                case "500":
-                    openStripePage(oneTimeDonation500)
-                    break 
-                case "1000":
-                    openStripePage(oneTimeDonation1000)
-                    break 
-                case "custom":
-                    openStripePage(oneTimeDonationCustom)
-                    break 
-            }
-        } else if(donationType === 'monthly'){
-            switch(selectedDonationAmount){
-                case "25":
-                    openStripePage(monthlyDonation25)
-                    break
-                case "50":
-                    openStripePage(monthlyDonation50)
-                    break 
-                case "100":
-                    openStripePage(monthlyDonation100)
-                    break
-                case "200":
-                    openStripePage(monthlyDonation200)
-                    break 
-                case "250":
-                    openStripePage(monthlyDonation250)
-                    break 
-                case "500":
-                    openStripePage(monthlyDonation500)
-                    break 
-                case "1000":
-                    openStripePage(monthlyDonation1000)
-                    break 
-            }
+
+        const donationLink = donationLinks.find(d => d.project === selectedProject && d.amount === selectedAmount && d.frequency === selectedFrequency)?.donationLink
+
+        if(donationLink){
+            openStripePage(donationLink)
+            return
         }
-    }
+
+        return
+    })
+
 
     const openStripePage = (url:string) => {
         window.open(url, '_blank')?.focus()
