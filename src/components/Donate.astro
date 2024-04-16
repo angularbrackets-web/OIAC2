@@ -1,9 +1,13 @@
 ---
+import '../styles/global.css'
 import donateImage from "../assets/donate-image.jpg"
 import interacLogo from "../assets/Interac.Logo1.png"
 import radioButtonIcon from "../assets/checkbox.unchecked.png"
 import radioButtonCheckedIcon from "../assets/icons8-choice-67.png"
 import radioButtonSelectedIcon from "../assets/checkbox.checked.png"
+import CharityPoster1 from "../assets/CharityPoster1.png"
+import CharityPoster2 from "../assets/CharityPoster2.png"
+import CharityPoster3 from "../assets/CharityPoster3.png"
 ---
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
@@ -125,7 +129,12 @@ import radioButtonSelectedIcon from "../assets/checkbox.checked.png"
                 </div>
 
                 <div class="hidden w-32 lg:w-48 xl:w-64 md:block flex-shrink-0">
-                    <img class="resize-none rounded-3xl object-cover" src={donateImage.src} alt="Donate"></img>
+                    <div id="image-container" style="position: relative;">
+                        <img class="fade" src={CharityPoster1.src} alt="Charity Image 1">
+                        <img class="fade fade-out" src={CharityPoster2.src} alt="Charity Image 2">
+                        <img class="fade fade-out" src={CharityPoster3.src} alt="Charity Image 3">
+                    </div>
+                    <!-- <img class="resize-none rounded-3xl object-cover" src={donateImage.src} alt="Donate"></img> -->
                 </div>
             </div>
 
@@ -406,6 +415,21 @@ const divProjectMasjid = document.querySelector('.divProjectMasjid') as HTMLDivE
     const groupProjectOptions = [divProjectMasjid, divProjectNewCentre]
     const groupAmountOptions = [divAmount25, divAmount50, divAmount100, divAmount200, divAmount250, divAmount500, divAmount1000, divAmountEnter]
     const groupFrequencyOptions = [divFrequencyOneTime, divFrequencyMonthly]
+
+const shuffleCharityImages = () => {
+    let index: number = 0;
+const images: HTMLImageElement[] = Array.from(document.querySelectorAll<HTMLImageElement>('#image-container img'));
+
+setInterval(() => {
+  images[index].classList.add('fade-out');
+  index = (index + 1) % images.length;
+  images[index].classList.remove('fade-out');
+}, 5000);
+
+}
+
+shuffleCharityImages()
+
 
 // Store the state of each option
 const optionStates = new Map();
