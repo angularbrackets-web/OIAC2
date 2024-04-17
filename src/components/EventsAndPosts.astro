@@ -24,13 +24,10 @@ const year = date.getFullYear()
     <div class="container mt-5">
         
         <!-- Web View -->
-        <div class="flex gap-5">
+        <div class="block md:flex md:gap-5">
 
             <!-- LEFT -->
-            <div class="w-full md:w-1/2 flex flex-col">
-                
-                
-
+            <div class="w-full mb-16 md:w-[49%]">
                 <!-- NEW CENTRE -->
                 <div class="p-10 bg-emerald-100 rounded-2xl mt-6">
                     <label class="align-right bg-orange-500 text-white font-black rounded-xl px-5">UPCOMING</label>
@@ -63,25 +60,12 @@ const year = date.getFullYear()
                                 <span>new.project@oiacedmonton.ca</span>
                             </div>
                         </div>
-                        
-                        
                     </div>
                 </div>
-
-
-
-                
-                
             </div>
 
             <!-- RIGHT -->
-            <div class="rounded-3xl my-3 hidden md:block w-full md:w-1/2 flex flex-col">
-                
-
-
-
-
-
+            <div class="w-full md:w-[49%] rounded-3xl my-3">
                 <!-- POSTS -->
                 <div class="slide-container w-full my-3 relative text-cyan-950 flex-1">
                     <button class="btn-navigate absolute left-5 top-[30vh] min-[400px]:top-[50vh] text-emerald-300 text-4xl w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600" data-direction="Prev">&#171;</button>
@@ -103,12 +87,7 @@ const year = date.getFullYear()
                         </div>
                     ))}
                 </div>
-
-
-                
-                
             </div>
-
         </div>
         
         <div class="my-10">
@@ -145,31 +124,6 @@ const year = date.getFullYear()
                 <p class="h-5"></p>
             </div>
         </div>
-
-        <!-- Mobile View
-        <div class="bg-gray-500 border-cyan-400 md:hidden rounded-xl text-gray-50">
-            <div class="bg-gray-600 p-3 font-semibold tracking-wide text-left rounded-t-2xl text-2xl text-gray-50">
-                <h4>Events at OIAC - {monthName}&nbsp;{year}</h4>
-            </div>
-
-            {eventsForTheMonth.map(event => (
-                <div class="p-5 border-b border-gray-700">
-                    {event.schedules.length > 0 && (
-                        event.schedules.map(schedule => (
-                        <h6 class="italic text-sm font-bold">{schedule.date}</h6>
-                        <h6 class="italic text-sm">{schedule.time}</h6>                        
-                        ))
-                    )}
-                    <h4 class="text-xl font-bold text-cyan-50 mb-3">{event.title}</h4>
-                    <div class="text-sm">
-                        <Fragment set:html={event.description.html}  />   
-                    </div>
-                </div>
-            ))}
-            <div class="p-1"><p>&nbsp;</p></div>
-        </div> -->
-
-        
     </div>
 </div>
 
@@ -291,5 +245,21 @@ const year = date.getFullYear()
         moveSlidePrevOrNext(direction)
     }))
     
+    // Touch swipe functionality for mobile screens
+let touchstartX = 0;
+let touchendX = 0;
 
+function checkSwipeDirection() {
+  if (touchendX < touchstartX) moveSlidePrevOrNext('Next');
+  if (touchendX > touchstartX) moveSlidePrevOrNext('Prev');
+}
+
+slideContainer.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].screenX;
+});
+
+slideContainer.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].screenX;
+  checkSwipeDirection();
+});
 </script>

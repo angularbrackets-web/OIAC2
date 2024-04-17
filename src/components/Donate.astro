@@ -15,130 +15,133 @@ import CharityPoster3 from "../assets/CharityPoster3.png"
         <div class="bg-emerald-950 rounded-xl text-gray-100 p-5">
             
 
-            <div class="p-2 md:p-20 flex flex-wrap gap-2 space-x-2 md:space-x-12 lg:space-x-24">
-                <div class="w-full md:w-[60%]">
-                    <h4 class="text-4xl font-black mb-10">Donate</h4>
-                    <p class="mb-3">Help us to improve our services and to offer much more to our community by donating generously.</p>
-                    <p class="mb-3">Your donations big or small makes a significant impact.</p>
-                    <p class="mb-9">Jazakumullah Khair for your continous donations and support.</p>
+            <div class="p-2 md:p-20 mb-10">
+                <h4 class="text-4xl font-black mb-10">Donate</h4>
+                <div class="flex gap-6 h-fit">
+                
 
-                    <div class="">
-                        <div class="mb-16">
-                            <div class="pb-2 border-b border-cyan-300 mb-3">
-                                <h4 class="text-xl font-black text-cyan-500">Choose Project</h4>
-                            </div>
-                            <div class="divDonationSelectionSummary"></div>
-                            <div class="flex flex-wrap gap-6 mt-5 divSelectProject">
-                                <div class="divProjectMasjid divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">Masjid</span>
-                                </div>
-                                <div class="divProjectNewCentre divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">New Islamic Centre</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-16">
-                            <div class="pb-2 border-b border-cyan-300 mb-3">
-                                <h4 class="text-xl font-black text-cyan-500">Choose amount</h4>
-                            </div>
-                            <div class="flex flex-wrap gap-6 mt-5 divSelectAmount">
-                                <div class="divAmount25 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">25</span>
-                                </div>
-                                <div class="divAmount50 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">50</span>
-                                </div>
-                                <div class="divAmount100 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">100</span>
-                                </div>
-                                <div class="divAmount200 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">200</span>
-                                </div>
-                                <div class="divAmount250 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">250</span>
-                                </div>
-                                <div class="divAmount500 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">500</span>
-                                </div>
-                                <div class="divAmount1000 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">1000</span>
-                                </div>
-                                <div class="divAmountEnter divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">Enter</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-1">
-                            <div class="pb-2 border-b border-cyan-300 mb-3">
-                                <h4 class="text-xl font-black text-cyan-500">Choose Frequency</h4>
-                            </div>
-                            <div class="flex flex-wrap gap-6 mt-5 divSelectFrequency">
-                                <div class="divFrequencyOneTime divFrequency bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">One Time</span>
-                                </div>
-                                <div class="divFrequencyMonthly divFrequency bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
-                                    <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
-                                    <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
-                                    <span class="selectedText">Monthly</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="h-[50px] py-5 mb-10">
-                            <div class="alert-div-donate hidden text-center px-6 py-1 rounded-md w-fit">
-                                
-                            </div>
+                    <div class="w-[150px] md:w-[180px]">
+                        <div id="image-container" style="position: relative;">
+                            <img class="fade" src={CharityPoster1.src} alt="Charity Image 1">
+                            <img class="fade fade-out" src={CharityPoster2.src} alt="Charity Image 2">
+                            <img class="fade fade-out" src={CharityPoster3.src} alt="Charity Image 3">
                         </div>
                     </div>
-                    
-                    
-
-                    <div class="flex flex-wrap gap-6">
-                        <button class="bg-teal-500 hover:bg-teal-700 text-white text-lg font-bold py-2 px-24 rounded-xl btnDonate">Donate</button>
+                    <div class="w-full md:w-fit text-sm md:text-md lg:text-lg xl:text-xl">
+                        <p class="mb-3">Help us to improve our services and to offer much more to our community by donating generously.</p>
+                        <p class="mb-3">Your donations big or small makes a significant impact.</p>
+                        <p class="mb-9">Jazakumullah Khair for your continous donations and support.</p>
                     </div>
 
-                    
-                </div>
-
-                <div class="hidden w-32 lg:w-48 xl:w-64 md:block flex-shrink-0">
-                    <div id="image-container" style="position: relative;">
-                        <img class="fade" src={CharityPoster1.src} alt="Charity Image 1">
-                        <img class="fade fade-out" src={CharityPoster2.src} alt="Charity Image 2">
-                        <img class="fade fade-out" src={CharityPoster3.src} alt="Charity Image 3">
-                    </div>
-                    <!-- <img class="resize-none rounded-3xl object-cover" src={donateImage.src} alt="Donate"></img> -->
                 </div>
             </div>
 
-            <div class="p-2 md:p-20 mt-2 flex flex-wrap gap-6 text-sm md:text-md lg:text-lg xl:text-xl">
+            <div class="p-2 md:p-20 mt-10 min-[575px]:mt-16 min-[620px]:mt-20 md:mt-5 min-[1300px]:mt-16">
+                <div class="">
+                    <div class="mb-16">
+                        <div class="pb-2 border-b border-cyan-300 mb-3">
+                            <h4 class="text-xl font-black text-cyan-500">Choose Project</h4>
+                        </div>
+                        <div class="divDonationSelectionSummary"></div>
+                        <div class="flex flex-wrap gap-6 mt-5 divSelectProject">
+                            <div class="divProjectMasjid divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">Masjid</span>
+                            </div>
+                            <div class="divProjectNewCentre divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">New Islamic Centre</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-16">
+                        <div class="pb-2 border-b border-cyan-300 mb-3">
+                            <h4 class="text-xl font-black text-cyan-500">Choose amount</h4>
+                        </div>
+                        <div class="flex flex-wrap gap-6 mt-5 divSelectAmount">
+                            <div class="divAmount25 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">25</span>
+                            </div>
+                            <div class="divAmount50 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">50</span>
+                            </div>
+                            <div class="divAmount100 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">100</span>
+                            </div>
+                            <div class="divAmount200 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">200</span>
+                            </div>
+                            <div class="divAmount250 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">250</span>
+                            </div>
+                            <div class="divAmount500 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">500</span>
+                            </div>
+                            <div class="divAmount1000 divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">1000</span>
+                            </div>
+                            <div class="divAmountEnter divAmount bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">Enter</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-1">
+                        <div class="pb-2 border-b border-cyan-300 mb-3">
+                            <h4 class="text-xl font-black text-cyan-500">Choose Frequency</h4>
+                        </div>
+                        <div class="flex flex-wrap gap-6 mt-5 divSelectFrequency">
+                            <div class="divFrequencyOneTime divFrequency bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">One Time</span>
+                            </div>
+                            <div class="divFrequencyMonthly divFrequency bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2">
+                                <img src={radioButtonIcon.src} alt="radiobutton" class="unselectedIcon h-5 w-5 mt-[2px]" />
+                                <img src={radioButtonSelectedIcon.src} alt="radiobutton" class="selectedIcon h-5 w-5 mt-[2px] hidden" />
+                                <span class="selectedText">Monthly</span>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+    
+    
+                    <div class="h-[50px] py-5 mb-10">
+                        <div class="alert-div-donate hidden text-center px-6 py-1 rounded-md w-fit">
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+    
+                <div class="flex flex-wrap gap-6">
+                    <button class="bg-teal-500 hover:bg-teal-700 text-white text-lg font-bold py-2 px-24 rounded-xl btnDonate">Donate</button>
+                </div>
+            </div>
+
+            <div class="p-2 md:p-20 mt-2 flex flex-wrap gap-6 text-sm md:text-md lg:text-lg xl:text-xl border-t">
                 <div class="">
                     <img src={interacLogo.src} width="100px" alt="Interac" />
                 </div>
