@@ -1,31 +1,60 @@
 ---
 import posterSrc from '../assets/OIAC.Eid.Ul.Adha.2024.jpeg'
 ---
-<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 p-8 z-50">
+<!-- <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 p-8 z-50">
+  <div class="relative bg-white rounded shadow-lg overflow-hidden">
+    <span id="closeBtn" class="absolute top-2 right-2 text-black text-4xl cursor-pointer">&times;</span>
+    <img src={posterSrc.src} alt="Poster" class="block w-[90%] h-auto max-w-full max-h-screen object-contain rounded">
+  </div>
+</div> -->
+<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 p-8 hidden z-50">
   <div class="relative bg-white rounded shadow-lg overflow-hidden">
     <span id="closeBtn" class="absolute top-2 right-2 text-black text-4xl cursor-pointer">&times;</span>
     <img src={posterSrc.src} alt="Poster" class="block w-[90%] h-auto max-w-full max-h-screen object-contain rounded">
   </div>
 </div>
 
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+const popupDuration = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
+//const popupDuration = 60000; // 1 minute in milliseconds
+document.addEventListener('DOMContentLoaded', () => {
     const popup = document.getElementById('popup') as HTMLDivElement;
     const closeBtn = document.getElementById('closeBtn') as HTMLSpanElement;
 
+    // Function to show popup
+    const showPopup = () => {
+      popup.classList.remove('hidden');
+    };
+
+    // Function to close popup
+    const closePopup = () => {
+      popup.classList.add('hidden');
+      const expirationTime = Date.now() + popupDuration;
+      localStorage.setItem('popupShown', JSON.stringify({ expiration: expirationTime }));
+    };
+
+    // Check if the popup has already been shown
+    const popupData = localStorage.getItem('popupShown');
+    if (popupData) {
+      const { expiration } = JSON.parse(popupData);
+      if (Date.now() < expiration) {
+        return; // Popup was shown within the last duration, do not show again
+      }
+    }
+
     // Show the popup when the page loads
-    popup.classList.remove('hidden');
+    showPopup();
 
     // Close the popup when the close button is clicked
-    closeBtn.addEventListener('click', () => {
-      popup.classList.add('hidden');
-    });
+    closeBtn.addEventListener('click', closePopup);
 
     // Optional: Close the popup when clicking outside of the popup content
     popup.addEventListener('click', (event) => {
       if (event.target === popup) {
-        popup.classList.add('hidden');
+        closePopup();
       }
     });
   });
+    
 </script>
