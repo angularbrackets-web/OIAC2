@@ -2,41 +2,58 @@
 import oiacLogo from '../assets/oiac-logo-removebg-preview.webp'
 ---
 
-<div class="bg-gray-800 px-4 p-2 md:px-8 md:py-2 mx-auto">
-    <div class="container">
-        <div class="rounded-xl text-gray-100 p-1 md:px-20 md:py-5 flex flex-wrap gap-10">
-            <div class="w-full md:w-[45%]">
-                <div class="mb-5">
-                    <img class=' w-32 h-28 mx-auto' src={oiacLogo.src} alt="OIAC Logo" />
-                </div>
-                <h4 class="w-full text-2xl md:text-4xl my-5 mx-auto">Omar Ibn Al Khattab Centre</h4>
-                <p class="w-full text-sm md:text-lg">
-                    Our aim and purpose at the Omar Ibn Al Khattab Centre is to serve the best interests of Islam and the Muslims of Edmonton
-                </p>
-            </div>
-            <div class="w-full md:w-[45%] flex flex-wrap gap-12 md:gap-12 justify-between mt-1 md:mt-10">
-                <div class="w-full md:w-[50%] mx-auto md:mx-2">
-                    <ul class="text-xl">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/aboutus">About Us</a></li>
-                        <li><a href="/prayertimes">Prayer Times</a></li>
-                        <li><a href="/programs">Programs</a></li>
-                        <li><a href="/events">Events</a></li>
-                        <li><a href="/contactus">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-[50%] mx-auto md:mx-2">
-                    <ul class="text-xl">
-                        <li><a href="http://www.facebook.com/oiacentre" target="_blank">Facebook</a></li>
-                        <li><a href="https://www.instagram.com/oiacentre/" target="_blank">Instagram</a></li>
-                        <li><a href="https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA" target="_blank">Youtube</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div>
-        <div class="text-white p-2 md:px-20 md:py-2">
-            <p><span>&copy;</span> All Rights Reserved</p>
+
+
+<footer class="bg-gray-800 text-white py-8">
+<div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between space-y-6 md:space-y-0">
+    <!-- Branding/Logo Section -->
+    <div class="w-full md:w-1/5 text-center md:text-left">
+        <img src={oiacLogo.src} alt="OIAC Logo" class="h-24 mx-auto md:mx-0 mb-5">
+        <p class="text-sm">© 2024 OIAC</p>
+        <p class="text-sm">All rights reserved.</p>
+    </div>
+
+    <!-- Main Links -->
+    <div class="w-full md:w-1/5">
+        <h2 class="text-xl font-bold mb-4 text-center md:text-left text-emerald-500">MAIN</h2>
+        <ul class="flex flex-col space-y-2 text-center md:text-left">
+        <li><a href="/" class="hover:underline">Home</a></li>
+        <li><a href="/aboutus" class="hover:underline">About Us</a></li>
+        <li><a href="/contactus" class="hover:underline">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Programs & Events Links -->
+    <div class="w-full md:w-1/5">
+        <h2 class="text-xl font-bold mb-4 text-center md:text-left text-emerald-500">PROGRAMS & EVENTS</h2>
+        <ul class="flex flex-col space-y-2 text-center md:text-left">
+        <li><a href="/prayertimes" class="hover:underline">Prayer Times</a></li>
+        <li><a href="/programs" class="hover:underline">Programs</a></li>
+        <li><a href="/events" class="hover:underline">Events</a></li>
+        </ul>
+    </div>
+
+    <!-- Resources Links -->
+    <div class="w-full md:w-1/5">
+        <h2 class="text-xl font-bold mb-4 text-center md:text-left text-emerald-500">LEGAL</h2>
+        <ul class="flex flex-col space-y-2 text-center md:text-left">
+        <li><a href="/privacypolicy" class="hover:underline">Privacy Policy</a></li>
+        </ul>
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="w-full md:w-1/5">
+        <h2 class="text-xl font-bold mb-4 text-center md:text-left text-emerald-500">SOCIAL MEDIA</h2>
+        <div class="mt-8 flex justify-center md:justify-start space-x-4">
+            <a href="http://www.facebook.com/oiacentre" target="_blank" class="hover:text-gray-400"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/oiacentre/" target="_blank class="hover:text-gray-400"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA" target="_blank class="hover:text-gray-400"><i class="fab fa-youtube"></i></a>
         </div>
     </div>
+    </div>
+
+    
 </div>
+</footer>
+          
