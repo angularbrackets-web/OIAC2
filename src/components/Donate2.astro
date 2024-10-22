@@ -1,0 +1,151 @@
+---
+import "../styles/global.css";
+import radioButtonIcon from "../assets/checkbox.unchecked.png";
+import radioButtonSelectedIcon from "../assets/checkbox.checked.png";
+import DonateToMasjid from "./DonateToMasjid.astro";
+import DonateToNewCentre from "./DonateToNewCentre.astro";
+---
+
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+  <div class="container mt-5">
+    <div class="bg-emerald-950 rounded-xl text-gray-100 p-5">
+      <div class="p-2 md:p-20 mb-10">
+        <h4 class="text-4xl font-black mb-10">Donate</h4>
+
+        <div class="mb-16">
+          <div class="pb-2 border-b border-cyan-300 mb-3">
+            <h4 class="text-xl font-black text-cyan-500">Choose Project</h4>
+          </div>
+          <div class="divDonationSelectionSummary"></div>
+          <div
+            class="flex flex-wrap gap-6 mt-5 divSelectProject"
+            role="tablist"
+          >
+            <!-- Project 1: Masjid -->
+            <button
+              class="divProjectMasjid divProject bg-emerald-400 shadow-xl shadow-emerald-500/50 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2 project"
+              data-project="masjid"
+              role="tab"
+              aria-selected="true"
+            >
+              <img
+                src={radioButtonIcon.src}
+                alt="radiobutton"
+                class="unselectedIcon h-5 w-5 mt-[2px] hidden"
+              />
+              <img
+                src={radioButtonSelectedIcon.src}
+                alt="radiobutton"
+                class="selectedIcon h-5 w-5 mt-[2px]"
+              />
+              <span class="selectedText">Masjid</span>
+            </button>
+
+            <!-- Project 2: New Islamic Centre -->
+            <button
+              class="divProjectNewCentre divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2 project"
+              data-project="newCentre"
+              role="tab"
+              aria-selected="false"
+            >
+              <img
+                src={radioButtonIcon.src}
+                alt="radiobutton"
+                class="unselectedIcon h-5 w-5 mt-[2px]"
+              />
+              <img
+                src={radioButtonSelectedIcon.src}
+                alt="radiobutton"
+                class="selectedIcon h-5 w-5 mt-[2px] hidden"
+              />
+              <span class="selectedText">New Islamic Centre</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Corresponding Divs -->
+        <div id="masjid-content" class="project-content">
+          <DonateToMasjid />
+        </div>
+        <div id="newCentre-content" class="project-content hidden">
+          <DonateToNewCentre />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get the parent container for project buttons
+  const projectContainer = document.querySelector(".divSelectProject");
+
+  // Store the currently selected project
+  let selectedProject =
+    document.querySelector<HTMLElement>(".divProjectMasjid");
+  selectedProject?.classList.add("bg-cyan-300");
+
+  // Show the default corresponding content
+  const defaultContent = document.getElementById("masjid-content");
+  defaultContent?.classList.remove("hidden");
+
+  // Add event listener to parent for event delegation
+  projectContainer?.addEventListener("click", (event: Event) => {
+    const target = event.target as HTMLElement;
+
+    // Traverse up to find the button that was clicked (in case img/span was clicked)
+    const projectButton = target.closest<HTMLElement>(".project");
+
+    if (projectButton) {
+      const project = projectButton.dataset.project;
+
+      // Skip if the project is already selected
+      if (selectedProject === projectButton) return;
+
+      // Remove highlight and icon from the previously selected project
+      selectedProject?.classList.remove(
+        "bg-emerald-400",
+        "shadow-xl",
+        "shadow-emerald-500/50"
+      );
+      selectedProject?.classList.add("bg-gray-200");
+      selectedProject?.setAttribute("aria-selected", "false");
+
+      // Toggle the icons in the previously selected project
+      const previousUnselectedIcon =
+        selectedProject?.querySelector(".unselectedIcon");
+      const previousSelectedIcon =
+        selectedProject?.querySelector(".selectedIcon");
+      previousUnselectedIcon?.classList.remove("hidden");
+      previousSelectedIcon?.classList.add("hidden");
+
+      // Hide all project contents
+      const allContents = document.querySelectorAll(".project-content");
+      allContents.forEach((content) => content.classList.add("hidden"));
+
+      // Show the selected project's content
+      const selectedContent = document.getElementById(`${project}-content`);
+      if (selectedContent) {
+        selectedContent.classList.remove("hidden");
+      }
+
+      // Highlight the selected project
+      projectButton.classList.remove("bg-gray-200");
+      projectButton.classList.add(
+        "bg-emerald-400",
+        "shadow-xl",
+        "shadow-emerald-500/50"
+      );
+      projectButton.setAttribute("aria-selected", "true");
+
+      // Toggle the icons in the newly selected project
+      const currentUnselectedIcon =
+        projectButton.querySelector(".unselectedIcon");
+      const currentSelectedIcon = projectButton.querySelector(".selectedIcon");
+      currentUnselectedIcon?.classList.add("hidden");
+      currentSelectedIcon?.classList.remove("hidden");
+
+      // Update the reference to the currently selected project
+      selectedProject = projectButton;
+    }
+  });
+</script>
