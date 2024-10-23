@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import interacLogo from "../assets/Interac.Logo1.png";
+import DonateToNewCentre from "./DonateToNewCentre.astro";
+---
+
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+  <div class="container mt-5">
+    <div class="bg-emerald-950 rounded-xl text-gray-100 p-5">
+      <div class="p-2 md:p-5 mb-5">
+        <h4 class="text-4xl font-black mb-5">Donate</h4>
+        <div
+          class="p-2 md:py-5 mt-2 flex flex-wrap gap-6 text-sm md:text-md lg:text-lg xl:text-xl"
+        >
+          <div class="">
+            <img src={interacLogo.src} width="100px" alt="Interac" />
+          </div>
+
+          <div class="w-[75%] flex-row gap-3">
+            <p>To donate via Interac / e-Transfer, please send it to</p>
+
+            <div class="flex flex-wrap gap-1">
+              <div
+                class="font-bold bg-yellow-500 text-gray-800 rounded-lg text-center mt-3 px-3"
+              >
+                <span>new.project@oiacedmonton.ca</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="newCentre-content" class="project-content">
+          <DonateToNewCentre />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
