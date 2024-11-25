@@ -69,9 +69,9 @@ export const POST: APIRoute = async ({request}) => {
         const ADD_VOLUNTEER = gql`${mutationAddVolunteer}`
 
         const addVolunteerResult = await client.mutate({mutation:ADD_VOLUNTEER})
-        console.log('addVolunteerResult => ', JSON.stringify(addVolunteerResult))
+        // console.log('addVolunteerResult => ', JSON.stringify(addVolunteerResult))
         const successResult = addVolunteerResult as AddVolunteerSuccessResponse
-        console.log('addVolunteerSuccessResult => ', JSON.stringify(successResult))
+        // console.log('addVolunteerSuccessResult => ', JSON.stringify(successResult))
         
         if(successResult){
             const mutationPublishVolunteer = `
@@ -83,7 +83,7 @@ export const POST: APIRoute = async ({request}) => {
             `
             const PUBLISH_VOLUNTEER = gql`${mutationPublishVolunteer}`
             const publishVolunteerResult = await client.mutate({mutation:PUBLISH_VOLUNTEER})
-            console.log('publishVolunteerResult => ', JSON.stringify(publishVolunteerResult))
+            // console.log('publishVolunteerResult => ', JSON.stringify(publishVolunteerResult))
         }
 
         let success_response : AddVolunteerApiResponse = {

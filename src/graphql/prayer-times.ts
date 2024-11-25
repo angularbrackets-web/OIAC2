@@ -91,7 +91,7 @@ export async function getPrayerTimesForCurrentMonth() {
 }
 
 export async function addPrayerTime() {
-    console.log('$$$$$$ADD PRAYER TIME$$$$$$$$')
+    // console.log('$$$$$$ADD PRAYER TIME$$$$$$$$')
     const ADD_PRAYERTIME = gql`
     mutation AddPrayerTimes {
         createPrayerTime(
@@ -107,7 +107,7 @@ export async function addPrayerTime() {
     `
     const result = await client.mutate({mutation:ADD_PRAYERTIME})
 
-    console.log('MUTATION RESULT: ', JSON.stringify(result))
+    // console.log('MUTATION RESULT: ', JSON.stringify(result))
 }
 
 export async function getJummahTimes() {

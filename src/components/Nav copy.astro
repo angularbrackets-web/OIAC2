@@ -46,9 +46,9 @@ import youtubeIcon from "../assets/youtube.png";
         </div>
       </div>
 
-      <!-- Mobile Button (Hamburger) -->
+      {/* Mobile Button */}
       <div class="block md:hidden w-[10%]">
-        <button id="hamburgerBtn" class="mobile-menu-button">
+        <button class="mobile-menu-button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -68,7 +68,7 @@ import youtubeIcon from "../assets/youtube.png";
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            stroke-width={1.5}
             stroke="currentColor"
             class="close-mobile-icon w-10 h-10 hidden text-red-500"
           >
@@ -80,13 +80,14 @@ import youtubeIcon from "../assets/youtube.png";
         </button>
       </div>
     </div>
-
     <!-- Web -->
     <div class="flex items-center justify-between">
       <div class="hidden md:block w-[10%]">
-        <a href="/">
-          <img class="" src={oiacLogo.src} alt="OIAC Logo" />
-        </a>
+        <div class="">
+          <a href="/">
+            <img class="" src={oiacLogo.src} alt="OIAC Logo" />
+          </a>
+        </div>
       </div>
       <div class="hidden md:block w-[80%] md:w-[75%] p-3">
         <div class="">
@@ -133,6 +134,7 @@ import youtubeIcon from "../assets/youtube.png";
         </div>
       </div>
     </div>
+
     <div class="hidden md:block">
       <div
         class="flex flex-wrap justify-between items-center transition duration-300 my-3 text-md lg:text-lg font-black"
@@ -193,85 +195,73 @@ import youtubeIcon from "../assets/youtube.png";
     </div>
   </div>
 
-  <!-- Mobile Menu -->
+  {/* Mobile Menu */}
+
   <div
     class="mobile-menu hidden fixed inset-0 bg-white text-lg flex flex-col px-6 py-6 font-black overflow-hidden"
   >
-    <!-- Mobile Header and Close Button -->
-    <div class="flex justify-between items-center pb-4">
-      <!-- <div class="text-xl font-bold">Mobile Menu</div> -->
-      <div class="w-[15%] p-1">
-        <a href="/">
-          <img class="w-96" src={oiacLogo.src} alt="OIAC Logo" />
-        </a>
+    <!-- The scrollable container inside the mobile menu -->
+    <div class="flex flex-col gap-8 overflow-y-auto max-h-full">
+      <a href="/" class="block hover:text-green-950">Home</a>
+      <!-- About Us with always-visible dropdown -->
+      <div class="relative">
+        <a href="/aboutus" class="block hover:text-green-950">About Us</a>
       </div>
-
-      <!-- Mobile Button (Close Menu) -->
-      <div class="block md:hidden w-[10%]">
-        <button class="close-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-10 h-10 text-red-500"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <a href="/aboutus" class="block hover:text-green-950">About Us</a>
-    <a href="/prayertimes" class="block hover:text-green-950">Prayer Times</a>
-    <a href="/programs" class="block hover:text-green-950">Programs</a>
-    <a href="/events" class="block hover:text-green-950">Events</a>
-    <a href="/newcentre" class="block hover:text-green-950">
-      New Islamic Centre <sup
-        class="text-[8px] bg-yellow-500 text-yellow-900 rounded-lg px-1"
-        >New</sup
+      <a href="/prayertimes" class="block hover:text-green-950">Prayer Times</a>
+      <a href="/programs" class="block hover:text-green-950">Programs</a>
+      <a href="/events" class="block hover:text-green-950">Events</a>
+      <a href="/newcentre" class="block hover:text-green-950">
+        New Islamic Centre <sup
+          class="text-[8px] bg-yellow-500 text-yellow-900 rounded-lg px-1"
+          >New</sup
+        >
+      </a>
+      <a href="/staff" class="block hover:text-green-950">Our Staff</a>
+      <a href="/jobs" class="block hover:text-green-950">Jobs</a>
+      <a href="/privacypolicy" class="block hover:text-green-950"
+        >Privacy Policy</a
       >
-    </a>
-    <a href="/staff" class="block hover:text-green-950">Our Staff</a>
-    <a href="/jobs" class="block hover:text-green-950">Jobs</a>
-    <a href="/privacypolicy" class="block hover:text-green-950"
-      >Privacy Policy</a
-    >
-    <a href="/contactus" class="block hover:text-green-950">Contact Us</a>
+      <a href="/contactus" class="block hover:text-green-950">Contact Us</a>
+    </div>
   </div>
 </nav>
+<!-- <div class="clear-both">&nbsp;</div>
+<div class="w-full bg-green-500 h-48">aaaaaaaaaaaaaaaaaa</div>
+<div class="h-[180px] max-[384px]:h-[180px] max-[390px]:h-[165px] max-[452px]:h-[150px] max-[650px]:h-[125px] min-[651px]:h-[115px] md:h-[155px] bg-red-800 md:bg-blue-700"></div>
+<div class="clear-both"></div> -->
+<!-- <div class="w-[128%] bg-blue-500 h-12">a</div> -->
+<!-- <div class="h-[180px] max-[384px]:h-[180px] max-[390px]:h-[165px] max-[452px]:h-[150px] max-[650px]:h-[125px] min-[651px]:h-[115px] md:h-[155px] bg-red-800 md:bg-blue-700"></div> -->
 <div
   class="h-[50px] max-[354px]:h-[50px] max-[562px]:h-[24px] min-[563px]:h-[8px] max-[767px]:h-[8px] md:h-[80px] lg:h-[80px] xl:h-[88px]"
 >
 </div>
-<!-- JavaScript -->
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Toggle Mobile Menu
-    const hamburgerBtn = document.getElementById("hamburgerBtn");
-    const mobileMenu = document.querySelector(".mobile-menu");
-    const mobileIcon = document.querySelector(".mobile-icon");
-    const closeIcon = document.querySelector(".close-mobile-icon");
-
-    hamburgerBtn.addEventListener("click", function () {
-      mobileMenu.classList.toggle("hidden");
-      mobileIcon.classList.toggle("hidden");
-      closeIcon.classList.toggle("hidden");
-    });
-
-    const closeButton = document.querySelector(".close-button"); // Make sure this selector is correct
-    if (closeButton) {
-      closeButton.addEventListener("click", function () {
-        mobileMenu.classList.add("hidden");
-        mobileIcon.classList.remove("hidden");
-        closeIcon.classList.add("hidden");
-      });
-    } else {
-      console.error("Close button not found");
-    }
+  let mobileMenuButton = document.querySelector("button.mobile-menu-button");
+  mobileMenuButton?.addEventListener("click", () => {
+    toggleShowMobileMenu();
   });
+  let mobileMenu = document.querySelector("div.mobile-menu");
+  let mobileIcon = document.querySelector("svg.mobile-icon");
+  let closeMobileIcon = document.querySelector("svg.close-mobile-icon");
+
+  let showMobileMenu = false;
+  let toggleShowMobileMenu = () => {
+    showMobileMenu = !showMobileMenu;
+    if (showMobileMenu) {
+      mobileMenu?.classList.remove("hidden");
+      mobileMenu?.classList.add("block");
+      mobileIcon?.classList.remove("block");
+      mobileIcon?.classList.add("hidden");
+      closeMobileIcon?.classList.remove("hidden");
+      closeMobileIcon?.classList.add("block");
+    } else {
+      mobileMenu?.classList.remove("block");
+      mobileMenu?.classList.add("hidden");
+      closeMobileIcon?.classList.remove("block");
+      closeMobileIcon?.classList.add("hidden");
+      mobileIcon?.classList.remove("hidden");
+      mobileIcon?.classList.add("block");
+    }
+  };
 </script>

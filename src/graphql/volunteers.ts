@@ -15,7 +15,7 @@ export const volunteerTest = () => {
 }
 
 export const addVolunteer = async (volunteer:Volunteer) => {
-    await console.log('111111')
+    // await console.log('111111')
     const mutationAddVolunteer = `
         mutation AddVolunteer {
             createVolunteer(
@@ -35,8 +35,8 @@ export const addVolunteer = async (volunteer:Volunteer) => {
     const ADD_VOLUNTEER = gql`${mutationAddVolunteer}`
 
     const result = await client.mutate({mutation:ADD_VOLUNTEER})
-    await console.log('22222')
-    await console.log('createVolunteer.id', result.data?.createVolunteer.id)
+    // await console.log('22222')
+    // await console.log('createVolunteer.id', result.data?.createVolunteer.id)
     //await console.log('createVolunteer.duplicateError', result.networkError?.result?.errors[0]?.message)
     
     // const mutationPublishVolunteer = `
@@ -47,7 +47,7 @@ export const addVolunteer = async (volunteer:Volunteer) => {
     //     }
     // `
 
-    await console.log('ADD VOLUNTEER RESULT : ', JSON.stringify(result))
+    // await console.log('ADD VOLUNTEER RESULT : ', JSON.stringify(result))
 
     return result
 }
