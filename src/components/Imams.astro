@@ -1,62 +1,51 @@
 ---
-import blankProfilePicture from '../assets/blank-profile-picture.png'
-import shaikhMusab from '../assets/SheikhMusab2.png'
-import shaikhSaid from '../assets/ShaikhSaid2.png'
-import shaikhYousif from '../assets/ShaikYousif2.png'
-import ustadAhmed from '../assets/UstadAhmed1.jpeg'
-import sheikhAhmedSaeed from '../assets/SheikhAhmedSaeed2.png'
+// import blankProfilePicture from "../assets/blank-profile-picture.png";
+// import shaikhMusab from "../assets/SheikhMusab2.png";
+// import shaikhSaid from "../assets/ShaikhSaid2.png";
+// import shaikhYousif from "../assets/ShaikYousif2.png";
+// import ustadAhmed from "../assets/UstadAhmed1.jpeg";
+// import sheikhAhmedSaeed from "../assets/SheikhAhmedSaeed2.png";
+
+import { getStaffMembers, type Staff } from "../graphql/staff";
+import defaultProfilePicture from "../assets/blank-profile-picture.png";
+const imams: Array<Staff> = await getStaffMembers("Imam");
 ---
 
 <div class="bg-teal-600 mx-auto mt-5">
-    <div class="mt-5">
-        <div class="container text-gray-50 py-5">
-            <h4 class="text-4xl font-black mb-10 px-5">Our Imams</h4>
-            <div class="flex flex-wrap">
-                <div class="w-full m-5 md:w-[48%] md:m-[1%] lg:w-[31%] bg-teal-700 rounded-2xl">
-                    <div class="bg-teal-800 rounded-t-2xl p-3">
-                        <img src={shaikhSaid.src} alt="profile picture" class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto" />
-                        <h4 class="text-4xl font-black text-center my-5 text-gray-950">SHAIKH SAID AHMED</h4>
-                    </div>
-                    <div class="p-3">
-                        <p class="my-3">Over 10 years of experience teaching Islamic studies and delivering Da'wah lectures.</p>
-                        <p class="my-3">Proficient in Quran recitation and teaching Quran Tafseer with proper Tajweed</p>
-                        <p class="my-3">Taught various students from diverse backgrounds, promoted Islamic manners and ethics</p>
-                        <p class="my-3">Involved in curriculam development of various levels for the Quran program</p>
-                    </div>
-                </div>
-
-                <div class="w-full m-5 md:w-[48%] md:m-[1%] lg:w-[31%] bg-teal-700 rounded-2xl">
-                    <div class="bg-teal-800 rounded-t-2xl p-3">
-                        <img src={sheikhAhmedSaeed.src} alt="profile picture" class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto" />
-                        <h4 class="text-4xl font-black text-center my-5 text-gray-950">SHAIKH AHMED SAEED</h4>
-                    </div>
-                    <div class="p-3">
-                        <p class="my-3">Over 10 years of experience as an Imam, a teacher of Quran and Islamic Studies, proficient in Quran recitation and Hadeeth sciences.</p>
-                        <p class="my-3">Imam at Al-Aelat mosque, Egypt delivering Jummah Khutbas</p>
-                        <p class="my-3">Teaching Quran and Islamic studies at Fawaris Ahl Sunnaha, Egypt</p>
-                        <p class="my-3">Imam at OIAC since 2021</p>
-                    </div>
-                </div>
-
-
-
-                
-
-                <div class="w-full m-5 md:w-[48%] md:m-[1%] lg:w-[31%] bg-teal-700 rounded-2xl">
-                    <div class="bg-teal-800 rounded-t-2xl p-3">
-                        <img src={shaikhYousif.src} alt="profile picture" class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto" />
-                        <h4 class="text-4xl font-black text-center my-5 text-gray-950">SHAIKH YOUSUF ALALAGHI</h4>
-                    </div>
-                    <div class="p-3">
-                        <p class="my-3">Sheikh Yousuf Alalaghi with us in the center, as a teacher of the Holy Quran.</p>
-                        <p class="my-3"> He holds a license (Ijaza) from the Libyan Ministry of Awqaf to teach the Holy Quran.</p>
-                        <p class="my-3">Ma Shaa Allah, he has been teaching the Holy Quran for more than 17 years, and many students memorized the Holy Quran under his supervision and teaching, praise be to Allah.</p>
-                        <p class="my-3">He also participated in many arbitration  committees for many competitions at Tripoli municipality, which is the place where he live.</p>
-                        <p class="my-3">It is really a blessing from Allah, the Almighty that Sheikh Yousuf will be one of the supervisors and teachers of the Holy Quran.</p>
-                    </div>
-                </div>
+  <div class="mt-5">
+    <div class="container text-gray-50 py-5">
+      <h4 class="text-4xl font-black mb-10 px-5">Our Imams</h4>
+      <div class="flex flex-wrap">
+        {
+          imams.map((imam) => (
+            <div class="w-full m-5 md:w-[48%] md:m-[1%] lg:w-[31%] bg-teal-700 rounded-2xl">
+              <div class="bg-teal-800 rounded-t-2xl p-3">
+                {/* <img src={imam.profilePicture?} alt="profile picture" class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto" /> */}
+                <img
+                  src={imam.profilePicture?.url || defaultProfilePicture.src}
+                  alt={
+                    imam.name
+                      ? `${imam.name}'s profile picture`
+                      : "Default profile picture"
+                  }
+                  class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto"
+                />
+                <h4 class="text-4xl font-black text-center my-5 text-gray-950">
+                  {imam.name}
+                </h4>
+              </div>
+              <div class="p-3">
+                {imam.description && (
+                  <div
+                    class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 text-white"
+                    set:html={imam.description.html}
+                  />
+                )}
+              </div>
             </div>
-
-        </div>
+          ))
+        }
+      </div>
     </div>
+  </div>
 </div>
