@@ -1,0 +1,91 @@
+---
+import { getStaffMembers, type Staff } from "../graphql/staff";
+import defaultProfilePicture from "../assets/blank-profile-picture.png";
+const staffMembers: Array<Staff> = await getStaffMembers();
+const staffTypes = [
+  ...new Set(staffMembers?.map((staff) => staff?.staffType?.name) ?? []),
+];
+// // Order staff types as desired
+// const staffTypes = [
+//   ...new Set(staffMembers.map((staff) => staff.staffType.name)),
+// ].sort();
+const groupedStaff =
+  staffMembers?.length > 0
+    ? staffMembers.reduce(
+        (acc, staff) => {
+          const type = staff?.staffType?.name || "Unknown";
+          if (!acc[type]) {
+            acc[type] = [];
+          }
+          acc[type].push(staff);
+          return acc;
+        },
+        {} as Record<string, Staff[]>
+      )
+    : {};
+---
+
+<div class="container mx-auto px-6 sm:px-8 py-16">
+  {
+    staffTypes.length > 0 ? (
+      <div class="space-y-24">
+        {staffTypes.map((type) => (
+          <section class="bg-white rounded-xl shadow-lg overflow-hidden p-8 sm:p-10 mb-8">
+            {/* Section Header */}
+            <h2 class="text-2xl font-semibold text-emerald-700 mb-6 border-b border-emerald-200 pb-4">
+              {type}s
+            </h2>
+
+            {/* Staff List */}
+            <div class="divide-y divide-gray-200">
+              {groupedStaff[type]?.map((staff, index) => (
+                <article
+                  class="p-8 md:p-10 flex flex-col md:flex-row gap-3 items-center md:items-start mb-8 border-b border-gray-200"
+                  aria-labelledby={`staff-${staff.id || index}`}
+                >
+                  {/* Staff Image */}
+                  <div class="flex-shrink-0 w-48">
+                    <img
+                      src={
+                        staff.profilePicture?.url || defaultProfilePicture.src
+                      }
+                      alt={
+                        staff.name
+                          ? `${staff.name}'s profile picture`
+                          : "Default profile picture"
+                      }
+                      class="w-48 h-48 rounded-full bg-teal-900 object-cover border-4 border-emerald-50 shadow-sm"
+                    />
+                  </div>
+
+                  {/* Staff Details */}
+                  <div class="flex-grow text-center md:text-left md:ml-10 mt-6 md:mt-0">
+                    <h3
+                      id={`staff-${staff.id || index}`}
+                      class="text-2xl font-semibold text-emerald-900 mb-3"
+                    >
+                      {staff.name || "Name unavailable"}
+                    </h3>
+                    <p class="text-emerald-600 text-lg mb-6">
+                      {staff.staffType?.name || "Role unavailable"}
+                    </p>
+                    {staff.description && (
+                      <div
+                        class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 text-gray-600"
+                        set:html={staff.description.html}
+                      />
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-gray-500">
+        No staff information available at this time.
+      </p>
+    )
+  }
+</div>

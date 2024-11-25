@@ -1,114 +1,232 @@
 ---
-import oiacLogo from '../assets/oiac-logo-removebg-preview.webp'
-import facebookIcon from '../assets/facebook.png'
-import instagramIcon from '../assets/instagram.png'
-import youtubeIcon from '../assets/youtube.png'
+import oiacLogo from "../assets/oiac-logo-removebg-preview.webp";
+import facebookIcon from "../assets/facebook.png";
+import instagramIcon from "../assets/instagram.png";
+import youtubeIcon from "../assets/youtube.png";
 ---
 
-<nav class="bg-gray-100 text-teal-700 text-sm md:text-md lg:text-lg xl:text-xl w-full fixed top-0 z-20">
-    <div class='md:container mx-auto'>
-        <!-- Mobile -->
-        <div class='flex md:hidden'>
-            <div class=" w-[15%] p-1">
-                <a href="/">
-                    <img class='w-96' src={oiacLogo.src} alt="OIAC Logo" />
-                </a>
-            </div>
-            
-            <div class="block md:hidden w-[75%] p-1">
-                <div class=""><h4 class="font-bold text-cyan-600 text-sm">Welcome To</h4></div>
-                <div class=""><h1 class="text-xl font-bold text-blue-950">Omar Ibn Al Khattab Centre</h1></div>
-                <p class="text-xs text-emerald-950">Striving to serve the best interests of Islam and the Muslims of Edmonton</p>
-                <div class="flex justify-between">
-                    <p class="min-[366px]:text-[8px] max-[398px]:text-[8px] min-[399px]:text-xs bg-emerald-950 rounded-xl h-[24px] px-5 py-1 my-1 w-fit text-teal-100 mt-2">6005 103A St NW, Edmonton</p>
-                    <a href="/donate">
-                        <div class='flex-1 grow bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg text-center w-fit mt-2 px-5 py-1 h-[24px]'>Donate</div>
-                    </a>
-                </div>
-                
-            </div>     
-            
-            {/* Mobile Button */}
-            <div class='block md:hidden w-[10%]'>
-                <button class='mobile-menu-button'>
-                    
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mobile-icon w-10 h-10 block hover:text-green-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
-                        </svg>
-                    
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="close-mobile-icon w-10 h-10 hidden text-red-500">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    
-                </button>
-            </div> 
-        </div>
-        <!-- Web -->
-        <div class="flex items-center justify-between">
-            <div class='hidden md:block w-[10%]'>
-                <div class="">
-                    <a href="/">
-                        <img class='' src={oiacLogo.src} alt="OIAC Logo" />
-                    </a>
-                </div>
-            </div>
-            <div class='hidden md:block w-[80%] md:w-[75%] p-3'>
-                <div class="">
-                    <div class=""><h4 class="font-bold text-cyan-600 text-sm">Welcome To</h4></div>
-                    <div class=""><h1 class="text-4xl font-bold text-blue-950">Omar Ibn Al Khattab Centre</h1></div>
-                    <p class="text-xs text-emerald-950">Striving to serve the best interests of Islam and the Muslims of Edmonton</p>
-                    <p class="text-xs bg-emerald-950 rounded-xl px-5 w-fit text-teal-100 mt-2">6005 103A St NW, Edmonton</p>
-                    
-                </div>
-                
-                
-            </div>
-            <div class='hidden md:block mt-8 w-[10%] md:w-[15%]'>
-                <div class="w-full">
-                    <a href="/donate">
-                        <div class='bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg text-center'>Donate</div>
-                    </a>
-                </div>
-                <div class="flex mt-5 justify-between">
-                    <a href="http://www.facebook.com/oiacentre" target="_blank"><img src={facebookIcon.src} alt="facebook"/></a>
-                    <a href="https://www.instagram.com/oiacentre/" target="_blank"><img src={instagramIcon.src} alt="instagram"/></a>
-                    <a href="https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA" target="_blank"><img src={youtubeIcon.src} alt="youtube"/></a>
-                </div>
-            </div>
-        </div>
+<nav
+  class="bg-gray-100 text-teal-700 text-sm md:text-md lg:text-lg xl:text-xl w-full fixed top-0 z-20"
+>
+  <div class="md:container mx-auto">
+    <!-- Mobile -->
+    <div class="flex md:hidden">
+      <div class="w-[15%] p-1">
+        <a href="/">
+          <img class="w-96" src={oiacLogo.src} alt="OIAC Logo" />
+        </a>
+      </div>
 
-        <div class='hidden md:block'>
-            <div class="flex items-center transition duration-300 my-3 text-md lg:text-lg font-black">
-                <div class="border-r border-emerald-600 pr-3"><a href="/" class=' hover:text-green-600'>Home</a></div>
-                <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/aboutus" class=' hover:text-green-600'>About Us</a></div>
-                <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/prayertimes" class=' hover:text-green-600'>Prayer Times</a></div>
-                <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/programs" class=' hover:text-green-600'>Programs</a></div>
-                <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/events" class=' hover:text-green-600'>Events</a></div>
-                <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/newcentre" class=' bg-emerald-900 text-white px-4 py-1 rounded-xl hover:text-green-300'>New Islamic Centre <sup class="text-[8px] bg-yellow-500 text-yellow-900 rounded-lg px-1">New</sup></a></div>
-                <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/privacypolicy" class=' hover:text-green-600'>Privacy Policy</a></div>
-                <div><a href="/contactus" class=' hover:text-green-600 pl-3'>Contact Us</a></div>
-            </div>
+      <div class="block md:hidden w-[75%] p-1">
+        <div class="">
+          <h4 class="font-bold text-cyan-600 text-sm">Welcome To</h4>
         </div>
+        <div class="">
+          <h1 class="text-xl font-bold text-blue-950">
+            Omar Ibn Al Khattab Centre
+          </h1>
+        </div>
+        <p class="text-xs text-emerald-950">
+          Striving to serve the best interests of Islam and the Muslims of
+          Edmonton
+        </p>
+        <div class="flex justify-between">
+          <p
+            class="min-[366px]:text-[8px] max-[398px]:text-[8px] min-[399px]:text-xs bg-emerald-950 rounded-xl h-[24px] px-5 py-1 my-1 w-fit text-teal-100 mt-2"
+          >
+            6005 103A St NW, Edmonton
+          </p>
+          <a href="/donate">
+            <div
+              class="flex-1 grow bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg text-center w-fit mt-2 px-5 py-1 h-[24px]"
+            >
+              Donate
+            </div>
+          </a>
+        </div>
+      </div>
 
-        
-                               
+      {/* Mobile Button */}
+      <div class="block md:hidden w-[10%]">
+        <button class="mobile-menu-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="mobile-icon w-10 h-10 block hover:text-green-500"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+            ></path>
+          </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width={1.5}
+            stroke="currentColor"
+            class="close-mobile-icon w-10 h-10 hidden text-red-500"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- Web -->
+    <div class="flex items-center justify-between">
+      <div class="hidden md:block w-[10%]">
+        <div class="">
+          <a href="/">
+            <img class="" src={oiacLogo.src} alt="OIAC Logo" />
+          </a>
+        </div>
+      </div>
+      <div class="hidden md:block w-[80%] md:w-[75%] p-3">
+        <div class="">
+          <div class="">
+            <h4 class="font-bold text-cyan-600 text-sm">Welcome To</h4>
+          </div>
+          <div class="">
+            <h1 class="text-4xl font-bold text-blue-950">
+              Omar Ibn Al Khattab Centre
+            </h1>
+          </div>
+          <p class="text-xs text-emerald-950">
+            Striving to serve the best interests of Islam and the Muslims of
+            Edmonton
+          </p>
+          <p
+            class="text-xs bg-emerald-950 rounded-xl px-5 w-fit text-teal-100 mt-2"
+          >
+            6005 103A St NW, Edmonton
+          </p>
+        </div>
+      </div>
+      <div class="hidden md:block mt-8 w-[10%] md:w-[15%]">
+        <div class="w-full">
+          <a href="/donate">
+            <div
+              class="bg-teal-700 hover:bg-green-600 text-green-100 rounded-lg text-center"
+            >
+              Donate
+            </div>
+          </a>
+        </div>
+        <div class="flex mt-5 justify-between">
+          <a href="http://www.facebook.com/oiacentre" target="_blank"
+            ><img src={facebookIcon.src} alt="facebook" /></a
+          >
+          <a href="https://www.instagram.com/oiacentre/" target="_blank"
+            ><img src={instagramIcon.src} alt="instagram" /></a
+          >
+          <a
+            href="https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA"
+            target="_blank"><img src={youtubeIcon.src} alt="youtube" /></a
+          >
+        </div>
+      </div>
     </div>
 
-    {/* Mobile Menu */}
-    
-    <div class='mobile-menu hidden text-lg flex bottom-0 left-0 w-full h-screen px-6 py-6 font-black'>
-        <div class='flex flex-col gap-8'>
-            <a href="/" class='block hover:text-green-950'>Home</a>
-            <a href="/aboutus" class='block hover:text-green-950'>About Us</a>
-            <a href="/prayertimes" class='block hover:text-green-950'>Prayer Times</a>
-            <a href="/programs" class='block hover:text-green-950'>Programs</a>
-            <a href="/events" class='block hover:text-green-950'>Events</a>
-            <a href="/newcentre" class='block hover:text-green-950'>New Islamic Centre <sup class="text-[8px] bg-yellow-500 text-yellow-900 rounded-lg px-1">New</sup></a>
-            <a href="/privacypolicy" class='block hover:text-green-950'>Privacy Policy</a>
-            <a href="/contactus" class='block hover:text-green-950'>Contact Us</a>
+    <div class="hidden md:block">
+      <div
+        class="flex items-center transition duration-300 my-3 text-md lg:text-lg font-black"
+      >
+        <div class="border-r border-emerald-600 pr-3">
+          <a href="/" class="hover:text-green-600">Home</a>
         </div>
+        <!-- <div class="border-r border-emerald-600 pl-3 pr-3"><a href="/aboutus" class=' hover:text-green-600'>About Us</a></div> -->
+        <div class="border-r border-emerald-600 pl-3 pr-3 relative group">
+          <a href="/aboutus" class="hover:text-green-600">About Us</a>
+          <!-- Dropdown Menu -->
+          <div
+            class="hidden group-hover:flex flex-col absolute top-full left-0 bg-white shadow-md border border-gray-200 rounded-md z-10 w-40"
+          >
+            <a
+              href="/staff"
+              class="block px-4 py-2 text-gray-800 hover:bg-emerald-100 hover:text-green-600"
+            >
+              Our Staff
+            </a>
+          </div>
+        </div>
+
+        <div class="border-r border-emerald-600 pl-3 pr-3">
+          <a href="/prayertimes" class="hover:text-green-600">Prayer Times</a>
+        </div>
+        <div class="border-r border-emerald-600 pl-3 pr-3">
+          <a href="/programs" class="hover:text-green-600">Programs</a>
+        </div>
+        <div class="border-r border-emerald-600 pl-3 pr-3">
+          <a href="/events" class="hover:text-green-600">Events</a>
+        </div>
+        <div class="border-r border-emerald-600 pl-3 pr-3">
+          <a
+            href="/newcentre"
+            class="bg-emerald-900 text-white px-4 py-1 rounded-xl hover:text-green-300"
+            >New Islamic Centre <sup
+              class="text-[8px] bg-yellow-500 text-yellow-900 rounded-lg px-1"
+              >New</sup
+            ></a
+          >
+        </div>
+        <div class="border-r border-emerald-600 pl-3 pr-3">
+          <a href="/privacypolicy" class="hover:text-green-600"
+            >Privacy Policy</a
+          >
+        </div>
+        <div>
+          <a href="/contactus" class="hover:text-green-600 pl-3">Contact Us</a>
+        </div>
+      </div>
     </div>
-    
+  </div>
+
+  {/* Mobile Menu */}
+
+  <div
+    class="mobile-menu hidden text-lg flex bottom-0 left-0 w-full h-screen px-6 py-6 font-black"
+  >
+    <div class="flex flex-col gap-8">
+      <a href="/" class="block hover:text-green-950">Home</a>
+      <!-- <a href="/aboutus" class="block hover:text-green-950">About Us</a> -->
+      <!-- About Us with always-visible dropdown -->
+      <div class="relative">
+        <a href="/aboutus" class="block hover:text-green-950">About Us</a>
+        <!-- Dropdown Menu visible by default -->
+        <div
+          class="mt-2 bg-white shadow-md border border-gray-200 rounded-md w-full"
+        >
+          <a
+            href="/staff"
+            class="block px-4 py-2 text-gray-800 hover:bg-emerald-100 hover:text-green-600"
+          >
+            Our Staff
+          </a>
+        </div>
+      </div>
+      <a href="/prayertimes" class="block hover:text-green-950">Prayer Times</a>
+      <a href="/programs" class="block hover:text-green-950">Programs</a>
+      <a href="/events" class="block hover:text-green-950">Events</a>
+      <a href="/newcentre" class="block hover:text-green-950"
+        >New Islamic Centre <sup
+          class="text-[8px] bg-yellow-500 text-yellow-900 rounded-lg px-1"
+          >New</sup
+        ></a
+      >
+      <a href="/privacypolicy" class="block hover:text-green-950"
+        >Privacy Policy</a
+      >
+      <a href="/contactus" class="block hover:text-green-950">Contact Us</a>
+    </div>
+  </div>
 </nav>
 <!-- <div class="clear-both">&nbsp;</div>
 <div class="w-full bg-green-500 h-48">aaaaaaaaaaaaaaaaaa</div>
@@ -116,36 +234,37 @@ import youtubeIcon from '../assets/youtube.png'
 <div class="clear-both"></div> -->
 <!-- <div class="w-[128%] bg-blue-500 h-12">a</div> -->
 <!-- <div class="h-[180px] max-[384px]:h-[180px] max-[390px]:h-[165px] max-[452px]:h-[150px] max-[650px]:h-[125px] min-[651px]:h-[115px] md:h-[155px] bg-red-800 md:bg-blue-700"></div> -->
-<div class="h-[50px] max-[354px]:h-[50px] max-[562px]:h-[24px] min-[563px]:h-[8px] max-[767px]:h-[8px] md:h-[80px] lg:h-[80px] xl:h-[88px]"></div>
+<div
+  class="h-[50px] max-[354px]:h-[50px] max-[562px]:h-[24px] min-[563px]:h-[8px] max-[767px]:h-[8px] md:h-[80px] lg:h-[80px] xl:h-[88px]"
+>
+</div>
 
 <script>
-    let mobileMenuButton = document.querySelector('button.mobile-menu-button')
-    mobileMenuButton?.addEventListener('click', () => {
-        toggleShowMobileMenu()
-    })
-    let mobileMenu = document.querySelector('div.mobile-menu')
-    let mobileIcon = document.querySelector('svg.mobile-icon')
-    let closeMobileIcon = document.querySelector('svg.close-mobile-icon')
+  let mobileMenuButton = document.querySelector("button.mobile-menu-button");
+  mobileMenuButton?.addEventListener("click", () => {
+    toggleShowMobileMenu();
+  });
+  let mobileMenu = document.querySelector("div.mobile-menu");
+  let mobileIcon = document.querySelector("svg.mobile-icon");
+  let closeMobileIcon = document.querySelector("svg.close-mobile-icon");
 
-
-    let showMobileMenu = false
-    let toggleShowMobileMenu = () => {
-        showMobileMenu = !showMobileMenu
-        if(showMobileMenu){
-            mobileMenu?.classList.remove('hidden')
-            mobileMenu?.classList.add('block')
-            mobileIcon?.classList.remove('block')
-            mobileIcon?.classList.add('hidden')
-            closeMobileIcon?.classList.remove('hidden')
-            closeMobileIcon?.classList.add('block')
-        }
-        else{
-            mobileMenu?.classList.remove('block')
-            mobileMenu?.classList.add('hidden')
-            closeMobileIcon?.classList.remove('block')
-            closeMobileIcon?.classList.add('hidden')
-            mobileIcon?.classList.remove('hidden')
-            mobileIcon?.classList.add('block')
-        }
+  let showMobileMenu = false;
+  let toggleShowMobileMenu = () => {
+    showMobileMenu = !showMobileMenu;
+    if (showMobileMenu) {
+      mobileMenu?.classList.remove("hidden");
+      mobileMenu?.classList.add("block");
+      mobileIcon?.classList.remove("block");
+      mobileIcon?.classList.add("hidden");
+      closeMobileIcon?.classList.remove("hidden");
+      closeMobileIcon?.classList.add("block");
+    } else {
+      mobileMenu?.classList.remove("block");
+      mobileMenu?.classList.add("hidden");
+      closeMobileIcon?.classList.remove("block");
+      closeMobileIcon?.classList.add("hidden");
+      mobileIcon?.classList.remove("hidden");
+      mobileIcon?.classList.add("block");
     }
-    </script>
+  };
+</script>
