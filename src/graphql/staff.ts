@@ -20,7 +20,7 @@ export interface Staff {
     const result = await client.query({
         query: gql`
         query StaffMembers {
-        staffs {
+        staffs(first: 100) {
           id
           name
           profilePicture {
