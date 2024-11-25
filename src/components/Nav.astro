@@ -252,10 +252,14 @@ import youtubeIcon from "../assets/youtube.png";
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Toggle Mobile Menu
-    const hamburgerBtn = document.getElementById("hamburgerBtn");
-    const mobileMenu = document.querySelector(".mobile-menu");
-    const mobileIcon = document.querySelector(".mobile-icon");
-    const closeIcon = document.querySelector(".close-mobile-icon");
+    const hamburgerBtn = document.getElementById(
+      "hamburgerBtn"
+    ) as HTMLButtonElement;
+    const mobileMenu = document.querySelector(".mobile-menu") as HTMLDivElement;
+    const mobileIcon = document.querySelector(".mobile-icon") as SVGElement;
+    const closeIcon = document.querySelector(
+      ".close-mobile-icon"
+    ) as SVGElement;
 
     hamburgerBtn.addEventListener("click", function () {
       mobileMenu.classList.toggle("hidden");
