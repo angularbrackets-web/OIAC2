@@ -2,34 +2,32 @@
 import volunteerImage from "../assets/volunteer.jpg";
 ---
 
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+<div class="px-4 py-8 md:px-8 md:py-12 mx-auto max-w-7xl">
   <div class="container mt-5">
-    <div class="bg-gray-600 rounded-xl text-gray-100 p-5">
+    <div class="bg-gray-800 rounded-xl text-gray-100 p-8 md:p-12">
       <div
-        class="p-2 md:p-20 flex flex-wrap space-x-2 md:space-x-6 lg:space-x-12"
+        class="flex flex-wrap md:flex-nowrap space-y-6 md:space-y-0 md:space-x-12"
       >
-        <div class="hidden md:block md:w-[40%] flex-shrink-0">
+        <div class="hidden md:block md:w-1/3 flex-shrink-0">
           <img
-            class="resize-none rounded-3xl h-[600px] w-[450px] object-cover"
+            class="rounded-3xl h-auto w-full object-cover"
             src={volunteerImage.src}
             alt="Volunteer"
           />
         </div>
-      </div>
-      <div class="w-full md:w-[50%]">
-        <h4 class="text-4xl font-black mb-10">Volunteer with us</h4>
-        <p class="mb-3">
-          We encourage you to share your experience and time to one of our many
-          Projects in our Masjid.
-        </p>
-        <p class="mb-3">
-          Please fill in your details and let us get back to you.
-        </p>
-        <p class="mb-16">Jazakumullah Khair.</p>
+        <div class="w-full md:w-2/3">
+          <h4 class="text-4xl font-black mb-6">Volunteer with us</h4>
+          <p class="mb-4">
+            We encourage you to share your experience and time with one of our
+            many projects in our Masjid.
+          </p>
+          <p class="mb-4">
+            Please fill in your details and let us get back to you.
+          </p>
+          <p class="mb-8">Jazakumullah Khair.</p>
 
-        <form id="add-volunteer-form" class="w-full max-w-lg">
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+          <form id="add-volunteer-form" class="w-full max-w-lg space-y-6">
+            <div>
               <label
                 class="block uppercase tracking-wide text-xs font-bold mb-2"
                 for="volunteer-name"
@@ -37,14 +35,12 @@ import volunteerImage from "../assets/volunteer.jpg";
                 Name
               </label>
               <input
-                class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
                 id="volunteer-name"
                 required
               />
             </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+            <div>
               <label
                 class="block uppercase tracking-wide text-xs font-bold mb-2"
                 for="volunteer-phone"
@@ -52,15 +48,13 @@ import volunteerImage from "../assets/volunteer.jpg";
                 Phone
               </label>
               <input
-                class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
                 name="volunteer-phone"
                 id="volunteer-phone"
                 required
               />
             </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+            <div>
               <label
                 class="block uppercase tracking-wide text-xs font-bold mb-2"
                 for="volunteer-email"
@@ -68,15 +62,13 @@ import volunteerImage from "../assets/volunteer.jpg";
                 Email
               </label>
               <input
-                class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
                 name="volunteer-email"
                 id="volunteer-email"
                 required
               />
             </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+            <div>
               <label
                 class="block uppercase tracking-wide text-xs font-bold mb-2"
                 for="volunteer-expertise"
@@ -84,14 +76,12 @@ import volunteerImage from "../assets/volunteer.jpg";
                 Your Expertise
               </label>
               <input
-                class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
                 name="volunteer-expertise"
                 id="volunteer-expertise"
               />
             </div>
-          </div>
-          <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
+            <div>
               <label
                 class="block uppercase tracking-wide text-xs font-bold mb-2"
                 for="volunteer-message"
@@ -99,25 +89,25 @@ import volunteerImage from "../assets/volunteer.jpg";
                 Message
               </label>
               <textarea
-                class="appearance-none block w-full bg-gray-300 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
                 name="volunteer-message"
                 id="volunteer-message"
                 required></textarea>
             </div>
-          </div>
-          <button
-            type="submit"
-            class="bg-emerald-500 hover:bg-emerald-700 text-white text-lg font-bold py-4 px-10 rounded"
-            id="btn-submit-volunteer">Submit</button
-          >
-
-          <div class="h-[50px] py-5">
-            <div
-              class="alert-div-volunteer hidden min-w-[20rem] text-center p-3 rounded-xl border-4"
+            <button
+              type="submit"
+              class="bg-emerald-500 hover:bg-emerald-700 text-white text-lg font-bold py-4 px-10 rounded transition duration-300"
+              id="btn-submit-volunteer">Submit</button
             >
+
+            <div class="h-[50px] py-5">
+              <div
+                class="alert-div-volunteer hidden min-w-[20rem] text-center p-3 rounded-xl border-4"
+              >
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
