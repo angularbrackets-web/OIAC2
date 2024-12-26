@@ -20,6 +20,21 @@ const staffTypes = [
 // const staffTypes = [
 //   ...new Set(staffMembers.map((staff) => staff.staffType.name)),
 // ].sort();
+//Previous code without sort by display order
+// const groupedStaff =
+//   staffMembers?.length > 0
+//     ? staffMembers.reduce(
+//         (acc, staff) => {
+//           const type = staff?.staffType?.name || "Unknown";
+//           if (!acc[type]) {
+//             acc[type] = [];
+//           }
+//           acc[type].push(staff);
+//           return acc;
+//         },
+//         {} as Record<string, Staff[]>
+//       )
+//     : {};
 const groupedStaff =
   staffMembers?.length > 0
     ? staffMembers.reduce(
@@ -28,7 +43,17 @@ const groupedStaff =
           if (!acc[type]) {
             acc[type] = [];
           }
-          acc[type].push(staff);
+
+          // Insert staff into the correct sorted position
+          const index = acc[type].findIndex(
+            (s) => (s.displayOrder || 0) > (staff.displayOrder || 0)
+          );
+          if (index === -1) {
+            acc[type].push(staff); // Add to the end if no larger displayOrder is found
+          } else {
+            acc[type].splice(index, 0, staff); // Insert at the correct position
+          }
+
           return acc;
         },
         {} as Record<string, Staff[]>
@@ -95,15 +120,18 @@ const groupedStaff =
                     >
                       {staff.name || "Name unavailable"}
                     </h3>
-                    <p
-                      class={`text-lg font-medium mb-6 ${
-                        type === specificStaffType
-                          ? "text-emerald-100"
-                          : "text-emerald-600"
-                      }`}
-                    >
-                      {staff.staffType?.name || "Role unavailable"}
-                    </p>
+
+                    {staff.title && (
+                      <p
+                        class={`text-lg font-medium mb-6 ${
+                          type === specificStaffType
+                            ? "text-emerald-100"
+                            : "text-emerald-600"
+                        }`}
+                      >
+                        {staff.title}
+                      </p>
+                    )}
                     {staff.description && (
                       <div
                         class={`prose prose-lg prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 ${

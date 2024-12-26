@@ -5,6 +5,8 @@ const {gql} = pkg
 export interface Staff {
     id: string;
     name: string;
+    title: string;
+    displayOrder: number;
     profilePicture?: {
       url: string;
     } | null;
@@ -26,6 +28,8 @@ export async function getStaffMembers(staffType?: string): Promise<any> {
             ) {
               id
               name
+              title
+              displayOrder
               profilePicture {
                 url
               }
@@ -43,6 +47,8 @@ export async function getStaffMembers(staffType?: string): Promise<any> {
             staffs(first: 100) {
               id
               name
+              title
+              displayOrder
               profilePicture {
                 url
               }
