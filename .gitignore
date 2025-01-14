@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+src/components/BulkInsertPrayerTimesCopy.ts
+src/components/BulkInsertPrayerTimes.ts
+src/pages/bulkUploadPrayerTimes.astro
