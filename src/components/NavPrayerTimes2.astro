@@ -8,44 +8,44 @@ const jummahTimes : Array<JummahTime> = await getJummahTimes()
 
 <div class="text-sm md:hidden z-10 w-full grid grid-cols-5 mt-24">
     <div class="">
-        <h4 class="font-bold bg-teal-800 text-teal-50 text-center py-1">Fajr</h4>
-        <h6 class="bg-teal-700 text-teal-100 text-center">{prayerTimesForCurrentDay.fajrBegins}</h6>
-        <h6 class="bg-teal-700 text-teal-50 font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
+        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Fajr</h4>
+        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.fajrBegins}</h6>
+        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
     </div>
     <div class="">
-        <h4 class="font-bold bg-teal-800 text-teal-50 text-center py-1">Dhuhr</h4>
-        <h6 class="bg-teal-700 text-teal-100 text-center">{prayerTimesForCurrentDay.zuhrBegins}</h6>
-        <h6 class="bg-teal-700 text-teal-50 font-bold text-center">{prayerTimesForCurrentDay.zuhrJamah}</h6>
+        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Dhuhr</h4>
+        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.zuhrBegins}</h6>
+        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.zuhrJamah}</h6>
     </div>
     <div class="">
-        <h4 class="font-bold bg-teal-800 text-teal-50 text-center py-1">Asr</h4>
-        <h6 class="bg-teal-700 text-teal-100 text-center">{prayerTimesForCurrentDay.asrBegins}</h6>
-        <h6 class="bg-teal-700 text-teal-50 font-bold text-center">{prayerTimesForCurrentDay.asrJamah}</h6>
+        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Asr</h4>
+        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.asrBegins}</h6>
+        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.asrJamah}</h6>
     </div>
     <div class="">
-        <h4 class="font-bold bg-teal-800 text-teal-50 text-center py-1">Maghrib</h4>
-        <h6 class="bg-teal-700 text-teal-100 text-center">{prayerTimesForCurrentDay.maghribBegins}</h6>
-        <h6 class="bg-teal-700 text-teal-50 font-bold text-center">{prayerTimesForCurrentDay.maghribJamah}</h6>
+        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Maghrib</h4>
+        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.maghribBegins}</h6>
+        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.maghribJamah}</h6>
     </div>
     <div class="">
-        <h4 class="font-bold bg-teal-800 text-teal-50 text-center py-1">Isha</h4>
-        <h6 class="bg-teal-700 text-teal-100 text-center">{prayerTimesForCurrentDay.ishaBegins}</h6>
-        <h6 class="bg-teal-700 text-teal-50 font-bold text-center">{prayerTimesForCurrentDay.ishaJamah}</h6>
+        <h4 class="font-bold bg-softBeige darkTeal text-center py-1">Isha</h4>
+        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.ishaBegins}</h6>
+        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.ishaJamah}</h6>
     </div>
     
 </div>
 <div class="text-sm md:hidden z-10 w-full grid grid-cols-3">
     <div class="">
-        <h4 class="text-white font-bold bg-teal-600 text-center py-1">Sunrise</h4>
-        <h6 class="bg-teal-500 text-gray-50 font-bold text-center">{prayerTimesForCurrentDay.sunrise}</h6>
+        <h4 class="text-white font-bold bg-sageGreen text-center py-1">Sunrise</h4>
+        <h6 class="bg-softBeige text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.sunrise}</h6>
     </div>
     <div class="">
-        <h4 class="text-white font-bold bg-teal-600 text-center py-1">{jummahTimes[0].name}</h4>
-        <h6 class="bg-teal-500 text-gray-50 font-bold text-center">{jummahTimes[0].time}</h6>
+        <h4 class="text-white font-bold bg-sageGreen text-center py-1">{jummahTimes[0].name}</h4>
+        <h6 class="bg-softBeige text-darkTeal font-bold text-center">{jummahTimes[0].time}</h6>
     </div>
     <div class="">
-        <h4 class="text-white font-bold bg-teal-600 text-center py-1">{jummahTimes[1].name}</h4>
-        <h6 class="bg-teal-500 text-gray-50 font-bold text-center">{jummahTimes[1].time}</h6>
+        <h4 class="text-white font-bold bg-sageGreen text-center py-1">{jummahTimes[1].name}</h4>
+        <h6 class="bg-softBeige text-darkTeal font-bold text-center">{jummahTimes[1].time}</h6>
     </div>
     <!-- <div class="bg-cyan-500 border-r border-cyan-300">
         <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">&nbsp;</h4>
@@ -112,80 +112,80 @@ const jummahTimes : Array<JummahTime> = await getJummahTimes()
     <span>PRAYER AREA FOR SISTERS WITH SEPARATE ENTERANCE</span>
     <span>VARIOUS SOCIAL ACTIVITIES</span>
 </div> -->
-<div class="bg-teal-700 mx-auto px-8 py-2 text-sm md:text-md lg:text-lg hidden md:block z-10 w-full mt-24">
+<div class="bg-terracottaRed text-warmWhite mx-auto px-8 py-2 text-sm md:text-md lg:text-lg hidden md:block z-10 w-full mt-24">
     <div class="container flex items-center justify-between">
-        <div class="flex rounded-lg w-fit bg-teal-800">
-            <div class="font-bold bg-teal-900 text-teal-200 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+        <div class="flex rounded-lg w-fit bg-lightWood">
+            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
                 <h4 class="mt-2">Fajr</h4>
             </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-200 rounded-r-lg">
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
             <h6>{prayerTimesForCurrentDay.fajrBegins}</h6>
-            <h6 class="text-teal-100 font-bold">{prayerTimesForCurrentDay.fajrJamah}</h6>
+            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.fajrJamah}</h6>
             </div>
         </div>
-        <div class="flex rounded-lg w-fit bg-teal-800">
-            <div class="font-bold bg-teal-900 text-teal-200 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+        <div class="flex rounded-lg w-fit bg-lightWood">
+            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
                 <h4 class="mt-2">Dhuhr</h4>
             </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-200 rounded-r-lg">
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
             <h6>{prayerTimesForCurrentDay.zuhrBegins}</h6>
-            <h6 class="text-teal-100 font-bold">{prayerTimesForCurrentDay.zuhrJamah}</h6>
+            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.zuhrJamah}</h6>
             </div>
         </div>
-        <div class="flex rounded-lg w-fit bg-teal-800">
-            <div class="font-bold bg-teal-900 text-teal-200 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+        <div class="flex rounded-lg w-fit bg-lightWood">
+            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
                 <h4 class="mt-2">Asr</h4>
             </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-200 rounded-r-lg">
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
             <h6>{prayerTimesForCurrentDay.asrBegins}</h6>
-            <h6 class="text-teal-100 font-bold">{prayerTimesForCurrentDay.asrJamah}</h6>
+            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.asrJamah}</h6>
             </div>
         </div>
-        <div class="flex rounded-lg w-fit bg-teal-800">
-            <div class="font-bold bg-teal-900 text-teal-200 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+        <div class="flex rounded-lg w-fit bg-lightWood">
+            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
                 <h4 class="mt-2">Maghrib</h4>
             </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-200 rounded-r-lg">
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
             <h6>{prayerTimesForCurrentDay.maghribBegins}</h6>
-            <h6 class="text-teal-100 font-bold">{prayerTimesForCurrentDay.maghribJamah}</h6>
+            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.maghribJamah}</h6>
             </div>
         </div>
-        <div class="flex rounded-lg w-fit bg-teal-800">
-            <div class="font-bold bg-teal-900 text-teal-200 px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
+        <div class="flex rounded-lg w-fit bg-lightWood">
+            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
                 <h4 class="mt-2">Isha</h4>
             </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-teal-200 rounded-r-lg">
+            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
             <h6>{prayerTimesForCurrentDay.ishaBegins}</h6>
-            <h6 class="text-teal-100 font-bold">{prayerTimesForCurrentDay.ishaJamah}</h6>
+            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.ishaJamah}</h6>
             </div>
         </div>
     </div>
 </div>
 
 
-<div class="bg-teal-600 mx-auto px-8 py-2 text-sm md:text-md lg:text-lg hidden md:block z-10 w-full">
+<div class="bg-lightWood mx-auto px-8 py-2 text-sm md:text-md lg:text-lg hidden md:block z-10 w-full">
     <div class="container flex items-center justify-left space-x-10">
         <div class="flex rounded-lg">
-            <div class="font-bold bg-teal-800 text-teal-200 px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
+            <div class="font-bold bg-warmWhite text-deepTeal px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
                 <h4 class="p-2">Sunrise</h4>
             </div>
-            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-teal-100 bg-teal-700 rounded-r-lg">
+            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-deepTeal bg-softBeige rounded-r-lg">
             <h6>{prayerTimesForCurrentDay.sunrise}</h6>
             </div>
         </div>
         <div class="flex rounded-lg">
-            <div class="font-bold bg-teal-800 text-teal-200 px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
+            <div class="font-bold bg-warmWhite text-deepTeal px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
                 <h4 class="p-2">{jummahTimes[0].name}</h4>
             </div>
-            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-teal-100 bg-teal-700 rounded-r-lg">
+            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-deepTeal bg-softBeige rounded-r-lg">
             <h6 class="font-bold">{jummahTimes[0].time}</h6>
             </div>
         </div>
         <div class="flex rounded-lg">
-            <div class="font-bold bg-teal-800 text-teal-200 px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
+            <div class="font-bold bg-warmWhite text-deepTeal px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
                 <h4 class="p-2">{jummahTimes[1].name}</h4>
             </div>
-            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-cyan-100 bg-teal-700 rounded-r-lg">
+            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-deepTeal bg-softBeige rounded-r-lg">
             <h6 class="font-bold">{jummahTimes[1].time</h6>
             </div>
         </div>

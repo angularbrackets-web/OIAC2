@@ -11,15 +11,15 @@ import defaultProfilePicture from "../assets/blank-profile-picture.png";
 const imams: Array<Staff> = await getStaffMembers("Imam");
 ---
 
-<div class="bg-teal-600 mx-auto mt-5">
+<div class="bg-wood-light mx-auto mt-5">
   <div class="mt-5">
-    <div class="container text-gray-50 py-5">
+    <div class="container text-darkTeal py-5">
       <h4 class="text-4xl font-black mb-10 px-5">Our Imams</h4>
       <div class="flex flex-wrap">
         {
           imams.map((imam) => (
-            <div class="w-full m-5 md:w-[48%] md:m-[1%] lg:w-[31%] bg-teal-700 rounded-2xl">
-              <div class="bg-teal-800 rounded-t-2xl p-3">
+            <div class="w-full m-5 md:w-[48%] md:m-[1%] lg:w-[31%] bg-wood text-darkTeal rounded-2xl">
+              <div class="bg-wood-dark rounded-t-2xl p-3">
                 {/* <img src={imam.profilePicture?} alt="profile picture" class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto" /> */}
                 <img
                   src={imam.profilePicture?.url || defaultProfilePicture.src}
@@ -28,7 +28,7 @@ const imams: Array<Staff> = await getStaffMembers("Imam");
                       ? `${imam.name}'s profile picture`
                       : "Default profile picture"
                   }
-                  class="rounded-full bg-teal-900 m-1 w-48 h-48 object-cover mx-auto"
+                  class="rounded-full bg-wood-darker m-1 w-48 h-48 object-cover mx-auto"
                 />
                 <h4 class="text-4xl font-black text-center my-5 text-gray-950">
                   {imam.name}
@@ -37,7 +37,7 @@ const imams: Array<Staff> = await getStaffMembers("Imam");
               <div class="p-3">
                 {imam.description && (
                   <div
-                    class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 text-white"
+                    class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 bg-wood text-darkTeal"
                     set:html={imam.description.html}
                   />
                 )}

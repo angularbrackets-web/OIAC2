@@ -1,0 +1,192 @@
+---
+interface Props {
+  initialSpeed?: number; // Initial speed in seconds
+}
+const { initialSpeed = 90 } = Astro.props;
+
+// Import all images from the assets folder
+const images = await Astro.glob('/src/assets/new-centre/*.(png|jpg|jpeg|webp)');
+
+// Transform image data into the required format
+const imageData = images.map((image, index) => ({
+  src: image.default.src,
+  alt: `Carousel image ${index + 1}`
+}));
+
+// Duplicate images only once to ensure seamless looping
+const duplicatedImages = [...imageData, ...imageData];
+---
+
+<div class="relative overflow-hidden w-full" aria-label="Image Carousel">
+  <div 
+    class="flex animate-scroll"
+    data-speed={initialSpeed}
+  >
+    {duplicatedImages.map((image, index) => (
+      <div 
+        class="flex-shrink-0 w-[20vw] h-[20vw] mx-2 transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
+        data-src={image.src} 
+        id={`${image.src}-${index}`}
+      >
+        <img
+          src={image.src}
+          alt={image.alt}
+          class="w-full h-full object-cover rounded-lg"
+          loading={index < imageData.length ? "eager" : "lazy"}
+        />
+      </div>
+    ))}
+  </div>
+
+  <!-- Modal for Image Preview -->
+  <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-center items-center">
+    <div class="relative max-w-4xl max-h-screen">
+      <button 
+        id="close-modal" 
+        class="absolute top-2 right-2 text-white text-3xl font-bold cursor-pointer"
+      >
+        &times;
+      </button>
+      <img id="modal-image" class="max-w-full max-h-full object-contain" />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Remove CSS animation */
+  .animate-scroll {
+    display: flex;
+  }
+
+  /* Modal Styles */
+  #modal {
+    display: none; /* Hidden by default */
+  }
+
+  #modal.hidden {
+    display: none;
+  }
+
+  #modal:not(.hidden) {
+    display: flex;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.animate-scroll') as HTMLElement;
+    if (!carousel) return;
+
+    // Retrieve the initial speed value from the data-speed attribute
+    let speed = parseFloat(carousel.getAttribute('data-speed') ?? '20'); // Default to 20
+    let isPaused = false;
+    let lastTimestamp = 0; // Track the timestamp when paused
+    let progress = 0; // Track the current progress of the animation
+    let animationFrameId: number | null = null; // Track the animation frame ID
+
+    function setupCarousel() {
+      const items = Array.from(carousel.children);
+      const itemWidth = (items[0] as HTMLElement).offsetWidth + parseFloat(getComputedStyle(items[0] as HTMLElement).marginLeft) * 2;
+      const totalWidth = itemWidth * items.length / 2; // Half the duplicated images
+
+      carousel.style.width = `${totalWidth * 2}px`; // Double the width for seamless looping
+
+      let startTime = performance.now();
+
+      function animate(timestamp: number) {
+        if (isPaused) return; // Pause animation if hovered or modal is open
+
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        progress = (elapsed / (speed * 1000)) % 1; // Normalize progress to [0, 1]
+
+        const translateX = -progress * totalWidth;
+        carousel.style.transform = `translateX(${translateX}px)`;
+
+        if (progress >= 1) {
+          // Reset position seamlessly
+          carousel.style.transition = 'none';
+          carousel.style.transform = 'translateX(0)';
+          setTimeout(() => {
+            carousel.style.transition = '';
+            startTime = timestamp; // Restart animation
+          }, 0);
+        }
+
+        animationFrameId = requestAnimationFrame(animate); // Save the animation frame ID
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+
+      // Pause/Resume on hover
+      carousel.addEventListener('mouseenter', () => {
+        isPaused = true;
+        lastTimestamp = performance.now(); // Save the timestamp when paused
+        if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId); // Cancel the animation frame
+        }
+      });
+
+      carousel.addEventListener('mouseleave', () => {
+        isPaused = false;
+        startTime = performance.now() - (lastTimestamp - startTime); // Adjust start time for smooth resumption
+        animationFrameId = requestAnimationFrame(animate); // Restart animation
+      });
+    }
+
+    setupCarousel();
+
+    // Modal Functionality
+    const modal = document.getElementById('modal') as HTMLElement;
+    const modalImage = document.getElementById('modal-image') as HTMLImageElement;
+    const closeModalButton = document.getElementById('close-modal') as HTMLElement;
+
+    function openModal(imageSrc: string) {
+      if (modal && modalImage) {
+        modal.classList.remove('hidden');
+        modalImage.src = imageSrc;
+        isPaused = true; // Pause the carousel when modal opens
+        if (animationFrameId !== null) {
+          cancelAnimationFrame(animationFrameId); // Stop the animation
+        }
+      }
+    }
+
+    function closeModal() {
+      if (modal && modalImage) {
+        modal.classList.add('hidden');
+        modalImage.src = ''; // Clear the image source
+        isPaused = false; // Resume the carousel when modal closes
+        animationFrameId = requestAnimationFrame(setupCarousel); // Restart animation
+      }
+    }
+
+    // Event delegation for opening modal
+    carousel.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const imageContainer = target.closest('[data-src]') as HTMLElement;
+      if (imageContainer) {
+        const imageSrc = imageContainer.getAttribute('data-src');
+        if (imageSrc) {
+          openModal(imageSrc);
+        }
+      }
+    });
+
+    closeModalButton?.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside the image
+    modal?.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on Escape key press
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  });
+</script>
