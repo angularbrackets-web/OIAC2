@@ -878,7 +878,9 @@ footer {
   font-size: 14px;
   color: #fff;
 }
-
+.footer-part-3 .social-icon {
+  display: flex;
+}
 .newsletter {
   padding: 15px;
   text-align: left;
