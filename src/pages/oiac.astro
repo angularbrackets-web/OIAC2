@@ -1,3 +1,495 @@
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto text-emerald-700">
-OIAC
-</div>
+---
+import ICOUTLINE from "../assets/ic_outline-call.svg"
+import ADDRESS_MARKER from "../assets/mdi_address-marker-outline.svg";
+import FACEBOOK_ICON from "../assets/mingcute_facebook-line.svg";
+import INSTAGRAM_ICON from "../assets/mdi_instagram.svg";
+import YOUTUBE_ICON from "../assets/iconoir_youtube.svg";
+import LOGO from "../assets/image (13).png";
+import OBJECT from "../assets/OBJECT.svg";
+import SVG1 from "../assets/svg-1.svg";
+import SVG2 from "../assets/svg951.svg";
+import SVG3 from "../assets/svg-3.svg";
+import CONTENT_IMG from "../assets/content-img-1.png";
+import OBJECT_2 from "../assets/OBJECT-2.svg";
+import BOX_IMG from "../assets/box-img-2.png";
+import DONATION_IMG from "../assets/donation-img.png";
+
+import FOUNDATION_1 from "../assets/foundation.svg";
+import FOUNDATION_2 from "../assets/foundation-2.svg";
+import FOUNDATION_3 from "../assets/foundation-3.svg";
+import TEAM1 from "../assets/team-1.png";
+import TEAM2 from "../assets/team-2.png";
+import TEAM3 from "../assets/team-3.png";
+import TESTIMONIAL1 from "../assets/testimonial (1).png";
+import TESTIMONIAL2 from "../assets/testimonial (2).png";
+import LOGO_OIAC from "../assets/logo-oiac.png";
+import FOOTER_PIN from  "../assets/footer-pin.svg";
+import FOOTER_MAIL from "../assets/footer-mail.svg"
+import FOOTER_CALL from "../assets/footer-call.svg"
+import SOCIAL_ICON_1 from "../assets/social-icon-f (2).svg";
+import SOCIAL_ICON_2 from "../assets/social-icon-i (3).svg";
+import SOCIAL_ICON_3 from "../assets/social-icon-y (1).svg";
+import "../styles/styles.css"
+import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OIAC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="nav-bar">
+            <div class="icon-nav">
+                <img src={ICOUTLINE.src} alt="">
+                <p>(587) 882-3202</p>
+            </div>
+            <div class="separator"></div>
+            <div class="icon-nav">
+                <img src={ADDRESS_MARKER.src} alt="">
+                <p>110 - 1011 Parsons Rd SW, Edmonton , AB T6X 0X2</p>
+            </div>
+            <div class="separator"></div>
+            <img src={FACEBOOK_ICON.src} alt="" class="facebook-icon">
+            <div class="separator"></div>
+            <img src={INSTAGRAM_ICON.src} alt="" class="instagram-icon">
+            <div class="separator"></div>
+            <img src={YOUTUBE_ICON.src} alt="" class="youtube-icon">
+        </div>
+        <div class="main-header">
+            <div class="hamburger">
+                &#9776;
+            </div>
+            <div class="header-logo">
+                <img src={LOGO.src} alt="">
+            </div>
+            <nav class="mobile-menu" id="mobileMenu">
+                <div class="close-btn">&times;</div>
+                <ul>
+                    <!-- <li><a href="">Home</a></li> -->
+                    <li><a href="#oiac">OIAC</a></li>
+                    <li><a href="#event">Our Event</a></li>
+                    <li><a href="#vision">Our Vision</a></li>
+                    <!-- <li><a href="">Events</a></li> -->
+                    <li><a href="#staff">Our Staff</a></li>
+                    <li><a href="">Jobs</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="header-menu">
+                <ul>
+                    <!-- <li><a href="">Home</a></li> -->
+                    <li><a href="#oiac">OIAC</a></li>
+                    <li><a href="#event">Our Event</a></li>
+                    <li><a href="#vision">Our Vision</a></li>
+                    <!-- <li><a href="">Events</a></li> -->
+                    <li><a href="#staff">Our Staff</a></li>
+                    <li><a href="">Jobs</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="header-btn">
+                <button><a href="https://www.oiacedmonton.ca/donatetonewcentre">Donate Now</a></button>
+            </div>
+        </div>
+    </header>
+    <div class="banner-section">
+        <div class="banner-content">
+            <h2>Help Build South Edmonton’s First Dedicated Islamic Academy for our Children</h2>
+            <h5>A Future Where Faith & Education Thrive Together</h5>
+            <div class="banner-content-btn">
+                <button class="learn-btn"><a href="https://www.oiacedmonton.ca/newcentre">Learn More</a></button>
+                <button class="donate-btn-1"><a href="https://www.oiacedmonton.ca/donatetonewcentre">Donate Now</a></button>
+            </div>
+        </div>
+        <div class="banner-line">
+            <img src={OBJECT.src} alt="">
+            <p><a href="https://www.oiacedmonton.ca/newcentre">new islamic center</a></p>
+        </div>
+    </div>
+    <div class="oiac-part" id="oiac">
+        <h2>Welcome to <span>OIAC</span></h2>
+        <div class="oiac-box">
+            <div class="center-box">
+                <div class="img-icon">
+                    <img src={SVG1.src} alt="">
+                </div>
+                <h4>islamic center</h4>
+                <p>A hub for faith, learning, and community</p>
+                <button class="oiac-btn"><a href="https://www.oiacedmonton.ca/newcentre">Learn More</a></button>
+            </div>
+            <div class="mosque-box">
+                <div class="img-icon">
+                    <img src={SVG2.src} alt="">
+                </div>
+                <h4>Mosque</h4>
+                <p>A peaceful space for prayer and reflection</p>
+                <button class="oiac-btn"><a href="https://www.oiacedmonton.ca/">Learn More</a></button>
+            </div>
+            <div class="event-box">
+                <div class="img-icon">
+                    <img src={SVG3.src} alt="">
+                </div>
+                <h4>Events</h4>
+                <p>Bringing the community together through engaging events.</p>
+                <button class="oiac-btn"><a href="https://www.oiacedmonton.ca/events">Learn More</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="fundrise-event">
+        <div class="event-content">
+            <h2>fundraising IFtaar</h2>
+            <p>Special guest speaker <span>Dr. Abdalla Idris Ali</span>.</p>
+            <div class="event-icon-list">
+                <img src="images/event-1.svg" alt="">
+                <p>110 - 1011 Parsons RD #110 SW</p>
+            </div>
+            <div class="event-icon-list">
+                <img src="images/event-2.svg" alt="">
+                <p>Mar 7th 2025 , 6:25 PM | Iftar time</p>
+            </div>
+        </div>
+        <div class="event-separator"></div>
+        <div class="time-stamp">
+            <div class="countdown">
+                <div class="time-box"><span id="days">10</span><span class="label">d</span></div>
+                <div class="time-box"><span id="hours">18</span><span class="label">h</span></div>
+                <div class="time-box"><span id="minutes">39</span><span class="label">m</span></div>
+                <div class="time-box"><span id="seconds">45</span><span class="label">s</span></div>
+            </div>
+            <div class="subscribe-box">
+                <input type="email" placeholder="Your Email">
+                <button>Subscribe</button>
+            </div>
+            <p class="disclaimer">I agree that my submitted data is being collected and stored.</p>
+        </div>
+    </div>
+    <div class="content-part-1" id="event">
+        <div class="content-img">
+            <img src={CONTENT_IMG.src} alt="">
+        </div>
+        <div class="content-box-1">
+            <h2>Why Edmonton’s Muslim Community <span>Needs This School</span> in south?</h2>
+            <div class="content-icon-box">
+                <img src={OBJECT_2.src} alt="">
+                <p><span>Lack of Full-Time Islamic Schools in Edmonton</span> – Many Muslim families struggle to find
+                    schools that offer both Islamic and academic excellence.</p>
+            </div>
+            <div class="content-icon-box">
+                <img src={OBJECT_2.src} alt="">
+                <p><span>A Safe, Faith-Centered Learning Environment</span> – Our children deserve an education rooted
+                    in Islamic values while excelling in science, math, and the arts.</p>
+            </div>
+            <div class="content-icon-box">
+                <img src={OBJECT_2.src} alt="">
+                <p><span>Lack of Full-Time Islamic Schools in Edmonton</span> – With your help, we can establish a
+                    lasting institution that will serve the community for decades.</p>
+            </div>
+            <div class="content-icon-box">
+                <img src={OBJECT_2.src} alt="">
+                <p><span>Every Contribution Counts</span> – Whether big or small, your donation brings us closer to
+                    making this dream a reality.</p>
+            </div>
+        </div>
+    </div>
+    <div class="content-part-2">
+        <div class="content-box-2">
+            <h5 style="text-transform: uppercase;">Building Faith and Knowledge - <span>Islamic School in South Edmonton</span></h5>
+            <p>Every child deserves a strong Islamic foundation alongside a world-class education. Today, YOU have the
+                chance to make a difference. Join us in building the first dedicated Islamic school in Edmonton, a place
+                where children grow in faith, knowledge, and character.</p>
+            <p class="bold-text">Your support today will plant the seeds of an Islamic legacy that will benefit
+                generations to come.</p>
+        </div>
+        <div class="content-img-2">
+            <img src={BOX_IMG.src} alt="">
+        </div>
+    </div>
+    <div class="donation-box">
+        <div class="donation-container">
+            <div class="donation-image">
+                <img src={DONATION_IMG.src} alt="Islamic Center">
+            </div>
+            <div class="donation-content">
+                <h2>Donate for Islamic Center</h2>
+                <p>Support the new Islamic Center with a donation to help create a space for learning and worship.</p>
+                <a href="mailto:new.project@aioacedmonton.ca" class="email-link">
+                    <img src={EMAIL_ICON.src} alt="Email"> new.project@aioacedmonton.ca
+                </a>
+                <div class="donation-goal">
+                    <span>Donation goal</span>
+                    <span style="color: #016b50;">$9 mil / $29 mil</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"><span>31%</span></div>
+                </div>
+                <a href="#" class="donate-btn">DONATE NOW</a>
+            </div>
+        </div>
+    </div>
+    <div class="project-box" id="vision">
+        <h2>The Project & Vision</h2>
+        <div class="project-container">
+            <div class="project-inner-box">
+                <h2>01</h2>
+                <div class="project-icon">
+                    <img src={FOUNDATION_1.src} alt="">
+                    <p>Establishing the Foundation</p>
+                </div>
+                <ul>
+                    <li>Land Acquisition & Initial Infrastructure</li>
+                    <li>Classrooms, Prayer Area & Activity Spaces</li>
+                </ul>
+            </div>
+            <div class="project-inner-box">
+                <h2>02</h2>
+                <div class="project-icon">
+                    <img src={FOUNDATION_2.src} alt="">
+                    <p>Expanding the School</p>
+                </div>
+                <ul>
+                    <li>Advanced Facilities for Holistic Learning</li>
+                    <li>Islamic & Academic Curriculum Integration</li>
+                </ul>
+            </div>
+            <div class="project-inner-box">
+                <h2>03</h2>
+                <div class="project-icon">
+                    <img src={FOUNDATION_3.src} alt="">
+                    <p>Creating a Model for Future Schools</p>
+                </div>
+                <ul>
+                    <li>A Beacon of Faith-Based Education for Muslims in Canada & Beyond</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="team-box" id="staff">
+        <h2>OUR IMAMS</h2>
+        <div class="team-container">
+            <div class="team-part-1">
+                <div class="team-img">
+                    <img src={TEAM1.src} alt="">
+                </div>
+                <div class="team-content">
+                    <h4>SHAIKH SAID AHMED</h4>
+                    <p>Over 10 years of experience in Islamic studies and Da'wah lectures. Skilled in Quran recitation,
+                        Tafseer with Tajweed, and curriculum development. Taught diverse students, promoting Islamic
+                        manners, ethics, and knowledge.</p>
+                </div>
+            </div>
+            <div class="team-part-1">
+                <div class="team-img">
+                    <img src={TEAM2.src} alt="">
+                </div>
+                <div class="team-content">
+                    <h4>SHAIKH AHMED SAEED</h4>
+                    <p>Experienced Imam and Quran teacher with 10+ years in leading prayers, delivering Jummah Khutbas,
+                        and teaching Quran and Islamic Studies. Currently Imam at OIAC (since 2021) and previously
+                        served at Al-Aelat Mosque and Fawaris Ahl Sunnaha, Egypt.</p>
+                </div>
+            </div>
+            <div class="team-part-1">
+                <div class="team-img">
+                    <img src={TEAM3.src} alt="">
+                </div>
+                <div class="team-content">
+                    <h4>SHAIKH YOUSUF ALALAGHI</h4>
+                    <p>A licensed Quran teacher by the Libyan Ministry of Awqaf, has over 17 years of experience. Many
+                        students have memorized the Quran under his guidance. He has also served on arbitration
+                        committees for Quran competitions in Tripoli.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="review-container">
+        <h2> <span>Hear</span> from Edmonton’s Muslim Families</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <div class="testimonial-img">
+                    <img src={TESTIMONIAL1.src} alt="">
+                    <h4>Moustafa Ghabour</h4>
+                    <h6>Edmonton Resident</h6>
+                </div>
+                <div class="testimonial-content">
+                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
+                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
+                        community for my family.</p>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-img">
+                    <img src={TESTIMONIAL2.src} alt="">
+                    <h4>Moustafa Ghabour</h4>
+                    <h6>Edmonton Resident</h6>
+                </div>
+                <div class="testimonial-content">
+                    <p>Edmonton urgently needs an independent Islamic school that nurtures academic excellence and
+                        strong Islamic values. Such a school will safeguard our children’s identity, provide a
+                        supportive community, and help them grow confidently in faith and education.</p>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-img">
+                    <img src={TESTIMONIAL2.src} alt="">
+                    <h4>Moustafa Ghabour</h4>
+                    <h6>Edmonton Resident</h6>
+                </div>
+                <div class="testimonial-content">
+
+                    <p>As a parent in South Edmonton, finding an Islamic school with available admissions has been
+                        challenging. The growing demand for faith-based education highlights the urgent need for more
+                        space to support our children’s academic and Islamic growth</p>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-img">
+                    <img src={TESTIMONIAL2.src} alt="">
+                    <h4>Moustafa Ghabour</h4>
+                    <h6>Edmonton Resident</h6>
+                </div>
+                <div class="testimonial-content">
+
+                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
+                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
+                        community for my family.</p>
+                </div>
+            </div>
+            <!-- <div class="testimonial">
+                <div class="testimonial-img">
+                    <img src="images/testimonial (2).png" alt="">
+                    <h4>Moustafa Ghabour</h4>
+                    <h6>Edmonton Resident</h6>
+                </div>
+                <div class="testimonial-content">
+
+                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
+                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
+                        community for my family.</p>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-img">
+                    <img src={TESTIMONIAL2.src} alt="">
+                    <h4>Moustafa Ghabour</h4>
+                    <h6>Edmonton Resident</h6>
+                </div>
+                <div class="testimonial-content">
+                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
+                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
+                        community for my family.</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <footer id="contact">
+        <div class="main-footer">
+            <div class="footer-part-1">
+                <div class="logo-img">
+                    <img src={LOGO_OIAC.src} alt="">
+                </div>
+                <div class="logo-content">
+                    <p>Introducing the new Omar bin-al-Khattab centre, a beacon of progress and possibility. This
+                        purpose-built facility will be more than just a building. It will be a hub of activity. A place
+                        where our children can learn and grow, where families can come together in prayer and fellowship
+                        and where the bonds of community are strengthened.</p>
+                </div>
+            </div>
+            <div class="footer-part-2">
+                <h4>Quick Links</h4>
+                <ul>
+                    <!-- <li><a href="">Home</a></li> -->
+                    <li><a href="#oiac">OIAC</a></li>
+                    <li><a href="#event">Our Event</a></li>
+                    <li><a href="#vision">Our Vision</a></li>
+                    <!-- <li><a href="">Events</a></li> -->
+                    <li><a href="#staff">Our Staff</a></li>
+                    <li><a href="">Jobs</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-part-3">
+                <h4>Contact us</h4>
+                <div class="footer-icon-list">
+                    <div class="icon-list">
+                        <img src={FOOTER_PIN.src} alt="">
+                        <p>110 - 1011 Parsons Rd SW, Edmonton , AB T6X 0X2</p>
+                    </div>
+                    <div class="icon-list">
+                        <img src={FOOTER_MAIL.src} alt="">
+                        <p>info@oiacentre.com</p>
+                    </div>
+                    <div class="icon-list">
+                        <img src={FOOTER_CALL.src} alt="">
+                        <p>(587)-882-3202</p>
+                    </div>
+                </div>
+                <div class="social-icon">
+                    <img src={SOCIAL_ICON_1.src} alt="">
+                    <img src={SOCIAL_ICON_2.src} alt="">
+                    <img src={SOCIAL_ICON_3.src} alt="">
+                </div>
+                <div class="footer-mail">
+                    <div class="newsletter">
+                        <label for="email">SUBSCRIBE FOR NEWSLETTER</label>
+                        <div class="input-container">
+                            <input type="email" id="email" placeholder="Your Email">
+                            <button type="submit">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <p>© 2024 OIAC All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script src="../assets/js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+     declare var $: any; 
+        $(document).ready(function () {
+            $('.testimonial-slider').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                dots: true,
+                centerMode: true,
+                centerPadding: '0px',
+                responsive: [
+                    {
+                        breakpoint: 1124,
+                        settings: {
+                            slidesToShow: 2,
+                            centerMode: true
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1,
+                            centerMode: false
+                        }
+                    }
+                ]
+            });
+        });
+
+    </script>
+</body>
+
+</html>
