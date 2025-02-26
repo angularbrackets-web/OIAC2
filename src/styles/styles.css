@@ -412,6 +412,7 @@ header {
   display: none;
   padding: 5px;
   width: 400px;
+  margin-left: 35px;
 }
 .countdown {
   display: flex;
@@ -794,7 +795,6 @@ header {
   font-weight: 400;
 }
 
-
 .testimonial-img h6 {
   font-size: 14px;
   font-weight: 500;
@@ -1155,6 +1155,9 @@ footer {
     width: 100%;
     padding: 12px;
   }
+  .time-stamp .messageBox {
+    margin-left: 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1332,5 +1335,6 @@ footer {
   }
   .time-stamp .messageBox {
     font-size: 12px;
+    margin-left: 0;
   }
 }

@@ -32,6 +32,9 @@ import SOCIAL_ICON_2 from "../assets/social-icon-i (3).svg";
 import SOCIAL_ICON_3 from "../assets/social-icon-y (1).svg";
 import "../styles/styles.css"
 import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
+
+import emailjs from "@emailjs/browser";
+
 ---
 
 <!DOCTYPE html>
@@ -523,52 +526,55 @@ import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
         });
 
     </script>
- <script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+
+import emailjs, { EmailJSResponseStatus } from "@emailjs/browser";
     document.addEventListener("DOMContentLoaded", function () {
-        // Initialize EmailJS after the script is loaded
-        emailjs.init("4PNtLWRLY0USpLaMs"); // Replace with your EmailJS Public Key
+        emailjs.init("4PNtLWRLY0USpLaMs"); // Replace with your public key
 
-        document.getElementById("sendEmail").addEventListener("click", function () {
-            let email = document.getElementById("emailInput").value;
-            let messageBox = document.getElementById("messageBox");
+       document.getElementById("sendEmail")?.addEventListener("click", function () {
+        
+             const subsEmailTextBox = document.querySelector(
+      "#emailInput"
+    ) as HTMLInputElement;
+            const messageBox = document.getElementById("messageBox");
 
-            // Function to display messages
-            function showMessage(message, type) {
-                messageBox.textContent = message;
-                messageBox.style.display = "block";
+          if (!subsEmailTextBox) return;
+          console.log(subsEmailTextBox)
+const email = subsEmailTextBox.value.trim(); 
 
-                // Apply different styles based on message type
-                if (type === "success") {
-                    messageBox.style.color = "green";
-                    messageBox.style.border = "2px solid green";
-                    messageBox.style.backgroundColor = "#d4edda";
-                } else if (type === "error") {
-                    messageBox.style.color = "red";
-                    messageBox.style.border = "2px solid red";
-                    messageBox.style.backgroundColor = "#f8d7da";
-                } else {
-                    messageBox.style.color = "orange";
-                    messageBox.style.border = "2px solid orange";
-                    messageBox.style.backgroundColor = "#fff3cd";
-                }
-            }
+         function showMessage(message: string, type: "success" | "error" | "warning") {
+    if (!messageBox) return;
 
-            // Validation
+    messageBox.textContent = message;
+    messageBox.style.display = "block";
+
+    const styles: Record<"success" | "error" | "warning", { color: string; border: string; background: string }> = {
+        success: { color: "green", border: "2px solid green", background: "#d4edda" },
+        error: { color: "red", border: "2px solid red", background: "#f8d7da" },
+        warning: { color: "orange", border: "2px solid orange", background: "#fff3cd" }
+    };
+
+    Object.assign(messageBox.style, styles[type]); // ✅ FIXED
+}
+
+
             if (!email) {
                 showMessage("⚠️ Please enter a valid email address.", "warning");
                 return;
             }
 
-            let templateParams = { from_name: email };
+            const templateParams = { from_name: email };
 
             emailjs.send("service_ct4ii3e", "template_vwllazm", templateParams)
-                .then(response => {
-                    console.log("Email sent successfully!", response);
+                .then((response: EmailJSResponseStatus) => {
+                    console.log("Email sent!", response);
                     showMessage("✅ Subscription successful! Check your email.", "success");
                 })
-                .catch(error => {
-                    console.error("Error sending email:", error);
-                    showMessage("❌ Failed to send email. Please try again later.", "error");
+                .catch((error: EmailJSResponseStatus) => {
+                    console.error("Error:", error);
+                    showMessage("❌ Failed to send email. Please try again.", "error");
                 });
         });
     });
