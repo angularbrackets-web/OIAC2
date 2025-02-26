@@ -407,7 +407,11 @@ header {
 .time-stamp {
   width: 50%;
 }
-
+.time-stamp .messageBox {
+  display: none;
+  padding: 5px;
+  width: 400px;
+}
 .countdown {
   display: flex;
   justify-content: space-around;
@@ -1320,5 +1324,8 @@ footer {
 
   .footer-part-3 {
     width: 100%;
+  }
+  .time-stamp .messageBox {
+    font-size: 12px;
   }
 }

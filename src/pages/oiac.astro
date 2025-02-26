@@ -45,6 +45,7 @@ import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -168,10 +169,12 @@ import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
                 <div class="time-box"><span id="seconds">45</span><span class="label">s</span></div>
             </div>
             <div class="subscribe-box">
-                <input type="email" placeholder="Your Email">
-                <button>Subscribe</button>
+                    <input type="email" id="emailInput" placeholder="Your Email">
+                  <button id="sendEmail">Subscribe</button>
             </div>
+             
             <p class="disclaimer">I agree that my submitted data is being collected and stored.</p>
+            <p id="messageBox" class="messageBox"></p>
         </div>
     </div>
     <div class="content-part-1" id="event">
@@ -427,7 +430,7 @@ import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
                     </div>
                     <div class="icon-list">
                         <img src={FOOTER_MAIL.src} alt="">
-                        <p>info@oiacentre.com</p>
+                        <p>info@oiacedmonton.ca</p>
                     </div>
                     <div class="icon-list">
                         <img src={FOOTER_CALL.src} alt="">
@@ -489,6 +492,56 @@ import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
         });
 
     </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Initialize EmailJS after the script is loaded
+        emailjs.init("4PNtLWRLY0USpLaMs"); // Replace with your EmailJS Public Key
+
+        document.getElementById("sendEmail").addEventListener("click", function () {
+            let email = document.getElementById("emailInput").value;
+            let messageBox = document.getElementById("messageBox");
+
+            // Function to display messages
+            function showMessage(message, type) {
+                messageBox.textContent = message;
+                messageBox.style.display = "block";
+
+                // Apply different styles based on message type
+                if (type === "success") {
+                    messageBox.style.color = "green";
+                    messageBox.style.border = "2px solid green";
+                    messageBox.style.backgroundColor = "#d4edda";
+                } else if (type === "error") {
+                    messageBox.style.color = "red";
+                    messageBox.style.border = "2px solid red";
+                    messageBox.style.backgroundColor = "#f8d7da";
+                } else {
+                    messageBox.style.color = "orange";
+                    messageBox.style.border = "2px solid orange";
+                    messageBox.style.backgroundColor = "#fff3cd";
+                }
+            }
+
+            // Validation
+            if (!email) {
+                showMessage("⚠️ Please enter a valid email address.", "warning");
+                return;
+            }
+
+            let templateParams = { from_name: email };
+
+            emailjs.send("service_ct4ii3e", "template_vwllazm", templateParams)
+                .then(response => {
+                    console.log("Email sent successfully!", response);
+                    showMessage("✅ Subscription successful! Check your email.", "success");
+                })
+                .catch(error => {
+                    console.error("Error sending email:", error);
+                    showMessage("❌ Failed to send email. Please try again later.", "error");
+                });
+        });
+    });
+</script>
 </body>
 
 </html>
