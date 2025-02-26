@@ -44,8 +44,8 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
           </div>
         </div>
         <div class="mb-16">
-          <div class="pb-2 border-b border-cyan-300 mb-3">
-            <h4 class="text-xl font-black text-cyan-500">Choose Project</h4>
+          <div class="pb-2 border-b border-white mb-3">
+            <h4 class="text-xl font-black text-white">Choose Project</h4>
           </div>
           <div class="divDonationSelectionSummary"></div>
           <div
@@ -54,7 +54,7 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
           >
             <!-- Project 1: Masjid -->
             <button
-              class="divProjectMasjid divProject bg-emerald-400 shadow-xl shadow-emerald-500/50 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2 project"
+              class="divProjectMasjid divProject bg-wood-lighter hover:bg-wood shadow-xl shadow-wood-500/50 text-black font-bold px-4 py-1 rounded-md flex gap-2 project"
               data-project="masjid"
               role="tab"
               aria-selected="true"
@@ -74,7 +74,7 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
 
             <!-- Project 2: New Islamic Centre -->
             <button
-              class="divProjectNewCentre divProject bg-gray-200 text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2 project"
+              class="divProjectNewCentre divProject bg-gray-200 hover:bg-wood text-gray-900 font-bold px-4 py-1 rounded-md flex gap-2 project"
               data-project="newCentre"
               role="tab"
               aria-selected="false"
@@ -133,9 +133,9 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
 
       // Remove highlight and icon from the previously selected project
       selectedProject?.classList.remove(
-        "bg-emerald-400",
+        "bg-wood-lighter",
         "shadow-xl",
-        "shadow-emerald-500/50"
+        "shadow-orange-500/50"
       );
       selectedProject?.classList.add("bg-gray-200");
       selectedProject?.setAttribute("aria-selected", "false");
@@ -161,9 +161,9 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
       // Highlight the selected project
       projectButton.classList.remove("bg-gray-200");
       projectButton.classList.add(
-        "bg-emerald-400",
+        "bg-wood-lighter",
         "shadow-xl",
-        "shadow-emerald-500/50"
+        "shadow-orange-500/50"
       );
       projectButton.setAttribute("aria-selected", "true");
 

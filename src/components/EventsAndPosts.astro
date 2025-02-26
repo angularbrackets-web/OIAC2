@@ -28,15 +28,15 @@ const year = date.getFullYear();
       <!-- LEFT -->
       <div class="w-full mb-16 md:w-[49%]">
         <!-- NEW CENTRE -->
-        <div class="p-10 bg-terracottaRed-light rounded-2xl mt-6">
+        <div class="p-10 rounded-2xl mt-6">
           <label
             class="align-right bg-orange-500 text-white font-black rounded-xl px-5"
             >UPCOMING</label
           >
-          <h4 class="text-4xl font-black text-gray-950">
+          <h4 class="text-4xl md:text-6xl font-black text-terracottaRed-darker">
             New Omar Ibn Al Khattab Centre
           </h4>
-          <div class="py-5 text-warmWhite">
+          <div class="py-5 text-terracottaRed">
             <p class="mb-3">
               Introducing the new Omar bin-al-Khattab centre, a beacon of
               progress and possibility. This purpose-built facility will be more
@@ -46,7 +46,7 @@ const year = date.getFullYear();
               strengthened.
             </p>
             <p>
-              <a href="/newcentre" class="underline text-lightWood font-bold"
+              <a href="/newcentre" class="underline text-gray-900 font-bold"
                 >Learn more</a
               >
             </p>
@@ -66,7 +66,7 @@ const year = date.getFullYear();
             </div>
           </div>
           <div>
-            <p class="mb-3 text-warmWhite">
+            <p class="mb-3 text-terracottaRed">
               Donate now and be a part of something truly transformative,
               empowering our community, building our future.
             </p>
@@ -75,7 +75,7 @@ const year = date.getFullYear();
             <div>
               <a
                 href="/donatetonewcentre"
-                class="bg-emerald-600 text-white text-2xl rounded-xl px-24 py-2"
+                class="bg-terracottaRed text-white hover:bg-terracottaRed-darker hover:text-white text-2xl rounded-xl px-24 py-2"
                 >Donate</a
               >
             </div>
@@ -93,9 +93,9 @@ const year = date.getFullYear();
       </div>
 
       <!-- RIGHT -->
-      <div class="w-full md:w-[49%] rounded-3xl my-3">
+      <div class="w-full md:w-[49%] rounded-3xl my-3 border border-terracottaRed-lighter">
         <!-- POSTS -->
-        <div class="slide-container w-full my-3 relative text-cyan-950 flex-1">
+        <div class="slide-container w-full mb-3 relative text-cyan-950 flex-1">
           <button
             class="btn-navigate absolute left-5 top-[30vh] min-[400px]:top-[50vh] text-emerald-300 text-4xl w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600"
             data-direction="Prev">&#171;</button
@@ -115,12 +115,12 @@ const year = date.getFullYear();
                     class="rounded-3xl"
                   />
                 </div>
-                <div class="text-emarald-800 py-10 px-3 min-h-24">
+                <div class="py-10 px-3 min-h-24">
                   {!isObjectEmpty(post.link) && post.link !== null && (
                     <a
                       href={post.link.url}
                       target="_blank"
-                      class="my-5 bg-emerald-500 hover:bg-emerald-700 text-white p-2 px-5 rounded-lg"
+                      class="my-5 bg-terracottaRed hover:bg-terracottaRed-darker text-white p-2 px-5 rounded-lg"
                     >
                       {post.link.text}
                     </a>

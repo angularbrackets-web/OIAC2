@@ -8,30 +8,30 @@ const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay(
 const prayerTimesForCurrentMonth : Array<PrayerTime> = await getPrayerTimesForCurrentMonth()
 const currentMonthNameShort = getMonthShortName()
 const getClassByDay = (day: number) => {
-    return day === currentDay ? "bg-green-500 text-white" : "bg-teal-50 text-teal-600"
+    return day === currentDay ? "bg-lightWood" : ""
 }
 ---
 <OIACLayout title="OIAC Prayer Times">
 
     <div class="md:px-8 md:py-2 md:mx-auto">
-        <div class="md:container md:mt-5 md:mb-10 md:rounded-2xl md:p-10 md:bg-gray-200">
-    <h1 class="text-2xl md:text-4xl font-black my-5 md:text-teal-800">{getMonthName} Prayer Times</h1>
-            <h6 class="text-lg text-teal-800">{getCurrentDateInEdmontonAsString}</h6>
-            <h6 class="text-lg text-teal-800">{getHijriDateAsString}</h6>
-    <div class="bg-teal-700 font-bold text-teal-50 text-center text-sm md:text-lg z-10 w-full grid grid-cols-6 mt-2">
-        <div class="py-5 border-r border-teal-300">
+        <div class="md:container md:mt-5 md:mb-10 md:rounded-2xl md:p-10 md:bg-softBeige-lighter">
+    <h1 class="text-2xl md:text-4xl font-black my-5 md:text-terracottaRed-darker">{getMonthName} Prayer Times</h1>
+            <h6 class="text-lg text-terracottaRed">{getCurrentDateInEdmontonAsString}</h6>
+            <h6 class="text-lg text-terracottaRed">{getHijriDateAsString}</h6>
+    <div class="bg-terracottaRed-darker font-bold text-white text-center text-sm md:text-lg z-10 w-full grid grid-cols-6 mt-2">
+        <div class="py-5 border-r border-softBeige">
             <h4>Date</h4>
         </div>
-        <div class="py-5 border-r border-teal-300">
+        <div class="py-5 border-r border-softBeige">
             <h4>Fajr</h4>
         </div>
-        <div class="py-5 border-r border-teal-300">
+        <div class="py-5 border-r border-softBeige">
             <h4>Dhuhr</h4>
         </div>
-        <div class="py-5 border-r border-teal-300">
+        <div class="py-5 border-r border-softBeige">
             <h4>Asr</h4>
         </div>
-        <div class="py-5 border-r border-teal-300">
+        <div class="py-5 border-r border-softBeige">
             <h4>Maghrib</h4>
         </div>
         <div class="py-5">
@@ -40,29 +40,29 @@ const getClassByDay = (day: number) => {
     </div>
 
     {prayerTimesForCurrentMonth.map(prayerTime => (
-        <div class={`text-xs md:text-lg text-center z-10 w-full grid grid-cols-6 border-b border-teal-100 ${getClassByDay(prayerTime.day)}`}>
-        <div class={`border-l border-r border-teal-100 row-span-2 py-3 `}>
+        <div class={`text-xs md:text-lg text-center z-10 w-full grid grid-cols-6 border-b border-softBeige ${getClassByDay(prayerTime.day)}`}>
+        <div class={`border-l border-r border-softBeige row-span-2 py-3 text-terracottaRed`}>
             <h6 class="">{getMonthName}&nbsp;{prayerTime.day}</h6>
             <h6>{getWeekdayByDay(prayerTime.day)}</h6>
             <h6 class={`font-extrabold`}>{getHijriShortDateAsString(new Date(currentYear, currentMonth, prayerTime.day))}</h6>
         </div>
-        <div class="py-3 border-r border-teal-100">
+        <div class="py-3 border-r border-softBeige text-gray-600">
             <h6 class="">{prayerTime.fajrBegins}</h6>
             <h6 class="font-bold">{prayerTime.fajrJamah}</h6>
         </div>
-        <div class="py-3 border-r border-teal-100">
+        <div class="py-3 border-r border-softBeige text-gray-600">
             <h6 class="">{prayerTime.zuhrBegins}</h6>
             <h6 class="font-bold">{prayerTime.zuhrJamah}</h6>
         </div>
-        <div class="py-3 border-r border-teal-100">
+        <div class="py-3 border-r border-softBeige text-gray-600">
             <h6 class="">{prayerTime.asrBegins}</h6>
             <h6 class="font-bold">{prayerTime.asrJamah}</h6>
         </div>
-        <div class="py-3 border-r border-teal-100">
+        <div class="py-3 border-r border-softBeige text-gray-600">
             <h6 class="">{prayerTime.maghribBegins}</h6>
             <h6 class="font-bold">{prayerTime.maghribJamah}</h6>
         </div>
-        <div class="py-3 border-r border-teal-100">
+        <div class="py-3 border-r border-softBeige text-gray-600">
             <h6 class="">{prayerTime.ishaBegins}</h6>
             <h6 class="font-bold">{prayerTime.ishaJamah}</h6>
         </div>
