@@ -19,6 +19,13 @@ export default {
 				light: "#C39365",  // 10% lighter
 				lighter: "#C89D74", // 20% lighter
 			  },
+			  wood2: {
+				darker: "#9F7C61", // 20% darker
+				dark: "#B38F6F", // 10% darker
+				DEFAULT: "#C7A37C", // base
+				light: "#D2AF8B", // 10% lighter
+				lighter: "#DDBB9A", // 20% lighter
+			  },
 			  lightWood: {
 				darker: "#9F8762", // 20% darker
 				dark: "#B3986F",   // 10% darker
@@ -34,7 +41,13 @@ export default {
 				lighter: "#E1D5C5", // 20% lighter
 				lightest: "#FAF4EC", // 30% lighter
 			  },
-			sageGreen: "#8B8F65",
+			  sageGreen: {
+				darker: "#3f4409", // 20% darker
+				dark: "#5b5f32", // 10% darker
+				DEFAULT: "#8B8F65", // base
+				light: "#bdc19c", // 10% lighter
+				lighter: "#eef0e0", // 20% lighter
+			  },
 			deepTeal: "#2E3F44",
 		  },
 		},
