@@ -13,7 +13,21 @@
     background: url('/Eid.Mubarak.3.jpg') no-repeat left center, url('/fireworks.png');
     background-size: contain;
   }
-  
+  .text-2rem{
+    font-size: 2rem !important;
+  }
+  .text-3rem{
+    font-size: 3rem !important;
+  }
+  .text-4rem{
+    font-size: 4rem !important;
+  }
+  .text-5rem{
+    font-size: 5rem !important;
+  }
+  .text-6rem{
+    font-size: 6rem !important;
+  }
   .iframe-wrapper {
     position: relative;
     aspect-ratio: 16 / 9;
