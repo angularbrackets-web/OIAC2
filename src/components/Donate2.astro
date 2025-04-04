@@ -9,8 +9,8 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
   <div class="container mt-5">
-    <div class="bg-terracottaRed-darker rounded-xl text-gray-100 p-5">
-      <div class="p-2 md:p-5 mb-5">
+    <div class="bg-terracottaRed-darker rounded-xl text-gray-100">
+      <div class="p-5 md:p-10 mb-5">
         <h4 class="text-4xl font-black mb-5">Donate</h4>
         <div
           class="p-2 md:py-5 mt-2 flex flex-wrap gap-6 text-sm md:text-md lg:text-lg xl:text-xl"
@@ -94,13 +94,16 @@ import DonateToNewCentre from "./DonateToNewCentre.astro";
           </div>
         </div>
 
-        <!-- Corresponding Divs -->
-        <div id="masjid-content" class="project-content">
-          <DonateToMasjid />
-        </div>
-        <div id="newCentre-content" class="project-content hidden">
-          <DonateToNewCentre />
-        </div>
+        
+      </div>
+
+
+      <!-- Corresponding Divs -->
+      <div id="masjid-content" class="project-content">
+        <DonateToMasjid />
+      </div>
+      <div id="newCentre-content" class="project-content hidden">
+        <DonateToNewCentre />
       </div>
     </div>
   </div>
