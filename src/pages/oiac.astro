@@ -50,6 +50,24 @@ import emailjs from "@emailjs/browser";
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Meta Pixel Code -->
+  <script is:inline>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1567826177955207');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1567826177955207&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -151,37 +169,6 @@ import emailjs from "@emailjs/browser";
             </div>
         </div>
     </div>
-
-    <!-- <div class="fundrise-event">
-        <div class="event-content">
-            <h2>fundraising IFtaar</h2>
-            <p>Special guest speaker <span>Dr. Abdalla Idris Ali</span>.</p>
-            <div class="event-icon-list">
-                <img src="images/event-1.svg" alt="">
-                <p>110 - 1011 Parsons RD #110 SW</p>
-            </div>
-            <div class="event-icon-list">
-                <img src="images/event-2.svg" alt="">
-                <p>Mar 7th 2025 , 6:25 PM | Iftar time</p>
-            </div>
-        </div>
-        <div class="event-separator"></div>
-        <div class="time-stamp">
-            <div class="countdown">
-                <div class="time-box"><span id="days">10</span><span class="label">d</span></div>
-                <div class="time-box"><span id="hours">18</span><span class="label">h</span></div>
-                <div class="time-box"><span id="minutes">39</span><span class="label">m</span></div>
-                <div class="time-box"><span id="seconds">45</span><span class="label">s</span></div>
-            </div>
-            <div class="subscribe-box">
-                    <input type="email" id="emailInput" placeholder="Your Email">
-                  <button id="sendEmail">Subscribe</button>
-            </div>
-             
-            <p class="disclaimer">I agree that my submitted data is being collected and stored.</p>
-            <p id="messageBox" class="messageBox"></p>
-        </div>
-    </div> -->
 
     <div class="content-part-1" id="event">
         <div class="content-img">
@@ -390,45 +377,6 @@ import emailjs from "@emailjs/browser";
                         space to support our children’s academic and Islamic growth</p>
                 </div>
             </div>
-            
-            <!-- <div class="testimonial">
-                <div class="testimonial-img">
-                    <img src={TESTIMONIAL2.src} alt="">
-                    <h4>Moustafa Ghabour</h4>
-                    <h6>Edmonton Resident</h6>
-                </div>
-                <div class="testimonial-content">
-
-                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
-                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
-                        community for my family.</p>
-                </div>
-            </div> -->
-            <!-- <div class="testimonial">
-                <div class="testimonial-img">
-                    <img src="images/testimonial (2).png" alt="">
-                    <h4>Moustafa Ghabour</h4>
-                    <h6>Edmonton Resident</h6>
-                </div>
-                <div class="testimonial-content">
-
-                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
-                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
-                        community for my family.</p>
-                </div>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-img">
-                    <img src={TESTIMONIAL2.src} alt="">
-                    <h4>Moustafa Ghabour</h4>
-                    <h6>Edmonton Resident</h6>
-                </div>
-                <div class="testimonial-content">
-                    <p>Alhamdulillah, my journey from Saskatchewan to Edmonton led me to Omar Ibn Al-Khattab School and
-                        Masjid—a place offering excellent education, a welcoming environment, and a strong sense of
-                        community for my family.</p>
-                </div>
-            </div> -->
         </div>
     </div>
     <footer id="contact">
