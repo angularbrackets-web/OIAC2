@@ -34,7 +34,10 @@ import "../styles/styles.css"
 import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
 
 import emailjs from "@emailjs/browser";
+//import { trackVisit } from '../lib/trackVisit.ts'
 
+// Track visit with current URL and UTM parameters
+// trackVisit(Astro.url.toString())
 ---
 
 <!DOCTYPE html>
@@ -122,7 +125,7 @@ import emailjs from "@emailjs/browser";
                 </ul>
             </div>
             <div class="header-btn">
-                <button><a href="https://give-can.keela.co/donate-to-southside-islamic-school">Donate Now</a></button>
+                <button class="donate-keela"><a href="https://give-can.keela.co/donate-to-southside-islamic-school">Donate Now</a></button>
             </div>
         </div>
     </header>
@@ -132,7 +135,7 @@ import emailjs from "@emailjs/browser";
             <h5>A Future Where Faith & Education Thrive Together</h5>
             <div class="banner-content-btn">
                 <button class="learn-btn"><a href="https://www.oiacedmonton.ca/newcentre">Learn More</a></button>
-                <button class="donate-btn-1"><a href="https://give-can.keela.co/donate-to-southside-islamic-school">Donate Now</a></button>
+                <button class="donate-btn-1 donate-keela"><a href="https://give-can.keela.co/donate-to-southside-islamic-school">Donate Now</a></button>
             </div>
         </div>
         <div class="banner-line">
@@ -229,7 +232,7 @@ import emailjs from "@emailjs/browser";
                 <div class="progress-bar">
                     <div class="progress"><span>31%</span></div>
                 </div>
-                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" class="donate-btn">DONATE NOW</a>
+                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" class="donate-btn donate-keela">DONATE NOW</a>
             </div>
         </div>
     </div>
@@ -529,6 +532,26 @@ const email = subsEmailTextBox.value.trim();
         });
     });
 </script>
+<script type="module">
+    import { trackVisit } from '/src/lib/trackVisit';
+  
+    const donateButtons = document.getElementsByClassName('donate-keela');
+    const params = new URLSearchParams(window.location.search);
+    const source = params.get('utm_source') || 'direct';
+  
+    trackVisit(source); // Track page view
+  
+    if (donateButtons.length > 0) {
+      Array.from(donateButtons).forEach(button => {
+        button.addEventListener('click', () => {
+          trackVisit(source, true); // Track donation click
+        });
+      });
+    }
+  </script>
+  
+  
+  
 </body>
 
 </html>

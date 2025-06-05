@@ -18,13 +18,21 @@ function startCountdown(targetDate) {
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerText = days;
-            document.getElementById("hours").innerText = hours;
-            document.getElementById("minutes").innerText = minutes;
-            document.getElementById("seconds").innerText = seconds;
+            const daysElement = document.getElementById("days");
+            const hoursElement = document.getElementById("hours");
+            const minutesElement = document.getElementById("minutes");
+            const secondsElement = document.getElementById("seconds");
+
+            if (daysElement) daysElement.innerText = days;
+            if (hoursElement) hoursElement.innerText = hours;
+            if (minutesElement) minutesElement.innerText = minutes;
+            if (secondsElement) secondsElement.innerText = seconds;
         } else {
             clearInterval(timer);
-            document.querySelector(".countdown").innerHTML = "Time's up!";
+            const countdownElement = document.querySelector(".countdown");
+            if (countdownElement) {
+                countdownElement.innerHTML = "Time's up!";
+            }
         }
     }
 

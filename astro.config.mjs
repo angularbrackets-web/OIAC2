@@ -8,5 +8,8 @@ import react from "@astrojs/react";
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-  integrations: [tailwind(), react()]
+  integrations: [tailwind(), react()],
+  image: {
+    domains: ["https://**.graphassets.com"],
+  }
 });

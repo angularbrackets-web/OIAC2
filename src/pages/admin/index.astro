@@ -1,0 +1,83 @@
+---
+import { getUtmCounts } from '../../graphql/utm-counts';
+
+const isAuthenticated = Astro.cookies.get('admin_auth')?.value === import.meta.env.OIAC_ADMIN_PASSWORD;
+if (!isAuthenticated) return Astro.redirect('/admin/login');
+
+const utmData = await getUtmCounts();
+const totalHits = utmData.reduce((sum, item) => sum + item.visits, 0);
+const totalDonations = utmData.reduce((sum, item) => sum + item.donations, 0);
+const conversionRate = totalHits > 0 ? ((totalDonations / totalHits) * 100).toFixed(1) : "0.0";
+---
+
+<html>
+  <head>
+    <title>Admin - UTM Report</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #f5f7fa;
+        padding: 2rem;
+      }
+      h1, p {
+        margin: 0 0 1rem;
+      }
+      a {
+        text-decoration: none;
+      }
+      .logout {
+        margin-bottom: 1rem;
+        display: inline-block;
+        color: #0f766e;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 2rem;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      }
+      th, td {
+        padding: 1rem;
+        border-bottom: 1px solid #e0e0e0;
+        text-align: left;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>UTM Tracking Report</h1>
+    <a class="logout" href="/admin/logout">Logout</a>
+    <p><strong>Total Visits:</strong> {totalHits}</p>
+    <p><strong>Total Donations:</strong> {totalDonations}</p>
+    <p><strong>Conversion Rate:</strong> {conversionRate}%</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>UTM Source</th>
+          <th>Visit Count</th>
+          <th>Donated</th>
+          <th>Conversion Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {utmData.map((row) => (
+          <tr>
+            <td>{row.source.charAt(0).toUpperCase() + row.source.slice(1).toLowerCase()}</td>
+            <td>{row.visits}</td>
+            <td>{row.donations}</td>
+            <td>{row.visits === 0 ? '0.0%' : ((row.donations / row.visits) * 100).toFixed(1) + '%'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,7 +1,6 @@
-import pkg from '@apollo/client'
+import { gql } from '@apollo/client'
 import {client} from '../../../graphql/apollo-client'
 import type { APIRoute } from 'astro'
-const {gql} = pkg
 
 export type Volunteer = {
     "name": string,

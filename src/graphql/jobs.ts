@@ -1,6 +1,5 @@
-import pkg from '@apollo/client'
+import { gql } from '@apollo/client'
 import {client} from './apollo-client'
-const {gql} = pkg
 
 export interface Job {
     id: string;

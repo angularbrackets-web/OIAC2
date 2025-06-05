@@ -1,5 +1,4 @@
-import pkg from '@apollo/client'
-const { gql, useMutation } = pkg
+import { gql, useMutation } from '@apollo/client'
 import {client}  from './apollo-client'
 import { getCurrentDateInEdmonton } from '../helper'
 
