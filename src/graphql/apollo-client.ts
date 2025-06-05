@@ -1,9 +1,17 @@
-import { InMemoryCache, ApolloClient } from '@apollo/client'
+import pkg from '@apollo/client';
+
+const {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+} = pkg;
 
 export const client = new ApolloClient({
-    uri:'https://us-west-2.cdn.hygraph.com/content/clo0kf2c97pnm01t4g8sva2ni/master',
-    cache: new InMemoryCache(),
-  })
+  link: new HttpLink({
+    uri: 'https://us-west-2.cdn.hygraph.com/content/clo0kf2c97pnm01t4g8sva2ni/master',
+    fetch // 👈 make sure to inject Node's global fetch    
+  }),
+  cache: new InMemoryCache(),
+});
 
-export default client
-
+export default client;
