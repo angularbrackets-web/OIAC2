@@ -4,7 +4,9 @@ const {
   ApolloClient,
   InMemoryCache,
   HttpLink,
+  gql,
 } = pkg;
+
 
 export const client = new ApolloClient({
   link: new HttpLink({
