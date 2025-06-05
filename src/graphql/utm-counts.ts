@@ -1,6 +1,7 @@
 // src/graphql/utm-counts.ts
-import { gql } from '@apollo/client';
-import { client } from './apollo-client';
+import pkg from '@apollo/client';
+const { gql, client } = pkg;
+
 
 export type DailyUtmCount = {
   date: string;
