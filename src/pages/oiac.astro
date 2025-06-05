@@ -32,7 +32,7 @@ import SOCIAL_ICON_2 from "../assets/social-icon-i (3).svg";
 import SOCIAL_ICON_3 from "../assets/social-icon-y (1).svg";
 import "../styles/styles.css"
 import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
-
+import utmTrackerUrl from '../components/utmTracker.ts?url';
 //import emailjs from "@emailjs/browser";
 //import { initUtmTracking } from '../components/utmTracker';
 //import { trackVisit } from '../lib/trackVisit.ts'
@@ -602,13 +602,8 @@ const email = subsEmailTextBox.value.trim();
         });
     });
 </script>
-<script type="module">
-    import { initUtmTracking } from '../components/utmTracker';
 
-// Initialize UTM tracking
-initUtmTracking();
-  </script>
-  
+<script type="module" src={utmTrackerUrl}></script> 
   
   
   
