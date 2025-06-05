@@ -33,7 +33,8 @@ import SOCIAL_ICON_3 from "../assets/social-icon-y (1).svg";
 import "../styles/styles.css"
 import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
 
-import emailjs from "@emailjs/browser";
+//import emailjs from "@emailjs/browser";
+//import { initUtmTracking } from '../components/utmTracker';
 //import { trackVisit } from '../lib/trackVisit.ts'
 
 // Track visit with current URL and UTM parameters
@@ -602,25 +603,10 @@ const email = subsEmailTextBox.value.trim();
     });
 </script>
 <script type="module">
-    import { trackVisit } from '/src/lib/trackVisit';
-    import { trackDonation } from '/src/lib/trackDonation';
-  
-    const params = new URLSearchParams(window.location.search);
-    const source = (params.get('utm_source') || 'direct').toLowerCase();
-    let utmId = null;
-  
-    document.addEventListener("DOMContentLoaded", async () => {
-      utmId = await trackVisit(source);
-  
-      const donateButtons = document.getElementsByClassName('donate-keela');
-      if (donateButtons.length > 0 && utmId) {
-        Array.from(donateButtons).forEach(button => {
-          button.addEventListener('click', () => {
-            trackDonation(utmId);
-          });
-        });
-      }
-    });
+    import { initUtmTracking } from '../src/components/utmTracker';
+
+// Initialize UTM tracking
+initUtmTracking();
   </script>
   
   
