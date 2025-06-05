@@ -1,50 +1,44 @@
 import { gql } from '@apollo/client';
 import { client } from '../graphql/apollo-client';
 
-export async function trackVisit(source: string, donateButtonClicked = false) {
-  const cleanedSource = (source || 'direct').toLowerCase();
-
-  const CREATE_UTM_HIT = gql`
-    mutation CreateUtmHit($source: UtmSourceType!, $donateButtonClicked: Boolean!, $timestamp: DateTime!) {
-      createUtmHit(data: {
-        source: $source,
-        donateButtonClicked: $donateButtonClicked,
-        timestamp: $timestamp
-      }) {
-        id
-      }
+const CREATE_UTM_HIT = gql`
+  mutation CreateUtmHit($source: UtmSourceType!) {
+    createUtmHit(data: {
+      source: $source,
+      timestamp: "${new Date().toISOString()}"
+    }) {
+      id
     }
-  `;
+  }
+`;
 
+const PUBLISH_UTM_HIT = gql`
+  mutation PublishUtmHit($id: ID!) {
+    publishUtmHit(where: { id: $id }, to: PUBLISHED) {
+      id
+    }
+  }
+`;
+
+export async function trackVisit(source: string): Promise<string | null> {
   try {
-    const timestamp = new Date().toISOString();
-
     const result = await client.mutate({
       mutation: CREATE_UTM_HIT,
-      variables: {
-        source: cleanedSource,
-        donateButtonClicked,
-        timestamp
-      }
+      variables: { source }
     });
 
-    const createdId = result?.data?.createUtmHit?.id;
+    const id = result?.data?.createUtmHit?.id;
 
-    if (createdId) {
+    if (id) {
       await client.mutate({
-        mutation: gql`
-          mutation PublishUtmHit($id: ID!) {
-            publishUtmHit(where: { id: $id }, to: PUBLISHED) {
-              id
-            }
-          }
-        `,
-        variables: {
-          id: createdId
-        }
+        mutation: PUBLISH_UTM_HIT,
+        variables: { id }
       });
+      return id;
     }
   } catch (err) {
     console.error('trackVisit error:', err);
   }
+
+  return null;
 }

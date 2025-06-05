@@ -11,7 +11,7 @@ import SVG2 from "../assets/svg951.svg";
 import SVG3 from "../assets/svg-3.svg";
 import CONTENT_IMG from "../assets/content-img-1.png";
 import OBJECT_2 from "../assets/OBJECT-2.svg";
-import BOX_IMG from "../assets/box-img-2.png";
+import BOX_IMG from "../assets/new-centre/new.oiac.18.png";
 import DONATION_IMG from "../assets/donation-img.png";
 
 import FOUNDATION_1 from "../assets/foundation.svg";
@@ -201,6 +201,75 @@ import emailjs from "@emailjs/browser";
             </div>
         </div>
     </div>
+
+
+    <section class="py-16 bg-gray-50" id="oiac">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Our Growing Community</h2>
+          <p class="text-center text-gray-600 max-w-3xl mx-auto">OIAC proudly serves Edmonton’s south-central community. Our vision for a new, purpose-built center at 8615 41 Avenue SW is designed to fully support and enrich our vibrant and growing community.</p>
+        </div>
+      </section>
+    
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Creating a Lasting Legacy</h2>
+          <p class="text-center text-gray-600 max-w-3xl mx-auto">Your generous support today will shape countless lives, preserve our cherished heritage, and uphold our foundational values for generations.</p>
+        </div>
+      </section>
+    
+      <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Current Programs & Initiatives</h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 max-w-4xl mx-auto list-disc list-inside">
+            <li>OIAC Homeschooling Program</li>
+            <li>Weekend Islamic School</li>
+            <li>Qur’anic Light Program</li>
+            <li>Bidaya Program</li>
+            <li>Youth Leadership Development</li>
+            <li>Men's Qur'an Classes</li>
+            <li>Makarim Tarbiyyah integrated throughout all programs</li>
+            <li>Ibn al-Islam Educational Series</li>
+            <li>Seasonal Youth Camps</li>
+          </ul>
+        </div>
+      </section>
+    
+      <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">State-of-the-Art, Purpose-Built Centre</h2>
+          <ul class="space-y-2 text-center text-gray-600 max-w-4xl mx-auto">
+            <li>22 spacious, modern classrooms</li>
+            <li>Prayer hall accommodating approximately 300 worshippers</li>
+            <li>Expansive school gym</li>
+            <li>Multi-purpose breakout areas for community gatherings</li>
+          </ul>
+        </div>
+      </section>
+    
+      <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Key Centre Features</h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-gray-600 max-w-5xl mx-auto list-disc list-inside">
+            <li>Accredited K-12 School Facility</li>
+            <li>Full-Service Masjid</li>
+            <li>Dynamic Breakout and Collaborative Spaces</li>
+            <li>Comprehensive Library</li>
+            <li>Welcoming School Common Area</li>
+            <li>22 Fully-equipped Classrooms</li>
+            <li>Modern, Spacious Gymnasium</li>
+            <li>Commercial Kitchen for community events and culinary programs</li>
+          </ul>
+        </div>
+      </section>
+    
+
+
+
+
+
+
+
+
     <div class="content-part-2">
         <div class="content-box-2">
             <h5 style="text-transform: uppercase;">Building Faith and Knowledge - <span>Islamic School in South Edmonton</span></h5>
@@ -534,21 +603,26 @@ const email = subsEmailTextBox.value.trim();
 </script>
 <script type="module">
     import { trackVisit } from '/src/lib/trackVisit';
+    import { trackDonation } from '/src/lib/trackDonation';
   
-    const donateButtons = document.getElementsByClassName('donate-keela');
     const params = new URLSearchParams(window.location.search);
-    const source = params.get('utm_source') || 'direct';
+    const source = (params.get('utm_source') || 'direct').toLowerCase();
+    let utmId = null;
   
-    trackVisit(source); // Track page view
+    document.addEventListener("DOMContentLoaded", async () => {
+      utmId = await trackVisit(source);
   
-    if (donateButtons.length > 0) {
-      Array.from(donateButtons).forEach(button => {
-        button.addEventListener('click', () => {
-          trackVisit(source, true); // Track donation click
+      const donateButtons = document.getElementsByClassName('donate-keela');
+      if (donateButtons.length > 0 && utmId) {
+        Array.from(donateButtons).forEach(button => {
+          button.addEventListener('click', () => {
+            trackDonation(utmId);
+          });
         });
-      });
-    }
+      }
+    });
   </script>
+  
   
   
   

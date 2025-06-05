@@ -1,44 +1,64 @@
+// src/graphql/utm-counts.ts
 import { gql } from '@apollo/client';
 import { client } from './apollo-client';
 
-export type UtmSourceCount = {
+export type DailyUtmCount = {
+  date: string;
   source: string;
   visits: number;
   donations: number;
   conversionRate: string;
 };
 
-export async function getUtmCounts(): Promise<UtmSourceCount[]> {
-  const result = await client.query({
+export async function getUtmCounts(): Promise<DailyUtmCount[]> {
+    // await client.clearStore();
+    const result = await client.query({
     query: gql`
       query GetUtmHits {
-        utmHits {
+        utmHits(orderBy: timestamp_ASC) {
           source
           donateButtonClicked
+          timestamp
         }
       }
     `
+//     ,
+//   fetchPolicy: 'no-cache'
   });
 
-  const rawHits = result.data.utmHits as { source: string; donateButtonClicked: boolean }[];
+  const rawHits = result.data.utmHits as {
+    source: string;
+    donateButtonClicked: boolean;
+    timestamp: string;
+  }[];
 
-  const countMap: Record<string, { visits: number; donations: number }> = {};
+  const grouped: Record<string, Record<string, { visits: number; donations: number }>> = {};
 
   for (const hit of rawHits) {
-    const src = hit.source.toLowerCase();
-    if (!countMap[src]) {
-      countMap[src] = { visits: 0, donations: 0 };
-    }
-    countMap[src].visits++;
-    if (hit.donateButtonClicked) {
-      countMap[src].donations++;
+    const date = new Date(hit.timestamp).toISOString().split('T')[0];
+    const source = hit.source.toLowerCase();
+
+    if (!grouped[date]) grouped[date] = {};
+    if (!grouped[date][source]) grouped[date][source] = { visits: 0, donations: 0 };
+
+    grouped[date][source].visits++;
+    if (hit.donateButtonClicked) grouped[date][source].donations++;
+  }
+
+  const results: DailyUtmCount[] = [];
+
+  for (const date in grouped) {
+    for (const source in grouped[date]) {
+      const { visits, donations } = grouped[date][source];
+      results.push({
+        date,
+        source,
+        visits,
+        donations,
+        conversionRate: `${((donations / visits) * 100).toFixed(1)}%`
+      });
     }
   }
 
-  return Object.entries(countMap).map(([source, data]) => ({
-    source,
-    visits: data.visits,
-    donations: data.donations,
-    conversionRate: `${((data.donations / data.visits) * 100).toFixed(1)}%`
-  }));
+  return results;
 }

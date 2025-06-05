@@ -1,12 +1,10 @@
 ---
 import { getUtmCounts } from '../../graphql/utm-counts';
 
-const isAuthenticated = Astro.cookies.get('admin_auth')?.value === import.meta.env.OIAC_ADMIN_PASSWORD;
-if (!isAuthenticated) return Astro.redirect('/admin/login');
-
 const utmData = await getUtmCounts();
-const totalHits = utmData.reduce((sum, item) => sum + item.visits, 0);
-const totalDonations = utmData.reduce((sum, item) => sum + item.donations, 0);
+
+const totalHits = utmData.reduce((sum, row) => sum + row.visits, 0);
+const totalDonations = utmData.reduce((sum, row) => sum + row.donations, 0);
 const conversionRate = totalHits > 0 ? ((totalDonations / totalHits) * 100).toFixed(1) : "0.0";
 ---
 
@@ -18,17 +16,6 @@ const conversionRate = totalHits > 0 ? ((totalDonations / totalHits) * 100).toFi
         font-family: sans-serif;
         background: #f5f7fa;
         padding: 2rem;
-      }
-      h1, p {
-        margin: 0 0 1rem;
-      }
-      a {
-        text-decoration: none;
-      }
-      .logout {
-        margin-bottom: 1rem;
-        display: inline-block;
-        color: #0f766e;
       }
       table {
         width: 100%;
@@ -47,34 +34,32 @@ const conversionRate = totalHits > 0 ? ((totalDonations / totalHits) * 100).toFi
       th {
         background-color: #f0f0f0;
       }
-      tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
     </style>
   </head>
   <body>
     <h1>UTM Tracking Report</h1>
-    <a class="logout" href="/admin/logout">Logout</a>
     <p><strong>Total Visits:</strong> {totalHits}</p>
-    <p><strong>Total Donations:</strong> {totalDonations}</p>
-    <p><strong>Conversion Rate:</strong> {conversionRate}%</p>
-    
+    <p><strong>Total Donation Clicks:</strong> {totalDonations}</p>
+    <p><strong>Overall Conversion Rate:</strong> {conversionRate}%</p>
+
     <table>
       <thead>
         <tr>
-          <th>UTM Source</th>
-          <th>Visit Count</th>
-          <th>Donated</th>
+          <th>Date</th>
+          <th>Source</th>
+          <th>Visits</th>
+          <th>Donations</th>
           <th>Conversion Rate</th>
         </tr>
       </thead>
       <tbody>
-        {utmData.map((row) => (
+        {utmData.map(row => (
           <tr>
-            <td>{row.source.charAt(0).toUpperCase() + row.source.slice(1).toLowerCase()}</td>
+            <td>{row.date}</td>
+            <td>{row.source}</td>
             <td>{row.visits}</td>
             <td>{row.donations}</td>
-            <td>{row.visits === 0 ? '0.0%' : ((row.donations / row.visits) * 100).toFixed(1) + '%'}</td>
+            <td>{row.conversionRate}</td>
           </tr>
         ))}
       </tbody>
