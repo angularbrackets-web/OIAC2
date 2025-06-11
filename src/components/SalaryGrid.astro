@@ -1,0 +1,138 @@
+---
+// src/components/SalaryGrid.astro
+// An enhanced salary grid component with a hero image and custom theme.
+
+interface GridRow {
+  year: string;
+  salary: string;
+}
+
+interface SalaryGridProps {
+  title: string;
+  yearsOfEducation: string;
+  data: GridRow[];
+  headerBgClass: string;
+  bodyBgClass: string;
+}
+
+const salaryGrids: SalaryGridProps[] = [
+  
+  {
+    title: "4 Years of Education",
+    yearsOfEducation: "Alberta Certified Teacher",
+    headerBgClass: "bg-lightWood-darker",
+    bodyBgClass: "bg-lightWood-lighter",
+    data: [
+      { year: "1st Year", salary: "$60,000" },
+      { year: "2nd Year", salary: "$60,000" },
+      { year: "3rd Year", salary: "$72,000" },
+      { year: "4th Year", salary: "$74,160" },
+      { year: "5th Year", salary: "$76,385" },
+      { year: "6th Year", salary: "$82,496" },
+      { year: "7th Year", salary: "$84,970" },
+      { year: "8th Year", salary: "$87,520" },
+      { year: "9th Year", salary: "$90,145" },
+      { year: "10th Year", salary: "$92,850" },
+    ],
+  },
+  {
+    title: "5 Years of Education",
+    yearsOfEducation: "Alberta Certified Teacher",
+    headerBgClass: "bg-wood2-darker",
+    bodyBgClass: "bg-wood2-lighter",
+    data: [
+      { year: "1st Year", salary: "$64,000" },
+      { year: "2nd Year", salary: "$64,000" },
+      { year: "3rd Year", salary: "$76,800" },
+      { year: "4th Year", salary: "$79,104" },
+      { year: "5th Year", salary: "$81,477" },
+      { year: "6th Year", salary: "$87,995" },
+      { year: "7th Year", salary: "$90,635" },
+      { year: "8th Year", salary: "$93,354" },
+      { year: "9th Year", salary: "$96,155" },
+      { year: "10th Year", salary: "$99,039" },
+    ],
+  },
+  {
+    title: "6 Years of Education",
+    yearsOfEducation: "Alberta Certified Teacher",
+    headerBgClass: "bg-wood-darker",
+    bodyBgClass: "bg-wood-lighter",
+    data: [
+      { year: "1st Year", salary: "$68,000" },
+      { year: "2nd Year", salary: "$68,000" },
+      { year: "3rd Year", salary: "$81,600" },
+      { year: "4th Year", salary: "$84,048" },
+      { year: "5th Year", salary: "$86,569" },
+      { year: "6th Year", salary: "$93,495" },
+      { year: "7th Year", salary: "$96,300" },
+      { year: "8th Year", salary: "$99,189" },
+      { year: "9th Year", salary: "$102,165" },
+      { year: "10th Year", salary: "$105,229" },
+    ],
+  },
+];
+
+const heroImageUrl = "/src/assets/new-centre/new.oiac.4.png";
+---
+
+<div class="bg-softBeige-lightest">
+    <div class="relative bg-deepTeal text-white min-h-[300px] lg:min-h-[400px]">
+        {/* Dark gradient overlay */}
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/50 z-10"></div>
+        
+        <img 
+            src={heroImageUrl} 
+            alt="Omar Ibn Al-Khattab Centre Exterior" 
+            class="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity duration-300 hover:opacity-50" 
+        />
+        
+        <div class="relative z-20 max-w-4xl mx-auto px-4 text-center sm:px-6 lg:px-8 h-full">
+            <div class="flex flex-col justify-center items-center h-full py-20 lg:py-24 space-y-12">
+                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-lg">
+                    Join Our Team
+                </h1>
+                <p class="max-w-2xl mx-auto text-xl text-white leading-relaxed drop-shadow-lg font-medium">
+                    We are looking for passionate educators to help us build a brighter future. Explore our competitive salary packages for the 2025-2026 academic year.
+                </p>
+            </div>
+        </div>
+    </div>
+
+  <div class="py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+       <div class="text-center mb-12">
+        <h2 class="text-3xl font-extrabold text-terracottaRed-darker tracking-tight sm:text-4xl">
+            OIAC Academy Salary Grid
+        </h2>
+        <p class="mt-4 max-w-3xl mx-auto text-xl text-wood-dark">
+            OIAC is committed to attracting and retaining high-quality staff and acknowledges the importance of maintaining a competitive edge within Edmonton's educational sector.
+        </p>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-3 lg:gap-x-8">
+        {salaryGrids.map((grid) => (
+          <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden">
+            <div class={`px-6 py-5 ${grid.headerBgClass} text-white`}>
+              <h3 class="text-2xl font-bold text-center text-white">{grid.title}</h3>
+              <p class="text-sm text-white text-center mt-1">{grid.yearsOfEducation}</p>
+            </div>
+            <div class={`flex-grow px-6 pt-6 pb-8 ${grid.bodyBgClass}`}>
+              <ul role="list" class="space-y-3">
+                {grid.data.map((row) => (
+                  <li class="flex justify-between items-center border-b border-black/10 pb-2">
+                    <span class="text-gray-900 font-semibold">{row.year}</span>
+                    <span class="text-gray-900 font-bold text-lg">{row.salary}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+       <p class="mt-12 text-center text-lg text-wood-dark italic">
+        In the long term, OIAC aims to match or exceed the salary grids offered to our academic teachers.
+      </p>
+    </div>
+  </div>
+</div>

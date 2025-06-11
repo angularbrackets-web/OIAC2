@@ -67,5 +67,5 @@ const VALID_UTM_SOURCES = [
     }
   }
   
-  initUtmTracking();
+//   initUtmTracking();
   

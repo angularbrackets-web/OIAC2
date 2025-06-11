@@ -37,7 +37,7 @@ export async function getPosts() {
             }
           }`
   })
-//   console.log('POSTS: ', JSON.stringify(result.data.posts))
+   //console.log('POSTS: ', JSON.stringify(result.data.posts))
   let posts : Array<OIAC_Post> = []
 
   posts = result.data.posts

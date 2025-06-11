@@ -32,13 +32,12 @@ import SOCIAL_ICON_2 from "../assets/social-icon-i (3).svg";
 import SOCIAL_ICON_3 from "../assets/social-icon-y (1).svg";
 import "../styles/styles.css"
 import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
-import utmTrackerUrl from '../components/utmTracker.ts?url';
-//import emailjs from "@emailjs/browser";
-//import { initUtmTracking } from '../components/utmTracker';
-//import { trackVisit } from '../lib/trackVisit.ts'
 
-// Track visit with current URL and UTM parameters
-// trackVisit(Astro.url.toString())
+const validUtmSources = ['facebook', 'instagram', 'youtube', 'email', 'whatsapp', 'other'];
+const params = new URLSearchParams(Astro.url.search);
+const rawSource = params.get('utm_source');
+const normalized = (rawSource || '').toLowerCase();
+const source = validUtmSources.includes(normalized) ? normalized : 'other';
 ---
 
 <!DOCTYPE html>
@@ -73,6 +72,7 @@ import utmTrackerUrl from '../components/utmTracker.ts?url';
   /></noscript>
   <!-- End Meta Pixel Code -->
 </head>
+
 
 <body>
     <header>
@@ -126,7 +126,7 @@ import utmTrackerUrl from '../components/utmTracker.ts?url';
                 </ul>
             </div>
             <div class="header-btn">
-                <button class="donate-keela"><a href="https://give-can.keela.co/donate-to-southside-islamic-school">Donate Now</a></button>
+                <button class="donate-keela"><a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank">Donate Now</a></button>
             </div>
         </div>
     </header>
@@ -135,8 +135,8 @@ import utmTrackerUrl from '../components/utmTracker.ts?url';
             <h2>Help Build South Edmonton’s First Dedicated Islamic Academy for our Children</h2>
             <h5>A Future Where Faith & Education Thrive Together</h5>
             <div class="banner-content-btn">
-                <button class="learn-btn"><a href="https://www.oiacedmonton.ca/newcentre">Learn More</a></button>
-                <button class="donate-btn-1 donate-keela"><a href="https://give-can.keela.co/donate-to-southside-islamic-school">Donate Now</a></button>
+                <button class="learn-btn p-3"><a href="https://www.oiacedmonton.ca/newcentre">Learn More</a></button>
+                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn-1 donate-keela p-3">Donate Now</a>
             </div>
         </div>
         <div class="banner-line">
@@ -204,53 +204,146 @@ import utmTrackerUrl from '../components/utmTracker.ts?url';
     </div>
 
 
-    <section class="py-16 bg-gray-50" id="oiac">
-        <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Our Growing Community</h2>
-          <p class="text-center text-gray-600 max-w-3xl mx-auto">OIAC proudly serves Edmonton’s south-central community. Our vision for a new, purpose-built center at 8615 41 Avenue SW is designed to fully support and enrich our vibrant and growing community.</p>
+    <section class="py-20 bg-gray-50 relative overflow-hidden" id="oiac">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-left">
+              <h2 class="text-4xl font-bold text-gray-800 mb-6">Our Growing Community</h2>
+              <p class="text-lg text-gray-600 leading-relaxed">
+                OIAC proudly serves Edmonton’s south-central community. Our vision for a new, purpose-built center at 8615 41 Avenue SW is designed to fully support and enrich our vibrant and growing community.
+              </p>
+            </div>
+            <div class="relative">
+              <img 
+                src="/src/assets/new-centre/new.oiac.18.png" 
+                alt="OIAC Community" 
+                class="w-full h-[400px] object-cover"
+                style="clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="relative order-2 md:order-1">
+              <img 
+                src="/src/assets/new-centre/new.oiac.19.png" 
+                alt="Islamic Legacy" 
+                class="w-full h-[400px] object-cover"
+                style="clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);"
+              />
+            </div>
+            <div class="text-left order-1 md:order-2">
+              <h2 class="text-4xl font-bold text-gray-800 mb-6">Creating a Lasting Legacy</h2>
+              <p class="text-lg text-gray-600 leading-relaxed">
+                Your generous support today will shape countless lives, preserve our cherished heritage, and uphold our foundational values for generations.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     
-      <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Creating a Lasting Legacy</h2>
-          <p class="text-center text-gray-600 max-w-3xl mx-auto">Your generous support today will shape countless lives, preserve our cherished heritage, and uphold our foundational values for generations.</p>
+      <section class="py-20 bg-gray-50 relative overflow-hidden" id="oiac">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-left">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Current Programs & Initiatives</h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 max-w-4xl mx-auto list-disc list-inside">
+                  <li>OIAC Homeschooling Program</li>
+                  <li>Weekend Islamic School</li>
+                  <li>Qur’anic Light Program</li>
+                  <li>Bidaya Program</li>
+                  <li>Youth Leadership Development</li>
+                  <li>Men's Qur'an Classes</li>
+                  <li>Makarim Tarbiyyah integrated throughout all programs</li>
+                  <li>Ibn al-Islam Educational Series</li>
+                  <li>Seasonal Youth Camps</li>
+                </ul>
+            </div>
+            <div class="relative">
+              <img 
+                src="/src/assets/new-centre/new.oiac.14.png" 
+                alt="OIAC Community" 
+                class="w-full h-[400px] object-cover"
+                style="clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);"
+              />
+            </div>
+          </div>
         </div>
       </section>
     
-      <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Current Programs & Initiatives</h2>
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 max-w-4xl mx-auto list-disc list-inside">
-            <li>OIAC Homeschooling Program</li>
-            <li>Weekend Islamic School</li>
-            <li>Qur’anic Light Program</li>
-            <li>Bidaya Program</li>
-            <li>Youth Leadership Development</li>
-            <li>Men's Qur'an Classes</li>
-            <li>Makarim Tarbiyyah integrated throughout all programs</li>
-            <li>Ibn al-Islam Educational Series</li>
-            <li>Seasonal Youth Camps</li>
-          </ul>
+      <section class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 max-w-6xl">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="relative order-2 md:order-1">
+              <img 
+                src="/src/assets/new-centre/new.oiac.30.png" 
+                alt="Islamic Legacy" 
+                class="w-full h-[400px] object-cover"
+                style="clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);"
+              />
+            </div>
+            <div class="text-left order-1 md:order-2">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">State-of-the-Art, Purpose-Built Centre</h2>
+                <ul class="space-y-2 text-center text-gray-600 max-w-4xl mx-auto">
+                  <li>22 spacious, modern classrooms</li>
+                  <li>Prayer hall accommodating approximately 300 worshippers</li>
+                  <li>Expansive school gym</li>
+                  <li>Multi-purpose breakout areas for community gatherings</li>
+                </ul>
+            </div>
+          </div>
         </div>
       </section>
     
-      <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">State-of-the-Art, Purpose-Built Centre</h2>
-          <ul class="space-y-2 text-center text-gray-600 max-w-4xl mx-auto">
-            <li>22 spacious, modern classrooms</li>
-            <li>Prayer hall accommodating approximately 300 worshippers</li>
-            <li>Expansive school gym</li>
-            <li>Multi-purpose breakout areas for community gatherings</li>
-          </ul>
+      <section class="py-20 bg-softBeige relative overflow-hidden">
+        <div class="absolute inset-0 opacity-15">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="islamicPattern" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+                {/* Complex Islamic Star Pattern */}
+                <path d="
+                  M60 10 L110 40 L110 80 L60 110 L10 80 L10 40Z
+                  M60 20 L100 45 L100 75 L60 100 L20 75 L20 45Z
+                  M60 30 L90 50 L90 70 L60 90 L30 70 L30 50Z
+                " fill="#999" fill-opacity="0.15"/>
+                
+                {/* Inner Star */}
+                <path d="
+                  M60 40 L80 50 L80 70 L60 80 L40 70 L40 50Z
+                  M60 45 L75 53 L75 67 L60 75 L45 67 L45 53Z
+                " fill="#EAEAEA" fill-opacity="0.2"/>
+                
+                {/* Connecting Lines */}
+                <path d="
+                  M0 60 H120 M60 0 V120
+                  M0 0 L120 120 M120 0 L0 120
+                  M30 0 L30 120 M90 0 L90 120
+                  M0 30 H120 M0 90 H120
+                " stroke="#723A36" stroke-width="0.5" stroke-opacity="0.1"/>
+                
+                {/* Decorative Elements */}
+                <circle cx="60" cy="60" r="4" fill="#AAA" fill-opacity="0.3"/>
+                <circle cx="60" cy="60" r="2" fill="#AAA" fill-opacity="0.4"/>
+                
+                {/* Corner Medallions */}
+                <path d="
+                  M0 0 Q30 0 30 30 Q30 0 0 0Z
+                  M90 0 Q120 0 120 30 Q120 0 90 0Z
+                  M0 90 Q0 120 30 120 Q0 120 0 90Z
+                  M90 90 Q120 90 120 120 Q120 90 90 90Z
+                " fill="#723A36" fill-opacity="0.1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#islamicPattern)"/>
+          </svg>
         </div>
-      </section>
-    
-      <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Key Centre Features</h2>
-          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-gray-600 max-w-5xl mx-auto list-disc list-inside">
+          <h2 class="text-3xl font-bold text-center text-gray-950 mb-8">Key Centre Features</h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-gray-950 max-w-5xl mx-auto list-disc list-inside">
             <li>Accredited K-12 School Facility</li>
             <li>Full-Service Masjid</li>
             <li>Dynamic Breakout and Collaborative Spaces</li>
@@ -262,14 +355,11 @@ import utmTrackerUrl from '../components/utmTracker.ts?url';
           </ul>
         </div>
       </section>
-    
 
 
 
 
-
-
-
+      
 
     <div class="content-part-2">
         <div class="content-box-2">
@@ -302,7 +392,7 @@ import utmTrackerUrl from '../components/utmTracker.ts?url';
                 <div class="progress-bar">
                     <div class="progress"><span>31%</span></div>
                 </div>
-                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" class="donate-btn donate-keela">DONATE NOW</a>
+                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn donate-keela">DONATE NOW</a>
             </div>
         </div>
     </div>
@@ -603,10 +693,53 @@ const email = subsEmailTextBox.value.trim();
     });
 </script>
 
-<script type="module" src={utmTrackerUrl}></script> 
+
   
   
+  <script define:vars={{ source, validUtmSources }}>
+    let utmId = null;
   
+    async function trackVisit(isButtonClick = false) {
+      try {
+        const response = await fetch('/api/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            source, 
+            timestamp: new Date().toISOString(),
+            donateButtonClicked: isButtonClick 
+          }),
+        });
+        const result = await response.json();
+        if (response.ok && result.status === 'success') {
+          utmId = result.utmId || null;
+        }
+      } catch (error) {
+        console.error('utm error', error);
+      }
+    }
+  
+    // Track initial page visit
+    trackVisit(false);
+  
+    // Add click handlers immediately, don't wait for utmId
+    document.addEventListener('DOMContentLoaded', () => {
+      const donateButtons = document.getElementsByClassName('donate-keela');
+      
+      if (donateButtons.length > 0) {
+        Array.from(donateButtons).forEach((button) => {
+            
+            button.addEventListener('click', async (e) => {
+            // Track the click event
+            
+        await trackVisit(true);            
+            
+          });
+        });
+      }
+    });
+</script>
+
 </body>
 
 </html>

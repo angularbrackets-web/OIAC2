@@ -2,7 +2,7 @@
 import { getUtmCounts } from '../../graphql/utm-counts';
 
 const utmData = await getUtmCounts();
-
+//console.log(utmData);
 const totalHits = utmData.reduce((sum, row) => sum + row.visits, 0);
 const totalDonations = utmData.reduce((sum, row) => sum + row.donations, 0);
 const conversionRate = totalHits > 0 ? ((totalDonations / totalHits) * 100).toFixed(1) : "0.0";
@@ -64,5 +64,7 @@ const conversionRate = totalHits > 0 ? ((totalDonations / totalHits) * 100).toFi
         ))}
       </tbody>
     </table>
+
+    
   </body>
 </html>

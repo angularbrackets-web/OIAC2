@@ -49,6 +49,8 @@ export const POST: APIRoute = async ({ request }) => {
       }
     `;
 
+    console.log('Creating UTM hit with source:', source, 'timestamp:', timestamp, 'donateButtonClicked:', donateButtonClicked);
+
     const result = await client.mutate({
       mutation: createMutation,
       variables: {
