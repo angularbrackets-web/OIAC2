@@ -1,7 +1,4 @@
 ---
-// src/components/SalaryGrid.astro
-// An enhanced salary grid component with a hero image and custom theme.
-
 interface GridRow {
   year: string;
   salary: string;
@@ -72,138 +69,113 @@ const salaryGrids: SalaryGridProps[] = [
     ],
   },
 ];
-import heroImageUrl from "../assets/new-centre/new.oiac.4.png";
 ---
-
-<div class="bg-softBeige-lightest">
-    <div class="relative bg-gray-50 text-terracottaRed-darker min-h-[300px] lg:min-h-[400px]">
-        {/* Light gradient overlay */}
-        <div class="absolute inset-0 bg-gradient-to-b from-white/50 via-white/30 to-white/50"></div>
-        
-        <img 
-            src={heroImageUrl.src} 
-            alt="Omar Ibn Al-Khattab Centre Exterior" 
-            class="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity duration-300 hover:opacity-50" 
-        />
-        
-        <div class="relative max-w-4xl mx-auto px-4 text-center sm:px-6 lg:px-8 h-full">
-            <div class="flex flex-col justify-center items-center h-full py-20 lg:py-24 space-y-12">
-                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl drop-shadow-lg">
-                    OIAC Salary Structure for <span class="text-gray-950">Alberta Certified Teachers</span>
-                </h1>
-                <p class="max-w-2xl mx-auto text-xl leading-relaxed drop-shadow-lg font-medium text-gray-900">
-                    We are looking for passionate educators to help us build a brighter future. Explore our competitive salary packages for the 2025-2026 academic year.
-                </p>
-            </div>
-        </div>
-    </div>
-
-  <div class="py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-       <div class="text-center mb-12">
-        <p class="mt-4 max-w-3xl mx-auto text-xl text-wood-dark leading-relaxed">
-            At OIAC, we believe in investing in exceptional educators who are <span class="text-gray-950">Alberta Certified</span>. Our competitive compensation package reflects our commitment to attracting and retaining outstanding teachers who share our vision for educational excellence in Edmonton's Islamic community.
-          </p>
-          <!-- <div class="mt-6 max-w-2xl mx-auto">
-            <p class="text-lg text-wood-dark/80">
-              Our salary grid is structured to recognize both educational credentials and years of experience, ensuring fair compensation that grows with your journey at OIAC.
-            </p>
-          </div> -->
-      </div>
-
-      <div class="grid gap-8 lg:grid-cols-3 lg:gap-x-8">
-        {salaryGrids.map((grid) => (
-          <div class="flex flex-col rounded-lg shadow-2xl overflow-hidden">
-            <div class={`px-6 py-5 ${grid.headerBgClass} text-white`}>
-              <h3 class="text-2xl font-bold text-center text-white">{grid.title}</h3>
-              <p class="text-xl font-bold text-center mt-1 bg-gray-800 p-1 rounded-xl text-white">{grid.yearsOfEducation}</p>
-            </div>
-            <div class={`flex-grow px-6 pt-6 pb-8 ${grid.bodyBgClass}`}>
-              <ul role="list" class="space-y-3">
-                {grid.data.map((row) => (
-                  <li class="flex justify-between items-center border-b border-black/10 pb-2">
-                    <span class="text-gray-900 font-semibold">{row.year}</span>
-                    <span class="text-gray-900 font-bold text-lg">{row.salary}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+<div class="bg-gray-50 rounded-xl w-full min-w-0">
+  <!-- Main Content Section -->
+  <div class="py-6 md:py-8 lg:py-10 px-3 sm:px-4 lg:px-6 xl:px-8 w-full min-w-0">
+      <div class="mx-auto w-full max-w-6xl xl:max-w-7xl">
+          <!-- Header Text -->
+          <div class="text-center mb-6 md:mb-8 lg:mb-10">
+              <p class="mt-2 max-w-2xl mx-auto text-sm md:text-base lg:text-lg xl:text-xl text-wood-dark leading-relaxed">
+                  At OIAC, we believe in investing in exceptional educators who are <span class="text-gray-950 font-semibold">Alberta Certified</span>. Our competitive compensation package reflects our commitment to attracting and retaining outstanding teachers who share our vision for educational excellence in Edmonton's Islamic community.
+              </p>
           </div>
-        ))}
+
+          <!-- Salary Grids -->
+<div class="grid gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 3xl:gap-16 grid-cols-1 2xl:grid-cols-2 3xl:grid-cols-3 w-full min-w-0 max-w-none" id="salaryGridsContainer">
+  {salaryGrids.map((grid) => (
+    <div class="flex flex-col rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden min-w-0 w-full bg-white">
+      <div class="px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12 py-4 md:py-5 lg:py-6 xl:py-7 2xl:py-8 ${grid.headerBgClass} text-white">
+        <h3 class="text-base md:text-md font-bold text-center leading-tight text-terracottaRed">{grid.title}</h3>
+        <p class="text-sm md:text-md font-bold text-center mt-2 lg:mt-3 xl:mt-4 bg-gray-800 px-3 lg:px-4 xl:px-5 py-1 lg:py-2 rounded-lg">{grid.yearsOfEducation}</p>
       </div>
-    {/* ...existing salary grid code... */}
+      <div class="flex-grow px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12 pt-4 md:pt-5 lg:pt-6 xl:pt-7 2xl:pt-8 pb-6 md:pb-7 lg:pb-8 xl:pb-9 2xl:pb-10 ${grid.bodyBgClass}">
+        <ul role="list" class="space-y-2 md:space-y-3 lg:space-y-4 xl:space-y-5">
+          {grid.data.map(row => 
+            <li class="flex justify-between items-center border-b border-gray-200 pb-2 lg:pb-3 xl:pb-4">
+              <span class="text-gray-900 font-semibold text-sm md:text-base">{row.year}</span>
+              <span class="text-gray-900 font-bold text-sm md:text-base">{row.salary}</span>
+            </li>
+          )}
+        </ul>
+      </div>
+    </div>
+  ))}
 </div>
-<p class="mt-12 text-center text-lg text-wood-dark italic">
- In the long term, OIAC aims to match or exceed the salary grids offered to our academic teachers.
-</p>
+          
+          <p class="mt-6 md:mt-8 lg:mt-10 text-center text-sm md:text-base text-wood-dark italic">
+              In the long term, OIAC aims to match or exceed the salary grids offered to our academic teachers.
+          </p>
+      </div>
+  </div>
 
-{/* Benefits Section */}
-<div class="mt-24 max-w-4xl mx-auto">
- <h2 class="text-3xl font-extrabold text-terracottaRed-darker tracking-tight sm:text-4xl text-center mb-16">
-   Comprehensive Benefits Package
- </h2>
+  <!-- Benefits Section -->
+  <div class="mt-8 md:mt-12 lg:mt-16 xl:mt-20 w-full px-3 sm:px-4 lg:px-6 xl:px-8 pb-6 md:pb-8 lg:pb-10">
+      <div class="mx-auto w-full max-w-6xl xl:max-w-7xl">
+          <h2 class="text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-terracottaRed-darker tracking-tight text-center mb-6 md:mb-8 lg:mb-10">
+              Comprehensive Benefits Package
+          </h2>
+          <div class="grid gap-5 md:gap-6 lg:gap-8 grid-cols-1 xl:grid-cols-2 w-full min-w-0">
+              <!-- Health Benefits -->
+              <div class="bg-white rounded-lg shadow-lg p-4 md:p-5 lg:p-6 xl:p-8 flex flex-col h-full">
+                  <h3 class="text-base md:text-lg lg:text-xl font-bold text-wood-dark mb-3 md:mb-4 lg:mb-6">Health Benefits Snapshot</h3>
+                  <ul class="space-y-2 md:space-y-3 lg:space-y-4 text-gray-700 text-xs md:text-sm lg:text-base">
+                      <li class="flex items-start">
+                          <span class="text-terracottaRed-darker mr-2 mt-1 flex-shrink-0">•</span>
+                          <div class="min-w-0">
+                              <span class="font-semibold">Paramedical Services:</span><br/>
+                              <span class="text-xs md:text-sm text-gray-600 leading-relaxed">Chiropractor, Osteopath, Naturopath, Psychologist, Dietitian, Massage Therapist, Acupuncture</span>
+                          </div>
+                      </li>
+                      <li class="flex items-center">
+                          <span class="text-terracottaRed-darker mr-2 flex-shrink-0">•</span>
+                          <span class="font-semibold">Vision Care</span>
+                      </li>
+                      <li class="flex items-center">
+                          <span class="text-terracottaRed-darker mr-2 flex-shrink-0">•</span>
+                          <span class="font-semibold">Prescription Drugs</span>
+                      </li>
+                      <li class="flex items-center">
+                          <span class="text-terracottaRed-darker mr-2 flex-shrink-0">•</span>
+                          <span class="font-semibold">Hearing and Speech Aids</span>
+                      </li>
+                      <li class="flex items-center">
+                          <span class="text-terracottaRed-darker mr-2 flex-shrink-0">•</span>
+                          <span class="font-semibold">Orthopedics</span>
+                      </li>
+                      <li class="flex items-start">
+                          <span class="text-terracottaRed-darker mr-2 mt-1 flex-shrink-0">•</span>
+                          <div class="min-w-0">
+                              <span class="font-semibold">Dental Care:</span><br/>
+                              <span class="text-xs md:text-sm text-gray-600">Basic, Major Dental, Accidental</span>
+                          </div>
+                      </li>
+                      <li class="flex items-start">
+                          <span class="text-terracottaRed-darker mr-2 mt-1 flex-shrink-0">•</span>
+                          <div class="min-w-0">
+                              <span class="font-semibold">Long Term Disability:</span><br/>
+                              <span class="text-xs md:text-sm text-gray-600 leading-relaxed">Your well-being is protected with coverage through OIAC's long-term disability plan.</span>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
 
- <div class="grid md:grid-cols-2 gap-12">
-   {/* Health Benefits */}
-   <div class="bg-white rounded-lg shadow-xl p-8">
-     <h3 class="text-2xl font-bold text-wood-dark mb-6">Health Benefits Snapshot</h3>
-     <ul class="space-y-4 text-gray-700">
-       <li class="flex items-start">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         <div>
-           <span class="font-semibold">Paramedical Services:</span><br/>
-           Chiropractor, Osteopath, Naturopath, Psychologist, Dietitian, Massage Therapist, Acupuncture
-         </div>
-       </li>
-       <li class="flex items-center">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         Vision Care
-       </li>
-       <li class="flex items-center">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         Prescription Drugs
-       </li>
-       <li class="flex items-center">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         Hearing and Speech Aids
-       </li>
-       <li class="flex items-center">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         Orthopedics
-       </li>
-       <li class="flex items-start">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         <div>
-           <span class="font-semibold">Dental Care:</span><br/>
-           Basic, Major Dental, Accidental
-         </div>
-       </li>
-       <li class="flex items-start">
-         <span class="text-terracottaRed-darker mr-2">•</span>
-         <div>
-           <span class="font-semibold">Long Term Disability:</span><br/>
-           Your well-being is protected with coverage through OIAC's long-term disability plan.
-         </div>
-       </li>
-     </ul>
-   </div>
-
-   {/* Pension Plan */}
-   <div class="bg-white rounded-lg shadow-xl p-8">
-     <h3 class="text-2xl font-bold text-wood-dark mb-6">Pension Plan Snapshot</h3>
-     <div class="space-y-4 text-gray-700">
-       <p>
-         OIAC has a deferred contribution pension plan where an amount of money, based on your earning, is credited to an account in your name. OIAC will match that employee contribution. The employee manages the growth of the plan.
-       </p>
-       <p>
-         Full-time and part-time employees are eligible to join the plan upon successful completion of 1 year of continuous employment with OIAC.
-       </p>
-       <p>
-         Member contribution level is consistent with number of years served at OIAC.
-       </p>
-     </div>
-   </div>
- </div>
-</div>
-</div>
+              <!-- Pension Plan -->
+              <div class="bg-white rounded-lg shadow-lg p-4 md:p-5 lg:p-6 xl:p-8 flex flex-col h-full">
+                  <h3 class="text-base md:text-lg lg:text-xl font-bold text-wood-dark mb-3 md:mb-4 lg:mb-6">Pension Plan Snapshot</h3>
+                  <div class="space-y-2 md:space-y-3 lg:space-y-4 text-gray-700 text-xs md:text-sm lg:text-base">
+                      <p class="leading-relaxed">
+                          OIAC has a deferred contribution pension plan where an amount of money, based on your earning, is credited to an account in your name. OIAC will match that employee contribution. The employee manages the growth of the plan.
+                      </p>
+                      <p class="leading-relaxed">
+                          Full-time and part-time employees are eligible to join the plan upon successful completion of 1 year of continuous employment with OIAC.
+                      </p>
+                      <p class="leading-relaxed">
+                          Member contribution level is consistent with number of years served at OIAC.
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

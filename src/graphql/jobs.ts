@@ -10,6 +10,7 @@ export interface Job {
     description?: {
       html: string;
     } | null;
+    requireAlbertaCertification?: boolean;
   }
   
 export async function getJobs() {
@@ -23,6 +24,7 @@ export async function getJobs() {
     description {
       html
     }
+    requireAlbertaCertification
   }
 }
         `
@@ -44,6 +46,7 @@ export async function getJobs() {
                 description {
                     html
                 }
+                requireAlbertaCertification
             }
         }
         `,

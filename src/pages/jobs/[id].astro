@@ -1,6 +1,7 @@
 ---
 import OIACLayout from "../../layouts/oiac-layout.astro";
 import { getJob, type Job } from "../../graphql/jobs";
+import SalaryGrid from "../../components/SalaryGrid.astro";
 const { id } = Astro.params;
 // Ensure `id` is a string or throw an error if undefined
 if (!id) {
@@ -12,29 +13,27 @@ const job: Job = await getJob(id);
 <OIACLayout title="OIAC - Job">
   <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
     <div
-      class="container mt-5 mb-10 md:mb-72 bg-gray-200 rounded-lg text-emerald-950"
+      class={`container mt-5 mb-10 md:mb-72 rounded-lg text-emerald-950 ${
+        job.requireAlbertaCertification ? "lg:grid lg:grid-cols-2 md:gap-8" : ""
+      }`}
     >
       <article
         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
       >
         <div class="p-6">
-          <div class="flex justify-between items-start mb-4">
-            <h2 class="text-xl font-semibold text-gray-900">
+          <div class="flex justify-between items-start mb-10">
+            <h2 class="text-4xl font-black text-terracottaRed-darker">
               {job.title}
             </h2>
           </div>
-
-          <p class="text-gray-600 mb-4 line-clamp-3">
-            {
-              job.description && (
-                <div
-                  class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 text-gray-600"
-                  set:html={job.description.html}
-                />
-              )
-            }
-          </p>
-
+  
+          {job.description && (
+            <div
+              class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 text-gray-600 mb-4"
+              set:html={job.description.html}
+            />
+          )}
+  
           <div class="flex justify-between items-center">
             <span class="text-sm text-gray-500">
               Posted {new Date(job.postedDate).toLocaleDateString()}
@@ -42,6 +41,11 @@ const job: Job = await getJob(id);
           </div>
         </div>
       </article>
+      {job.requireAlbertaCertification && (
+        <div class="mt-6 md:mt-0">
+          <SalaryGrid />
+        </div>
+      )}
     </div>
   </div>
 </OIACLayout>
