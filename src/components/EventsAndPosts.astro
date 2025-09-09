@@ -214,7 +214,7 @@ const year = date.getFullYear();
   ];
   let currentSlideIndex = 0;
   let prevSlideIndex = -1;
-  let timer: number;
+  let timer: ReturnType<typeof setTimeout>;
   let slideClasses = [
     "w-full",
     "h-[100px]",
@@ -291,7 +291,7 @@ const year = date.getFullYear();
     }
 
     clearTimeout(timer);
-    timer = 0;
+    timer = setTimeout(() => {}, 0);
 
     changeSlide();
   }
