@@ -1,11 +1,4 @@
-import pkg from '@apollo/client';
-
-const {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-  gql,
-} = pkg;
+import { ApolloClient, InMemoryCache, HttpLink, gql } from '@apollo/client';
 
 
 export const client = new ApolloClient({

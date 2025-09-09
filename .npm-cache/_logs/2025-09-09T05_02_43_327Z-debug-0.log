@@ -7,11 +7,11 @@
 6 silly config load:file:/usr/local/etc/npmrc
 7 verbose title npm view @anthropic-ai/claude-code@latest version
 8 verbose argv "view" "@anthropic-ai/claude-code@latest" "version"
-9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T04_57_38_980Z-
-10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T04_57_38_980Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T05_02_43_327Z-
+10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T05_02_43_327Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
-13 http fetch GET 200 https://registry.npmjs.org/@anthropic-ai%2fclaude-code 193ms (cache revalidated)
+13 http fetch GET 200 https://registry.npmjs.org/@anthropic-ai%2fclaude-code 199ms (cache revalidated)
 14 verbose cwd /Users/mohammad/Projects/OIAC2
 15 verbose os Darwin 24.6.0
 16 verbose node v22.17.1

@@ -1,5 +1,4 @@
-import pkg from '@apollo/client';
-const { gql } = pkg;
+import { gql } from '@apollo/client';
 
 import {client}  from './apollo-client'
 

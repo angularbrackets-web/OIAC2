@@ -1,8 +1,7 @@
-import pkg from '@apollo/client';
-const { gql } = pkg;
+import { gql } from '@apollo/client';
 
 import {client}  from './apollo-client'
-import type { MarkdownContent } from 'astro'
+// MarkdownContent removed in Astro 5, using string instead
 import type { HTMLString } from 'astro/runtime/server/escape.js'
 
 export type OIAC_EventSchedule = {
@@ -15,7 +14,7 @@ export type OIAC_Event = {
     title:string,
     description:{
       html:HTMLString,
-      markdown:MarkdownContent
+      markdown:string
     },
     schedules:Array<OIAC_EventSchedule>,
     month:Array<number>,
