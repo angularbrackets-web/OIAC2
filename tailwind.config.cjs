@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         warmWhite: "#F2F0EC",
         terracottaRed: {
+          darkest: "#5A2D2A", // 40% darker
           darker: "#723A36", // 20% darker
           dark: "#81413C", // 10% darker
           DEFAULT: "#8F4843", // base
