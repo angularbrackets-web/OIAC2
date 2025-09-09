@@ -1,5 +1,7 @@
+// @ts-ignore - Handle CommonJS/ESM compatibility
 import pkg from '@apollo/client';
 
+// @ts-ignore
 const {
   ApolloClient,
   InMemoryCache,

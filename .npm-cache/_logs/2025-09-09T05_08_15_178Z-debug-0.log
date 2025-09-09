@@ -7,8 +7,8 @@
 6 silly config load:file:/usr/local/etc/npmrc
 7 verbose title npm run build
 8 verbose argv "run" "build"
-9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T05_00_10_726Z-
-10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T05_00_10_726Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T05_08_15_178Z-
+10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-09-09T05_08_15_178Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mohammad/Projects/OIAC2

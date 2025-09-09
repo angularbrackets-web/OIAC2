@@ -1,5 +1,7 @@
 // src/graphql/utm-counts.ts
+// @ts-ignore - Handle CommonJS/ESM compatibility
 import pkg from '@apollo/client';
+// @ts-ignore
 const { gql } = pkg;
 
 import {client}  from './apollo-client'

@@ -1,6 +1,8 @@
 import { client } from '../../../graphql/apollo-client';
 import type { APIRoute } from 'astro';
+// @ts-ignore - Handle CommonJS/ESM compatibility
 import pkg from '@apollo/client';
+// @ts-ignore
 const { gql } = pkg;
 
 
