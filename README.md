@@ -48,3 +48,6 @@ Feel free to check [our documentation](https://docs.astro.build) or jump into ou
 
 ## 🌟 OIAC Project
 This is the official website for Omar Ibn Al-Khattab Centre (OIAC) built with Astro.
+
+### 🚀 Deployment
+Deployed on Vercel with Node.js 22.x runtime.
