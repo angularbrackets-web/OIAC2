@@ -1,8 +1,3 @@
 {
-  "framework": "astro",
-  "functions": {
-    ".vercel/output/functions/render.func/index.js": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  "framework": "astro"
 }

@@ -7,14 +7,7 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  adapter: vercel({
-    functionPerRoute: false,
-    edgeMiddleware: false,
-    imageService: true,
-    webAnalytics: { enabled: false },
-    speedInsights: { enabled: false },
-    isr: false,
-  }),
+  adapter: vercel(),
   integrations: [tailwind(), react()],
   image: {
     domains: ["https://**.graphassets.com"],
