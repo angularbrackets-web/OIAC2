@@ -1,4 +1,5 @@
-import { gql } from '@apollo/client';
+import pkg from '@apollo/client';
+const { gql } = pkg;
 
 import {client}  from './apollo-client'
 // MarkdownContent removed in Astro 5, using string instead

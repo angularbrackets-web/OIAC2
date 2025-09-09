@@ -1,6 +1,7 @@
 import { client } from '../../../graphql/apollo-client';
 import type { APIRoute } from 'astro';
-import { gql } from '@apollo/client';
+import pkg from '@apollo/client';
+const { gql } = pkg;
 
 
 const allowedSources = [
