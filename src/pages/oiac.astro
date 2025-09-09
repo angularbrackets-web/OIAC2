@@ -32,6 +32,7 @@ import SOCIAL_ICON_2 from "../assets/social-icon-i (3).svg";
 import SOCIAL_ICON_3 from "../assets/social-icon-y (1).svg";
 import "../styles/styles.css"
 import EMAIL_ICON from "../assets/material-symbols_mail-outline-rounded.svg"
+import FundraiserPoster from "../assets/OIAACADEMY.FUNDRAISER.28SEP2025.jpeg"
 import NEW_CENTRE_IMG_4 from "../assets/new-centre/new.oiac.4.png";
 import NEW_CENTRE_IMG_5 from "../assets/new-centre/new.oiac.5.png";
 import NEW_CENTRE_IMG_8 from "../assets/new-centre/new.oiac.8.png";
@@ -149,6 +150,257 @@ const source = validUtmSources.includes(normalized) ? normalized : 'other';
             <p><a href="https://www.oiacedmonton.ca/newcentre">new islamic center</a></p>
         </div>
     </div>
+
+    <!-- Announcements Section -->
+    <style>
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    @keyframes shimmer-button {
+        0% { background-position: -200% center; }
+        100% { background-position: 200% center; }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+            text-shadow: 0 0 5px rgba(217, 202, 182, 0.5);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(217, 202, 182, 0.8), 0 0 30px rgba(217, 202, 182, 0.6);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+    }
+
+    @keyframes cycleText {
+        0%, 18% { opacity: 1; }
+        20%, 98% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    .announcement-section {
+        padding: 1rem 1rem 0.5rem;
+        margin: 0 auto 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .announcement-section {
+            padding: 0.5rem 2rem;
+        }
+    }
+
+    .announcement-container {
+        max-width: 1200px;
+        margin: 1.5rem auto 0;
+        width: 100%;
+        background: linear-gradient(135deg, #000000 0%, #5A2D2A 50%, #374151 100%);
+        background-size: 400% 400%;
+        animation: gradient 6s ease infinite;
+        color: white;
+        font-weight: bold;
+        border-radius: 1rem;
+        box-shadow: 0 25px 50px -12px rgba(114, 58, 54, 0.3);
+        border: 1px solid rgba(217, 202, 182, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .announcement-shimmer {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .announcement-content {
+        padding: 1.25rem;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+        .announcement-content {
+            flex-direction: row;
+        }
+    }
+
+    .announcement-image {
+        flex-shrink: 0;
+    }
+
+    .announcement-image img {
+        width: 12rem;
+        height: 16rem;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba(217, 202, 182, 0.3);
+    }
+
+    @media (min-width: 768px) {
+        .announcement-image img {
+            width: 10rem;
+            height: 13rem;
+        }
+    }
+
+    .announcement-text {
+        flex: 1;
+        text-align: center;
+    }
+
+    @media (min-width: 768px) {
+        .announcement-text {
+            text-align: left;
+        }
+    }
+
+    .cycling-text {
+        position: relative;
+        min-height: 2.5em;
+        margin-bottom: 0.75rem;
+        font-size: 1.125rem;
+        font-weight: bold;
+        color: #D9CAB6;
+        text-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        animation: pulse-glow 3s ease-in-out infinite, fadeInUp 0.8s ease-out;
+    }
+
+    @media (min-width: 768px) {
+        .cycling-text {
+            font-size: 1.5rem;
+        }
+    }
+
+    .cycling-text span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        animation: cycleText 15s infinite;
+    }
+
+    .cycling-text span:nth-child(1) { animation-delay: 0s; }
+    .cycling-text span:nth-child(2) { animation-delay: 3s; }
+    .cycling-text span:nth-child(3) { animation-delay: 6s; }
+    .cycling-text span:nth-child(4) { animation-delay: 9s; }
+    .cycling-text span:nth-child(5) { animation-delay: 12s; }
+
+    .announcement-description {
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @media (min-width: 768px) {
+        .announcement-description {
+            font-size: 1rem;
+        }
+    }
+
+    .announcement-details {
+        margin-bottom: 1rem;
+        font-size: 0.75rem;
+        font-weight: normal;
+        line-height: 1.625;
+        text-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    @media (min-width: 768px) {
+        .announcement-details {
+            font-size: 0.875rem;
+        }
+    }
+
+    .purchase-button {
+        display: inline-block;
+        background: linear-gradient(90deg, #DC8068 0%, #DC2626 50%, #DC8068 100%);
+        background-size: 200% 100%;
+        animation: shimmer-button 2s ease-in-out infinite, fadeInUp 0.8s ease-out 0.6s both;
+        color: white;
+        font-weight: bold;
+        padding: 0.75rem 2rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-size: 0.875rem;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba(217, 202, 182, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    @media (min-width: 768px) {
+        .purchase-button {
+            font-size: 1rem;
+        }
+    }
+
+    .purchase-button:hover {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        transform: scale(1.05);
+    }
+
+    .float-emoji {
+        display: inline-block;
+        animation: float 3s ease-in-out infinite;
+    }
+    </style>
+
+    <div class="announcement-section">
+        <div class="announcement-container">
+            <div class="announcement-shimmer"></div>
+            <div class="announcement-content">
+                <div class="announcement-image">
+                    <img src={FundraiserPoster.src} alt="OIAC Academy Fundraising Dinner - September 28, 2025" />
+                </div>
+                <div class="announcement-text">
+                    <h3 class="cycling-text">
+                        <span>🍽️ New Southside Islamic School - Fundraising Dinner</span>
+                        <span>📅 Sunday, September 28, 2025</span>
+                        <span>📍 Evario Holiday Inn - 950 Parsons Rd SW, T6X 0J4</span>
+                        <span>🕕 Starts 6:00 PM</span>
+                        <span>📞 Contact - 587 882 3202</span>
+                    </h3>
+                    <p class="announcement-description">Join OIAC for a Special Fundraising Dinner for South Edmonton's New Islamic Centre! (School & Masjid)</p>
+                    <p class="announcement-details">Be part of building a new center of learning for our community! Join OIAC for an inspiring evening in support of the new Islamic school in Southside Edmonton. Enjoy a night of fellowship, delicious food, and opportunities to contribute to this vital cause.</p>
+                    <a href="https://give-can.keela.co/OIAC-dinner-tickets" target="_blank" class="purchase-button">
+                        <span class="float-emoji">🎫</span> Purchase Tickets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="oiac-part" id="oiac">
         <h2>Welcome to <span>OIAC</span></h2>
         <div class="oiac-box">
