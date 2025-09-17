@@ -93,6 +93,128 @@ const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
             gtag('config', GA_ID);
         })();
     </script>
+        <!-- Event snippet for Purchase conversion page
+        In your html page, call `gtag_report_conversion(url)` on click. This function
+        is hardened to handle missing `gtag`/`dataLayer` and uses a safe timeout fallback. -->
+            <script is:inline>
+                (function () {
+                    var SEND_TO = 'AW-17128140550/OGAUCNWL4pwbEIbequc_';
+                                        function _redirect(url, openInNewTab) {
+                        if (typeof url !== 'undefined' && url) {
+                            if (openInNewTab) {
+                                try { window.open(url, '_blank'); } catch (e) { window.location = url; }
+                            } else {
+                                window.location = url;
+                            }
+                        }
+                    }
+                                        // small toast helper for visual feedback during testing
+                                        function _showToast(message) {
+                                            try {
+                                                var existing = document.getElementById('gtag-toast');
+                                                if (existing) { existing.remove(); }
+                                                var div = document.createElement('div');
+                                                div.id = 'gtag-toast';
+                                                div.textContent = message;
+                                                Object.assign(div.style, { position: 'fixed', bottom: '20px', right: '20px', padding: '10px 14px', background: '#111827', color: '#fff', borderRadius: '8px', zIndex: 99999, boxShadow: '0 6px 18px rgba(0,0,0,0.2)', fontSize: '14px' });
+                                                document.body.appendChild(div);
+                                                setTimeout(function(){ div.style.transition = 'opacity 0.3s'; div.style.opacity = '0'; setTimeout(()=>div.remove(),300); }, 1600);
+                                            } catch (e) { /* ignore in environments without DOM */ }
+                                        }
+                    window.gtag_report_conversion = function (url, openInNewTab) {
+                                    console.debug('[gtag_report_conversion] called with', { url: url, openInNewTab: !!openInNewTab });
+                                    _showToast('Recording conversion...');
+                                    var fired = false;
+                                    var callback = function () {
+                                        if (fired) return;
+                                        fired = true;
+                                        console.debug('[gtag_report_conversion] callback — redirecting', { url: url, openInNewTab: !!openInNewTab });
+                                        _redirect(url, !!openInNewTab);
+                                    };
+
+                                    try {
+                                        // Always try to record conversion first
+                                        try {
+                                            if (typeof window.gtag === 'function') {
+                                                console.debug('[gtag_report_conversion] calling window.gtag');
+                                                window.gtag('event', 'conversion', {
+                                                    'send_to': SEND_TO,
+                                                    'transaction_id': ''
+                                                });
+                                            } else if (window.dataLayer && Array.isArray(window.dataLayer.push)) {
+                                                console.debug('[gtag_report_conversion] pushing to dataLayer');
+                                                window.dataLayer.push({
+                                                    event: 'conversion',
+                                                    send_to: SEND_TO,
+                                                    transaction_id: ''
+                                                });
+                                            }
+                                        } catch (e) {
+                                            console.debug('[gtag_report_conversion] analytics push error', e);
+                                        }
+
+                                        // If opening in new tab, do it immediately
+                                        if (openInNewTab) {
+                                            try {
+                                                window.open(url, '_blank');
+                                            } catch (e) {
+                                                console.debug('[gtag_report_conversion] window.open failed, will attempt redirect in callback', e);
+                                            }
+
+                                            // Track conversion in database via single API call
+                                            try {
+                                                var payload = JSON.stringify({ source: 'gtag_report_conversion', donateButtonClicked: true, timestamp: new Date().toISOString() });
+                                                if (navigator && typeof navigator.sendBeacon === 'function') {
+                                                    navigator.sendBeacon('/api/track', payload);
+                                                    console.debug('[gtag_report_conversion] sendBeacon dispatched');
+                                                } else {
+                                                    // Fallback to fetch
+                                                    fetch('/api/track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload })
+                                                        .then(function(){ console.debug('[gtag_report_conversion] fetch recorded'); })
+                                                        .catch(function(e){console.debug('[gtag_report_conversion] fetch track error', e);});
+                                                }
+                                            } catch (e) {
+                                                console.debug('[gtag_report_conversion] server tracking failed', e);
+                                            }
+
+                                            // nothing else to do here — the opened tab will proceed
+                                            return false;
+                                        }
+
+                                        // Same-tab flow — use callback redirect
+                                        if (typeof window.gtag === 'function') {
+                                            console.debug('[gtag_report_conversion] calling window.gtag (same-tab)');
+                                            window.gtag('event', 'conversion', {
+                                                'send_to': SEND_TO,
+                                                'transaction_id': '',
+                                                'event_callback': callback
+                                            });
+                                            // Ensure redirect happens even if event_callback isn't called
+                                            setTimeout(callback, 1200);
+                                            return false;
+                                        }
+
+                                        if (window.dataLayer && Array.isArray(window.dataLayer.push)) {
+                                            console.debug('[gtag_report_conversion] pushing to dataLayer (same-tab)');
+                                            window.dataLayer.push({
+                                                event: 'conversion',
+                                                send_to: SEND_TO,
+                                                transaction_id: ''
+                                            });
+                                            setTimeout(callback, 800);
+                                            return false;
+                                        }
+                                    } catch (err) {
+                                        console.error('gtag_report_conversion error:', err);
+                                    }
+
+                                    // No analytics available — immediately redirect/open
+                                    callback();
+                                    return false;
+                                };
+                })();
+            </script>
+
 </head>
 
 
@@ -148,7 +270,7 @@ const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
                 </ul>
             </div>
             <div class="header-btn">
-                <button class="donate-keela"><a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank">Donate Now</a></button>
+                <button class="donate-keela" onclick="return window.gtag_report_conversion('https://give-can.keela.co/donate-to-southside-islamic-school', true)"><a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank">Donate Now</a></button>
             </div>
         </div>
     </header>
@@ -161,21 +283,22 @@ const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
       Join us in <span class="font-semibold">{eventLocation}</span> for a community dinner supporting the construction of OIAC’s new K–9 School.
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a
-        href={ticketUrl}
-        class="bg-orange-600 hover:bg-orange-700 text-white text-lg font-semibold px-6 py-3 rounded-xl shadow-md transition-colors"
-        target="_blank" rel="noopener noreferrer"
-      >
-        🎟 Buy Tickets / Donate
-      </a>
+            <a
+                  href={ticketUrl}
+                  class="bg-orange-600 hover:bg-orange-700 text-white text-lg font-semibold px-6 py-3 rounded-xl shadow-md transition-colors"
+                  target="_blank" rel="noopener noreferrer"
+                  onclick={"return window.gtag_report_conversion('" + ticketUrl + "', true)"}
+              >
+                  🎟 Buy Tickets / Donate
+              </a>
       <a
         href="/oiac#details"
         class="bg-white hover:bg-gray-100 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-800 dark:text-gray-200 text-lg font-medium px-6 py-3 rounded-xl shadow border transition-colors"
       >
         Learn More
       </a>
-    </div>
-  </div>
+                <button class="donate-keela" onclick="return window.gtag_report_conversion('https://give-can.keela.co/donate-to-southside-islamic-school', true)"><a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank">Donate Now</a></button>
+                    </div>
 </section>
 <section id="details" class="py-16 px-6 sm:px-12 bg-white dark:bg-slate-800 rounded-2xl shadow-md mt-12">
   <div class="max-w-3xl mx-auto text-center">
@@ -213,10 +336,11 @@ const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
         <h4 class="text-lg font-semibold text-orange-700 dark:text-orange-400 mb-2">🎟 Tickets</h4>
         <p class="text-gray-700 dark:text-gray-300">
           Purchase your tickets or donate securely via Keela.<br/>
-          <a href="https://give-can.keela.co/OIAC-dinner-tickets" target="_blank" rel="noopener noreferrer"
-             class="inline-block mt-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-            Buy Tickets / Donate
-          </a>
+                    <a href="https://give-can.keela.co/OIAC-dinner-tickets" target="_blank" rel="noopener noreferrer"
+                         class="inline-block mt-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                         onclick="return window.gtag_report_conversion('https://give-can.keela.co/OIAC-dinner-tickets', true)">
+                        Buy Tickets / Donate
+                    </a>
         </p>
       </div>
     </div>
@@ -229,7 +353,7 @@ const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
             <h5>A Future Where Faith & Education Thrive Together</h5>
             <div class="banner-content-btn">
                 <button class="learn-btn p-3"><a href="https://www.oiacedmonton.ca/newcentre">Learn More</a></button>
-                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn-1 donate-keela p-3">Donate Now</a>
+                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn-1 donate-keela p-3" onclick="return window.gtag_report_conversion('https://give-can.keela.co/donate-to-southside-islamic-school', true)">Donate Now</a>
             </div>
         </div>
         <div class="banner-line">
@@ -736,7 +860,7 @@ const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
                 <div class="progress-bar">
                     <div class="progress"><span>31%</span></div>
                 </div>
-                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn donate-keela">DONATE NOW</a>
+                <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn donate-keela" onclick="return window.gtag_report_conversion('https://give-can.keela.co/donate-to-southside-islamic-school', true)">DONATE NOW</a>
             </div>
         </div>
     </div>
