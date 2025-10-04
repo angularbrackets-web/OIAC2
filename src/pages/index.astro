@@ -8,11 +8,26 @@ import Contact from "../components/Contact.astro";
 import EventsAndPosts from "../components/EventsAndPosts.astro";
 import Announcements from "../components/Announcements.astro";
 import PopupPoster from "../components/PopupPoster.astro";
+
+// New Fundraiser Success Components
+import FundraiserSuccess from "../components/FundraiserSuccess.astro";
+import VideoShowcase from "../components/VideoShowcase.astro";
+import ImpactStats from "../components/ImpactStats.astro";
+import DualCTA from "../components/DualCTA.astro";
+import CommunityMessage from "../components/CommunityMessage.astro";
 ---
 
 <OIACLayout title="Welcome to OIAC">
   <div class="w-full mx-auto">
     <div class="">
+      <!-- Fundraiser Success Campaign -->
+      <FundraiserSuccess />
+      <VideoShowcase />
+      <ImpactStats />
+      <DualCTA />
+      <CommunityMessage />
+
+      <!-- Existing Components -->
       <Announcements />
       <EventsAndPosts />
       <Donate />

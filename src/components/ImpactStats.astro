@@ -1,0 +1,166 @@
+---
+// Impact Statistics Counter Component
+---
+
+<style>
+@keyframes count-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes icon-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+
+.stat-card {
+    animation: count-up 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0.1s; }
+.stat-card:nth-child(2) { animation-delay: 0.2s; }
+.stat-card:nth-child(3) { animation-delay: 0.3s; }
+.stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+.stat-icon {
+    animation: icon-float 3s ease-in-out infinite;
+}
+
+.islamic-pattern-bg {
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(217, 202, 182, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(107, 142, 127, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(220, 128, 104, 0.05) 0%, transparent 50%);
+}
+
+.number-display {
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+}
+</style>
+
+<section class="py-16 px-4 md:px-8 bg-softBeige islamic-pattern-bg relative overflow-hidden">
+    <!-- Decorative Islamic Pattern SVG -->
+    <div class="absolute inset-0 opacity-5">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="islamicStars" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="currentColor" opacity="0.3"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#islamicStars)"/>
+        </svg>
+    </div>
+
+    <div class="container mx-auto max-w-7xl relative z-10">
+        <!-- Section Title -->
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-3">
+                Our Community Impact
+            </h2>
+            <p class="text-gray-700 text-base md:text-lg">
+                Together, we're building a legacy of faith and education
+            </p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <!-- Stat 1: Money Raised -->
+            <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-emerald-500">
+                <div class="stat-icon mb-4 text-5xl">💰</div>
+                <div class="number-display text-4xl md:text-5xl font-black text-emerald-600 mb-2" data-target="2.8" data-suffix="M">
+                    $0
+                </div>
+                <p class="text-gray-600 font-semibold text-sm md:text-base">Raised (Alhamdulillah)</p>
+                <p class="text-gray-500 text-xs mt-2">From our recent dinner</p>
+            </div>
+
+            <!-- Stat 2: Students -->
+            <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-sageGreen">
+                <div class="stat-icon mb-4 text-5xl">📚</div>
+                <div class="number-display text-4xl md:text-5xl font-black text-sageGreen mb-2" data-target="300" data-suffix="+">
+                    0
+                </div>
+                <p class="text-gray-600 font-semibold text-sm md:text-base">Students Enrolled</p>
+                <p class="text-gray-500 text-xs mt-2">Across all programs</p>
+            </div>
+
+            <!-- Stat 3: Total Goal -->
+            <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-terracottaRed">
+                <div class="stat-icon mb-4 text-5xl">🎯</div>
+                <div class="number-display text-4xl md:text-5xl font-black text-terracottaRed mb-2" data-target="29" data-suffix="M">
+                    $0
+                </div>
+                <p class="text-gray-600 font-semibold text-sm md:text-base">Total Goal</p>
+                <p class="text-gray-500 text-xs mt-2">For the new centre</p>
+            </div>
+
+            <!-- Stat 4: Launch Date -->
+            <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-amber-500">
+                <div class="stat-icon mb-4 text-5xl">📅</div>
+                <div class="text-4xl md:text-5xl font-black text-amber-600 mb-2">
+                    Sep 2026
+                </div>
+                <p class="text-gray-600 font-semibold text-sm md:text-base">Launch Target</p>
+                <p class="text-gray-500 text-xs mt-2">InshaAllah</p>
+            </div>
+        </div>
+
+        <!-- Bottom Message -->
+        <div class="mt-12 text-center">
+            <div class="inline-block bg-white/80 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-md">
+                <p class="text-gray-700 text-base md:text-lg font-medium">
+                    <span class="text-emerald-600 font-bold">$9M raised</span> of our <span class="text-terracottaRed font-bold">$29M goal</span> —
+                    <span class="text-gray-900 font-bold">31% complete!</span> 🎉
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Counter animation with Intersection Observer
+    function animateCounter(element: HTMLElement, target: number, suffix: string = '') {
+        const duration = 2000; // 2 seconds
+        const steps = 60;
+        const increment = target / steps;
+        let current = 0;
+        const prefix = element.textContent?.includes('$') ? '$' : '';
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+
+            // Format number with proper decimals
+            let displayValue = current.toFixed(1);
+            if (!suffix.includes('M') && !suffix.includes('+')) {
+                displayValue = Math.round(current).toString();
+            }
+
+            element.textContent = `${prefix}${displayValue}${suffix}`;
+        }, duration / steps);
+    }
+
+    // Intersection Observer to trigger animation when in view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const element = entry.target as HTMLElement;
+                const target = parseFloat(element.getAttribute('data-target') || '0');
+                const suffix = element.getAttribute('data-suffix') || '';
+
+                animateCounter(element, target, suffix);
+                observer.unobserve(element);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    // Observe all number displays
+    document.querySelectorAll('.number-display').forEach(el => {
+        observer.observe(el);
+    });
+</script>

@@ -1,0 +1,142 @@
+---
+// Community Message Component - Heartfelt message from OIAC leadership
+---
+
+<style>
+@keyframes shine {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes fade-in {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.quote-card {
+    animation: fade-in 1s ease-out forwards;
+}
+
+.golden-border {
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    background-size: 200% 100%;
+}
+
+.golden-border:hover {
+    animation: shine 3s linear infinite;
+}
+
+.arabic-text {
+    font-family: 'Noto Naskh Arabic', 'Traditional Arabic', 'Arabic Typesetting', serif;
+    direction: rtl;
+}
+
+.signature {
+    font-family: 'Brush Script MT', cursive, serif;
+}
+
+.decorative-dot {
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(135deg, #D4AF37, #B8941F);
+    border-radius: 50%;
+}
+</style>
+
+<section class="py-16 px-4 md:px-8 bg-gradient-to-b from-white via-softBeige-50 to-white">
+    <div class="container mx-auto max-w-4xl">
+        <!-- Quote Card -->
+        <div class="quote-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <!-- Golden Border Top -->
+            <div class="golden-border h-1"></div>
+
+            <!-- Content -->
+            <div class="p-8 md:p-12">
+                <!-- Opening Quote Mark -->
+                <div class="text-6xl md:text-7xl text-terracottaRed-200 leading-none mb-4">"</div>
+
+                <!-- Arabic Greeting -->
+                <div class="mb-6 text-center">
+                    <h3 class="arabic-text text-2xl md:text-3xl text-gray-800 font-semibold mb-2">
+                        السلام عليكم ورحمة الله وبركاته
+                    </h3>
+                    <p class="text-sageGreen text-lg font-medium">As'Salamu'Alaykum Dear OIAC Family</p>
+                </div>
+
+                <!-- Decorative Divider -->
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <div class="decorative-dot"></div>
+                    <div class="decorative-dot"></div>
+                    <div class="decorative-dot"></div>
+                </div>
+
+                <!-- Main Message -->
+                <div class="space-y-4 text-gray-700 leading-relaxed text-base md:text-lg">
+                    <p class="text-center md:text-left">
+                        <strong class="text-emerald-600">Alhamdulillah</strong>, with the help of <strong>Allah ﷻ</strong> and through your generosity, our recent fundraising dinner for the dream Southside Islamic School was a beautiful success.
+                    </p>
+
+                    <p class="text-center md:text-left">
+                        Together, we raised <strong class="text-terracottaRed text-xl">$2.8 million</strong>, a remarkable step that brings us closer to making this long-awaited vision a reality, <strong class="text-emerald-600">InshaAllah</strong>, by <strong>September 2026</strong>.
+                    </p>
+
+                    <p class="text-center md:text-left">
+                        The door of participation is still open. You can join us and be part of this <strong class="text-amber-600">legacy</strong> — a legacy that will serve your children and the generations to come with strong Islamic education and values.
+                    </p>
+
+                    <p class="text-center md:text-left italic bg-softBeige/30 p-4 rounded-xl border-l-4 border-terracottaRed">
+                        Every donation, every share, every dua, and every effort is a brick in this foundation. Together, as one community, we are building a future where our children can grow with both excellence in education and strength in faith.
+                    </p>
+                </div>
+
+                <!-- Decorative Divider -->
+                <div class="flex items-center justify-center gap-2 my-8">
+                    <div class="decorative-dot"></div>
+                    <div class="decorative-dot"></div>
+                    <div class="decorative-dot"></div>
+                </div>
+
+                <!-- Closing Dua -->
+                <div class="bg-gradient-to-r from-sageGreen-50 via-emerald-50 to-sageGreen-50 rounded-2xl p-6 mb-6">
+                    <p class="text-center text-gray-800 text-base md:text-lg leading-relaxed">
+                        <strong>Jazakum Allahu khayran</strong> for your unwavering love, sacrifices, and dedication.
+                    </p>
+                    <p class="arabic-text text-center text-xl md:text-2xl text-sageGreen mt-3 font-semibold">
+                        جزاكم الله خيراً
+                    </p>
+                    <p class="text-center text-gray-700 text-sm md:text-base mt-4 italic">
+                        May Allah ﷻ accept from you, increase you in blessings, and unite us all in Jannah alongside His Prophet ﷺ.
+                    </p>
+                </div>
+
+                <!-- Signature -->
+                <div class="text-center md:text-right">
+                    <div class="inline-block">
+                        <p class="signature text-2xl md:text-3xl text-gray-600 mb-1">Your OIAC Family</p>
+                        <div class="h-0.5 w-full bg-gradient-to-r from-transparent via-terracottaRed to-transparent"></div>
+                    </div>
+                </div>
+
+                <!-- Closing Quote Mark -->
+                <div class="text-right text-6xl md:text-7xl text-terracottaRed-200 leading-none mt-4">"</div>
+            </div>
+
+            <!-- Golden Border Bottom -->
+            <div class="golden-border h-1"></div>
+        </div>
+
+        <!-- Bottom Action -->
+        <div class="text-center mt-8">
+            <a
+                href="/donatetonewcentre"
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-base md:text-lg"
+            >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+                Join This Legacy Today
+            </a>
+            <p class="text-gray-500 text-sm mt-3">Together, we build the future</p>
+        </div>
+    </div>
+</section>

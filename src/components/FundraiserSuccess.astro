@@ -1,0 +1,168 @@
+---
+// Fundraiser Success Hero Banner Component
+---
+
+<style>
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes confetti-fall {
+    0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(5, 150, 105, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(5, 150, 105, 0.6); }
+}
+
+@keyframes progress-fill {
+    0% { width: 0%; }
+    100% { width: var(--progress-width); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confetti-fall 3s linear;
+    opacity: 0;
+}
+
+.shimmer-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.pulse-button {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.float-element {
+    animation: float 3s ease-in-out infinite;
+}
+
+.progress-bar-fill {
+    animation: progress-fill 2s ease-out forwards;
+}
+
+.islamic-pattern {
+    background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(217, 202, 182, 0.03) 10px, rgba(217, 202, 182, 0.03) 20px),
+        repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(217, 202, 182, 0.03) 10px, rgba(217, 202, 182, 0.03) 20px);
+}
+</style>
+
+<section class="relative bg-gradient-to-br from-emerald-600 via-terracottaRed to-terracottaRed-darker overflow-hidden py-12 md:py-20 px-4 md:px-8 mt-8">
+    <!-- Shimmer Effect -->
+    <div class="shimmer-overlay"></div>
+
+    <!-- Islamic Pattern Overlay -->
+    <div class="absolute inset-0 islamic-pattern opacity-30"></div>
+
+    <!-- Confetti Animation (first load only) -->
+    <div class="confetti-container absolute inset-0 pointer-events-none" id="confettiContainer"></div>
+
+    <!-- Content -->
+    <div class="container mx-auto relative z-10 max-w-6xl">
+        <!-- Top Badge -->
+        <div class="text-center mb-6">
+            <span class="inline-block bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm md:text-base font-semibold border border-white/30">
+                🎉 Fundraising Dinner Update
+            </span>
+        </div>
+
+        <!-- Main Hero Content -->
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <!-- Left: Success Milestone -->
+            <div class="text-center md:text-left">
+                <h2 class="text-white text-2xl md:text-3xl font-bold mb-4">
+                    Alhamdulillah! Our Dream is Coming Alive
+                </h2>
+                <div class="float-element">
+                    <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border-2 border-white/30">
+                        <p class="text-softBeige text-sm md:text-base mb-2 font-medium">Together We Raised</p>
+                        <div class="text-6xl md:text-7xl font-black text-white mb-2 drop-shadow-lg">
+                            $2.8M
+                        </div>
+                        <p class="text-softBeige-lightest text-sm md:text-base">
+                            A remarkable step towards our vision
+                        </p>
+                    </div>
+                </div>
+                <p class="text-white/90 mt-6 text-base md:text-lg leading-relaxed">
+                    Together, we're building South Edmonton's Islamic School by <span class="font-bold text-softBeige">September 2026</span>, InshaAllah.
+                </p>
+            </div>
+
+            <!-- Right: Progress & Goal -->
+            <div class="text-center md:text-right">
+                <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                    <div class="mb-6">
+                        <p class="text-gray-600 text-sm md:text-base font-medium mb-2">Total Goal</p>
+                        <div class="text-5xl md:text-6xl font-black text-terracottaRed mb-1">
+                            $29M
+                        </div>
+                        <p class="text-gray-500 text-xs md:text-sm">For the new Islamic Centre</p>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600 font-medium">Progress</span>
+                            <span class="text-emerald-600 font-bold">31%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                            <div class="progress-bar-fill h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full" style="--progress-width: 31%;"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">$9M raised so far, Alhamdulillah</p>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <a href="/donatetonewcentre" class="pulse-button inline-block w-full bg-gradient-to-r from-terracottaRed to-terracottaRed-darker hover:from-terracottaRed-darker hover:to-terracottaRed text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 text-base md:text-lg shadow-lg">
+                        Join This Legacy 🤲
+                    </a>
+                    <p class="text-xs text-gray-500 mt-3">Every donation is a brick in this foundation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Confetti animation on load
+    const confettiContainer = document.getElementById('confettiContainer');
+    const colors = ['#059669', '#DC8068', '#D4AF37', '#6B8E7F', '#D9CAB6'];
+
+    function createConfetti() {
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti-piece';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            confettiContainer?.appendChild(confetti);
+        }
+
+        // Remove confetti after animation
+        setTimeout(() => {
+            if (confettiContainer) confettiContainer.innerHTML = '';
+        }, 5000);
+    }
+
+    // Trigger confetti only once per session
+    if (!sessionStorage.getItem('confettiShown')) {
+        createConfetti();
+        sessionStorage.setItem('confettiShown', 'true');
+    }
+</script>
