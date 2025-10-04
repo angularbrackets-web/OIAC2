@@ -164,7 +164,7 @@
 <script>
     // Social sharing functionality
     document.querySelectorAll('.share-social-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(this: HTMLElement) {
             const platform = this.getAttribute('data-platform');
             const url = 'https://www.oiacedmonton.ca/donatetonewcentre';
             const title = 'Join us in building South Edmonton\'s Islamic School - OIAC';
