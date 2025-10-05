@@ -1,5 +1,6 @@
 ---
 // Community Message Component - Heartfelt message from OIAC leadership
+import { FUNDRAISER_CONFIG } from '../config/fundraiser';
 ---
 
 <style>
@@ -77,7 +78,7 @@
                     </p>
 
                     <p class="text-center md:text-left">
-                        Together, we raised <strong class="text-terracottaRed text-xl">$2.8 million</strong>, a remarkable step that brings us closer to making this long-awaited vision a reality, <strong class="text-emerald-600">InshaAllah</strong>, by <strong>September 2026</strong>.
+                        Together, we raised <strong class="text-terracottaRed text-xl">${FUNDRAISER_CONFIG.amountRaisedFromDinner} million</strong>, a remarkable step that brings us closer to making this long-awaited vision a reality, <strong class="text-emerald-600">InshaAllah</strong>, by <strong>{FUNDRAISER_CONFIG.launchDate}</strong>.
                     </p>
 
                     <p class="text-center md:text-left">

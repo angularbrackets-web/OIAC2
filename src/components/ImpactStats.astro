@@ -1,5 +1,6 @@
 ---
 // Impact Statistics Counter Component
+import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
 ---
 
 <style>
@@ -69,7 +70,7 @@
             <!-- Stat 1: Money Raised -->
             <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-emerald-500">
                 <div class="stat-icon mb-4 text-5xl">💰</div>
-                <div class="number-display text-4xl md:text-5xl font-black text-emerald-600 mb-2" data-target="2.8" data-suffix="M">
+                <div class="number-display text-4xl md:text-5xl font-black text-emerald-600 mb-2" data-target={FUNDRAISER_CONFIG.amountRaisedFromDinner} data-suffix="M">
                     $0
                 </div>
                 <p class="text-gray-600 font-semibold text-sm md:text-base">Raised (Alhamdulillah)</p>
@@ -79,28 +80,39 @@
             <!-- Stat 2: Students -->
             <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-sageGreen">
                 <div class="stat-icon mb-4 text-5xl">📚</div>
-                <div class="number-display text-4xl md:text-5xl font-black text-sageGreen mb-2" data-target="300" data-suffix="+">
+                <div class="number-display text-4xl md:text-5xl font-black text-sageGreen mb-2" data-target={FUNDRAISER_CONFIG.studentsEnrolled} data-suffix="+">
                     0
                 </div>
                 <p class="text-gray-600 font-semibold text-sm md:text-base">Students Enrolled</p>
                 <p class="text-gray-500 text-xs mt-2">Across all programs</p>
             </div>
 
-            <!-- Stat 3: Total Goal -->
-            <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-terracottaRed">
-                <div class="stat-icon mb-4 text-5xl">🎯</div>
-                <div class="number-display text-4xl md:text-5xl font-black text-terracottaRed mb-2" data-target="29" data-suffix="M">
-                    $0
+            <!-- Stat 3: Total Goal or Total Raised -->
+            {shouldShowTotalGoal() ? (
+                <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-terracottaRed">
+                    <div class="stat-icon mb-4 text-5xl">🎯</div>
+                    <div class="number-display text-4xl md:text-5xl font-black text-terracottaRed mb-2" data-target={FUNDRAISER_CONFIG.totalGoal} data-suffix="M">
+                        $0
+                    </div>
+                    <p class="text-gray-600 font-semibold text-sm md:text-base">Total Goal</p>
+                    <p class="text-gray-500 text-xs mt-2">For the new centre</p>
                 </div>
-                <p class="text-gray-600 font-semibold text-sm md:text-base">Total Goal</p>
-                <p class="text-gray-500 text-xs mt-2">For the new centre</p>
-            </div>
+            ) : (
+                <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-emerald-500">
+                    <div class="stat-icon mb-4 text-5xl">💚</div>
+                    <div class="number-display text-4xl md:text-5xl font-black text-emerald-600 mb-2" data-target={FUNDRAISER_CONFIG.totalRaised} data-suffix="M">
+                        $0
+                    </div>
+                    <p class="text-gray-600 font-semibold text-sm md:text-base">Total Raised</p>
+                    <p class="text-gray-500 text-xs mt-2">So far, Alhamdulillah</p>
+                </div>
+            )}
 
             <!-- Stat 4: Launch Date -->
             <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-amber-500">
                 <div class="stat-icon mb-4 text-5xl">📅</div>
                 <div class="text-4xl md:text-5xl font-black text-amber-600 mb-2">
-                    Sep 2026
+                    {FUNDRAISER_CONFIG.launchDate}
                 </div>
                 <p class="text-gray-600 font-semibold text-sm md:text-base">Launch Target</p>
                 <p class="text-gray-500 text-xs mt-2">InshaAllah</p>
@@ -110,10 +122,17 @@
         <!-- Bottom Message -->
         <div class="mt-12 text-center">
             <div class="inline-block bg-white/80 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-md">
-                <p class="text-gray-700 text-base md:text-lg font-medium">
-                    <span class="text-emerald-600 font-bold">$9M raised</span> of our <span class="text-terracottaRed font-bold">$29M goal</span> —
-                    <span class="text-gray-900 font-bold">31% complete!</span> 🎉
-                </p>
+                {shouldShowTotalGoal() ? (
+                    <p class="text-gray-700 text-base md:text-lg font-medium">
+                        <span class="text-emerald-600 font-bold">${FUNDRAISER_CONFIG.totalRaised}M raised</span> of our <span class="text-terracottaRed font-bold">${FUNDRAISER_CONFIG.totalGoal}M goal</span> —
+                        <span class="text-gray-900 font-bold">{FUNDRAISER_CONFIG.progressPercentage}% complete!</span> 🎉
+                    </p>
+                ) : (
+                    <p class="text-gray-700 text-base md:text-lg font-medium">
+                        <span class="text-emerald-600 font-bold">${FUNDRAISER_CONFIG.totalRaised}M raised so far</span> —
+                        <span class="text-gray-900 font-semibold italic">{FUNDRAISER_CONFIG.motivationalMessages.stats}</span> 🎯
+                    </p>
+                )}
             </div>
         </div>
     </div>

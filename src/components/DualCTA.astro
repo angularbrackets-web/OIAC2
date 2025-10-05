@@ -1,5 +1,6 @@
 ---
 // Dual Call-to-Action Component
+import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
 ---
 
 <style>
@@ -48,9 +49,20 @@
                     <p class="text-gray-700 text-sm md:text-base leading-relaxed mb-4">
                         Every donation, every share, every dua is a brick in this foundation
                     </p>
-                    <p class="text-terracottaRed font-semibold text-lg">
-                        Help us reach our $29M goal
-                    </p>
+                    {shouldShowTotalGoal() ? (
+                        <p class="text-terracottaRed font-semibold text-lg">
+                            Help us reach our ${FUNDRAISER_CONFIG.totalGoal}M goal
+                        </p>
+                    ) : (
+                        <div>
+                            <p class="text-emerald-600 font-semibold text-base mb-1">
+                                ${FUNDRAISER_CONFIG.totalRaised}M raised so far
+                            </p>
+                            <p class="text-gray-700 font-medium text-sm italic">
+                                {FUNDRAISER_CONFIG.motivationalMessages.cta}
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 <!-- Primary CTA Button -->

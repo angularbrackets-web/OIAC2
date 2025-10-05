@@ -1,5 +1,6 @@
 ---
 // Fundraiser Success Hero Banner Component
+import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
 ---
 
 <style>
@@ -92,7 +93,7 @@
                     <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 border-2 border-white/30">
                         <p class="text-softBeige text-sm md:text-base mb-2 font-medium">Together We Raised</p>
                         <div class="text-6xl md:text-7xl font-black text-white mb-2 drop-shadow-lg">
-                            $2.8M
+                            ${FUNDRAISER_CONFIG.amountRaisedFromDinner}M
                         </div>
                         <p class="text-softBeige-lightest text-sm md:text-base">
                             A remarkable step towards our vision
@@ -100,32 +101,47 @@
                     </div>
                 </div>
                 <p class="text-white/90 mt-6 text-base md:text-lg leading-relaxed">
-                    Together, we're building South Edmonton's Islamic School by <span class="font-bold text-softBeige">September 2026</span>, InshaAllah.
+                    Together, we're building South Edmonton's Islamic School by <span class="font-bold text-softBeige">{FUNDRAISER_CONFIG.launchDate}</span>, InshaAllah.
                 </p>
             </div>
 
             <!-- Right: Progress & Goal -->
             <div class="text-center md:text-right">
                 <div class="bg-white rounded-3xl p-8 shadow-2xl">
-                    <div class="mb-6">
-                        <p class="text-gray-600 text-sm md:text-base font-medium mb-2">Total Goal</p>
-                        <div class="text-5xl md:text-6xl font-black text-terracottaRed mb-1">
-                            $29M
-                        </div>
-                        <p class="text-gray-500 text-xs md:text-sm">For the new Islamic Centre</p>
-                    </div>
+                    {shouldShowTotalGoal() ? (
+                        <>
+                            <div class="mb-6">
+                                <p class="text-gray-600 text-sm md:text-base font-medium mb-2">Total Goal</p>
+                                <div class="text-5xl md:text-6xl font-black text-terracottaRed mb-1">
+                                    ${FUNDRAISER_CONFIG.totalGoal}M
+                                </div>
+                                <p class="text-gray-500 text-xs md:text-sm">For the new Islamic Centre</p>
+                            </div>
 
-                    <!-- Progress Bar -->
-                    <div class="mb-6">
-                        <div class="flex justify-between text-sm mb-2">
-                            <span class="text-gray-600 font-medium">Progress</span>
-                            <span class="text-emerald-600 font-bold">31%</span>
+                            <!-- Progress Bar -->
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-600 font-medium">Progress</span>
+                                    <span class="text-emerald-600 font-bold">{FUNDRAISER_CONFIG.progressPercentage}%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                                    <div class="progress-bar-fill h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full" style={`--progress-width: ${FUNDRAISER_CONFIG.progressPercentage}%;`}></div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">{FUNDRAISER_CONFIG.progressText}</p>
+                            </div>
+                        </>
+                    ) : (
+                        <div class="mb-6">
+                            <p class="text-gray-600 text-sm md:text-base font-medium mb-2">Total Raised So Far</p>
+                            <div class="text-5xl md:text-6xl font-black text-emerald-600 mb-1">
+                                ${FUNDRAISER_CONFIG.totalRaised}M
+                            </div>
+                            <p class="text-gray-500 text-xs md:text-sm mb-2">Alhamdulillah!</p>
+                            <p class="text-sageGreen font-semibold text-sm md:text-base italic">
+                                {FUNDRAISER_CONFIG.motivationalMessages.hero}
+                            </p>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
-                            <div class="progress-bar-fill h-full bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full" style="--progress-width: 31%;"></div>
-                        </div>
-                        <p class="text-xs text-gray-500 mt-2">$9M raised so far, Alhamdulillah</p>
-                    </div>
+                    )}
 
                     <!-- CTA Button -->
                     <a href="/donatetonewcentre" class="pulse-button inline-block w-full bg-gradient-to-r from-terracottaRed to-terracottaRed-darker hover:from-terracottaRed-darker hover:to-terracottaRed text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 text-base md:text-lg shadow-lg">
