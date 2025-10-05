@@ -1,6 +1,6 @@
 ---
 // Fundraiser Success Hero Banner Component
-import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
+import { FUNDRAISER_CONFIG, shouldShowTotalGoal, shouldShowTotalRaised } from '../config/fundraiser';
 ---
 
 <style>
@@ -130,7 +130,7 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                                 <p class="text-xs text-gray-500 mt-2">{FUNDRAISER_CONFIG.progressText}</p>
                             </div>
                         </>
-                    ) : (
+                    ) : shouldShowTotalRaised() ? (
                         <div class="mb-6">
                             <p class="text-gray-600 text-sm md:text-base font-medium mb-2">Total Raised So Far</p>
                             <div class="text-5xl md:text-6xl font-black text-emerald-600 mb-1">
@@ -139,6 +139,20 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                             <p class="text-gray-500 text-xs md:text-sm mb-2">Alhamdulillah!</p>
                             <p class="text-sageGreen font-semibold text-sm md:text-base italic">
                                 {FUNDRAISER_CONFIG.motivationalMessages.hero}
+                            </p>
+                        </div>
+                    ) : (
+                        <div class="mb-6 text-center">
+                            <div class="bg-gradient-to-r from-emerald-50 to-sageGreen-50 rounded-2xl p-6 mb-4">
+                                <p class="text-emerald-700 font-bold text-xl md:text-2xl mb-3">
+                                    Building Our Future Together
+                                </p>
+                                <p class="text-gray-700 text-base md:text-lg leading-relaxed italic">
+                                    {FUNDRAISER_CONFIG.motivationalMessages.hero}
+                                </p>
+                            </div>
+                            <p class="text-gray-600 text-sm">
+                                {FUNDRAISER_CONFIG.motivationalMessages.progress}
                             </p>
                         </div>
                     )}

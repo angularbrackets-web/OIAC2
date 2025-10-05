@@ -1,6 +1,6 @@
 ---
 // Dual Call-to-Action Component
-import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
+import { FUNDRAISER_CONFIG, shouldShowTotalGoal, shouldShowTotalRaised } from '../config/fundraiser';
 ---
 
 <style>
@@ -53,7 +53,7 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                         <p class="text-terracottaRed font-semibold text-lg">
                             Help us reach our ${FUNDRAISER_CONFIG.totalGoal}M goal
                         </p>
-                    ) : (
+                    ) : shouldShowTotalRaised() ? (
                         <div>
                             <p class="text-emerald-600 font-semibold text-base mb-1">
                                 ${FUNDRAISER_CONFIG.totalRaised}M raised so far
@@ -62,6 +62,10 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                                 {FUNDRAISER_CONFIG.motivationalMessages.cta}
                             </p>
                         </div>
+                    ) : (
+                        <p class="text-sageGreen font-semibold text-base italic">
+                            {FUNDRAISER_CONFIG.motivationalMessages.cta}
+                        </p>
                     )}
                 </div>
 

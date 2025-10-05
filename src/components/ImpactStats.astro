@@ -1,6 +1,6 @@
 ---
 // Impact Statistics Counter Component
-import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
+import { FUNDRAISER_CONFIG, shouldShowTotalGoal, shouldShowTotalRaised } from '../config/fundraiser';
 ---
 
 <style>
@@ -87,7 +87,7 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                 <p class="text-gray-500 text-xs mt-2">Across all programs</p>
             </div>
 
-            <!-- Stat 3: Total Goal or Total Raised -->
+            <!-- Stat 3: Total Goal or Total Raised or Community Impact -->
             {shouldShowTotalGoal() ? (
                 <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-terracottaRed">
                     <div class="stat-icon mb-4 text-5xl">🎯</div>
@@ -97,7 +97,7 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                     <p class="text-gray-600 font-semibold text-sm md:text-base">Total Goal</p>
                     <p class="text-gray-500 text-xs mt-2">For the new centre</p>
                 </div>
-            ) : (
+            ) : shouldShowTotalRaised() ? (
                 <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-emerald-500">
                     <div class="stat-icon mb-4 text-5xl">💚</div>
                     <div class="number-display text-4xl md:text-5xl font-black text-emerald-600 mb-2" data-target={FUNDRAISER_CONFIG.totalRaised} data-suffix="M">
@@ -105,6 +105,15 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                     </div>
                     <p class="text-gray-600 font-semibold text-sm md:text-base">Total Raised</p>
                     <p class="text-gray-500 text-xs mt-2">So far, Alhamdulillah</p>
+                </div>
+            ) : (
+                <div class="stat-card bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center border-t-4 border-sageGreen">
+                    <div class="stat-icon mb-4 text-5xl">🌱</div>
+                    <div class="text-3xl md:text-4xl font-black text-sageGreen mb-2">
+                        Growing
+                    </div>
+                    <p class="text-gray-600 font-semibold text-sm md:text-base">Community Support</p>
+                    <p class="text-gray-500 text-xs mt-2">With your help</p>
                 </div>
             )}
 
@@ -127,10 +136,14 @@ import { FUNDRAISER_CONFIG, shouldShowTotalGoal } from '../config/fundraiser';
                         <span class="text-emerald-600 font-bold">${FUNDRAISER_CONFIG.totalRaised}M raised</span> of our <span class="text-terracottaRed font-bold">${FUNDRAISER_CONFIG.totalGoal}M goal</span> —
                         <span class="text-gray-900 font-bold">{FUNDRAISER_CONFIG.progressPercentage}% complete!</span> 🎉
                     </p>
-                ) : (
+                ) : shouldShowTotalRaised() ? (
                     <p class="text-gray-700 text-base md:text-lg font-medium">
                         <span class="text-emerald-600 font-bold">${FUNDRAISER_CONFIG.totalRaised}M raised so far</span> —
                         <span class="text-gray-900 font-semibold italic">{FUNDRAISER_CONFIG.motivationalMessages.stats}</span> 🎯
+                    </p>
+                ) : (
+                    <p class="text-gray-700 text-base md:text-lg font-medium italic">
+                        {FUNDRAISER_CONFIG.motivationalMessages.stats} 🎯
                     </p>
                 )}
             </div>
