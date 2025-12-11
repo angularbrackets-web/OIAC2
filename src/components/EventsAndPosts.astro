@@ -1,13 +1,8 @@
 ---
-import { getPosts, type OIAC_Post } from "../graphql/posts";
-import { type OIAC_PostImage } from "../graphql/posts";
-import { getEventsForMonths } from "../graphql/events";
-import { type OIAC_Event } from "../graphql/events";
+import { getPosts, type OIAC_Post } from "../lib/content/posts";
+import { getEventsForMonths, type OIAC_Event } from "../lib/content/events";
 import { isObjectEmpty } from "../helper";
 import interacLogo from "../assets/Interac.Logo1.png";
-//import {MarkdownBlock, MarkdownSpan, MarkdownElement} from "https://md-block.verou.me/md-block.js"
-// import {MarkdownBlock, MarkdownSpan, MarkdownElement} from "md-block"
-// import { marked } from 'marked'
 
 const posts: Array<OIAC_Post> = await getPosts();
 

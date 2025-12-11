@@ -1,7 +1,6 @@
 ---
-import { getJobs, getJob, type Job } from "../graphql/jobs";
+import { getJobs, type Job } from "../lib/content/jobs";
 const jobs: Array<Job> = await getJobs();
-const testJob: Job = await getJob("cm3wkxvslina307n0ieefbw5p");
 ---
 
 <div class="container mx-auto px-6 sm:px-8 py-16">

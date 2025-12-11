@@ -16,6 +16,25 @@ const tables = [
       { name: "image_url", type: "string" },
     ],
   },
+  {
+    name: "Volunteers",
+    columns: [
+      { name: "name", type: "string" },
+      { name: "email", type: "string" },
+      { name: "phone", type: "string" },
+      { name: "expertise", type: "string" },
+      { name: "message", type: "text" },
+      { name: "createdAt", type: "datetime" },
+    ],
+  },
+  {
+    name: "UtmHits",
+    columns: [
+      { name: "source", type: "string" },
+      { name: "timestamp", type: "datetime" },
+      { name: "donateButtonClicked", type: "bool" },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -24,8 +43,16 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type TestEvents = InferredTypes["TestEvents"];
 export type TestEventsRecord = TestEvents & XataRecord;
 
+export type Volunteers = InferredTypes["Volunteers"];
+export type VolunteersRecord = Volunteers & XataRecord;
+
+export type UtmHits = InferredTypes["UtmHits"];
+export type UtmHitsRecord = UtmHits & XataRecord;
+
 export type DatabaseSchema = {
   TestEvents: TestEventsRecord;
+  Volunteers: VolunteersRecord;
+  UtmHits: UtmHitsRecord;
 };
 
 const DatabaseClient = buildClient();

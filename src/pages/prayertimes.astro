@@ -1,9 +1,7 @@
 ---
 import OIACLayout from "../layouts/oiac-layout.astro"
-import {getPrayerTimesForCurrentDay, getPrayerTimesForCurrentMonth, addPrayerTime} from '../graphql/prayer-times'
-import {type PrayerTime} from '../graphql/prayer-times'
+import {getPrayerTimesForCurrentMonth, type PrayerTime} from '../lib/content/prayer-times'
 import { getMonthShortName, getHijriDateAsString, getHijriShortDateAsString, getCurrentDateInEdmontonAsString, getWeekday, getWeekdayByDay, currentDay, currentMonth, currentYear, getMonthName } from "../helper"
-const prayerTimesForCurrentDay : PrayerTime = await getPrayerTimesForCurrentDay()
 
 const prayerTimesForCurrentMonth : Array<PrayerTime> = await getPrayerTimesForCurrentMonth()
 const currentMonthNameShort = getMonthShortName()

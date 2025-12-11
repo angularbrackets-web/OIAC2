@@ -1,0 +1,348 @@
+[
+  {
+    "__typename": "Staff",
+    "id": "cm3scv76t0ln307n0f89hztqu",
+    "name": "SHAIKH SAID AHMED",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/U3MjIRqTCeq1za9hkb2g"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Imam"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Over 10 years of experience teaching Islamic studies and delivering Da&#39;wah lectures.</p><p>Proficient in Quran recitation and teaching Quran Tafseer with proper Tajweed</p><p>Taught various students from diverse backgrounds, promoted Islamic manners and ethics</p><p>Involved in curriculam development of various levels for the Quran program</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3scxizu0mf307n0mj7jubgz",
+    "name": "SHAIKH AHMED SAEED",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/bIWR6kA0TQaPxZagUU5M"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Imam"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Over 15 years of experience as an Imam, a teacher of Quran and Islamic Studies, proficient in Quran recitation and Hadeeth sciences.</p><p>Ijaza in Qur&#39;an of riwayat-Hafs.</p><p>Imam at Al-Aelat mosque, Egypt delivering Jummah Khutbas</p><p>Teaching Quran and Islamic studies at Fawaris Ahl Sunnaha, Egypt</p><p>Imam at OIAC since 2021</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3scz2aq0p2207n6tik2v7pu",
+    "name": "SHAIKH YOUSUF ALALAGHI",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/PWUcNLB2Q21uqbfGy57w"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Imam"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Sheikh Yousuf Alalaghi with us in the center, as a teacher of the Holy Quran.</p><p>He holds a license (Ijaza) from the Libyan Ministry of Awqaf to teach the Holy Quran.</p><p>Ma Shaa Allah, he has been teaching the Holy Quran for more than 17 years, and many students memorized the Holy Quran under his supervision and teaching, praise be to Allah.</p><p>He also participated in many arbitration committees for many competitions at Tripoli municipality, which is the place where he live.</p><p>It is really a blessing from Allah, the Almighty that Sheikh Yousuf will be one of the supervisors and teachers of the Holy Quran.</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sd73e00pfp07n0lewgdg65",
+    "name": "HUDA KHURSHID",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Homeschooling Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sd82cg0s4907n6qdyc2bed",
+    "name": "HAJIRA KHAN",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Homeschooling Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sd8ndw0pt207n0438f086v",
+    "name": "FATIMA BUTOOL",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Homeschooling Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sd96cp0see07n60gqbxcul",
+    "name": "SAIDA MUSA",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Homeschooling Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sd9onw0sl107n60fv8vhxx",
+    "name": "JAWARIA YASEEN",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Homeschooling Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sdaa200spt07n6wced4lvw",
+    "name": "AVIN FELMEZ",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Bidaya Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sdaq980sum07n6pu0an5m3",
+    "name": "ASMA ABOELEZZ",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Bidaya Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sdbc2w0t1o07n6dh0fjpaa",
+    "name": "SHUAIB KADRI",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Office Staff"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sdbxxx0qy307n0y6o3jh1d",
+    "name": "ASHFAQ HUSSAIN",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Office Staff"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3sdchqk0r2u07n0t95lf8m7",
+    "name": "RAMEEL AHMAD",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Office Staff"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3wdpxeeq3lh07n1gthutux6",
+    "name": "SHAZIA TARIQ",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Weekend School Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm3wdqv3xq41307n1p6ik2e6s",
+    "name": "MAHMOOD BACHH",
+    "title": null,
+    "displayOrder": null,
+    "profilePicture": null,
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Weekend School Teacher"
+    },
+    "description": null
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm50hf4lb8nek07lrirxs9xpd",
+    "name": "Dr. Osama Namaruish",
+    "title": "President",
+    "displayOrder": 1,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/GN0ZcavTRvmyakZcBqqw"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Board Member"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Dr. Osama Namaruish – President - is a local family physician with deep connections in the Edmonton Muslim community and is passionate about Islamic education. He is one of the founders of OIAC and is been a long-standing philanthropist in the Edmonton community. </p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm50hgpakyly407n3e01soar9",
+    "name": "Dr. Mohamed Abufayed",
+    "title": "Vice President",
+    "displayOrder": 2,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/m2LXbeNhSIuIV2u7oaj0"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Board Member"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Dr. Mohamed Abufayed - Vice President – is a family physician in Edmonton with a passion for helping anyway he can in the community and has participated on several other organizations including fundraising for those less fortunate and helping victims or war oversees.</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm50hhmkeymcb07n3twgm8vic",
+    "name": "Yasir Mahmood Saeed",
+    "title": "Treasurer",
+    "displayOrder": 5,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/ZMTl03qRviVl4S252Q7z"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Board Member"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Yasir Mahmood Saeed – Treasurer – has worked and lived all over the world as an electrical engineer and has a Professional Engineering Certificate but has resided in Edmonton for the past 10 years Yasir is a successful business owner of several locally owned businesses and is an avid outdoor enthusiast.</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm50hjzck8pis07lrjft9090z",
+    "name": "Dr. Ismail Taher",
+    "title": "Director",
+    "displayOrder": 3,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/nscxvzsjReuTRRF06TnR"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Board Member"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Dr. Ismail Taher - Director – is a local family physician with children that attend Islamic schools. He is into fitness and has a keen interest in Islamic education.</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm50hlk49yo0z07n3ay8v5trx",
+    "name": "Dr. Adel Al Mighairbi",
+    "title": "Director",
+    "displayOrder": 4,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/6TF3rB6RRqjZvMMlObSo"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Board Member"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Dr. Adel Al Mighairbi, Director, is a family physician who relocated to Canada in 2008 and to Edmonton in 2014. He is passionate about volunteering and contributing to the community.</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cm50hmrguyoip07n3uxs76qle",
+    "name": "Masudur Rahman",
+    "title": "Secretary",
+    "displayOrder": 6,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/pwf7odUkQwKKiH8kL5sw"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Board Member"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Masudur Rahman – Secretary – has spent over 35 years in Edmonton and is a father of 3 young children and values the importance of Islamic education. Professionally, Masudur has a master’s degree in Health Administration and works in healthcare consulting.</p>"
+    }
+  },
+  {
+    "__typename": "Staff",
+    "id": "cmac1cvue8gzg07n26rqlz20r",
+    "name": "Qusai Bawazir",
+    "title": null,
+    "displayOrder": 7,
+    "profilePicture": {
+      "__typename": "Asset",
+      "url": "https://us-west-2.graphassets.com/A3KPYik2OQHK7UERpP1XVz/0f4EMcYQiWhI5ZEPNTZw"
+    },
+    "staffType": {
+      "__typename": "StaffType",
+      "name": "Imam"
+    },
+    "description": {
+      "__typename": "RichText",
+      "html": "<p>Extensive experience in Qur’anic instruction, Qira’at and curriculum development with a strong background in teaching, supervising and certifying students worldwide.</p><p>Experience and Certifications:</p><p>Ijazah in the Qur’an with the ten Qira’at granted by renowned Qur’anic scholars.</p><p>Certified in numerous classical works of Tajweed, Qira’at, Hadith, Fiqh and Arabic linguistics.</p><p>Supervised and issued Ijaz’at in multiple classical texts in Qira’at and Tajweed to dozens of students.</p><p>Founder and Supervisor of the Ihya project, a specialized initiative for Qur’anic education and Qira’at instruction.</p>"
+    }
+  }
+]

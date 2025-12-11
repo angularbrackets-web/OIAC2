@@ -1,13 +1,16 @@
 ---
 import OIACLayout from "../../layouts/oiac-layout.astro";
-import { getJob, type Job } from "../../graphql/jobs";
+import { getJob, type Job } from "../../lib/content/jobs";
 import SalaryGrid from "../../components/SalaryGrid.astro";
 const { id } = Astro.params;
 // Ensure `id` is a string or throw an error if undefined
 if (!id) {
   throw new Error("Job ID is required.");
 }
-const job: Job = await getJob(id);
+const job: Job | undefined = await getJob(id);
+if (!job) {
+  throw new Error(`Job with ID ${id} not found.`);
+}
 ---
 
 <OIACLayout title="OIAC - Job">

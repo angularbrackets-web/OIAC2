@@ -6,7 +6,7 @@
 // import ustadAhmed from "../assets/UstadAhmed1.jpeg";
 // import sheikhAhmedSaeed from "../assets/SheikhAhmedSaeed2.png";
 
-import { getStaffMembers, type Staff } from "../graphql/staff";
+import { getStaffMembers, type Staff } from "../lib/content/staff";
 import defaultProfilePicture from "../assets/blank-profile-picture.png";
 const imams: Array<Staff> = await getStaffMembers("Imam");
 ---

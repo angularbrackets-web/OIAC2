@@ -1,0 +1,83 @@
+import { defineCollection, z } from 'astro:content';
+
+// Jobs Collection
+const jobs = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    postedDate: z.string(),
+    description: z.string().optional(),
+    requireAlbertaCertification: z.boolean().optional().nullable(),
+    active: z.boolean().default(true),
+  }),
+});
+
+// Posts Collection
+const posts = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    image: z.array(z.object({
+      url: z.string(),
+    })),
+    link: z.object({
+      text: z.string(),
+      url: z.string(),
+    }),
+    content: z.array(z.string()).optional(),
+    priority: z.number().optional(),
+  }),
+});
+
+// Staff Collection
+const staff = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    title: z.string().optional().nullable(),
+    displayOrder: z.number().optional().nullable(),
+    profilePicture: z.object({
+      url: z.string(),
+    }).optional().nullable(),
+    staffType: z.string(), // Will store the type name directly
+    description: z.string().optional().nullable(),
+  }),
+});
+
+// Prayer Times Collection
+const prayerTimes = defineCollection({
+  type: 'data',
+  schema: z.object({
+    month: z.number(),
+    day: z.number(),
+    fajrBegins: z.string(),
+    fajrJamah: z.string(),
+    sunrise: z.string(),
+    zuhrBegins: z.string(),
+    zuhrJamah: z.string(),
+    asrBegins: z.string(),
+    asrJamah: z.string(),
+    maghribBegins: z.string(),
+    maghribJamah: z.string(),
+    ishaBegins: z.string(),
+    ishaJamah: z.string(),
+  }),
+});
+
+// Jummah Times Collection
+const jummahTimes = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    time: z.string(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = {
+  jobs,
+  posts,
+  staff,
+  'prayer-times': prayerTimes,
+  'jummah-times': jummahTimes,
+};

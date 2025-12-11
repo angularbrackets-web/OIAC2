@@ -1,0 +1,12 @@
+[
+  {
+    "__typename": "JummahTime",
+    "name": "Jummah 1 (Arabic)",
+    "time": "12:30 PM"
+  },
+  {
+    "__typename": "JummahTime",
+    "name": "Jummah 2 (English)",
+    "time": "01:30 PM"
+  }
+]
