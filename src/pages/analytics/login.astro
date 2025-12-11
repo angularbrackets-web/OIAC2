@@ -1,5 +1,5 @@
 ---
-// src/pages/admin/login.astro
+// src/pages/analytics/login.astro
 let message = '';
 
 if (Astro.request.method === 'POST') {
@@ -12,7 +12,7 @@ if (Astro.request.method === 'POST') {
       httpOnly: true,
       maxAge: 60 * 60 * 24, // 1 day
     });
-    return Astro.redirect('/admin');
+    return Astro.redirect('/analytics');
   } else {
     message = 'Invalid password';
   }
@@ -20,7 +20,7 @@ if (Astro.request.method === 'POST') {
 ---
 <html>
   <head>
-    <title>Admin Login</title>
+    <title>Analytics Login</title>
     <style>
       body { font-family: sans-serif; background: #f0f4f8; display: flex; align-items: center; justify-content: center; height: 100vh; }
       form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
@@ -31,7 +31,7 @@ if (Astro.request.method === 'POST') {
   </head>
   <body>
     <form method="POST">
-      <h2>Admin Login</h2>
+      <h2>Analytics Login</h2>
       {message && <div class="error">{message}</div>}
       <input type="password" name="password" placeholder="Enter admin password" required />
       <button type="submit">Login</button>

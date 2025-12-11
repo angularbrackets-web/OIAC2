@@ -7,13 +7,13 @@
 6 silly config load:file:/usr/local/etc/npmrc
 7 verbose title npm run build
 8 verbose argv "run" "build"
-9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-11T00_46_14_701Z-
-10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-11T00_46_14_701Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-11T01_22_30_729Z-
+10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-11T01_22_30_729Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mohammad/Projects/OIAC2
 14 verbose os Darwin 25.1.0
 15 verbose node v22.17.1
 16 verbose npm  v10.9.2
-17 verbose exit 1
-18 verbose code 1
+17 verbose exit 0
+18 info ok
