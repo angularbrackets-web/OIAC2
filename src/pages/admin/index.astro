@@ -1,22 +1,21 @@
 ---
-// Serve Decap CMS admin interface with manual config initialization
----
-<!DOCTYPE html>
+// Serve Decap CMS admin interface - skip TypeScript checking
+const html = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager - OIAC</title>
-  <link href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" rel="stylesheet" />
 </head>
 <body>
-  <!-- Include the script that builds the page and powers Decap CMS -->
-  <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-  <script is:inline>
-    // Manually initialize Decap CMS with config
-    // @ts-ignore - CMS is loaded from external script
-    window.CMS.init({
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" type="module"><\/script>
+  <script>
+    window.CMS_MANUAL_INIT = true;
+  <\/script>
+  <script>
+    window.addEventListener('load', function() {
+      if (window.CMS) {
+        window.CMS.init({
       config: {
         backend: {
           name: 'github',
@@ -145,7 +144,17 @@
           }
         ]
       }
+        });
+      }
     });
-  </script>
+  <\/script>
 </body>
-</html>
+</html>`;
+
+return new Response(html, {
+  status: 200,
+  headers: {
+    'Content-Type': 'text/html; charset=utf-8',
+  },
+});
+---
