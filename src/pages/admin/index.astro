@@ -6,16 +6,17 @@ const html = `<!DOCTYPE html>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager - OIAC</title>
-</head>
-<body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js" type="module"><\/script>
   <script>
     window.CMS_MANUAL_INIT = true;
   <\/script>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"><\/script>
   <script>
-    window.addEventListener('load', function() {
-      if (window.CMS) {
-        window.CMS.init({
+    (function() {
+      var initCMS = function() {
+        if (window.CMS) {
+          window.CMS.init({
       config: {
         backend: {
           name: 'github',
@@ -144,9 +145,13 @@ const html = `<!DOCTYPE html>
           }
         ]
       }
-        });
-      }
-    });
+          });
+        } else {
+          setTimeout(initCMS, 100);
+        }
+      };
+      initCMS();
+    })();
   <\/script>
 </body>
 </html>`;
