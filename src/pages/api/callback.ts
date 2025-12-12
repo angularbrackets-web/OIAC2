@@ -48,7 +48,7 @@ export const GET: APIRoute = async ({ url }) => {
         console.log("receiveMessage %o", e);
         // send message to main window with the token
         window.opener.postMessage(
-          'authorization:github:success:${JSON.stringify(tokenData)}',
+          \`authorization:github:success:${JSON.stringify(tokenData)}\`,
           e.origin
         );
       }
