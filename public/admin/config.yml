@@ -42,7 +42,7 @@ collections:
         name: "image"
         widget: "list"
         fields:
-          - { label: "Image URL", name: "url", widget: "string" }
+          - { label: "Image", name: "url", widget: "image", allow_multiple: false }
       - label: "Link"
         name: "link"
         widget: "object"
