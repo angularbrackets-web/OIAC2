@@ -11,11 +11,12 @@
 </head>
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-  <script>
+  <script is:inline>
     // Manually initialize Decap CMS with config
-    CMS.init({
+    // @ts-ignore - CMS is loaded from external script
+    window.CMS.init({
       config: {
         backend: {
           name: 'github',
