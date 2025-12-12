@@ -1,0 +1,46 @@
+0 verbose cli /usr/local/bin/node /usr/local/lib/node_modules/npm/bin/npm-cli.js
+1 info using npm@10.9.2
+2 info using node@v22.17.1
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/mohammad/Projects/OIAC2/.npmrc
+5 silly config load:file:/Users/mohammad/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm exec @modelcontextprotocol/server-sqlite /Users/mohammad/Projects/alfaruq-new-gm/prisma/dev.db
+8 verbose argv "exec" "--yes" "--" "@modelcontextprotocol/server-sqlite" "/Users/mohammad/Projects/alfaruq-new-gm/prisma/dev.db"
+9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_23_10_997Z-
+10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_23_10_997Z-debug-0.log
+11 silly logfile start cleaning logs, removing 3 files
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+15 notice Access token expired or revoked. Please try logging in again.
+16 http fetch GET 404 https://registry.npmjs.org/@modelcontextprotocol%2fserver-sqlite 192ms (cache skip)
+17 notice Access token expired or revoked. Please try logging in again.
+18 http fetch GET 404 https://registry.npmjs.org/@modelcontextprotocol%2fserver-sqlite 62ms (cache skip)
+19 verbose stack HttpErrorGeneral: 404 Not Found - GET https://registry.npmjs.org/@modelcontextprotocol%2fserver-sqlite - Not found
+19 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/npm-registry-fetch/lib/check-response.js:103:15
+19 verbose stack     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+19 verbose stack     at async RegistryFetcher.packument (/usr/local/lib/node_modules/npm/node_modules/pacote/lib/registry.js:90:19)
+19 verbose stack     at async RegistryFetcher.manifest (/usr/local/lib/node_modules/npm/node_modules/pacote/lib/registry.js:128:23)
+19 verbose stack     at async getManifest (/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js:27:22)
+19 verbose stack     at async missingFromTree (/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js:60:22)
+19 verbose stack     at async /usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js:182:32
+19 verbose stack     at async Promise.all (index 0)
+19 verbose stack     at async exec (/usr/local/lib/node_modules/npm/node_modules/libnpmexec/lib/index.js:180:3)
+19 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:207:9)
+20 verbose statusCode 404
+21 verbose pkgid @modelcontextprotocol/server-sqlite@*
+22 error code E404
+23 error 404 Not Found - GET https://registry.npmjs.org/@modelcontextprotocol%2fserver-sqlite - Not found
+24 error 404
+25 error 404  '@modelcontextprotocol/server-sqlite@*' is not in this registry.
+26 error 404
+27 error 404 Note that you can also install from a
+28 error 404 tarball, folder, http url, or git url.
+29 verbose cwd /Users/mohammad/Projects/OIAC2
+30 verbose os Darwin 25.1.0
+31 verbose node v22.17.1
+32 verbose npm  v10.9.2
+33 verbose exit 1
+34 verbose code 1
+35 error A complete log of this run can be found in: /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_23_10_997Z-debug-0.log
