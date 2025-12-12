@@ -34,6 +34,9 @@ export const GET: APIRoute = async ({ url }) => {
       return new Response(`OAuth error: ${tokenData.error_description}`, { status: 400 });
     }
 
+    // Prepare the message content in the format Decap CMS expects
+    const postMsgContent = { token: tokenData.access_token, provider: "github" };
+
     // Return HTML that posts the message to the parent window (Decap CMS)
     const html = `
 <!DOCTYPE html>
@@ -44,11 +47,13 @@ export const GET: APIRoute = async ({ url }) => {
 <body>
   <script>
     (function() {
+      var postMsgContent = ${JSON.stringify(postMsgContent)};
+
       function recieveMessage(e) {
         console.log("receiveMessage %o", e);
         // send message to main window with the token
         window.opener.postMessage(
-          \`authorization:github:success:${JSON.stringify(tokenData)}\`,
+          'authorization:github:success:' + JSON.stringify(postMsgContent),
           e.origin
         );
       }
