@@ -1,18 +1,19 @@
 ---
-// Serve Decap CMS admin interface - skip TypeScript checking
-const html = `<!DOCTYPE html>
+// Serve Decap CMS admin interface
+---
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager - OIAC</title>
-  <script>
+  <script is:inline>
     window.CMS_MANUAL_INIT = true;
-  <\/script>
+  </script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"><\/script>
-  <script>
+  <script is:inline src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script is:inline>
     (function() {
       var initCMS = function() {
         if (window.CMS) {
@@ -152,14 +153,6 @@ const html = `<!DOCTYPE html>
       };
       initCMS();
     })();
-  <\/script>
+  </script>
 </body>
-</html>`;
-
-return new Response(html, {
-  status: 200,
-  headers: {
-    'Content-Type': 'text/html; charset=utf-8',
-  },
-});
----
+</html>

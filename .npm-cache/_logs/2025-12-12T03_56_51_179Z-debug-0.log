@@ -6,15 +6,15 @@
 5 silly config load:file:/usr/local/etc/npmrc
 6 verbose title npm install @anthropic-ai/claude-code
 7 verbose argv "install" "--global" "@anthropic-ai/claude-code"
-8 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_44_16_209Z-
-9 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_44_16_209Z-debug-0.log
+8 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_56_51_179Z-
+9 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2025-12-12T03_56_51_179Z-debug-0.log
 10 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
 11 silly logfile start cleaning logs, removing 2 files
 12 silly idealTree buildDeps
 13 silly fetch manifest @anthropic-ai/claude-code@*
 14 silly packumentCache full:https://registry.npmjs.org/@anthropic-ai%2fclaude-code cache-miss
 15 silly logfile done cleaning log files
-16 http cache https://registry.npmjs.org/@anthropic-ai%2fclaude-code 5ms (cache hit)
+16 http cache https://registry.npmjs.org/@anthropic-ai%2fclaude-code 6ms (cache hit)
 17 silly packumentCache full:https://registry.npmjs.org/@anthropic-ai%2fclaude-code set size:696228 disposed:false
 18 silly placeDep ROOT @anthropic-ai/claude-code@2.0.67 OK for:  want: *
 19 silly fetch manifest @img/sharp-linux-arm@^0.33.5
@@ -33,22 +33,22 @@
 32 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 cache-miss
 33 silly fetch manifest @img/sharp-linuxmusl-arm64@^0.33.5
 34 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 cache-miss
-35 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 140ms (cache revalidated)
-36 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 set size:66897 disposed:false
-37 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-x64 149ms (cache revalidated)
-38 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-x64 set size:63901 disposed:false
-39 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-x64 155ms (cache revalidated)
-40 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-x64 set size:64953 disposed:false
-41 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm 175ms (cache revalidated)
-42 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm set size:65285 disposed:false
-43 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm64 189ms (cache revalidated)
-44 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm64 set size:65833 disposed:false
-45 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-x64 200ms (cache revalidated)
-46 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-x64 set size:67340 disposed:false
-47 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 333ms (cache revalidated)
-48 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 set size:66015 disposed:false
-49 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-arm64 437ms (cache revalidated)
-50 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-arm64 set size:64782 disposed:false
+35 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm 135ms (cache revalidated)
+36 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm set size:65285 disposed:false
+37 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 135ms (cache revalidated)
+38 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 set size:66015 disposed:false
+39 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm64 136ms (cache revalidated)
+40 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm64 set size:65833 disposed:false
+41 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 136ms (cache revalidated)
+42 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 set size:66897 disposed:false
+43 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-x64 148ms (cache revalidated)
+44 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-x64 set size:63901 disposed:false
+45 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-x64 153ms (cache revalidated)
+46 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-x64 set size:64953 disposed:false
+47 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-arm64 169ms (cache revalidated)
+48 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-arm64 set size:64782 disposed:false
+49 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-x64 180ms (cache revalidated)
+50 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-x64 set size:67340 disposed:false
 51 silly placeDep node_modules/@anthropic-ai/claude-code @img/sharp-darwin-arm64@0.33.5 OK for: @anthropic-ai/claude-code@2.0.67 want: ^0.33.5
 52 silly placeDep node_modules/@anthropic-ai/claude-code @img/sharp-darwin-x64@0.33.5 OK for: @anthropic-ai/claude-code@2.0.67 want: ^0.33.5
 53 silly placeDep node_modules/@anthropic-ai/claude-code @img/sharp-linux-arm@0.33.5 OK for: @anthropic-ai/claude-code@2.0.67 want: ^0.33.5
@@ -71,20 +71,20 @@
 70 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 cache-miss
 71 silly fetch manifest @img/sharp-libvips-linuxmusl-x64@1.0.4
 72 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 cache-miss
-73 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 66ms (cache revalidated)
-74 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 set size:54400 disposed:false
-75 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 71ms (cache revalidated)
-76 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 set size:52177 disposed:false
-77 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm 74ms (cache revalidated)
-78 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm set size:58790 disposed:false
-79 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 89ms (cache revalidated)
-80 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 set size:52735 disposed:false
-81 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 96ms (cache revalidated)
-82 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 set size:55624 disposed:false
-83 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 95ms (cache revalidated)
-84 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 set size:53807 disposed:false
-85 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 133ms (cache revalidated)
-86 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 set size:56849 disposed:false
+73 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 56ms (cache revalidated)
+74 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 set size:56849 disposed:false
+75 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm 62ms (cache revalidated)
+76 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm set size:58790 disposed:false
+77 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 62ms (cache revalidated)
+78 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 set size:52177 disposed:false
+79 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 70ms (cache revalidated)
+80 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 set size:54400 disposed:false
+81 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 71ms (cache revalidated)
+82 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 set size:53807 disposed:false
+83 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 73ms (cache revalidated)
+84 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 set size:52735 disposed:false
+85 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 82ms (cache revalidated)
+86 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 set size:55624 disposed:false
 87 silly placeDep node_modules/@anthropic-ai/claude-code @img/sharp-libvips-darwin-arm64@1.0.4 OK for: @img/sharp-darwin-arm64@0.33.5 want: 1.0.4
 88 silly placeDep node_modules/@anthropic-ai/claude-code @img/sharp-libvips-darwin-x64@1.0.4 OK for: @img/sharp-darwin-x64@0.33.5 want: 1.0.4
 89 silly placeDep node_modules/@anthropic-ai/claude-code @img/sharp-libvips-linux-arm@1.0.5 OK for: @img/sharp-linux-arm@0.33.5 want: 1.0.5
