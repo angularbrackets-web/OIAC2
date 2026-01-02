@@ -33,19 +33,22 @@ def format_time_12hr(time_val):
 excel_file = '/Users/ibrahim/OIAC2/2026 v2 Prayer Times  Calendar-2.xlsx'
 df = pd.read_excel(excel_file)
 
-# Filter for January 2026
+# Extract month and day from Date column
 df['month'] = pd.to_datetime(df['Date']).dt.month
 df['day'] = pd.to_datetime(df['Date']).dt.day
-january_data = df[df['month'] == 1]
+
+# Filter for all months 1-11 (January through November)
+# December (12) already exists in the system
+data_to_process = df[df['month'] <= 11]
 
 # Create output directory if it doesn't exist
 output_dir = '/Users/ibrahim/OIAC2/src/content/prayer-times'
 os.makedirs(output_dir, exist_ok=True)
 
-print(f"Processing {len(january_data)} days for January 2026...\n")
+print(f"Processing {len(data_to_process)} days for months 1-11 of 2026...\n")
 
 # Process each day
-for idx, row in january_data.iterrows():
+for idx, row in data_to_process.iterrows():
     month = int(row['month'])
     day = int(row['day'])
 
@@ -76,4 +79,4 @@ for idx, row in january_data.iterrows():
 
     print(f"Created: {filename}")
 
-print(f"\n✓ Successfully created {len(january_data)} prayer time files for January 2026")
+print(f"\n✓ Successfully created {len(data_to_process)} prayer time files for 2026 (January-November)")

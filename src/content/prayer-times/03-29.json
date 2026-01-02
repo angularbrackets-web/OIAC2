@@ -1,0 +1,15 @@
+{
+  "month": 3,
+  "day": 29,
+  "fajrBegins": "05:11 AM",
+  "fajrJamah": "06:30 AM",
+  "sunrise": "07:15 AM",
+  "zuhrBegins": "01:41 PM",
+  "zuhrJamah": "02:00 PM",
+  "asrBegins": "05:08 PM",
+  "asrJamah": "06:15 PM",
+  "maghribBegins": "08:05 PM",
+  "maghribJamah": "08:10 PM",
+  "ishaBegins": "09:46 PM",
+  "ishaJamah": "09:51 PM"
+}
