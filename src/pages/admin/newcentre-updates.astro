@@ -318,21 +318,84 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
       container.innerHTML = selectedLinks.map((link, i) => `
         <div class="bg-white p-3 rounded border relative">
-          <button type="button" onclick="removeLink(${i})" class="absolute top-2 right-2 text-red-500 hover:text-red-700">×</button>
+          <button type="button" onclick="removeLink(${i})" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-xl">&times;</button>
           <div class="space-y-2">
+            <div class="flex gap-2">
+              <input type="url" id="linkUrl${i}" placeholder="URL *" value="${escapeHtml(link.url)}"
+                onchange="updateLink(${i}, 'url', this.value)"
+                class="flex-1 px-2 py-1 border border-gray-300 rounded text-sm" />
+              <button type="button" onclick="fetchLinkPreview(${i})"
+                class="px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 whitespace-nowrap">
+                Fetch Info
+              </button>
+            </div>
             <input type="text" placeholder="Link Title *" value="${escapeHtml(link.title)}"
               onchange="updateLink(${i}, 'title', this.value)"
-              class="w-full px-2 py-1 border border-gray-300 rounded text-sm" />
-            <input type="url" placeholder="URL *" value="${escapeHtml(link.url)}"
-              onchange="updateLink(${i}, 'url', this.value)"
               class="w-full px-2 py-1 border border-gray-300 rounded text-sm" />
             <input type="text" placeholder="Description (optional)" value="${escapeHtml(link.description || '')}"
               onchange="updateLink(${i}, 'description', this.value)"
               class="w-full px-2 py-1 border border-gray-300 rounded text-sm" />
+            ${link.preview ? `
+              <div class="mt-2 p-2 bg-gray-50 rounded border text-xs">
+                <div class="flex gap-2">
+                  ${link.preview.image ? `<img src="${escapeHtml(link.preview.image)}" class="w-16 h-16 object-cover rounded" onerror="this.style.display='none'" />` : ''}
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-800 truncate">${escapeHtml(link.preview.title || '')}</p>
+                    <p class="text-gray-500 truncate">${escapeHtml(link.preview.domain || '')}</p>
+                    ${link.preview.description ? `<p class="text-gray-600 line-clamp-2 mt-1">${escapeHtml(link.preview.description)}</p>` : ''}
+                  </div>
+                </div>
+              </div>
+            ` : ''}
           </div>
         </div>
       `).join('');
     }
+
+    window.fetchLinkPreview = async function(index) {
+      const urlInput = document.getElementById('linkUrl' + index);
+      const url = urlInput?.value?.trim();
+
+      if (!url) {
+        alert('Please enter a URL first');
+        return;
+      }
+
+      // Show loading state
+      const btn = event.target;
+      const originalText = btn.textContent;
+      btn.textContent = 'Loading...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch('/api/cms/link-preview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        if (data.preview) {
+          selectedLinks[index].preview = data.preview;
+          // Auto-fill title and description if empty
+          if (!selectedLinks[index].title && data.preview.title) {
+            selectedLinks[index].title = data.preview.title;
+          }
+          if (!selectedLinks[index].description && data.preview.description) {
+            selectedLinks[index].description = data.preview.description;
+          }
+          renderLinks();
+        } else if (data.error) {
+          alert('Could not fetch preview: ' + data.error);
+        }
+      } catch (err) {
+        alert('Error fetching preview: ' + err.message);
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    };
 
     // Media Picker
     window.openMediaPicker = async function(type) {

@@ -136,8 +136,8 @@ export async function getNewCentreUpdates(): Promise<NewCentreUpdateRecord[]> {
   const { data, error } = await supabase
     .from('oiac_newcentre_updates')
     .select('*')
-    .order('display_order', { ascending: true, nullsFirst: false })
-    .order('date', { ascending: false });
+    .order('date', { ascending: false })
+    .order('display_order', { ascending: true, nullsFirst: false });
 
   if (error) {
     throw error;
