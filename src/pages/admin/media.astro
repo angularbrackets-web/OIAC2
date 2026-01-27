@@ -1,50 +1,42 @@
 ---
-// Media Library - Upload and manage media files
+import AdminLayout from '../../layouts/AdminLayout.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Media Library - Admin</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen">
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex justify-between items-center mb-8">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800">Media Library</h1>
-        <p class="text-gray-600 mt-1">Upload and manage images and videos</p>
-      </div>
-      <div class="flex gap-4">
-        <a href="/admin" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-          ← Back to Dashboard
-        </a>
-        <label class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer">
-          + Upload File
-          <input type="file" id="fileInput" class="hidden" accept="image/*,video/*" multiple />
-        </label>
-      </div>
+<AdminLayout title="Media Library" currentPage="media">
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">Media Library</h1>
+      <p class="text-gray-600 mt-1">Upload and manage images and videos</p>
     </div>
+    <label class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer font-medium">
+      + Upload File
+      <input type="file" id="fileInput" class="hidden" accept="image/*,video/*" multiple />
+    </label>
+  </div>
 
-    <!-- Upload Progress -->
-    <div id="uploadProgress" class="hidden mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-      <div class="flex items-center gap-3">
-        <div class="animate-spin w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full"></div>
-        <span class="text-blue-800">Uploading...</span>
-      </div>
+  <!-- Upload Progress -->
+  <div id="uploadProgress" class="hidden mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+    <div class="flex items-center gap-3">
+      <div class="animate-spin w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full"></div>
+      <span class="text-blue-800">Uploading...</span>
     </div>
+  </div>
 
-    <!-- Media Grid -->
-    <div id="mediaGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      <p class="col-span-full text-gray-500">Loading media...</p>
-    </div>
+  <!-- Drag & Drop Area -->
+  <div id="dropZone" class="mb-6 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white transition hover:border-blue-400 hover:bg-blue-50">
+    <div class="text-4xl mb-2">📤</div>
+    <p class="text-gray-600">Drag & drop files here, or click "Upload File" above</p>
+    <p class="text-gray-400 text-sm mt-1">Supports images (JPG, PNG, GIF, WebP) and videos (MP4, WebM)</p>
+  </div>
+
+  <!-- Media Grid -->
+  <div id="mediaGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <p class="col-span-full text-gray-500">Loading media...</p>
   </div>
 
   <!-- Preview Modal -->
   <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-4 max-w-4xl max-h-[90vh] overflow-auto">
+    <div class="bg-white rounded-lg p-4 max-w-4xl max-h-[90vh] overflow-auto mx-4">
       <div class="flex justify-between items-center mb-4">
         <h3 id="previewTitle" class="font-semibold text-lg">File Preview</h3>
         <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
@@ -69,8 +61,31 @@
 
     document.addEventListener('DOMContentLoaded', loadMedia);
 
+    // File input handler
     document.getElementById('fileInput').addEventListener('change', async (e) => {
-      const files = e.target.files;
+      await uploadFiles(e.target.files);
+      e.target.value = '';
+    });
+
+    // Drag & drop handlers
+    const dropZone = document.getElementById('dropZone');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-blue-500', 'bg-blue-50');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+    });
+
+    dropZone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+      await uploadFiles(e.dataTransfer.files);
+    });
+
+    async function uploadFiles(files) {
       if (files.length === 0) return;
 
       const progress = document.getElementById('uploadProgress');
@@ -96,9 +111,8 @@
       }
 
       progress.classList.add('hidden');
-      e.target.value = '';
       await loadMedia();
-    });
+    }
 
     async function loadMedia() {
       try {
@@ -116,7 +130,7 @@
       const grid = document.getElementById('mediaGrid');
 
       if (mediaFiles.length === 0) {
-        grid.innerHTML = '<p class="col-span-full text-gray-500">No media files yet. Upload some!</p>';
+        grid.innerHTML = '<p class="col-span-full text-gray-500 bg-white rounded-lg p-8 text-center">No media files yet. Upload some!</p>';
         return;
       }
 
@@ -143,7 +157,7 @@
       return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
     }
 
-    function showPreview(fileName) {
+    window.showPreview = function(fileName) {
       currentFile = mediaFiles.find(f => f.name === fileName);
       if (!currentFile) return;
 
@@ -160,23 +174,23 @@
       const modal = document.getElementById('previewModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-    }
+    };
 
-    function closePreview() {
+    window.closePreview = function() {
       const modal = document.getElementById('previewModal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
       currentFile = null;
-    }
+    };
 
-    function copyUrl() {
+    window.copyUrl = function() {
       const input = document.getElementById('previewUrl');
       input.select();
-      document.execCommand('copy');
+      navigator.clipboard.writeText(input.value);
       alert('URL copied to clipboard!');
-    }
+    };
 
-    async function deleteFile() {
+    window.deleteFile = async function() {
       if (!currentFile) return;
       if (!confirm('Are you sure you want to delete ' + currentFile.name + '?')) return;
 
@@ -194,11 +208,10 @@
       } catch (error) {
         alert('Error deleting file: ' + error.message);
       }
-    }
+    };
 
     document.getElementById('previewModal').addEventListener('click', (e) => {
       if (e.target.id === 'previewModal') closePreview();
     });
   </script>
-</body>
-</html>
+</AdminLayout>

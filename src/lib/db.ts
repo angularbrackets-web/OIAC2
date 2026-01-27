@@ -87,13 +87,20 @@ export async function getUtmHits() {
 }
 
 // New Centre Updates table
+export type NewCentreUpdateLink = {
+  url: string;
+  title: string;
+  description?: string;
+};
+
 export type NewCentreUpdateInput = {
   title: string;
   description?: string;
   date: string;
-  mediaType: 'images' | 'video';
+  mediaType?: 'images' | 'video' | 'mixed'; // Now optional, can have any combination
   images?: Array<{ url: string }>;
   videoUrl?: string;
+  links?: NewCentreUpdateLink[];
   displayOrder?: number;
 };
 
@@ -110,9 +117,10 @@ export async function createNewCentreUpdate(data: NewCentreUpdateInput) {
       title: data.title,
       description: data.description || null,
       date: data.date,
-      media_type: data.mediaType,
+      media_type: data.mediaType || null,
       images: data.images || [],
       video_url: data.videoUrl || null,
+      links: data.links || [],
       display_order: data.displayOrder || null,
     }])
     .select();
@@ -143,6 +151,7 @@ export async function getNewCentreUpdates(): Promise<NewCentreUpdateRecord[]> {
     mediaType: record.media_type,
     images: record.images || [],
     videoUrl: record.video_url,
+    links: record.links || [],
     displayOrder: record.display_order,
     created_at: record.created_at,
     updated_at: record.updated_at,
@@ -169,6 +178,7 @@ export async function getNewCentreUpdateById(id: string): Promise<NewCentreUpdat
     mediaType: data.media_type,
     images: data.images || [],
     videoUrl: data.video_url,
+    links: data.links || [],
     displayOrder: data.display_order,
     created_at: data.created_at,
     updated_at: data.updated_at,
@@ -184,6 +194,7 @@ export async function updateNewCentreUpdate(id: string, data: Partial<NewCentreU
   if (data.mediaType !== undefined) updateData.media_type = data.mediaType;
   if (data.images !== undefined) updateData.images = data.images;
   if (data.videoUrl !== undefined) updateData.video_url = data.videoUrl;
+  if (data.links !== undefined) updateData.links = data.links;
   if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
 
   const { data: result, error } = await supabase

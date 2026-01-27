@@ -1,137 +1,132 @@
 ---
-// Admin page for managing New Centre Updates
-// This page provides a simple interface to manage updates stored in Supabase
+import AdminLayout from '../../layouts/AdminLayout.astro';
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>New Centre Updates - Admin</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 min-h-screen">
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex justify-between items-center mb-8">
-      <div>
-        <h1 class="text-3xl font-bold text-gray-800">New Centre Updates</h1>
-        <p class="text-gray-600 mt-1">Manage timeline updates for the New Centre page</p>
-      </div>
-      <div class="flex gap-4">
-        <a href="/admin" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-          ← Back to Dashboard
-        </a>
-        <button id="addNewBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
-          + Add New Update
-        </button>
-      </div>
+<AdminLayout title="New Centre Updates" currentPage="newcentre-updates">
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">New Centre Updates</h1>
+      <p class="text-gray-600 mt-1">Manage timeline updates for the New Centre page</p>
     </div>
+    <button id="addNewBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium">
+      + Add New Update
+    </button>
+  </div>
 
-    <!-- Updates List -->
-    <div id="updatesList" class="space-y-4">
-      <p class="text-gray-500">Loading updates...</p>
-    </div>
+  <!-- Updates List -->
+  <div id="updatesList" class="space-y-4">
+    <p class="text-gray-500">Loading updates...</p>
+  </div>
 
-    <!-- Modal for Add/Edit -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-      <div class="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add New Update</h2>
-        <form id="updateForm" class="space-y-4">
-          <input type="hidden" id="updateId" />
+  <!-- Modal for Add/Edit -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto mx-4">
+      <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add New Update</h2>
+      <form id="updateForm" class="space-y-6">
+        <input type="hidden" id="updateId" />
 
+        <!-- Basic Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
             <input type="text" id="title" required
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
-            <textarea id="description" rows="3"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-          </div>
-
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Date *</label>
             <input type="date" id="date" required
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
+        </div>
 
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Description (optional)</label>
+          <textarea id="description" rows="2"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Optional description for this update"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Display Order (optional)</label>
+          <input type="number" id="displayOrder" min="1"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Lower numbers appear first" />
+        </div>
+
+        <!-- Video Section -->
+        <div class="border rounded-lg p-4 bg-blue-50">
+          <h3 class="font-semibold text-blue-800 mb-3 flex items-center gap-2">
+            <span>🎥</span> Video (optional)
+          </h3>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Media Type *</label>
-            <select id="mediaType" required
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="video">Video</option>
-              <option value="images">Images</option>
-            </select>
-          </div>
-
-          <div id="videoUrlField">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Video URL</label>
             <input type="url" id="videoUrl" placeholder="https://youtube.com/embed/... or https://streamable.com/e/..."
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
             <p class="text-sm text-gray-500 mt-1">Use embed URLs for YouTube or Streamable</p>
-            <div class="mt-2">
-              <button type="button" onclick="openMediaPicker('video')" class="text-sm text-blue-600 hover:text-blue-800">
-                📁 Or select from uploaded videos
-              </button>
-            </div>
           </div>
+          <button type="button" onclick="openMediaPicker('video')" class="mt-2 text-sm text-blue-600 hover:text-blue-800">
+            Or select from uploaded videos
+          </button>
+        </div>
 
-          <div id="imagesField" class="hidden">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Images</label>
-            <div id="selectedImages" class="grid grid-cols-3 gap-2 mb-3"></div>
-            <div class="flex gap-2">
-              <button type="button" onclick="openMediaPicker('image')" class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-lg border-2 border-dashed border-blue-300">
-                📁 Select from Media Library
-              </button>
-              <label class="flex-1 bg-green-50 hover:bg-green-100 text-green-700 px-4 py-3 rounded-lg border-2 border-dashed border-green-300 text-center cursor-pointer">
-                📤 Upload New Image
-                <input type="file" class="hidden" accept="image/*" multiple onchange="uploadImages(this.files)" />
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Display Order (optional)</label>
-            <input type="number" id="displayOrder" min="1"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <p class="text-sm text-gray-500 mt-1">Lower numbers appear first</p>
-          </div>
-
-          <div class="flex justify-end gap-3 pt-4">
-            <button type="button" id="cancelBtn" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
-              Cancel
+        <!-- Images Section -->
+        <div class="border rounded-lg p-4 bg-green-50">
+          <h3 class="font-semibold text-green-800 mb-3 flex items-center gap-2">
+            <span>🖼️</span> Images (optional)
+          </h3>
+          <div id="selectedImages" class="grid grid-cols-4 gap-2 mb-3"></div>
+          <div class="flex gap-2">
+            <button type="button" onclick="openMediaPicker('image')" class="flex-1 bg-white hover:bg-green-100 text-green-700 px-4 py-3 rounded-lg border-2 border-dashed border-green-300 text-sm">
+              Select from Media Library
             </button>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-              Save
-            </button>
+            <label class="flex-1 bg-white hover:bg-green-100 text-green-700 px-4 py-3 rounded-lg border-2 border-dashed border-green-300 text-center cursor-pointer text-sm">
+              Upload New Image
+              <input type="file" class="hidden" accept="image/*" multiple onchange="uploadImages(this.files)" />
+            </label>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <!-- Links Section -->
+        <div class="border rounded-lg p-4 bg-purple-50">
+          <h3 class="font-semibold text-purple-800 mb-3 flex items-center gap-2">
+            <span>🔗</span> Article Links (optional)
+          </h3>
+          <div id="linksList" class="space-y-3 mb-3"></div>
+          <button type="button" onclick="addLinkField()" class="text-sm bg-white hover:bg-purple-100 text-purple-700 px-4 py-2 rounded-lg border border-purple-300">
+            + Add Link
+          </button>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4 border-t">
+          <button type="button" id="cancelBtn" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+            Save Update
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <!-- Media Picker Modal -->
-    <div id="mediaPickerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-[60]">
-      <div class="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-bold">Select Media</h2>
-          <button onclick="closeMediaPicker()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-        </div>
+  <!-- Media Picker Modal -->
+  <div id="mediaPickerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-[60]">
+    <div class="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Select Media</h2>
+        <button onclick="closeMediaPicker()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+      </div>
 
-        <!-- Upload area in picker -->
-        <div class="mb-4 p-4 bg-gray-50 rounded-lg">
-          <label class="flex items-center justify-center gap-2 cursor-pointer text-blue-600 hover:text-blue-800">
-            <span class="text-xl">📤</span>
-            <span>Upload new file</span>
-            <input type="file" id="pickerUploadInput" class="hidden" accept="image/*,video/*" />
-          </label>
-        </div>
+      <!-- Upload area in picker -->
+      <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+        <label class="flex items-center justify-center gap-2 cursor-pointer text-blue-600 hover:text-blue-800">
+          <span class="text-xl">📤</span>
+          <span>Upload new file</span>
+          <input type="file" id="pickerUploadInput" class="hidden" accept="image/*,video/*" />
+        </label>
+      </div>
 
-        <div id="mediaPickerGrid" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          <p class="col-span-full text-gray-500 text-center py-8">Loading media...</p>
-        </div>
+      <div id="mediaPickerGrid" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <p class="col-span-full text-gray-500 text-center py-8">Loading media...</p>
       </div>
     </div>
   </div>
@@ -142,6 +137,7 @@
     let updates = [];
     let mediaFiles = [];
     let selectedImageUrls = [];
+    let selectedLinks = [];
     let currentPickerType = 'image';
 
     // Load updates on page load
@@ -173,39 +169,59 @@
       const container = document.getElementById('updatesList');
 
       if (updates.length === 0) {
-        container.innerHTML = '<p class="text-gray-500">No updates yet. Click "Add New Update" to create one.</p>';
+        container.innerHTML = '<p class="text-gray-500 bg-white rounded-lg p-8 text-center">No updates yet. Click "Add New Update" to create one.</p>';
         return;
       }
 
-      container.innerHTML = updates.map(update => `
-        <div class="bg-white rounded-lg shadow p-4 flex justify-between items-start">
-          <div class="flex-1">
-            <h3 class="font-semibold text-lg">${escapeHtml(update.title)}</h3>
-            <p class="text-sm text-gray-500">
-              ${formatDate(update.date)} • ${update.mediaType === 'video' ? '🎥 Video' : '🖼️ Images'}
-              ${update.displayOrder ? ` • Order: ${update.displayOrder}` : ''}
-            </p>
-            ${update.description ? `<p class="text-gray-600 mt-2">${escapeHtml(update.description)}</p>` : ''}
-            ${update.videoUrl ? `<p class="text-sm text-blue-500 mt-1 truncate">${update.videoUrl}</p>` : ''}
-            ${update.images && update.images.length > 0 ? `
-              <div class="flex gap-2 mt-2">
-                ${update.images.slice(0, 3).map(img => `
-                  <img src="${img.url}" class="w-16 h-16 object-cover rounded" />
-                `).join('')}
-                ${update.images.length > 3 ? `<span class="text-gray-500 text-sm self-center">+${update.images.length - 3} more</span>` : ''}
-              </div>
-            ` : ''}
+      container.innerHTML = updates.map(update => {
+        const hasVideo = update.videoUrl;
+        const hasImages = update.images && update.images.length > 0;
+        const hasLinks = update.links && update.links.length > 0;
+
+        const mediaTypes = [];
+        if (hasVideo) mediaTypes.push('🎥 Video');
+        if (hasImages) mediaTypes.push(`🖼️ ${update.images.length} image${update.images.length > 1 ? 's' : ''}`);
+        if (hasLinks) mediaTypes.push(`🔗 ${update.links.length} link${update.links.length > 1 ? 's' : ''}`);
+
+        return `
+          <div class="bg-white rounded-lg shadow p-4 flex justify-between items-start">
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg">${escapeHtml(update.title)}</h3>
+              <p class="text-sm text-gray-500">
+                ${formatDate(update.date)}
+                ${mediaTypes.length > 0 ? ' • ' + mediaTypes.join(' • ') : ''}
+                ${update.displayOrder ? ` • Order: ${update.displayOrder}` : ''}
+              </p>
+              ${update.description ? `<p class="text-gray-600 mt-2 text-sm">${escapeHtml(update.description)}</p>` : ''}
+              ${hasVideo ? `<p class="text-sm text-blue-500 mt-1 truncate">Video: ${update.videoUrl}</p>` : ''}
+              ${hasImages ? `
+                <div class="flex gap-2 mt-2">
+                  ${update.images.slice(0, 4).map(img => `
+                    <img src="${img.url}" class="w-12 h-12 object-cover rounded" />
+                  `).join('')}
+                  ${update.images.length > 4 ? `<span class="text-gray-500 text-sm self-center">+${update.images.length - 4} more</span>` : ''}
+                </div>
+              ` : ''}
+              ${hasLinks ? `
+                <div class="mt-2 text-sm">
+                  ${update.links.slice(0, 2).map(link => `
+                    <span class="inline-block bg-purple-100 text-purple-700 px-2 py-1 rounded mr-1 mb-1">${escapeHtml(link.title)}</span>
+                  `).join('')}
+                  ${update.links.length > 2 ? `<span class="text-gray-500">+${update.links.length - 2} more</span>` : ''}
+                </div>
+              ` : ''}
+            </div>
+            <div class="flex gap-2 ml-4">
+              <button onclick="editUpdate('${update.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 border border-blue-600 rounded text-sm">
+                Edit
+              </button>
+              <button onclick="deleteUpdate('${update.id}')" class="text-red-600 hover:text-red-800 px-3 py-1 border border-red-600 rounded text-sm">
+                Delete
+              </button>
+            </div>
           </div>
-          <div class="flex gap-2 ml-4">
-            <button onclick="editUpdate('${update.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 border border-blue-600 rounded">
-              Edit
-            </button>
-            <button onclick="deleteUpdate('${update.id}')" class="text-red-600 hover:text-red-800 px-3 py-1 border border-red-600 rounded">
-              Delete
-            </button>
-          </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function formatDate(dateString) {
@@ -225,7 +241,6 @@
     // Modal handling
     const modal = document.getElementById('modal');
     const form = document.getElementById('updateForm');
-    const mediaTypeSelect = document.getElementById('mediaType');
 
     document.getElementById('addNewBtn').addEventListener('click', () => {
       document.getElementById('modalTitle').textContent = 'Add New Update';
@@ -233,8 +248,9 @@
       document.getElementById('updateId').value = '';
       document.getElementById('date').value = new Date().toISOString().split('T')[0];
       selectedImageUrls = [];
+      selectedLinks = [];
       renderSelectedImages();
-      toggleMediaFields();
+      renderLinks();
       showModal();
     });
 
@@ -254,20 +270,11 @@
       modal.classList.remove('flex');
     }
 
-    // Toggle video/images fields
-    mediaTypeSelect.addEventListener('change', toggleMediaFields);
-
-    function toggleMediaFields() {
-      const isVideo = mediaTypeSelect.value === 'video';
-      document.getElementById('videoUrlField').classList.toggle('hidden', !isVideo);
-      document.getElementById('imagesField').classList.toggle('hidden', isVideo);
-    }
-
     // Selected images management
     function renderSelectedImages() {
       const container = document.getElementById('selectedImages');
       if (selectedImageUrls.length === 0) {
-        container.innerHTML = '<p class="col-span-3 text-gray-400 text-sm">No images selected</p>';
+        container.innerHTML = '<p class="col-span-4 text-gray-400 text-sm">No images selected</p>';
         return;
       }
 
@@ -275,7 +282,7 @@
         <div class="relative group">
           <img src="${url}" class="w-full aspect-square object-cover rounded" />
           <button type="button" onclick="removeImage(${i})"
-            class="absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full opacity-0 group-hover:opacity-100 transition">
+            class="absolute top-1 right-1 bg-red-500 text-white w-5 h-5 rounded-full text-xs opacity-0 group-hover:opacity-100 transition">
             ×
           </button>
         </div>
@@ -286,6 +293,46 @@
       selectedImageUrls.splice(index, 1);
       renderSelectedImages();
     };
+
+    // Links management
+    window.addLinkField = function(link = { url: '', title: '', description: '' }) {
+      selectedLinks.push(link);
+      renderLinks();
+    };
+
+    window.removeLink = function(index) {
+      selectedLinks.splice(index, 1);
+      renderLinks();
+    };
+
+    window.updateLink = function(index, field, value) {
+      selectedLinks[index][field] = value;
+    };
+
+    function renderLinks() {
+      const container = document.getElementById('linksList');
+      if (selectedLinks.length === 0) {
+        container.innerHTML = '<p class="text-gray-400 text-sm">No links added</p>';
+        return;
+      }
+
+      container.innerHTML = selectedLinks.map((link, i) => `
+        <div class="bg-white p-3 rounded border relative">
+          <button type="button" onclick="removeLink(${i})" class="absolute top-2 right-2 text-red-500 hover:text-red-700">×</button>
+          <div class="space-y-2">
+            <input type="text" placeholder="Link Title *" value="${escapeHtml(link.title)}"
+              onchange="updateLink(${i}, 'title', this.value)"
+              class="w-full px-2 py-1 border border-gray-300 rounded text-sm" />
+            <input type="url" placeholder="URL *" value="${escapeHtml(link.url)}"
+              onchange="updateLink(${i}, 'url', this.value)"
+              class="w-full px-2 py-1 border border-gray-300 rounded text-sm" />
+            <input type="text" placeholder="Description (optional)" value="${escapeHtml(link.description || '')}"
+              onchange="updateLink(${i}, 'description', this.value)"
+              class="w-full px-2 py-1 border border-gray-300 rounded text-sm" />
+          </div>
+        </div>
+      `).join('');
+    }
 
     // Media Picker
     window.openMediaPicker = async function(type) {
@@ -394,13 +441,13 @@
       document.getElementById('title').value = update.title;
       document.getElementById('description').value = update.description || '';
       document.getElementById('date').value = update.date;
-      document.getElementById('mediaType').value = update.mediaType;
       document.getElementById('videoUrl').value = update.videoUrl || '';
       document.getElementById('displayOrder').value = update.displayOrder || '';
 
       selectedImageUrls = (update.images || []).map(img => img.url);
+      selectedLinks = (update.links || []).map(link => ({ ...link }));
       renderSelectedImages();
-      toggleMediaFields();
+      renderLinks();
       showModal();
     };
 
@@ -429,15 +476,27 @@
       e.preventDefault();
 
       const id = document.getElementById('updateId').value;
-      const mediaType = document.getElementById('mediaType').value;
+      const videoUrl = document.getElementById('videoUrl').value.trim();
+      const validLinks = selectedLinks.filter(l => l.url && l.title);
+
+      // Determine media type for backward compatibility
+      let mediaType = null;
+      if (videoUrl && selectedImageUrls.length > 0) {
+        mediaType = 'mixed';
+      } else if (videoUrl) {
+        mediaType = 'video';
+      } else if (selectedImageUrls.length > 0) {
+        mediaType = 'images';
+      }
 
       const data = {
         title: document.getElementById('title').value,
         description: document.getElementById('description').value || undefined,
         date: document.getElementById('date').value,
         mediaType: mediaType,
-        videoUrl: mediaType === 'video' ? document.getElementById('videoUrl').value || undefined : undefined,
-        images: mediaType === 'images' ? selectedImageUrls.map(url => ({ url })) : undefined,
+        videoUrl: videoUrl || undefined,
+        images: selectedImageUrls.length > 0 ? selectedImageUrls.map(url => ({ url })) : undefined,
+        links: validLinks.length > 0 ? validLinks : undefined,
         displayOrder: document.getElementById('displayOrder').value
           ? parseInt(document.getElementById('displayOrder').value)
           : undefined
@@ -468,5 +527,4 @@
       if (e.target.id === 'mediaPickerModal') closeMediaPicker();
     });
   </script>
-</body>
-</html>
+</AdminLayout>

@@ -44,9 +44,9 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const data: NewCentreUpdateInput = await request.json();
 
-    // Validate required fields
-    if (!data.title || !data.date || !data.mediaType) {
-      return new Response(JSON.stringify({ error: 'Missing required fields: title, date, mediaType' }), {
+    // Validate required fields (mediaType is now optional)
+    if (!data.title || !data.date) {
+      return new Response(JSON.stringify({ error: 'Missing required fields: title, date' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });

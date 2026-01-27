@@ -10,25 +10,87 @@ const html = `<!DOCTYPE html>
   </script>
   <style>
     .admin-nav {
-      background: #f3f4f6;
-      padding: 8px 16px;
+      background: linear-gradient(to right, #1e40af, #1e3a8a);
+      padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .admin-nav a {
-      color: #4b5563;
+    .admin-nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .admin-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .admin-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .admin-nav-link {
+      color: white;
       text-decoration: none;
       font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
     }
-    .admin-nav a:hover {
-      color: #1f2937;
+    .admin-nav-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .admin-nav-link.active {
+      background: rgba(255,255,255,0.2);
+    }
+    .admin-nav-site {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .admin-nav-site:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    @media (max-width: 768px) {
+      .admin-nav-links { display: none; }
+      .admin-nav-site { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="admin-nav">
-    <a href="/admin">← Back to Dashboard</a>
-  </div>
+  <nav class="admin-nav">
+    <div class="admin-nav-container">
+      <a href="/admin" class="admin-nav-brand">
+        <span>⚙️</span>
+        <span>OIAC Admin</span>
+      </a>
+      <div class="admin-nav-links">
+        <a href="/admin" class="admin-nav-link">🏠 Dashboard</a>
+        <a href="/admin/newcentre-updates" class="admin-nav-link">🏗️ New Centre Updates</a>
+        <a href="/admin/media" class="admin-nav-link">🖼️ Media Library</a>
+        <a href="/admin/cms" class="admin-nav-link active">📝 Content CMS</a>
+      </div>
+      <a href="/" class="admin-nav-site">👁️ View Site</a>
+    </div>
+  </nav>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     (function() {
