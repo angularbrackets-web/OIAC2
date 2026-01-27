@@ -11,5 +11,8 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   image: {
     domains: ["https://**.graphassets.com"],
+  },
+  security: {
+    checkOrigin: false // Allow form submissions to API routes
   }
 });
