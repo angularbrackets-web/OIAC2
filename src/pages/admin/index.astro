@@ -1,0 +1,84 @@
+---
+// Admin Dashboard - Landing page with navigation to all admin sections
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - OIAC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">OIAC Admin Dashboard</h1>
+      <p class="text-gray-600 mt-2">Manage website content and settings</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Database-Managed Collections -->
+      <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white shadow-lg">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">🗄️</span>
+          <h2 class="text-xl font-bold">Database Collections</h2>
+        </div>
+        <p class="text-blue-100 mb-4 text-sm">Content stored in database for instant updates (no rebuild required)</p>
+        <div class="space-y-2">
+          <a href="/admin/newcentre-updates" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition">
+            <div class="font-semibold">New Centre Updates</div>
+            <div class="text-sm text-blue-200">Timeline updates with videos and images</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Git-Based Collections (Decap CMS) -->
+      <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl p-6 text-white shadow-lg">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">📝</span>
+          <h2 class="text-xl font-bold">Content Collections</h2>
+        </div>
+        <p class="text-green-100 mb-4 text-sm">Git-based content managed via Decap CMS (triggers rebuild on save)</p>
+        <div class="space-y-2">
+          <a href="/admin/cms" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition">
+            <div class="font-semibold">Open Decap CMS</div>
+            <div class="text-sm text-green-200">Jobs, Posts, Staff, Prayer Times, Jummah Times</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Media Library -->
+      <div class="bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-6 text-white shadow-lg">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">🖼️</span>
+          <h2 class="text-xl font-bold">Media Library</h2>
+        </div>
+        <p class="text-purple-100 mb-4 text-sm">Upload and manage images and videos</p>
+        <div class="space-y-2">
+          <a href="/admin/media" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition">
+            <div class="font-semibold">Manage Media</div>
+            <div class="text-sm text-purple-200">Upload, view, and delete media files</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="mt-8 bg-white rounded-xl p-6 shadow">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Quick Links</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition">
+          ← View Website
+        </a>
+        <a href="/newcentre" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition">
+          New Centre Page
+        </a>
+        <a href="/prayertimes" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition">
+          Prayer Times
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
