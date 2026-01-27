@@ -18,7 +18,7 @@ export const GET: APIRoute = async () => {
     const mediaFiles = files
       .filter(file => {
         const ext = path.extname(file).toLowerCase();
-        return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.mp4', '.webm', '.mov'].includes(ext);
+        return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.avif', '.heic', '.heif', '.mp4', '.webm', '.mov'].includes(ext);
       })
       .map(file => {
         const filePath = path.join(uploadPath, file);
@@ -63,9 +63,9 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'video/mp4', 'video/webm', 'video/quicktime'];
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'image/avif', 'image/heic', 'image/heif', 'video/mp4', 'video/webm', 'video/quicktime'];
     if (!allowedTypes.includes(file.type)) {
-      return new Response(JSON.stringify({ error: 'Invalid file type. Allowed: JPG, PNG, GIF, WebP, SVG, MP4, WebM, MOV' }), {
+      return new Response(JSON.stringify({ error: 'Invalid file type. Allowed: JPG, PNG, GIF, WebP, AVIF, HEIC, SVG, MP4, WebM, MOV' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
