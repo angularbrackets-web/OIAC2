@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
-// Environment variables will be provided via Vercel
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+// Environment variables will be provided via Vercel or .env file
+const supabaseUrl = import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL || '';
+const supabaseServiceKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
