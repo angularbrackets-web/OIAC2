@@ -8,8 +8,50 @@ const html = `<!DOCTYPE html>
   <script>
     window.CMS_MANUAL_INIT = true;
   </script>
+  <style>
+    .db-collections-banner {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .db-collections-banner h3 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .db-collections-banner p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    .db-collections-banner a {
+      background: white;
+      color: #1e3a5f;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .db-collections-banner a:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
 </head>
 <body>
+  <div class="db-collections-banner">
+    <div>
+      <h3>📦 Database-Managed Collections</h3>
+      <p>New Centre Updates are stored in the database for instant updates.</p>
+    </div>
+    <a href="/admin/newcentre-updates">Manage New Centre Updates →</a>
+  </div>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     (function() {
