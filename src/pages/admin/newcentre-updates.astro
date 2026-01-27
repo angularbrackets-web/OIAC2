@@ -388,6 +388,13 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       const file = e.target.files[0];
       if (!file) return;
 
+      // Check file size
+      if (file.size > MAX_FILE_SIZE) {
+        alert(`File "${file.name}" is too large (${formatFileSize(file.size)}). Maximum size is 4MB. Please compress or resize before uploading.`);
+        e.target.value = '';
+        return;
+      }
+
       const formData = new FormData();
       formData.append('file', file);
 
@@ -397,7 +404,12 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           body: formData
         });
 
-        if (!response.ok) throw new Error('Upload failed');
+        if (!response.ok) {
+          if (response.status === 413) {
+            throw new Error('File too large. Please use a file under 4MB.');
+          }
+          throw new Error('Upload failed');
+        }
 
         const result = await response.json();
         selectMedia(result.url);
@@ -408,9 +420,24 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       e.target.value = '';
     });
 
+    // File size limit (4MB to be safe with Vercel's 4.5MB limit)
+    const MAX_FILE_SIZE = 4 * 1024 * 1024;
+
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+
     // Upload images directly
     window.uploadImages = async function(files) {
       for (const file of files) {
+        // Check file size
+        if (file.size > MAX_FILE_SIZE) {
+          alert(`File "${file.name}" is too large (${formatFileSize(file.size)}). Maximum size is 4MB. Please compress or resize the image before uploading.`);
+          continue;
+        }
+
         const formData = new FormData();
         formData.append('file', file);
 
@@ -420,7 +447,12 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
             body: formData
           });
 
-          if (!response.ok) throw new Error('Upload failed');
+          if (!response.ok) {
+            if (response.status === 413) {
+              throw new Error('File too large. Please use an image under 4MB.');
+            }
+            throw new Error('Upload failed');
+          }
 
           const result = await response.json();
           selectedImageUrls.push(result.url);

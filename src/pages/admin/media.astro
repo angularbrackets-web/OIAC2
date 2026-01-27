@@ -85,6 +85,9 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       await uploadFiles(e.dataTransfer.files);
     });
 
+    // File size limit (4MB to be safe with Vercel's 4.5MB limit)
+    const MAX_FILE_SIZE = 4 * 1024 * 1024;
+
     async function uploadFiles(files) {
       if (files.length === 0) return;
 
@@ -92,6 +95,12 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       progress.classList.remove('hidden');
 
       for (const file of files) {
+        // Check file size
+        if (file.size > MAX_FILE_SIZE) {
+          alert(`File "${file.name}" is too large (${formatSize(file.size)}). Maximum size is 4MB. Please compress or resize before uploading.`);
+          continue;
+        }
+
         const formData = new FormData();
         formData.append('file', file);
 
@@ -102,6 +111,9 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           });
 
           if (!response.ok) {
+            if (response.status === 413) {
+              throw new Error('File too large. Server limit is 4MB.');
+            }
             const err = await response.json();
             throw new Error(err.error || 'Upload failed');
           }
