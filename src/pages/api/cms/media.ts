@@ -1,40 +1,45 @@
 import type { APIRoute } from 'astro';
-import fs from 'fs';
-import path from 'path';
+import { supabase } from '../../../lib/db';
 
-const UPLOAD_DIR = 'public/images/uploads';
+const BUCKET_NAME = 'media';
 
-// GET: List all uploaded media files
+// GET: List all uploaded media files from Supabase Storage
 export const GET: APIRoute = async () => {
   try {
-    const uploadPath = path.join(process.cwd(), UPLOAD_DIR);
+    const { data: files, error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .list('', {
+        limit: 100,
+        sortBy: { column: 'created_at', order: 'desc' }
+      });
 
-    // Ensure directory exists
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
+    if (error) {
+      console.error('Supabase storage error:', error);
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
-    const files = fs.readdirSync(uploadPath);
-    const mediaFiles = files
-      .filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.avif', '.heic', '.heif', '.mp4', '.webm', '.mov'].includes(ext);
-      })
+    const mediaFiles = (files || [])
+      .filter(file => file.name !== '.emptyFolderPlaceholder')
       .map(file => {
-        const filePath = path.join(uploadPath, file);
-        const stats = fs.statSync(filePath);
-        const ext = path.extname(file).toLowerCase();
-        const isVideo = ['.mp4', '.webm', '.mov'].includes(ext);
+        const ext = file.name.split('.').pop()?.toLowerCase() || '';
+        const isVideo = ['mp4', 'webm', 'mov'].includes(ext);
+
+        // Get public URL
+        const { data: { publicUrl } } = supabase.storage
+          .from(BUCKET_NAME)
+          .getPublicUrl(file.name);
 
         return {
-          name: file,
-          url: `/images/uploads/${file}`,
+          name: file.name,
+          url: publicUrl,
           type: isVideo ? 'video' : 'image',
-          size: stats.size,
-          modified: stats.mtime.toISOString(),
+          size: file.metadata?.size || 0,
+          modified: file.created_at || new Date().toISOString(),
         };
-      })
-      .sort((a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime());
+      });
 
     return new Response(JSON.stringify(mediaFiles), {
       status: 200,
@@ -49,7 +54,7 @@ export const GET: APIRoute = async () => {
   }
 };
 
-// POST: Upload a new media file
+// POST: Upload a new media file to Supabase Storage
 export const POST: APIRoute = async ({ request }) => {
   try {
     const formData = await request.formData();
@@ -79,24 +84,34 @@ export const POST: APIRoute = async ({ request }) => {
       .replace(/_+/g, '_');
     const fileName = `${timestamp}_${safeName}`;
 
-    const uploadPath = path.join(process.cwd(), UPLOAD_DIR);
+    // Upload to Supabase Storage
+    const buffer = await file.arrayBuffer();
+    const { data, error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .upload(fileName, buffer, {
+        contentType: file.type,
+        cacheControl: '3600',
+        upsert: false
+      });
 
-    // Ensure directory exists
-    if (!fs.existsSync(uploadPath)) {
-      fs.mkdirSync(uploadPath, { recursive: true });
+    if (error) {
+      console.error('Supabase upload error:', error);
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
-    // Write file
-    const filePath = path.join(uploadPath, fileName);
-    const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(filePath, buffer);
+    // Get public URL
+    const { data: { publicUrl } } = supabase.storage
+      .from(BUCKET_NAME)
+      .getPublicUrl(fileName);
 
     const isVideo = file.type.startsWith('video/');
-    const url = `/images/uploads/${fileName}`;
 
     return new Response(JSON.stringify({
       success: true,
-      url,
+      url: publicUrl,
       name: fileName,
       type: isVideo ? 'video' : 'image'
     }), {
@@ -112,7 +127,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 };
 
-// DELETE: Delete a media file
+// DELETE: Delete a media file from Supabase Storage
 export const DELETE: APIRoute = async ({ request }) => {
   try {
     const { fileName } = await request.json();
@@ -124,18 +139,20 @@ export const DELETE: APIRoute = async ({ request }) => {
       });
     }
 
-    // Prevent directory traversal
-    const safeName = path.basename(fileName);
-    const filePath = path.join(process.cwd(), UPLOAD_DIR, safeName);
+    // Extract just the filename if a full URL was provided
+    const name = fileName.includes('/') ? fileName.split('/').pop() : fileName;
 
-    if (!fs.existsSync(filePath)) {
-      return new Response(JSON.stringify({ error: 'File not found' }), {
-        status: 404,
+    const { error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .remove([name]);
+
+    if (error) {
+      console.error('Supabase delete error:', error);
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
     }
-
-    fs.unlinkSync(filePath);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
