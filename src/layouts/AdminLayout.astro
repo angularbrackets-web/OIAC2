@@ -20,108 +20,105 @@ const navItems = [
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} - OIAC Admin</title>
-  <style>
-    /* Base styles - inline to ensure they work */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background-color: #f3f4f6;
-      min-height: 100vh;
-    }
+  <style is:inline>
+    /* Admin styles - is:inline prevents Astro processing, !important overrides Tailwind */
     .admin-nav {
-      background: linear-gradient(to right, #1e40af, #1e3a8a);
-      color: white;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      background: linear-gradient(to right, #1e40af, #1e3a8a) !important;
+      color: white !important;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1) !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
     .admin-nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+      padding: 0 16px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      height: 64px !important;
     }
     .admin-nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 18px;
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      color: white !important;
+      text-decoration: none !important;
+      font-weight: bold !important;
+      font-size: 18px !important;
     }
-    .admin-nav-brand:hover { opacity: 0.9; }
+    .admin-nav-brand:hover { opacity: 0.9 !important; }
     .admin-nav-links {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      display: flex !important;
+      align-items: center !important;
+      gap: 4px !important;
     }
     .admin-nav-link {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      padding: 8px 16px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.2s;
+      color: white !important;
+      text-decoration: none !important;
+      font-size: 14px !important;
+      padding: 8px 16px !important;
+      border-radius: 8px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      transition: background 0.2s !important;
+      background: transparent !important;
     }
-    .admin-nav-link:hover { background: rgba(255,255,255,0.1); }
-    .admin-nav-link.active { background: rgba(255,255,255,0.2); }
+    .admin-nav-link:hover { background: rgba(255,255,255,0.1) !important; }
+    .admin-nav-link.active { background: rgba(255,255,255,0.2) !important; }
     .admin-nav-site {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      padding: 8px 16px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.1);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: white !important;
+      text-decoration: none !important;
+      font-size: 14px !important;
+      padding: 8px 16px !important;
+      border-radius: 8px !important;
+      background: rgba(255,255,255,0.1) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
     }
-    .admin-nav-site:hover { background: rgba(255,255,255,0.2); }
+    .admin-nav-site:hover { background: rgba(255,255,255,0.2) !important; }
     .mobile-menu-btn {
-      display: none;
-      padding: 8px;
-      border-radius: 8px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: white;
+      display: none !important;
+      padding: 8px !important;
+      border-radius: 8px !important;
+      background: none !important;
+      border: none !important;
+      cursor: pointer !important;
+      color: white !important;
     }
-    .mobile-menu-btn:hover { background: rgba(255,255,255,0.1); }
+    .mobile-menu-btn:hover { background: rgba(255,255,255,0.1) !important; }
     .mobile-menu {
-      display: none;
-      padding-bottom: 16px;
+      display: none !important;
+      padding: 0 16px 16px 16px !important;
     }
     .mobile-menu a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      padding: 12px 16px !important;
+      color: white !important;
+      text-decoration: none !important;
+      border-radius: 8px !important;
     }
-    .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
-    .mobile-menu a.active { background: rgba(255,255,255,0.2); }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.1) !important; }
+    .mobile-menu a.active { background: rgba(255,255,255,0.2) !important; }
     .mobile-menu-divider {
-      border-top: 1px solid rgba(255,255,255,0.2);
-      margin-top: 8px;
-      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.2) !important;
+      margin-top: 8px !important;
+      padding-top: 8px !important;
     }
     .admin-main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 32px 16px;
+      max-width: 1200px !important;
+      margin: 0 auto !important;
+      padding: 32px 16px !important;
     }
     @media (max-width: 768px) {
-      .admin-nav-links { display: none; }
-      .admin-nav-site { display: none; }
-      .mobile-menu-btn { display: block; }
-      .mobile-menu.open { display: block; }
+      .admin-nav-links { display: none !important; }
+      .admin-nav-site { display: none !important; }
+      .mobile-menu-btn { display: block !important; }
+      .mobile-menu.open { display: block !important; }
     }
   </style>
 </head>

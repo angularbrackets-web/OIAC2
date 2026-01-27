@@ -80,7 +80,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
             </button>
             <label class="flex-1 bg-white hover:bg-green-100 text-green-700 px-4 py-3 rounded-lg border-2 border-dashed border-green-300 text-center cursor-pointer text-sm">
               Upload New Image
-              <input type="file" class="hidden" accept="image/*" multiple onchange="uploadImages(this.files)" />
+              <input type="file" class="hidden" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/avif,image/heic,image/heif,.jpg,.jpeg,.png,.gif,.webp,.svg,.avif,.heic,.heif" multiple onchange="uploadImages(this.files)" />
             </label>
           </div>
         </div>
@@ -121,7 +121,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         <label class="flex items-center justify-center gap-2 cursor-pointer text-blue-600 hover:text-blue-800">
           <span class="text-xl">📤</span>
           <span>Upload new file</span>
-          <input type="file" id="pickerUploadInput" class="hidden" accept="image/*,video/*" />
+          <input type="file" id="pickerUploadInput" class="hidden" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/avif,image/heic,image/heif,video/mp4,video/webm,video/quicktime,.jpg,.jpeg,.png,.gif,.webp,.svg,.avif,.heic,.heif,.mp4,.webm,.mov" />
         </label>
       </div>
 
