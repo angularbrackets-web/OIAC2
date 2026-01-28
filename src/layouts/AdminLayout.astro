@@ -79,6 +79,23 @@ const navItems = [
       gap: 8px !important;
     }
     .admin-nav-site:hover { background: rgba(255,255,255,0.2) !important; }
+    .admin-nav-actions {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .admin-nav-logout {
+      color: white !important;
+      text-decoration: none !important;
+      font-size: 18px !important;
+      padding: 8px 12px !important;
+      border-radius: 8px !important;
+      background: rgba(239,68,68,0.2) !important;
+      display: flex !important;
+      align-items: center !important;
+      transition: background 0.2s !important;
+    }
+    .admin-nav-logout:hover { background: rgba(239,68,68,0.4) !important; }
     .mobile-menu-btn {
       display: none !important;
       padding: 8px !important;
@@ -116,7 +133,7 @@ const navItems = [
     }
     @media (max-width: 768px) {
       .admin-nav-links { display: none !important; }
-      .admin-nav-site { display: none !important; }
+      .admin-nav-actions { display: none !important; }
       .mobile-menu-btn { display: block !important; }
       .mobile-menu.open { display: block !important; }
     }
@@ -142,11 +159,16 @@ const navItems = [
         ))}
       </div>
 
-      <!-- View Site Link -->
-      <a href="/" class="admin-nav-site">
-        <span>👁️</span>
-        <span>View Site</span>
-      </a>
+      <!-- View Site & Logout -->
+      <div class="admin-nav-actions">
+        <a href="/" class="admin-nav-site">
+          <span>👁️</span>
+          <span>View Site</span>
+        </a>
+        <a href="/api/admin/logout" class="admin-nav-logout" title="Logout">
+          🚪
+        </a>
+      </div>
 
       <!-- Mobile Menu Button -->
       <button class="mobile-menu-btn" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
@@ -168,6 +190,10 @@ const navItems = [
         <a href="/">
           <span>👁️</span>
           <span>View Site</span>
+        </a>
+        <a href="/api/admin/logout" style="color: #fca5a5 !important;">
+          <span>🚪</span>
+          <span>Logout</span>
         </a>
       </div>
     </div>
