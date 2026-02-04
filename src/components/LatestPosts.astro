@@ -1,8 +1,7 @@
 ---
-import { getPosts, type OIAC_Post } from "../lib/content/posts";
-import { isObjectEmpty } from "../helper";
+import { getPosters, type PosterRecord } from "../lib/db";
 
-const posts: Array<OIAC_Post> = await getPosts();
+const posters: Array<PosterRecord> = await getPosters();
 ---
 
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
@@ -10,19 +9,19 @@ const posts: Array<OIAC_Post> = await getPosts();
     <!-- Remove the nested flex-wrap div and keep just one flex container -->
     <div class="flex flex-wrap gap-4 md:gap-8 lg:gap-12">
       {
-        posts.map((post) => (
+        posters.map((poster) => (
           <div class="w-1/2 md:w-1/3 lg:w-1/4 p-1 mb-5 md:mb-10">
-            <a href={post.link?.url} target="_blank">
+            <a href={poster.linkUrl} target="_blank">
               <div>
                 <img
-                  src={post.image[0].url}
-                  alt={post.title}
+                  src={poster.imageUrl}
+                  alt={poster.title}
                   class="rounded-lg"
                 />
               </div>
 
               <div class="my-1 bg-terracottaRed hover:bg-terracottaRed-darker text-white p-1 rounded-md w-full text-center text-[10px] md:text-lg">
-                {post.link?.text}
+                {poster.linkText}
               </div>
             </a>
           </div>

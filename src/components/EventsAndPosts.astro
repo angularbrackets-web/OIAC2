@@ -1,10 +1,9 @@
 ---
-import { getPosts, type OIAC_Post } from "../lib/content/posts";
+import { getPosters, type PosterRecord } from "../lib/db";
 import { getEventsForMonths, type OIAC_Event } from "../lib/content/events";
-import { isObjectEmpty } from "../helper";
 import interacLogo from "../assets/Interac.Logo1.png";
 
-const posts: Array<OIAC_Post> = await getPosts();
+const posters: Array<PosterRecord> = await getPosters();
 
 let currentMonth = new Date().getMonth() + 1;
 const eventsForTheMonth: Array<OIAC_Event> = await getEventsForMonths([
@@ -101,23 +100,23 @@ const year = date.getFullYear();
           >
 
           {
-            posts.map((post) => (
+            posters.map((poster) => (
               <div class="post-slide hidden">
                 <div class="">
                   <img
-                    src={post.image[0].url}
-                    alt={post.title}
+                    src={poster.imageUrl}
+                    alt={poster.title}
                     class="rounded-3xl"
                   />
                 </div>
                 <div class="py-10 px-3 min-h-24">
-                  {!isObjectEmpty(post.link) && post.link !== null && (
+                  {poster.linkText && poster.linkUrl && (
                     <a
-                      href={post.link.url}
+                      href={poster.linkUrl}
                       target="_blank"
                       class="my-5 bg-terracottaRed hover:bg-terracottaRed-darker text-white p-2 px-5 rounded-lg"
                     >
-                      {post.link.text}
+                      {poster.linkText}
                     </a>
                   )}
                 </div>

@@ -328,6 +328,103 @@ export async function deleteSlideshowItem(id: string) {
   return true;
 }
 
+// Posters table
+export type PosterInput = {
+  title: string;
+  imageUrl: string;
+  linkText?: string;
+  linkUrl?: string;
+  displayOrder?: number;
+};
+
+export type PosterRecord = PosterInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapPosterRecord(record: Record<string, any>): PosterRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    imageUrl: record.image_url,
+    linkText: record.link_text,
+    linkUrl: record.link_url,
+    displayOrder: record.display_order,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createPoster(data: PosterInput): Promise<PosterRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_posters')
+    .insert([{
+      title: data.title,
+      image_url: data.imageUrl,
+      link_text: data.linkText || null,
+      link_url: data.linkUrl || null,
+      display_order: data.displayOrder || null,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapPosterRecord);
+}
+
+export async function getPosters(): Promise<PosterRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_posters')
+    .select('*')
+    .order('display_order', { ascending: true, nullsFirst: false });
+
+  if (error) throw error;
+  return (data || []).map(mapPosterRecord);
+}
+
+export async function getPosterById(id: string): Promise<PosterRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_posters')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapPosterRecord(data);
+}
+
+export async function updatePoster(id: string, data: Partial<PosterInput>) {
+  const updateData: Record<string, unknown> = {};
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.imageUrl !== undefined) updateData.image_url = data.imageUrl;
+  if (data.linkText !== undefined) updateData.link_text = data.linkText;
+  if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+
+  const { data: result, error } = await supabase
+    .from('oiac_posters')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deletePoster(id: string) {
+  const { error } = await supabase
+    .from('oiac_posters')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor
