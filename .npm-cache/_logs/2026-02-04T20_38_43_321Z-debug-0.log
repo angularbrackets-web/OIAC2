@@ -5,10 +5,10 @@
 4 silly config load:file:/Users/mohammad/Projects/OIAC2/.npmrc
 5 silly config load:file:/Users/mohammad/.npmrc
 6 silly config load:file:/usr/local/etc/npmrc
-7 verbose title npm exec astro build
-8 verbose argv "exec" "--" "astro" "build"
-9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2026-02-04T17_02_29_659Z-
-10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2026-02-04T17_02_29_659Z-debug-0.log
+7 verbose title npm exec astro check
+8 verbose argv "exec" "--" "astro" "check"
+9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2026-02-04T20_38_43_321Z-
+10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2026-02-04T20_38_43_321Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mohammad/Projects/OIAC2

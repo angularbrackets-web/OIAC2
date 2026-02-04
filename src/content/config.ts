@@ -12,23 +12,6 @@ const jobs = defineCollection({
   }),
 });
 
-// Posts Collection
-const posts = defineCollection({
-  type: 'data',
-  schema: z.object({
-    title: z.string(),
-    image: z.array(z.object({
-      url: z.string(),
-    })),
-    link: z.object({
-      text: z.string(),
-      url: z.string(),
-    }),
-    content: z.array(z.string()).optional(),
-    priority: z.number().optional(),
-  }),
-});
-
 // Staff Collection
 const staff = defineCollection({
   type: 'data',
@@ -76,7 +59,6 @@ const jummahTimes = defineCollection({
 
 export const collections = {
   jobs,
-  posts,
   staff,
   'prayer-times': prayerTimes,
   'jummah-times': jummahTimes,

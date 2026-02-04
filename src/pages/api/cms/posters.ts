@@ -5,6 +5,7 @@ import {
   getPosterById,
   updatePoster,
   deletePoster,
+  shiftPosterOrders,
   type PosterInput
 } from '../../../lib/db';
 
@@ -49,6 +50,11 @@ export const POST: APIRoute = async ({ request }) => {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
+    }
+
+    if (data.displayOrder == null) {
+      await shiftPosterOrders();
+      data.displayOrder = 1;
     }
 
     const result = await createPoster(data);

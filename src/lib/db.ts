@@ -356,6 +356,21 @@ function mapPosterRecord(record: Record<string, any>): PosterRecord {
   };
 }
 
+export async function shiftPosterOrders(): Promise<void> {
+  const { data, error } = await supabase
+    .from('oiac_posters')
+    .select('id, display_order');
+
+  if (error) throw error;
+
+  for (const poster of (data || [])) {
+    await supabase
+      .from('oiac_posters')
+      .update({ display_order: (poster.display_order || 0) + 1 })
+      .eq('id', poster.id);
+  }
+}
+
 export async function createPoster(data: PosterInput): Promise<PosterRecord[]> {
   const { data: result, error } = await supabase
     .from('oiac_posters')

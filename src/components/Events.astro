@@ -1,8 +1,5 @@
 ---
-import { getPosts, type OIAC_Post } from '../lib/content/posts'
 import { getEventsForMonths, type OIAC_Event } from '../lib/content/events'
-
-const posts : Array<OIAC_Post> = await getPosts()
 
 let currentMonth = new Date().getMonth() + 1
 const eventsForTheMonth : Array<OIAC_Event> = await getEventsForMonths([currentMonth])
