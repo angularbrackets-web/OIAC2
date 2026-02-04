@@ -92,7 +92,7 @@ const { posters, autoPlayInterval = 5000 } = Astro.props;
 )}
 
 <script>
-  document.querySelectorAll('.posters-carousel').forEach((carousel) => {
+  document.querySelectorAll<HTMLElement>('.posters-carousel').forEach((carousel) => {
     const slides = carousel.querySelectorAll<HTMLDivElement>('.poster-slide');
     const dots   = carousel.querySelectorAll<HTMLButtonElement>('.poster-dot');
     const prevBtn = carousel.querySelector('.poster-nav-prev');
