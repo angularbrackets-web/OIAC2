@@ -1,0 +1,217 @@
+---
+import type { PosterRecord } from "../lib/db";
+
+interface Props {
+  posters: PosterRecord[];
+  autoPlayInterval?: number;
+}
+
+const { posters, autoPlayInterval = 5000 } = Astro.props;
+---
+
+{posters.length > 0 && (
+<div
+  class="posters-carousel"
+  data-interval={autoPlayInterval}
+  role="region"
+  aria-label="Poster slideshow"
+>
+  <!-- Screen-reader live region announces the current poster title -->
+  <span class="sr-only poster-live-region" aria-live="polite" aria-atomic="true">
+    {posters[0].title}
+  </span>
+
+  <!-- Slide viewport — fixed 3:4 aspect ratio prevents layout shift -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[3/4]">
+    {posters.map((poster, i) => (
+      <div
+        class="poster-slide absolute inset-0"
+        style={i === 0 ? 'opacity: 1; transform: translateX(0)' : 'opacity: 0; transform: translateX(100%)'}
+        aria-hidden={i === 0 ? undefined : "true"}
+      >
+        <img
+          src={poster.imageUrl}
+          alt={poster.title}
+          class="w-full h-full object-cover object-center"
+          loading={i === 0 ? "eager" : "lazy"}
+        />
+
+        <!-- CTA overlay with bottom gradient — only rendered when the poster has a link -->
+        {poster.linkText && poster.linkUrl && (
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-16 pb-4 px-4 flex items-end">
+            <a
+              href={poster.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-terracottaRed hover:bg-terracottaRed-darker text-white px-5 py-2 rounded-lg transition-colors duration-200 text-sm font-semibold shadow-md"
+            >
+              {poster.linkText}
+            </a>
+          </div>
+        )}
+      </div>
+    ))}
+
+    <!-- Prev / Next arrows — hidden when there is only one poster -->
+    {posters.length > 1 && (
+      <button
+        class="poster-nav-prev absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 hover:bg-black/80 text-white flex items-center justify-center transition-colors duration-200 z-10"
+        aria-label="Previous poster"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+    )}
+    {posters.length > 1 && (
+      <button
+        class="poster-nav-next absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 hover:bg-black/80 text-white flex items-center justify-center transition-colors duration-200 z-10"
+        aria-label="Next poster"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    )}
+  </div>
+
+  <!-- Dot indicators — hidden when there is only one poster -->
+  {posters.length > 1 && (
+    <div class="flex justify-center gap-2.5 mt-3">
+      {posters.map((poster, i) => (
+        <button
+          class={`poster-dot w-2.5 h-2.5 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-terracottaRed focus-visible:ring-offset-1 ${i === 0 ? 'bg-terracottaRed scale-110' : 'bg-gray-300 hover:bg-gray-400'}`}
+          aria-label={poster.title}
+          aria-pressed={i === 0 ? "true" : "false"}
+          data-index={i}
+        ></button>
+      ))}
+    </div>
+  )}
+</div>
+)}
+
+<script>
+  document.querySelectorAll('.posters-carousel').forEach((carousel) => {
+    const slides = carousel.querySelectorAll<HTMLDivElement>('.poster-slide');
+    const dots   = carousel.querySelectorAll<HTMLButtonElement>('.poster-dot');
+    const prevBtn = carousel.querySelector('.poster-nav-prev');
+    const nextBtn = carousel.querySelector('.poster-nav-next');
+    const liveRegion = carousel.querySelector('.poster-live-region');
+    const interval = parseInt(carousel.getAttribute('data-interval') || '5000', 10);
+
+    if (slides.length === 0) return;
+
+    let current     = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    let isPaused    = false;
+    let isAnimating = false;
+
+    const DURATION = 450; // ms
+
+    // ── position helper ─────────────────────────────────────────────
+    function position(slide: HTMLDivElement, tx: string, animate: boolean) {
+      slide.style.transition = animate ? `transform ${DURATION}ms ease-out` : 'none';
+      slide.style.transform  = `translateX(${tx})`;
+    }
+
+    // ── core transition ─────────────────────────────────────────────
+    // dir: 1 = forward (incoming enters from right), -1 = backward (enters from left)
+    function goTo(index: number, dir: number = 1) {
+      if (index === current || isAnimating) return;
+      isAnimating = true;
+
+      const outgoing = slides[current];
+      const incoming = slides[index];
+
+      // Place incoming off-screen and make it fully opaque instantly.
+      // It stays invisible because the viewport has overflow-hidden.
+      incoming.style.opacity = '1';
+      position(incoming, dir > 0 ? '100%' : '-100%', false);
+
+      // ── aria + dots (update state immediately) ────────────────────
+      outgoing.setAttribute('aria-hidden', 'true');
+      incoming.removeAttribute('aria-hidden');
+      current = index;
+
+      dots.forEach((dot, i) => {
+        const active = i === current;
+        dot.classList.toggle('bg-terracottaRed', active);
+        dot.classList.toggle('scale-110',        active);
+        dot.classList.toggle('bg-gray-300',     !active);
+        dot.setAttribute('aria-pressed', String(active));
+      });
+
+      if (liveRegion) {
+        liveRegion.textContent =
+          slides[current].querySelector('img')?.getAttribute('alt') || '';
+      }
+
+      // ── animate on next frame ─────────────────────────────────────
+      // rAF guarantees the browser has painted the off-screen starting
+      // position before we begin the transition — no fade, pure slide.
+      requestAnimationFrame(() => {
+        position(outgoing, dir > 0 ? '-100%' : '100%', true);
+        position(incoming, '0%', true);
+      });
+
+      // Unlock after the transition finishes (+20 ms covers the rAF delay)
+      setTimeout(() => { isAnimating = false; }, DURATION + 20);
+    }
+
+    function next() { goTo((current + 1) % slides.length,                  1); }
+    function prev() { goTo((current - 1 + slides.length) % slides.length, -1); }
+
+    // ── auto-play ───────────────────────────────────────────────────
+    function startTimer() {
+      if (slides.length <= 1) return;
+      timer = setInterval(() => { if (!isPaused) next(); }, interval);
+    }
+    function stopTimer() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+    function resetTimer() { stopTimer(); startTimer(); }
+
+    // ── nav buttons ─────────────────────────────────────────────────
+    prevBtn?.addEventListener('click', () => { prev(); resetTimer(); });
+    nextBtn?.addEventListener('click', () => { next(); resetTimer(); });
+
+    // ── dot buttons ─────────────────────────────────────────────────
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        goTo(i, i > current ? 1 : -1);
+        resetTimer();
+      });
+    });
+
+    // ── keyboard (arrows) ───────────────────────────────────────────
+    carousel.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); resetTimer(); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); next(); resetTimer(); }
+    });
+
+    // ── hover / focus pause ─────────────────────────────────────────
+    carousel.addEventListener('mouseenter', () => { isPaused = true;  });
+    carousel.addEventListener('mouseleave', () => { isPaused = false; });
+    carousel.addEventListener('focusin',    () => { isPaused = true;  });
+    carousel.addEventListener('focusout', (e: FocusEvent) => {
+      if (!carousel.contains(e.relatedTarget as Node)) isPaused = false;
+    });
+
+    // ── touch swipe (50 px threshold) ───────────────────────────────
+    let touchStartX = 0;
+    carousel.addEventListener('touchstart', (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e: TouchEvent) => {
+      const diff = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diff) > 50) {
+        diff < 0 ? next() : prev();
+        resetTimer();
+      }
+    });
+
+    startTimer();
+  });
+</script>

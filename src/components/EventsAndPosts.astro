@@ -2,6 +2,7 @@
 import { getPosters, type PosterRecord } from "../lib/db";
 import { getEventsForMonths, type OIAC_Event } from "../lib/content/events";
 import interacLogo from "../assets/Interac.Logo1.png";
+import PostersCarousel from "./PostersCarousel.astro";
 
 const posters: Array<PosterRecord> = await getPosters();
 
@@ -87,43 +88,8 @@ const year = date.getFullYear();
       </div>
 
       <!-- RIGHT -->
-      <div class="w-full md:w-[49%] rounded-3xl my-3">
-        <!-- POSTS -->
-        <div class="slide-container w-full mb-3 relative text-cyan-950 flex-1">
-          <button
-            class="btn-navigate absolute left-5 top-[30vh] min-[400px]:top-[50vh] text-emerald-300 text-4xl w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600"
-            data-direction="Prev">&#171;</button
-          >
-          <button
-            class="btn-navigate absolute right-5 top-[30vh] min-[400px]:top-[50vh] text-emerald-300 text-4xl w-[50px] h-[50px] rounded-full items-center justify-center bg-gray-950 opacity-75 hover:opacity-90 hover:text-lime-600"
-            data-direction="Next">&#187;</button
-          >
-
-          {
-            posters.map((poster) => (
-              <div class="post-slide hidden">
-                <div class="">
-                  <img
-                    src={poster.imageUrl}
-                    alt={poster.title}
-                    class="rounded-3xl"
-                  />
-                </div>
-                <div class="py-10 px-3 min-h-24">
-                  {poster.linkText && poster.linkUrl && (
-                    <a
-                      href={poster.linkUrl}
-                      target="_blank"
-                      class="my-5 bg-terracottaRed hover:bg-terracottaRed-darker text-white p-2 px-5 rounded-lg"
-                    >
-                      {poster.linkText}
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))
-          }
-        </div>
+      <div class="w-full md:w-[49%] my-3">
+        <PostersCarousel posters={posters} />
       </div>
     </div>
 
@@ -169,150 +135,3 @@ const year = date.getFullYear();
     </div>
   </div>
 </div>
-
-<script>
-  import { slide } from "astro:transitions";
-
-  let slideContainer = document.querySelector(
-    ".slide-container"
-  ) as HTMLDivElement;
-  const navigationButtons = document.querySelectorAll(".btn-navigate");
-
-  let slides: Array<string>;
-  type LatestPostData = {
-    Title: string;
-    Date: Date;
-    Content: string;
-  };
-  let latestPostsData: Array<LatestPostData> = [
-    {
-      Title: "One",
-      Date: new Date(),
-      Content: "111 1111111 11111",
-    },
-    {
-      Title: "Two",
-      Date: new Date(),
-      Content: "222 2222222 22222",
-    },
-    {
-      Title: "Three",
-      Date: new Date(),
-      Content: "333 3333333 33333",
-    },
-    {
-      Title: "Four",
-      Date: new Date(),
-      Content: "444 4444444 44444",
-    },
-  ];
-  let currentSlideIndex = 0;
-  let prevSlideIndex = -1;
-  let timer: ReturnType<typeof setTimeout>;
-  let slideClasses = [
-    "w-full",
-    "h-[100px]",
-    "bg-blue-800",
-    "text-white",
-    "p-5",
-    "hidden",
-  ];
-
-  let slideContainers: NodeListOf<HTMLDivElement> =
-    document.querySelectorAll(".post-slide");
-
-  // function prepareSlides(){
-  //     latestPostsData.map((post, i) => {
-  //         let slideDiv = document.createElement("div")
-  //         slideDiv.id = `slide${i}`
-  //         slideDiv.classList.add(...slideClasses)
-  //         slideDiv.classList.add(slideDiv.id)
-  //         slideContainer.appendChild(slideDiv)
-  //         slideContainers.push(slideDiv)
-
-  //         let slideTitle = document.createElement("h1")
-  //         slideTitle.innerText = post.Title
-  //         slideDiv.appendChild(slideTitle)
-
-  //         let slideContent = document.createElement('p')
-  //         slideContent.textContent = post.Content
-  //         slideDiv.appendChild(slideContent)
-  //     })
-  // }
-
-  function changeSlide() {
-    let currentSlideClassList = slideContainers[currentSlideIndex].classList;
-
-    if (prevSlideIndex !== -1) {
-      let prevSlideClassList = slideContainers[prevSlideIndex].classList;
-      if (prevSlideClassList.contains("block"))
-        prevSlideClassList.remove("block");
-      if (!prevSlideClassList.contains("hidden"))
-        prevSlideClassList.add("hidden");
-    }
-
-    currentSlideClassList.remove("hidden");
-    currentSlideClassList.add("block");
-
-    prevSlideIndex = currentSlideIndex;
-
-    if (currentSlideIndex < slideContainers.length - 1) currentSlideIndex++;
-    else currentSlideIndex = 0;
-
-    timer = setTimeout(changeSlide, 5000);
-  }
-
-  // prepareSlides()
-  changeSlide();
-
-  function moveSlidePrevOrNext(direction: string) {
-    let moveSlideIndex =
-      currentSlideIndex === 0
-        ? slideContainers.length - 1
-        : currentSlideIndex - 1;
-    if (direction === "Prev") {
-      if (moveSlideIndex === 0) {
-        currentSlideIndex = slideContainers.length - 1;
-      } else {
-        currentSlideIndex = moveSlideIndex - 1;
-      }
-    } else {
-      if (moveSlideIndex === slideContainers.length - 1) {
-        currentSlideIndex = 0;
-      } else {
-        currentSlideIndex = moveSlideIndex + 1;
-      }
-    }
-
-    clearTimeout(timer);
-    timer = setTimeout(() => {}, 0);
-
-    changeSlide();
-  }
-
-  navigationButtons.forEach((btn) =>
-    btn.addEventListener("click", (e) => {
-      let btn = e.target && (e.target as HTMLButtonElement);
-      let direction = btn?.getAttribute("data-direction") as string;
-      moveSlidePrevOrNext(direction);
-    })
-  );
-
-  // Touch swipe functionality for mobile screens
-  let touchstartX = 0;
-  let touchendX = 0;
-
-  function checkSwipeDirection() {
-    if (touchendX < touchstartX) moveSlidePrevOrNext("Next");
-    if (touchendX > touchstartX) moveSlidePrevOrNext("Prev");
-  }
-
-  slideContainer.addEventListener("touchstart", (e) => {
-    touchstartX = e.changedTouches[0].screenX;
-  });
-
-  slideContainer.addEventListener("touchend", (e) => {
-    touchendX = e.changedTouches[0].screenX;
-    checkSwipeDirection();
-  });
-</script>
