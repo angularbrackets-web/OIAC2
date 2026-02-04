@@ -277,7 +277,7 @@ export async function getSlideshowItems(): Promise<SlideshowItemRecord[]> {
   const { data, error } = await supabase
     .from('oiac_slideshow')
     .select('*')
-    .order('display_order', { ascending: true, nullsLast: true });
+    .order('display_order', { ascending: true, nullsFirst: false });
 
   if (error) throw error;
   return (data || []).map(mapSlideshowRecord);
