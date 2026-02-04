@@ -1,0 +1,2511 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.9.2
+2 info using node@v22.17.1
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/mohammad/Projects/OIAC2/.npmrc
+5 silly config load:file:/Users/mohammad/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install playwright
+8 verbose argv "install" "playwright" "--save-dev" "--loglevel" "silent"
+9 verbose logfile logs-max:10 dir:/Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2026-01-27T22_24_28_552Z-
+10 verbose logfile /Users/mohammad/Projects/OIAC2/.npm-cache/_logs/2026-01-27T22_24_28_552Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest playwright@*
+16 silly packumentCache full:https://registry.npmjs.org/playwright cache-miss
+17 http cache https://registry.npmjs.org/playwright 91ms (cache hit)
+18 silly packumentCache full:https://registry.npmjs.org/playwright set size:15569725 disposed:false
+19 silly placeDep ROOT playwright@1.58.0 OK for: oiac2@0.0.1 want: *
+20 silly fetch manifest playwright-core@1.58.0
+21 silly packumentCache full:https://registry.npmjs.org/playwright-core cache-miss
+22 silly fetch manifest fsevents@2.3.2
+23 silly packumentCache full:https://registry.npmjs.org/fsevents cache-miss
+24 http cache https://registry.npmjs.org/fsevents 6ms (cache hit)
+25 silly packumentCache full:https://registry.npmjs.org/fsevents set size:182472 disposed:false
+26 http cache https://registry.npmjs.org/playwright-core 23ms (cache hit)
+27 silly packumentCache full:https://registry.npmjs.org/playwright-core set size:17446849 disposed:false
+28 silly fetch manifest react@^16.9.0 || ^17.0.0 || ^18
+29 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+30 http fetch GET 200 https://registry.npmjs.org/react 140ms (cache revalidated)
+31 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+32 warn ERESOLVE overriding peer dependency {
+32 warn ERESOLVE   code: 'ERESOLVE',
+32 warn ERESOLVE   edge: {
+32 warn ERESOLVE     type: 'peerOptional',
+32 warn ERESOLVE     name: 'react',
+32 warn ERESOLVE     spec: '^16.9.0 || ^17.0.0 || ^18',
+32 warn ERESOLVE     error: 'INVALID',
+32 warn ERESOLVE     from: {
+32 warn ERESOLVE       name: '@reduxjs/toolkit',
+32 warn ERESOLVE       version: '1.9.7',
+32 warn ERESOLVE       location: 'node_modules/@reduxjs/toolkit',
+32 warn ERESOLVE       isWorkspace: false,
+32 warn ERESOLVE       dependents: [Array]
+32 warn ERESOLVE     }
+32 warn ERESOLVE   },
+32 warn ERESOLVE   dep: {
+32 warn ERESOLVE     name: 'react',
+32 warn ERESOLVE     version: '18.3.1',
+32 warn ERESOLVE     whileInstalling: {
+32 warn ERESOLVE       name: '@reduxjs/toolkit',
+32 warn ERESOLVE       version: '1.9.7',
+32 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/@reduxjs/toolkit'
+32 warn ERESOLVE     },
+32 warn ERESOLVE     location: 'node_modules/react',
+32 warn ERESOLVE     isWorkspace: false,
+32 warn ERESOLVE     dependents: [ [Object] ]
+32 warn ERESOLVE   },
+32 warn ERESOLVE   force: false,
+32 warn ERESOLVE   isMine: false,
+32 warn ERESOLVE   strictPeerDeps: false,
+32 warn ERESOLVE   current: {
+32 warn ERESOLVE     name: 'react',
+32 warn ERESOLVE     version: '19.2.1',
+32 warn ERESOLVE     location: 'node_modules/react',
+32 warn ERESOLVE     isWorkspace: false,
+32 warn ERESOLVE     dependents: [
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+32 warn ERESOLVE       [Object], [Object], [Object]
+32 warn ERESOLVE     ]
+32 warn ERESOLVE   },
+32 warn ERESOLVE   peerConflict: {
+32 warn ERESOLVE     current: {
+32 warn ERESOLVE       name: 'react',
+32 warn ERESOLVE       version: '19.2.1',
+32 warn ERESOLVE       location: 'node_modules/react',
+32 warn ERESOLVE       isWorkspace: false,
+32 warn ERESOLVE       dependents: [Array]
+32 warn ERESOLVE     },
+32 warn ERESOLVE     peer: {
+32 warn ERESOLVE       name: 'react',
+32 warn ERESOLVE       version: '18.3.1',
+32 warn ERESOLVE       whileInstalling: [Object],
+32 warn ERESOLVE       location: 'node_modules/react',
+32 warn ERESOLVE       isWorkspace: false,
+32 warn ERESOLVE       dependents: [Array]
+32 warn ERESOLVE     }
+32 warn ERESOLVE   }
+32 warn ERESOLVE }
+33 silly placeDep node_modules/playwright fsevents@2.3.2 OK for: playwright@1.58.0 want: 2.3.2
+34 silly placeDep ROOT playwright-core@1.58.0 OK for: playwright@1.58.0 want: 1.58.0
+35 silly fetch manifest react@^16.3.0 || ^17.0.0
+36 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+37 http cache https://registry.npmjs.org/react 5ms (cache hit)
+38 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+39 warn ERESOLVE overriding peer dependency {
+39 warn ERESOLVE   code: 'ERESOLVE',
+39 warn ERESOLVE   edge: {
+39 warn ERESOLVE     type: 'peer',
+39 warn ERESOLVE     name: 'react',
+39 warn ERESOLVE     spec: '^16.3.0 || ^17.0.0',
+39 warn ERESOLVE     error: 'INVALID',
+39 warn ERESOLVE     from: {
+39 warn ERESOLVE       name: 'react-aria-menubutton',
+39 warn ERESOLVE       version: '7.0.3',
+39 warn ERESOLVE       location: 'node_modules/react-aria-menubutton',
+39 warn ERESOLVE       isWorkspace: false,
+39 warn ERESOLVE       dependents: [Array]
+39 warn ERESOLVE     }
+39 warn ERESOLVE   },
+39 warn ERESOLVE   dep: {
+39 warn ERESOLVE     name: 'react',
+39 warn ERESOLVE     version: '17.0.2',
+39 warn ERESOLVE     whileInstalling: {
+39 warn ERESOLVE       name: 'react-aria-menubutton',
+39 warn ERESOLVE       version: '7.0.3',
+39 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-aria-menubutton'
+39 warn ERESOLVE     },
+39 warn ERESOLVE     location: 'node_modules/react',
+39 warn ERESOLVE     isWorkspace: false,
+39 warn ERESOLVE     dependents: [ [Object] ]
+39 warn ERESOLVE   },
+39 warn ERESOLVE   force: false,
+39 warn ERESOLVE   isMine: false,
+39 warn ERESOLVE   strictPeerDeps: false,
+39 warn ERESOLVE   current: {
+39 warn ERESOLVE     name: 'react',
+39 warn ERESOLVE     version: '19.2.1',
+39 warn ERESOLVE     location: 'node_modules/react',
+39 warn ERESOLVE     isWorkspace: false,
+39 warn ERESOLVE     dependents: [
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+39 warn ERESOLVE       [Object], [Object], [Object]
+39 warn ERESOLVE     ]
+39 warn ERESOLVE   },
+39 warn ERESOLVE   peerConflict: {
+39 warn ERESOLVE     current: {
+39 warn ERESOLVE       name: 'react',
+39 warn ERESOLVE       version: '19.2.1',
+39 warn ERESOLVE       location: 'node_modules/react',
+39 warn ERESOLVE       isWorkspace: false,
+39 warn ERESOLVE       dependents: [Array]
+39 warn ERESOLVE     },
+39 warn ERESOLVE     peer: {
+39 warn ERESOLVE       name: 'react',
+39 warn ERESOLVE       version: '17.0.2',
+39 warn ERESOLVE       whileInstalling: [Object],
+39 warn ERESOLVE       location: 'node_modules/react',
+39 warn ERESOLVE       isWorkspace: false,
+39 warn ERESOLVE       dependents: [Array]
+39 warn ERESOLVE     }
+39 warn ERESOLVE   }
+39 warn ERESOLVE }
+40 silly fetch manifest react@>=15.5 <=17.x
+41 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+42 http cache https://registry.npmjs.org/react 5ms (cache hit)
+43 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+44 warn ERESOLVE overriding peer dependency {
+44 warn ERESOLVE   code: 'ERESOLVE',
+44 warn ERESOLVE   edge: {
+44 warn ERESOLVE     type: 'peer',
+44 warn ERESOLVE     name: 'react',
+44 warn ERESOLVE     spec: '>=15.5 <=17.x',
+44 warn ERESOLVE     error: 'INVALID',
+44 warn ERESOLVE     from: {
+44 warn ERESOLVE       name: 'react-codemirror2',
+44 warn ERESOLVE       version: '7.3.0',
+44 warn ERESOLVE       location: 'node_modules/react-codemirror2',
+44 warn ERESOLVE       isWorkspace: false,
+44 warn ERESOLVE       dependents: [Array]
+44 warn ERESOLVE     }
+44 warn ERESOLVE   },
+44 warn ERESOLVE   dep: {
+44 warn ERESOLVE     name: 'react',
+44 warn ERESOLVE     version: '17.0.2',
+44 warn ERESOLVE     whileInstalling: {
+44 warn ERESOLVE       name: 'react-codemirror2',
+44 warn ERESOLVE       version: '7.3.0',
+44 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-codemirror2'
+44 warn ERESOLVE     },
+44 warn ERESOLVE     location: 'node_modules/react',
+44 warn ERESOLVE     isWorkspace: false,
+44 warn ERESOLVE     dependents: [ [Object] ]
+44 warn ERESOLVE   },
+44 warn ERESOLVE   force: false,
+44 warn ERESOLVE   isMine: false,
+44 warn ERESOLVE   strictPeerDeps: false,
+44 warn ERESOLVE   current: {
+44 warn ERESOLVE     name: 'react',
+44 warn ERESOLVE     version: '19.2.1',
+44 warn ERESOLVE     location: 'node_modules/react',
+44 warn ERESOLVE     isWorkspace: false,
+44 warn ERESOLVE     dependents: [
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+44 warn ERESOLVE       [Object], [Object], [Object]
+44 warn ERESOLVE     ]
+44 warn ERESOLVE   },
+44 warn ERESOLVE   peerConflict: {
+44 warn ERESOLVE     current: {
+44 warn ERESOLVE       name: 'react',
+44 warn ERESOLVE       version: '19.2.1',
+44 warn ERESOLVE       location: 'node_modules/react',
+44 warn ERESOLVE       isWorkspace: false,
+44 warn ERESOLVE       dependents: [Array]
+44 warn ERESOLVE     },
+44 warn ERESOLVE     peer: {
+44 warn ERESOLVE       name: 'react',
+44 warn ERESOLVE       version: '17.0.2',
+44 warn ERESOLVE       whileInstalling: [Object],
+44 warn ERESOLVE       location: 'node_modules/react',
+44 warn ERESOLVE       isWorkspace: false,
+44 warn ERESOLVE       dependents: [Array]
+44 warn ERESOLVE     }
+44 warn ERESOLVE   }
+44 warn ERESOLVE }
+45 silly fetch manifest react@^16.8.3 || ^17 || ^18
+46 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+47 http cache https://registry.npmjs.org/react 5ms (cache hit)
+48 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+49 warn ERESOLVE overriding peer dependency {
+49 warn ERESOLVE   code: 'ERESOLVE',
+49 warn ERESOLVE   edge: {
+49 warn ERESOLVE     type: 'peer',
+49 warn ERESOLVE     name: 'react',
+49 warn ERESOLVE     spec: '^16.8.3 || ^17 || ^18',
+49 warn ERESOLVE     error: 'INVALID',
+49 warn ERESOLVE     from: {
+49 warn ERESOLVE       name: 'react-redux',
+49 warn ERESOLVE       version: '7.2.9',
+49 warn ERESOLVE       location: 'node_modules/react-redux',
+49 warn ERESOLVE       isWorkspace: false,
+49 warn ERESOLVE       dependents: [Array]
+49 warn ERESOLVE     }
+49 warn ERESOLVE   },
+49 warn ERESOLVE   dep: {
+49 warn ERESOLVE     name: 'react',
+49 warn ERESOLVE     version: '18.3.1',
+49 warn ERESOLVE     whileInstalling: {
+49 warn ERESOLVE       name: 'react-redux',
+49 warn ERESOLVE       version: '7.2.9',
+49 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-redux'
+49 warn ERESOLVE     },
+49 warn ERESOLVE     location: 'node_modules/react',
+49 warn ERESOLVE     isWorkspace: false,
+49 warn ERESOLVE     dependents: [ [Object] ]
+49 warn ERESOLVE   },
+49 warn ERESOLVE   force: false,
+49 warn ERESOLVE   isMine: false,
+49 warn ERESOLVE   strictPeerDeps: false,
+49 warn ERESOLVE   current: {
+49 warn ERESOLVE     name: 'react',
+49 warn ERESOLVE     version: '19.2.1',
+49 warn ERESOLVE     location: 'node_modules/react',
+49 warn ERESOLVE     isWorkspace: false,
+49 warn ERESOLVE     dependents: [
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+49 warn ERESOLVE       [Object], [Object], [Object]
+49 warn ERESOLVE     ]
+49 warn ERESOLVE   },
+49 warn ERESOLVE   peerConflict: {
+49 warn ERESOLVE     current: {
+49 warn ERESOLVE       name: 'react',
+49 warn ERESOLVE       version: '19.2.1',
+49 warn ERESOLVE       location: 'node_modules/react',
+49 warn ERESOLVE       isWorkspace: false,
+49 warn ERESOLVE       dependents: [Array]
+49 warn ERESOLVE     },
+49 warn ERESOLVE     peer: {
+49 warn ERESOLVE       name: 'react',
+49 warn ERESOLVE       version: '18.3.1',
+49 warn ERESOLVE       whileInstalling: [Object],
+49 warn ERESOLVE       location: 'node_modules/react',
+49 warn ERESOLVE       isWorkspace: false,
+49 warn ERESOLVE       dependents: [Array]
+49 warn ERESOLVE     }
+49 warn ERESOLVE   }
+49 warn ERESOLVE }
+50 silly fetch manifest react@16.x || 17.x || 18.x
+51 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+52 http cache https://registry.npmjs.org/react 8ms (cache hit)
+53 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+54 silly fetch manifest react-dom@16.x || 17.x || 18.x
+55 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+56 http fetch GET 200 https://registry.npmjs.org/react-dom 48ms (cache revalidated)
+57 silly packumentCache full:https://registry.npmjs.org/react-dom set size:8482254 disposed:false
+58 warn ERESOLVE overriding peer dependency {
+58 warn ERESOLVE   code: 'ERESOLVE',
+58 warn ERESOLVE   edge: {
+58 warn ERESOLVE     type: 'peer',
+58 warn ERESOLVE     name: 'react',
+58 warn ERESOLVE     spec: '16.x || 17.x || 18.x',
+58 warn ERESOLVE     error: 'INVALID',
+58 warn ERESOLVE     from: {
+58 warn ERESOLVE       name: 'react-scroll-sync',
+58 warn ERESOLVE       version: '0.11.3',
+58 warn ERESOLVE       location: 'node_modules/react-scroll-sync',
+58 warn ERESOLVE       isWorkspace: false,
+58 warn ERESOLVE       dependents: [Array]
+58 warn ERESOLVE     }
+58 warn ERESOLVE   },
+58 warn ERESOLVE   dep: {
+58 warn ERESOLVE     name: 'react',
+58 warn ERESOLVE     version: '18.3.1',
+58 warn ERESOLVE     whileInstalling: {
+58 warn ERESOLVE       name: 'react-scroll-sync',
+58 warn ERESOLVE       version: '0.11.3',
+58 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-scroll-sync'
+58 warn ERESOLVE     },
+58 warn ERESOLVE     location: 'node_modules/react',
+58 warn ERESOLVE     isWorkspace: false,
+58 warn ERESOLVE     dependents: [ [Object] ]
+58 warn ERESOLVE   },
+58 warn ERESOLVE   force: false,
+58 warn ERESOLVE   isMine: false,
+58 warn ERESOLVE   strictPeerDeps: false,
+58 warn ERESOLVE   current: {
+58 warn ERESOLVE     name: 'react',
+58 warn ERESOLVE     version: '19.2.1',
+58 warn ERESOLVE     location: 'node_modules/react',
+58 warn ERESOLVE     isWorkspace: false,
+58 warn ERESOLVE     dependents: [
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+58 warn ERESOLVE       [Object], [Object], [Object]
+58 warn ERESOLVE     ]
+58 warn ERESOLVE   },
+58 warn ERESOLVE   peerConflict: {
+58 warn ERESOLVE     current: {
+58 warn ERESOLVE       name: 'react',
+58 warn ERESOLVE       version: '19.2.1',
+58 warn ERESOLVE       location: 'node_modules/react',
+58 warn ERESOLVE       isWorkspace: false,
+58 warn ERESOLVE       dependents: [Array]
+58 warn ERESOLVE     },
+58 warn ERESOLVE     peer: {
+58 warn ERESOLVE       name: 'react',
+58 warn ERESOLVE       version: '18.3.1',
+58 warn ERESOLVE       whileInstalling: [Object],
+58 warn ERESOLVE       location: 'node_modules/react',
+58 warn ERESOLVE       isWorkspace: false,
+58 warn ERESOLVE       dependents: [Array]
+58 warn ERESOLVE     }
+58 warn ERESOLVE   }
+58 warn ERESOLVE }
+59 warn ERESOLVE overriding peer dependency {
+59 warn ERESOLVE   code: 'ERESOLVE',
+59 warn ERESOLVE   edge: {
+59 warn ERESOLVE     type: 'peer',
+59 warn ERESOLVE     name: 'react-dom',
+59 warn ERESOLVE     spec: '16.x || 17.x || 18.x',
+59 warn ERESOLVE     error: 'INVALID',
+59 warn ERESOLVE     from: {
+59 warn ERESOLVE       name: 'react-scroll-sync',
+59 warn ERESOLVE       version: '0.11.3',
+59 warn ERESOLVE       location: 'node_modules/react-scroll-sync',
+59 warn ERESOLVE       isWorkspace: false,
+59 warn ERESOLVE       dependents: [Array]
+59 warn ERESOLVE     }
+59 warn ERESOLVE   },
+59 warn ERESOLVE   dep: {
+59 warn ERESOLVE     name: 'react-dom',
+59 warn ERESOLVE     version: '18.3.1',
+59 warn ERESOLVE     whileInstalling: {
+59 warn ERESOLVE       name: 'react-scroll-sync',
+59 warn ERESOLVE       version: '0.11.3',
+59 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-scroll-sync'
+59 warn ERESOLVE     },
+59 warn ERESOLVE     location: 'node_modules/react-dom',
+59 warn ERESOLVE     isWorkspace: false,
+59 warn ERESOLVE     dependents: [ [Object] ]
+59 warn ERESOLVE   },
+59 warn ERESOLVE   force: false,
+59 warn ERESOLVE   isMine: false,
+59 warn ERESOLVE   strictPeerDeps: false,
+59 warn ERESOLVE   current: {
+59 warn ERESOLVE     name: 'react-dom',
+59 warn ERESOLVE     version: '19.2.1',
+59 warn ERESOLVE     location: 'node_modules/react-dom',
+59 warn ERESOLVE     isWorkspace: false,
+59 warn ERESOLVE     dependents: [
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object], [Object],
+59 warn ERESOLVE       [Object]
+59 warn ERESOLVE     ]
+59 warn ERESOLVE   },
+59 warn ERESOLVE   peerConflict: {
+59 warn ERESOLVE     current: {
+59 warn ERESOLVE       name: 'react-dom',
+59 warn ERESOLVE       version: '19.2.1',
+59 warn ERESOLVE       location: 'node_modules/react-dom',
+59 warn ERESOLVE       isWorkspace: false,
+59 warn ERESOLVE       dependents: [Array]
+59 warn ERESOLVE     },
+59 warn ERESOLVE     peer: {
+59 warn ERESOLVE       name: 'react-dom',
+59 warn ERESOLVE       version: '18.3.1',
+59 warn ERESOLVE       whileInstalling: [Object],
+59 warn ERESOLVE       location: 'node_modules/react-dom',
+59 warn ERESOLVE       isWorkspace: false,
+59 warn ERESOLVE       dependents: [Array]
+59 warn ERESOLVE     }
+59 warn ERESOLVE   }
+59 warn ERESOLVE }
+60 silly fetch manifest react@^16.0.0-0
+61 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+62 http cache https://registry.npmjs.org/react 5ms (cache hit)
+63 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+64 silly fetch manifest react-dom@^16.0.0-0
+65 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+66 http cache https://registry.npmjs.org/react-dom 6ms (cache hit)
+67 silly packumentCache full:https://registry.npmjs.org/react-dom set size:8482254 disposed:false
+68 warn ERESOLVE overriding peer dependency {
+68 warn ERESOLVE   code: 'ERESOLVE',
+68 warn ERESOLVE   edge: {
+68 warn ERESOLVE     type: 'peer',
+68 warn ERESOLVE     name: 'react',
+68 warn ERESOLVE     spec: '^16.0.0-0',
+68 warn ERESOLVE     error: 'INVALID',
+68 warn ERESOLVE     from: {
+68 warn ERESOLVE       name: 'react-split-pane',
+68 warn ERESOLVE       version: '0.1.92',
+68 warn ERESOLVE       location: 'node_modules/react-split-pane',
+68 warn ERESOLVE       isWorkspace: false,
+68 warn ERESOLVE       dependents: [Array]
+68 warn ERESOLVE     }
+68 warn ERESOLVE   },
+68 warn ERESOLVE   dep: {
+68 warn ERESOLVE     name: 'react',
+68 warn ERESOLVE     version: '16.14.0',
+68 warn ERESOLVE     whileInstalling: {
+68 warn ERESOLVE       name: 'react-split-pane',
+68 warn ERESOLVE       version: '0.1.92',
+68 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-split-pane'
+68 warn ERESOLVE     },
+68 warn ERESOLVE     location: 'node_modules/react',
+68 warn ERESOLVE     isWorkspace: false,
+68 warn ERESOLVE     dependents: [ [Object] ]
+68 warn ERESOLVE   },
+68 warn ERESOLVE   force: false,
+68 warn ERESOLVE   isMine: false,
+68 warn ERESOLVE   strictPeerDeps: false,
+68 warn ERESOLVE   current: {
+68 warn ERESOLVE     name: 'react',
+68 warn ERESOLVE     version: '19.2.1',
+68 warn ERESOLVE     location: 'node_modules/react',
+68 warn ERESOLVE     isWorkspace: false,
+68 warn ERESOLVE     dependents: [
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+68 warn ERESOLVE       [Object], [Object], [Object]
+68 warn ERESOLVE     ]
+68 warn ERESOLVE   },
+68 warn ERESOLVE   peerConflict: {
+68 warn ERESOLVE     current: {
+68 warn ERESOLVE       name: 'react',
+68 warn ERESOLVE       version: '19.2.1',
+68 warn ERESOLVE       location: 'node_modules/react',
+68 warn ERESOLVE       isWorkspace: false,
+68 warn ERESOLVE       dependents: [Array]
+68 warn ERESOLVE     },
+68 warn ERESOLVE     peer: {
+68 warn ERESOLVE       name: 'react',
+68 warn ERESOLVE       version: '16.14.0',
+68 warn ERESOLVE       whileInstalling: [Object],
+68 warn ERESOLVE       location: 'node_modules/react',
+68 warn ERESOLVE       isWorkspace: false,
+68 warn ERESOLVE       dependents: [Array]
+68 warn ERESOLVE     }
+68 warn ERESOLVE   }
+68 warn ERESOLVE }
+69 warn ERESOLVE overriding peer dependency {
+69 warn ERESOLVE   code: 'ERESOLVE',
+69 warn ERESOLVE   edge: {
+69 warn ERESOLVE     type: 'peer',
+69 warn ERESOLVE     name: 'react-dom',
+69 warn ERESOLVE     spec: '^16.0.0-0',
+69 warn ERESOLVE     error: 'INVALID',
+69 warn ERESOLVE     from: {
+69 warn ERESOLVE       name: 'react-split-pane',
+69 warn ERESOLVE       version: '0.1.92',
+69 warn ERESOLVE       location: 'node_modules/react-split-pane',
+69 warn ERESOLVE       isWorkspace: false,
+69 warn ERESOLVE       dependents: [Array]
+69 warn ERESOLVE     }
+69 warn ERESOLVE   },
+69 warn ERESOLVE   dep: {
+69 warn ERESOLVE     name: 'react-dom',
+69 warn ERESOLVE     version: '16.14.0',
+69 warn ERESOLVE     whileInstalling: {
+69 warn ERESOLVE       name: 'react-split-pane',
+69 warn ERESOLVE       version: '0.1.92',
+69 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-split-pane'
+69 warn ERESOLVE     },
+69 warn ERESOLVE     location: 'node_modules/react-dom',
+69 warn ERESOLVE     isWorkspace: false,
+69 warn ERESOLVE     dependents: [ [Object] ]
+69 warn ERESOLVE   },
+69 warn ERESOLVE   force: false,
+69 warn ERESOLVE   isMine: false,
+69 warn ERESOLVE   strictPeerDeps: false,
+69 warn ERESOLVE   current: {
+69 warn ERESOLVE     name: 'react-dom',
+69 warn ERESOLVE     version: '19.2.1',
+69 warn ERESOLVE     location: 'node_modules/react-dom',
+69 warn ERESOLVE     isWorkspace: false,
+69 warn ERESOLVE     dependents: [
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object], [Object],
+69 warn ERESOLVE       [Object]
+69 warn ERESOLVE     ]
+69 warn ERESOLVE   },
+69 warn ERESOLVE   peerConflict: {
+69 warn ERESOLVE     current: {
+69 warn ERESOLVE       name: 'react-dom',
+69 warn ERESOLVE       version: '19.2.1',
+69 warn ERESOLVE       location: 'node_modules/react-dom',
+69 warn ERESOLVE       isWorkspace: false,
+69 warn ERESOLVE       dependents: [Array]
+69 warn ERESOLVE     },
+69 warn ERESOLVE     peer: {
+69 warn ERESOLVE       name: 'react-dom',
+69 warn ERESOLVE       version: '16.14.0',
+69 warn ERESOLVE       whileInstalling: [Object],
+69 warn ERESOLVE       location: 'node_modules/react-dom',
+69 warn ERESOLVE       isWorkspace: false,
+69 warn ERESOLVE       dependents: [Array]
+69 warn ERESOLVE     }
+69 warn ERESOLVE   }
+69 warn ERESOLVE }
+70 silly fetch manifest react@^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+71 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+72 http cache https://registry.npmjs.org/react 5ms (cache hit)
+73 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+74 warn ERESOLVE overriding peer dependency {
+74 warn ERESOLVE   code: 'ERESOLVE',
+74 warn ERESOLVE   edge: {
+74 warn ERESOLVE     type: 'peer',
+74 warn ERESOLVE     name: 'react',
+74 warn ERESOLVE     spec: '^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0',
+74 warn ERESOLVE     error: 'INVALID',
+74 warn ERESOLVE     from: {
+74 warn ERESOLVE       name: 'react-waypoint',
+74 warn ERESOLVE       version: '10.3.0',
+74 warn ERESOLVE       location: 'node_modules/react-waypoint',
+74 warn ERESOLVE       isWorkspace: false,
+74 warn ERESOLVE       dependents: [Array]
+74 warn ERESOLVE     }
+74 warn ERESOLVE   },
+74 warn ERESOLVE   dep: {
+74 warn ERESOLVE     name: 'react',
+74 warn ERESOLVE     version: '18.3.1',
+74 warn ERESOLVE     whileInstalling: {
+74 warn ERESOLVE       name: 'react-waypoint',
+74 warn ERESOLVE       version: '10.3.0',
+74 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/react-waypoint'
+74 warn ERESOLVE     },
+74 warn ERESOLVE     location: 'node_modules/react',
+74 warn ERESOLVE     isWorkspace: false,
+74 warn ERESOLVE     dependents: [ [Object] ]
+74 warn ERESOLVE   },
+74 warn ERESOLVE   force: false,
+74 warn ERESOLVE   isMine: false,
+74 warn ERESOLVE   strictPeerDeps: false,
+74 warn ERESOLVE   current: {
+74 warn ERESOLVE     name: 'react',
+74 warn ERESOLVE     version: '19.2.1',
+74 warn ERESOLVE     location: 'node_modules/react',
+74 warn ERESOLVE     isWorkspace: false,
+74 warn ERESOLVE     dependents: [
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+74 warn ERESOLVE       [Object], [Object], [Object]
+74 warn ERESOLVE     ]
+74 warn ERESOLVE   },
+74 warn ERESOLVE   peerConflict: {
+74 warn ERESOLVE     current: {
+74 warn ERESOLVE       name: 'react',
+74 warn ERESOLVE       version: '19.2.1',
+74 warn ERESOLVE       location: 'node_modules/react',
+74 warn ERESOLVE       isWorkspace: false,
+74 warn ERESOLVE       dependents: [Array]
+74 warn ERESOLVE     },
+74 warn ERESOLVE     peer: {
+74 warn ERESOLVE       name: 'react',
+74 warn ERESOLVE       version: '18.3.1',
+74 warn ERESOLVE       whileInstalling: [Object],
+74 warn ERESOLVE       location: 'node_modules/react',
+74 warn ERESOLVE       isWorkspace: false,
+74 warn ERESOLVE       dependents: [Array]
+74 warn ERESOLVE     }
+74 warn ERESOLVE   }
+74 warn ERESOLVE }
+75 silly fetch manifest react@^0.14.0 || ^15.0.0-0 || ^15.4.0-0 || ^16.0.0-0
+76 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+77 http cache https://registry.npmjs.org/react 5ms (cache hit)
+78 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+79 silly fetch manifest react-dom@^0.14.0 || ^15.0.0-0 || ^15.4.0-0 || ^16.0.0-0
+80 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+81 http cache https://registry.npmjs.org/react-dom 6ms (cache hit)
+82 silly packumentCache full:https://registry.npmjs.org/react-dom set size:8482254 disposed:false
+83 warn ERESOLVE overriding peer dependency {
+83 warn ERESOLVE   code: 'ERESOLVE',
+83 warn ERESOLVE   edge: {
+83 warn ERESOLVE     type: 'peer',
+83 warn ERESOLVE     name: 'react',
+83 warn ERESOLVE     spec: '^0.14.0 || ^15.0.0-0 || ^15.4.0-0 || ^16.0.0-0',
+83 warn ERESOLVE     error: 'INVALID',
+83 warn ERESOLVE     from: {
+83 warn ERESOLVE       name: 'redux-notifications',
+83 warn ERESOLVE       version: '4.0.1',
+83 warn ERESOLVE       location: 'node_modules/redux-notifications',
+83 warn ERESOLVE       isWorkspace: false,
+83 warn ERESOLVE       dependents: [Array]
+83 warn ERESOLVE     }
+83 warn ERESOLVE   },
+83 warn ERESOLVE   dep: {
+83 warn ERESOLVE     name: 'react',
+83 warn ERESOLVE     version: '16.14.0',
+83 warn ERESOLVE     whileInstalling: {
+83 warn ERESOLVE       name: 'redux-notifications',
+83 warn ERESOLVE       version: '4.0.1',
+83 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/redux-notifications'
+83 warn ERESOLVE     },
+83 warn ERESOLVE     location: 'node_modules/react',
+83 warn ERESOLVE     isWorkspace: false,
+83 warn ERESOLVE     dependents: [ [Object] ]
+83 warn ERESOLVE   },
+83 warn ERESOLVE   force: false,
+83 warn ERESOLVE   isMine: false,
+83 warn ERESOLVE   strictPeerDeps: false,
+83 warn ERESOLVE   current: {
+83 warn ERESOLVE     name: 'react',
+83 warn ERESOLVE     version: '19.2.1',
+83 warn ERESOLVE     location: 'node_modules/react',
+83 warn ERESOLVE     isWorkspace: false,
+83 warn ERESOLVE     dependents: [
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+83 warn ERESOLVE       [Object], [Object], [Object]
+83 warn ERESOLVE     ]
+83 warn ERESOLVE   },
+83 warn ERESOLVE   peerConflict: {
+83 warn ERESOLVE     current: {
+83 warn ERESOLVE       name: 'react',
+83 warn ERESOLVE       version: '19.2.1',
+83 warn ERESOLVE       location: 'node_modules/react',
+83 warn ERESOLVE       isWorkspace: false,
+83 warn ERESOLVE       dependents: [Array]
+83 warn ERESOLVE     },
+83 warn ERESOLVE     peer: {
+83 warn ERESOLVE       name: 'react',
+83 warn ERESOLVE       version: '16.14.0',
+83 warn ERESOLVE       whileInstalling: [Object],
+83 warn ERESOLVE       location: 'node_modules/react',
+83 warn ERESOLVE       isWorkspace: false,
+83 warn ERESOLVE       dependents: [Array]
+83 warn ERESOLVE     }
+83 warn ERESOLVE   }
+83 warn ERESOLVE }
+84 warn ERESOLVE overriding peer dependency {
+84 warn ERESOLVE   code: 'ERESOLVE',
+84 warn ERESOLVE   edge: {
+84 warn ERESOLVE     type: 'peer',
+84 warn ERESOLVE     name: 'react-dom',
+84 warn ERESOLVE     spec: '^0.14.0 || ^15.0.0-0 || ^15.4.0-0 || ^16.0.0-0',
+84 warn ERESOLVE     error: 'INVALID',
+84 warn ERESOLVE     from: {
+84 warn ERESOLVE       name: 'redux-notifications',
+84 warn ERESOLVE       version: '4.0.1',
+84 warn ERESOLVE       location: 'node_modules/redux-notifications',
+84 warn ERESOLVE       isWorkspace: false,
+84 warn ERESOLVE       dependents: [Array]
+84 warn ERESOLVE     }
+84 warn ERESOLVE   },
+84 warn ERESOLVE   dep: {
+84 warn ERESOLVE     name: 'react-dom',
+84 warn ERESOLVE     version: '16.14.0',
+84 warn ERESOLVE     whileInstalling: {
+84 warn ERESOLVE       name: 'redux-notifications',
+84 warn ERESOLVE       version: '4.0.1',
+84 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/redux-notifications'
+84 warn ERESOLVE     },
+84 warn ERESOLVE     location: 'node_modules/react-dom',
+84 warn ERESOLVE     isWorkspace: false,
+84 warn ERESOLVE     dependents: [ [Object] ]
+84 warn ERESOLVE   },
+84 warn ERESOLVE   force: false,
+84 warn ERESOLVE   isMine: false,
+84 warn ERESOLVE   strictPeerDeps: false,
+84 warn ERESOLVE   current: {
+84 warn ERESOLVE     name: 'react-dom',
+84 warn ERESOLVE     version: '19.2.1',
+84 warn ERESOLVE     location: 'node_modules/react-dom',
+84 warn ERESOLVE     isWorkspace: false,
+84 warn ERESOLVE     dependents: [
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object], [Object],
+84 warn ERESOLVE       [Object]
+84 warn ERESOLVE     ]
+84 warn ERESOLVE   },
+84 warn ERESOLVE   peerConflict: {
+84 warn ERESOLVE     current: {
+84 warn ERESOLVE       name: 'react-dom',
+84 warn ERESOLVE       version: '19.2.1',
+84 warn ERESOLVE       location: 'node_modules/react-dom',
+84 warn ERESOLVE       isWorkspace: false,
+84 warn ERESOLVE       dependents: [Array]
+84 warn ERESOLVE     },
+84 warn ERESOLVE     peer: {
+84 warn ERESOLVE       name: 'react-dom',
+84 warn ERESOLVE       version: '16.14.0',
+84 warn ERESOLVE       whileInstalling: [Object],
+84 warn ERESOLVE       location: 'node_modules/react-dom',
+84 warn ERESOLVE       isWorkspace: false,
+84 warn ERESOLVE       dependents: [Array]
+84 warn ERESOLVE     }
+84 warn ERESOLVE   }
+84 warn ERESOLVE }
+85 silly fetch manifest slate@>=0.32.0 <0.50.0
+86 silly packumentCache full:https://registry.npmjs.org/slate cache-miss
+87 http fetch GET 200 https://registry.npmjs.org/slate 52ms (cache revalidated)
+88 silly packumentCache full:https://registry.npmjs.org/slate set size:2601588 disposed:false
+89 silly fetch manifest immutable@>=3.8.1 || >4.0.0-rc
+90 silly packumentCache full:https://registry.npmjs.org/immutable cache-miss
+91 http fetch GET 200 https://registry.npmjs.org/immutable 48ms (cache revalidated)
+92 silly packumentCache full:https://registry.npmjs.org/immutable set size:267034 disposed:false
+93 warn ERESOLVE overriding peer dependency {
+93 warn ERESOLVE   code: 'ERESOLVE',
+93 warn ERESOLVE   edge: {
+93 warn ERESOLVE     type: 'peer',
+93 warn ERESOLVE     name: 'slate',
+93 warn ERESOLVE     spec: '>=0.32.0 <0.50.0',
+93 warn ERESOLVE     error: 'INVALID',
+93 warn ERESOLVE     from: {
+93 warn ERESOLVE       name: 'slate-base64-serializer',
+93 warn ERESOLVE       version: '0.2.115',
+93 warn ERESOLVE       location: 'node_modules/slate-base64-serializer',
+93 warn ERESOLVE       isWorkspace: false,
+93 warn ERESOLVE       dependents: [Array]
+93 warn ERESOLVE     }
+93 warn ERESOLVE   },
+93 warn ERESOLVE   dep: {
+93 warn ERESOLVE     name: 'slate',
+93 warn ERESOLVE     version: '0.47.9',
+93 warn ERESOLVE     whileInstalling: {
+93 warn ERESOLVE       name: 'slate-base64-serializer',
+93 warn ERESOLVE       version: '0.2.115',
+93 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/slate-base64-serializer'
+93 warn ERESOLVE     },
+93 warn ERESOLVE     location: 'node_modules/slate',
+93 warn ERESOLVE     isWorkspace: false,
+93 warn ERESOLVE     dependents: [ [Object] ]
+93 warn ERESOLVE   },
+93 warn ERESOLVE   force: false,
+93 warn ERESOLVE   isMine: false,
+93 warn ERESOLVE   strictPeerDeps: false,
+93 warn ERESOLVE   current: {
+93 warn ERESOLVE     name: 'slate',
+93 warn ERESOLVE     version: '0.118.1',
+93 warn ERESOLVE     location: 'node_modules/slate',
+93 warn ERESOLVE     isWorkspace: false,
+93 warn ERESOLVE     dependents: [ [Object], [Object], [Object], [Object], [Object], [Object] ]
+93 warn ERESOLVE   },
+93 warn ERESOLVE   peerConflict: {
+93 warn ERESOLVE     current: {
+93 warn ERESOLVE       name: 'slate',
+93 warn ERESOLVE       version: '0.118.1',
+93 warn ERESOLVE       location: 'node_modules/slate',
+93 warn ERESOLVE       isWorkspace: false,
+93 warn ERESOLVE       dependents: [Array]
+93 warn ERESOLVE     },
+93 warn ERESOLVE     peer: {
+93 warn ERESOLVE       name: 'slate',
+93 warn ERESOLVE       version: '0.47.9',
+93 warn ERESOLVE       whileInstalling: [Object],
+93 warn ERESOLVE       location: 'node_modules/slate',
+93 warn ERESOLVE       isWorkspace: false,
+93 warn ERESOLVE       dependents: [Array]
+93 warn ERESOLVE     }
+93 warn ERESOLVE   }
+93 warn ERESOLVE }
+94 silly fetch manifest slate@>=0.46.0 <0.50.0
+95 silly packumentCache full:https://registry.npmjs.org/slate cache-miss
+96 http cache https://registry.npmjs.org/slate 3ms (cache hit)
+97 silly packumentCache full:https://registry.npmjs.org/slate set size:2601588 disposed:false
+98 silly fetch manifest immutable@>=3.8.1
+99 silly packumentCache full:https://registry.npmjs.org/immutable cache-hit
+100 warn ERESOLVE overriding peer dependency {
+100 warn ERESOLVE   code: 'ERESOLVE',
+100 warn ERESOLVE   edge: {
+100 warn ERESOLVE     type: 'peer',
+100 warn ERESOLVE     name: 'slate',
+100 warn ERESOLVE     spec: '>=0.46.0 <0.50.0',
+100 warn ERESOLVE     error: 'INVALID',
+100 warn ERESOLVE     from: {
+100 warn ERESOLVE       name: 'slate-plain-serializer',
+100 warn ERESOLVE       version: '0.7.13',
+100 warn ERESOLVE       location: 'node_modules/slate-plain-serializer',
+100 warn ERESOLVE       isWorkspace: false,
+100 warn ERESOLVE       dependents: [Array]
+100 warn ERESOLVE     }
+100 warn ERESOLVE   },
+100 warn ERESOLVE   dep: {
+100 warn ERESOLVE     name: 'slate',
+100 warn ERESOLVE     version: '0.47.9',
+100 warn ERESOLVE     whileInstalling: {
+100 warn ERESOLVE       name: 'slate-plain-serializer',
+100 warn ERESOLVE       version: '0.7.13',
+100 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/slate-plain-serializer'
+100 warn ERESOLVE     },
+100 warn ERESOLVE     location: 'node_modules/slate',
+100 warn ERESOLVE     isWorkspace: false,
+100 warn ERESOLVE     dependents: [ [Object] ]
+100 warn ERESOLVE   },
+100 warn ERESOLVE   force: false,
+100 warn ERESOLVE   isMine: false,
+100 warn ERESOLVE   strictPeerDeps: false,
+100 warn ERESOLVE   current: {
+100 warn ERESOLVE     name: 'slate',
+100 warn ERESOLVE     version: '0.118.1',
+100 warn ERESOLVE     location: 'node_modules/slate',
+100 warn ERESOLVE     isWorkspace: false,
+100 warn ERESOLVE     dependents: [ [Object], [Object], [Object], [Object], [Object], [Object] ]
+100 warn ERESOLVE   },
+100 warn ERESOLVE   peerConflict: {
+100 warn ERESOLVE     current: {
+100 warn ERESOLVE       name: 'slate',
+100 warn ERESOLVE       version: '0.118.1',
+100 warn ERESOLVE       location: 'node_modules/slate',
+100 warn ERESOLVE       isWorkspace: false,
+100 warn ERESOLVE       dependents: [Array]
+100 warn ERESOLVE     },
+100 warn ERESOLVE     peer: {
+100 warn ERESOLVE       name: 'slate',
+100 warn ERESOLVE       version: '0.47.9',
+100 warn ERESOLVE       whileInstalling: [Object],
+100 warn ERESOLVE       location: 'node_modules/slate',
+100 warn ERESOLVE       isWorkspace: false,
+100 warn ERESOLVE       dependents: [Array]
+100 warn ERESOLVE     }
+100 warn ERESOLVE   }
+100 warn ERESOLVE }
+101 warn ERESOLVE overriding peer dependency {
+101 warn ERESOLVE   code: 'ERESOLVE',
+101 warn ERESOLVE   edge: {
+101 warn ERESOLVE     type: 'peer',
+101 warn ERESOLVE     name: 'react',
+101 warn ERESOLVE     spec: '^0.14.0 || ^15.0.0-0 || ^15.4.0-0 || ^16.0.0-0',
+101 warn ERESOLVE     error: 'INVALID',
+101 warn ERESOLVE     from: {
+101 warn ERESOLVE       name: 'react-redux',
+101 warn ERESOLVE       version: '4.4.10',
+101 warn ERESOLVE       location: 'node_modules/redux-notifications/node_modules/react-redux',
+101 warn ERESOLVE       isWorkspace: false,
+101 warn ERESOLVE       dependents: [Array]
+101 warn ERESOLVE     }
+101 warn ERESOLVE   },
+101 warn ERESOLVE   dep: {
+101 warn ERESOLVE     name: 'react',
+101 warn ERESOLVE     version: '16.14.0',
+101 warn ERESOLVE     whileInstalling: {
+101 warn ERESOLVE       name: 'react-redux',
+101 warn ERESOLVE       version: '4.4.10',
+101 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/redux-notifications/node_modules/react-redux'
+101 warn ERESOLVE     },
+101 warn ERESOLVE     location: 'node_modules/react',
+101 warn ERESOLVE     isWorkspace: false,
+101 warn ERESOLVE     dependents: [ [Object] ]
+101 warn ERESOLVE   },
+101 warn ERESOLVE   force: false,
+101 warn ERESOLVE   isMine: false,
+101 warn ERESOLVE   strictPeerDeps: false,
+101 warn ERESOLVE   current: {
+101 warn ERESOLVE     name: 'react',
+101 warn ERESOLVE     version: '19.2.1',
+101 warn ERESOLVE     location: 'node_modules/react',
+101 warn ERESOLVE     isWorkspace: false,
+101 warn ERESOLVE     dependents: [
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+101 warn ERESOLVE       [Object], [Object], [Object]
+101 warn ERESOLVE     ]
+101 warn ERESOLVE   },
+101 warn ERESOLVE   peerConflict: {
+101 warn ERESOLVE     current: {
+101 warn ERESOLVE       name: 'react',
+101 warn ERESOLVE       version: '19.2.1',
+101 warn ERESOLVE       location: 'node_modules/react',
+101 warn ERESOLVE       isWorkspace: false,
+101 warn ERESOLVE       dependents: [Array]
+101 warn ERESOLVE     },
+101 warn ERESOLVE     peer: {
+101 warn ERESOLVE       name: 'react',
+101 warn ERESOLVE       version: '16.14.0',
+101 warn ERESOLVE       whileInstalling: [Object],
+101 warn ERESOLVE       location: 'node_modules/react',
+101 warn ERESOLVE       isWorkspace: false,
+101 warn ERESOLVE       dependents: [Array]
+101 warn ERESOLVE     }
+101 warn ERESOLVE   }
+101 warn ERESOLVE }
+102 silly fetch manifest react@^15.0.0 || ^16.0.0
+103 silly packumentCache full:https://registry.npmjs.org/react cache-miss
+104 http cache https://registry.npmjs.org/react 5ms (cache hit)
+105 silly packumentCache full:https://registry.npmjs.org/react set size:6427064 disposed:false
+106 silly fetch manifest react-dom@^15.0.0 || ^16.0.0
+107 silly packumentCache full:https://registry.npmjs.org/react-dom cache-miss
+108 http cache https://registry.npmjs.org/react-dom 6ms (cache hit)
+109 silly packumentCache full:https://registry.npmjs.org/react-dom set size:8482254 disposed:false
+110 warn ERESOLVE overriding peer dependency {
+110 warn ERESOLVE   code: 'ERESOLVE',
+110 warn ERESOLVE   edge: {
+110 warn ERESOLVE     type: 'peer',
+110 warn ERESOLVE     name: 'react',
+110 warn ERESOLVE     spec: '^15.0.0 || ^16.0.0',
+110 warn ERESOLVE     error: 'INVALID',
+110 warn ERESOLVE     from: {
+110 warn ERESOLVE       name: 'react-transition-group',
+110 warn ERESOLVE       version: '1.2.1',
+110 warn ERESOLVE       location: 'node_modules/redux-notifications/node_modules/react-transition-group',
+110 warn ERESOLVE       isWorkspace: false,
+110 warn ERESOLVE       dependents: [Array]
+110 warn ERESOLVE     }
+110 warn ERESOLVE   },
+110 warn ERESOLVE   dep: {
+110 warn ERESOLVE     name: 'react',
+110 warn ERESOLVE     version: '16.14.0',
+110 warn ERESOLVE     whileInstalling: {
+110 warn ERESOLVE       name: 'react-transition-group',
+110 warn ERESOLVE       version: '1.2.1',
+110 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/redux-notifications/node_modules/react-transition-group'
+110 warn ERESOLVE     },
+110 warn ERESOLVE     location: 'node_modules/react',
+110 warn ERESOLVE     isWorkspace: false,
+110 warn ERESOLVE     dependents: [ [Object] ]
+110 warn ERESOLVE   },
+110 warn ERESOLVE   force: false,
+110 warn ERESOLVE   isMine: false,
+110 warn ERESOLVE   strictPeerDeps: false,
+110 warn ERESOLVE   current: {
+110 warn ERESOLVE     name: 'react',
+110 warn ERESOLVE     version: '19.2.1',
+110 warn ERESOLVE     location: 'node_modules/react',
+110 warn ERESOLVE     isWorkspace: false,
+110 warn ERESOLVE     dependents: [
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object], [Object], [Object],
+110 warn ERESOLVE       [Object], [Object], [Object]
+110 warn ERESOLVE     ]
+110 warn ERESOLVE   },
+110 warn ERESOLVE   peerConflict: {
+110 warn ERESOLVE     current: {
+110 warn ERESOLVE       name: 'react',
+110 warn ERESOLVE       version: '19.2.1',
+110 warn ERESOLVE       location: 'node_modules/react',
+110 warn ERESOLVE       isWorkspace: false,
+110 warn ERESOLVE       dependents: [Array]
+110 warn ERESOLVE     },
+110 warn ERESOLVE     peer: {
+110 warn ERESOLVE       name: 'react',
+110 warn ERESOLVE       version: '16.14.0',
+110 warn ERESOLVE       whileInstalling: [Object],
+110 warn ERESOLVE       location: 'node_modules/react',
+110 warn ERESOLVE       isWorkspace: false,
+110 warn ERESOLVE       dependents: [Array]
+110 warn ERESOLVE     }
+110 warn ERESOLVE   }
+110 warn ERESOLVE }
+111 warn ERESOLVE overriding peer dependency {
+111 warn ERESOLVE   code: 'ERESOLVE',
+111 warn ERESOLVE   edge: {
+111 warn ERESOLVE     type: 'peer',
+111 warn ERESOLVE     name: 'react-dom',
+111 warn ERESOLVE     spec: '^15.0.0 || ^16.0.0',
+111 warn ERESOLVE     error: 'INVALID',
+111 warn ERESOLVE     from: {
+111 warn ERESOLVE       name: 'react-transition-group',
+111 warn ERESOLVE       version: '1.2.1',
+111 warn ERESOLVE       location: 'node_modules/redux-notifications/node_modules/react-transition-group',
+111 warn ERESOLVE       isWorkspace: false,
+111 warn ERESOLVE       dependents: [Array]
+111 warn ERESOLVE     }
+111 warn ERESOLVE   },
+111 warn ERESOLVE   dep: {
+111 warn ERESOLVE     name: 'react-dom',
+111 warn ERESOLVE     version: '16.14.0',
+111 warn ERESOLVE     whileInstalling: {
+111 warn ERESOLVE       name: 'react-transition-group',
+111 warn ERESOLVE       version: '1.2.1',
+111 warn ERESOLVE       path: '/Users/mohammad/Projects/OIAC2/node_modules/redux-notifications/node_modules/react-transition-group'
+111 warn ERESOLVE     },
+111 warn ERESOLVE     location: 'node_modules/react-dom',
+111 warn ERESOLVE     isWorkspace: false,
+111 warn ERESOLVE     dependents: [ [Object] ]
+111 warn ERESOLVE   },
+111 warn ERESOLVE   force: false,
+111 warn ERESOLVE   isMine: false,
+111 warn ERESOLVE   strictPeerDeps: false,
+111 warn ERESOLVE   current: {
+111 warn ERESOLVE     name: 'react-dom',
+111 warn ERESOLVE     version: '19.2.1',
+111 warn ERESOLVE     location: 'node_modules/react-dom',
+111 warn ERESOLVE     isWorkspace: false,
+111 warn ERESOLVE     dependents: [
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object], [Object],
+111 warn ERESOLVE       [Object]
+111 warn ERESOLVE     ]
+111 warn ERESOLVE   },
+111 warn ERESOLVE   peerConflict: {
+111 warn ERESOLVE     current: {
+111 warn ERESOLVE       name: 'react-dom',
+111 warn ERESOLVE       version: '19.2.1',
+111 warn ERESOLVE       location: 'node_modules/react-dom',
+111 warn ERESOLVE       isWorkspace: false,
+111 warn ERESOLVE       dependents: [Array]
+111 warn ERESOLVE     },
+111 warn ERESOLVE     peer: {
+111 warn ERESOLVE       name: 'react-dom',
+111 warn ERESOLVE       version: '16.14.0',
+111 warn ERESOLVE       whileInstalling: [Object],
+111 warn ERESOLVE       location: 'node_modules/react-dom',
+111 warn ERESOLVE       isWorkspace: false,
+111 warn ERESOLVE       dependents: [Array]
+111 warn ERESOLVE     }
+111 warn ERESOLVE   }
+111 warn ERESOLVE }
+112 silly reify moves {}
+113 silly audit bulk request {
+113 silly audit   '@alloc/quick-lru': [ '5.2.0' ],
+113 silly audit   '@apollo/client': [ '3.14.0' ],
+113 silly audit   '@astrojs/check': [ '0.9.6' ],
+113 silly audit   '@astrojs/compiler': [ '2.13.0' ],
+113 silly audit   '@astrojs/internal-helpers': [ '0.7.4', '0.7.5' ],
+113 silly audit   '@astrojs/language-server': [ '2.16.2' ],
+113 silly audit   '@astrojs/markdown-remark': [ '6.3.10' ],
+113 silly audit   '@astrojs/prism': [ '3.3.0' ],
+113 silly audit   '@astrojs/react': [ '4.4.2' ],
+113 silly audit   '@astrojs/tailwind': [ '6.0.2' ],
+113 silly audit   '@astrojs/telemetry': [ '3.3.0' ],
+113 silly audit   '@astrojs/vercel': [ '8.2.11' ],
+113 silly audit   '@vercel/analytics': [ '1.6.1' ],
+113 silly audit   '@astrojs/yaml2ts': [ '0.2.2' ],
+113 silly audit   '@babel/code-frame': [ '7.27.1' ],
+113 silly audit   '@babel/compat-data': [ '7.28.5' ],
+113 silly audit   '@babel/core': [ '7.28.5' ],
+113 silly audit   semver: [ '6.3.1', '7.7.3' ],
+113 silly audit   '@babel/generator': [ '7.28.5' ],
+113 silly audit   '@babel/helper-compilation-targets': [ '7.27.2' ],
+113 silly audit   '@babel/helper-globals': [ '7.28.0' ],
+113 silly audit   '@babel/helper-module-imports': [ '7.27.1' ],
+113 silly audit   '@babel/helper-module-transforms': [ '7.28.3' ],
+113 silly audit   '@babel/helper-plugin-utils': [ '7.27.1' ],
+113 silly audit   '@babel/helper-string-parser': [ '7.27.1' ],
+113 silly audit   '@babel/helper-validator-identifier': [ '7.28.5' ],
+113 silly audit   '@babel/helper-validator-option': [ '7.27.1' ],
+113 silly audit   '@babel/helpers': [ '7.28.4' ],
+113 silly audit   '@babel/parser': [ '7.28.5' ],
+113 silly audit   '@babel/plugin-transform-react-jsx-self': [ '7.27.1' ],
+113 silly audit   '@babel/plugin-transform-react-jsx-source': [ '7.27.1' ],
+113 silly audit   '@babel/runtime': [ '7.28.4' ],
+113 silly audit   '@babel/template': [ '7.27.2' ],
+113 silly audit   '@babel/traverse': [ '7.28.5' ],
+113 silly audit   '@babel/types': [ '7.28.5' ],
+113 silly audit   '@capsizecss/unpack': [ '4.0.0' ],
+113 silly audit   '@dnd-kit/accessibility': [ '3.1.1' ],
+113 silly audit   '@dnd-kit/core': [ '6.3.1' ],
+113 silly audit   '@dnd-kit/modifiers': [ '6.0.1' ],
+113 silly audit   '@dnd-kit/sortable': [ '7.0.2' ],
+113 silly audit   '@dnd-kit/utilities': [ '3.2.2' ],
+113 silly audit   '@emailjs/browser': [ '4.4.1' ],
+113 silly audit   '@emmetio/abbreviation': [ '2.3.3' ],
+113 silly audit   '@emmetio/css-abbreviation': [ '2.1.8' ],
+113 silly audit   '@emmetio/css-parser': [ '0.4.1' ],
+113 silly audit   '@emmetio/html-matcher': [ '1.3.0' ],
+113 silly audit   '@emmetio/scanner': [ '1.0.4' ],
+113 silly audit   '@emmetio/stream-reader': [ '2.2.0' ],
+113 silly audit   '@emmetio/stream-reader-utils': [ '0.1.0' ],
+113 silly audit   '@emnapi/runtime': [ '1.7.1' ],
+113 silly audit   '@emotion/babel-plugin': [ '11.13.5' ],
+113 silly audit   'convert-source-map': [ '1.9.0', '2.0.0' ],
+113 silly audit   '@emotion/cache': [ '11.14.0' ],
+113 silly audit   '@emotion/hash': [ '0.9.2' ],
+113 silly audit   '@emotion/is-prop-valid': [ '1.4.0' ],
+113 silly audit   '@emotion/memoize': [ '0.9.0' ],
+113 silly audit   '@emotion/react': [ '11.14.0' ],
+113 silly audit   '@emotion/serialize': [ '1.3.3' ],
+113 silly audit   '@emotion/sheet': [ '1.4.0' ],
+113 silly audit   '@emotion/styled': [ '11.14.1' ],
+113 silly audit   '@emotion/unitless': [ '0.10.0' ],
+113 silly audit   '@emotion/use-insertion-effect-with-fallbacks': [ '1.2.0' ],
+113 silly audit   '@emotion/utils': [ '1.4.2' ],
+113 silly audit   '@emotion/weak-memoize': [ '0.4.0' ],
+113 silly audit   '@esbuild/aix-ppc64': [ '0.25.12' ],
+113 silly audit   '@esbuild/android-arm': [ '0.25.12' ],
+113 silly audit   '@esbuild/android-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/android-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/darwin-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/darwin-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/freebsd-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/freebsd-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-arm': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-ia32': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-loong64': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-mips64el': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-ppc64': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-riscv64': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-s390x': [ '0.25.12' ],
+113 silly audit   '@esbuild/linux-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/netbsd-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/netbsd-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/openbsd-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/openbsd-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/openharmony-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/sunos-x64': [ '0.25.12' ],
+113 silly audit   '@esbuild/win32-arm64': [ '0.25.12' ],
+113 silly audit   '@esbuild/win32-ia32': [ '0.25.12' ],
+113 silly audit   '@esbuild/win32-x64': [ '0.25.12' ],
+113 silly audit   '@floating-ui/core': [ '1.7.3' ],
+113 silly audit   '@floating-ui/dom': [ '1.7.4' ],
+113 silly audit   '@floating-ui/utils': [ '0.2.10' ],
+113 silly audit   '@graphql-typed-document-node/core': [ '3.2.0' ],
+113 silly audit   '@iarna/toml': [ '2.2.5' ],
+113 silly audit   '@icons/material': [ '0.2.4' ],
+113 silly audit   '@img/colour': [ '1.0.0' ],
+113 silly audit   '@img/sharp-darwin-arm64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-darwin-x64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linux-arm': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linux-x64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.2.4' ],
+113 silly audit   '@img/sharp-linux-arm': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linux-arm64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linux-ppc64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linux-riscv64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linux-s390x': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linux-x64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-wasm32': [ '0.34.5' ],
+113 silly audit   '@img/sharp-win32-arm64': [ '0.34.5' ],
+113 silly audit   '@img/sharp-win32-ia32': [ '0.34.5' ],
+113 silly audit   '@img/sharp-win32-x64': [ '0.34.5' ],
+113 silly audit   '@isaacs/cliui': [ '8.0.2' ],
+113 silly audit   'emoji-regex': [ '9.2.2', '8.0.0', '10.6.0' ],
+113 silly audit   'string-width': [ '5.1.2', '4.2.3', '7.2.0' ],
+113 silly audit   'wrap-ansi': [ '8.1.0', '7.0.0', '9.0.2' ],
+113 silly audit   '@isaacs/fs-minipass': [ '4.0.1' ],
+113 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+113 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+113 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+113 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+113 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+113 silly audit   '@juggle/resize-observer': [ '3.4.0' ],
+113 silly audit   '@mailchimp/mailchimp_transactional': [ '1.1.2' ],
+113 silly audit   '@mapbox/jsonlint-lines-primitives': [ '2.0.2' ],
+113 silly audit   '@mapbox/mapbox-gl-style-spec': [ '13.28.0' ],
+113 silly audit   '@mapbox/node-pre-gyp': [ '2.0.3' ],
+113 silly audit   '@mapbox/point-geometry': [ '0.1.0' ],
+113 silly audit   '@mapbox/unitbezier': [ '0.0.0' ],
+113 silly audit   '@neondatabase/serverless': [ '0.9.5' ],
+113 silly audit   '@nodelib/fs.scandir': [ '2.1.5' ],
+113 silly audit   '@nodelib/fs.stat': [ '2.0.5' ],
+113 silly audit   '@nodelib/fs.walk': [ '1.2.8' ],
+113 silly audit   '@oslojs/encoding': [ '1.1.0' ],
+113 silly audit   '@petamoriken/float16': [ '3.9.3' ],
+113 silly audit   '@pkgjs/parseargs': [ '0.11.0' ],
+113 silly audit   '@react-dnd/asap': [ '4.0.1' ],
+113 silly audit   '@react-dnd/invariant': [ '2.0.0' ],
+113 silly audit   '@react-dnd/shallowequal': [ '2.0.0' ],
+113 silly audit   '@reduxjs/toolkit': [ '1.9.7' ],
+113 silly audit   '@rolldown/pluginutils': [ '1.0.0-beta.27' ],
+113 silly audit   '@rollup/pluginutils': [ '5.3.0' ],
+113 silly audit   '@rollup/rollup-android-arm-eabi': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-android-arm64': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-darwin-arm64': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-darwin-x64': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-freebsd-arm64': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-freebsd-x64': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-arm-gnueabihf': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-arm-musleabihf': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-arm64-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-arm64-musl': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-loong64-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-ppc64-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-riscv64-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-riscv64-musl': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-s390x-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-x64-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-linux-x64-musl': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-openharmony-arm64': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-win32-arm64-msvc': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-win32-ia32-msvc': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-win32-x64-gnu': [ '4.53.3' ],
+113 silly audit   '@rollup/rollup-win32-x64-msvc': [ '4.53.3' ],
+113 silly audit   '@shikijs/core': [ '3.21.0' ],
+113 silly audit   '@shikijs/engine-javascript': [ '3.21.0' ],
+113 silly audit   '@shikijs/engine-oniguruma': [ '3.21.0' ],
+113 silly audit   '@shikijs/langs': [ '3.21.0' ],
+113 silly audit   '@shikijs/themes': [ '3.21.0' ],
+113 silly audit   '@shikijs/types': [ '3.21.0' ],
+113 silly audit   '@shikijs/vscode-textmate': [ '10.0.2' ],
+113 silly audit   '@supabase/auth-js': [ '2.87.1' ],
+113 silly audit   '@supabase/functions-js': [ '2.87.1' ],
+113 silly audit   '@supabase/postgrest-js': [ '2.87.1' ],
+113 silly audit   '@supabase/realtime-js': [ '2.87.1' ],
+113 silly audit   '@supabase/storage-js': [ '2.87.1' ],
+113 silly audit   '@supabase/supabase-js': [ '2.87.1' ],
+113 silly audit   '@tailwindcss/typography': [ '0.5.19' ],
+113 silly audit   '@types/babel__core': [ '7.20.5' ],
+113 silly audit   '@types/babel__generator': [ '7.27.0' ],
+113 silly audit   '@types/babel__template': [ '7.4.4' ],
+113 silly audit   '@types/babel__traverse': [ '7.28.0' ],
+113 silly audit   '@types/debug': [ '4.1.12' ],
+113 silly audit   '@types/escape-html': [ '1.0.4' ],
+113 silly audit   '@types/estree': [ '1.0.8' ],
+113 silly audit   '@types/hast': [ '3.0.4', '2.3.10' ],
+113 silly audit   '@types/hoist-non-react-statics': [ '3.3.7' ],
+113 silly audit   '@types/mdast': [ '4.0.4', '3.0.15' ],
+113 silly audit   '@types/ms': [ '2.1.0' ],
+113 silly audit   '@types/nlcst': [ '2.0.3' ],
+113 silly audit   '@types/node': [ '25.0.0' ],
+113 silly audit   '@types/parse-json': [ '4.0.2' ],
+113 silly audit   '@types/pg': [ '8.11.6' ],
+113 silly audit   '@types/phoenix': [ '1.6.7' ],
+113 silly audit   '@types/react': [ '19.2.7' ],
+113 silly audit   '@types/react-dom': [ '19.2.3' ],
+113 silly audit   '@types/react-redux': [ '7.1.34' ],
+113 silly audit   '@types/react-transition-group': [ '4.4.12' ],
+113 silly audit   '@types/trusted-types': [ '2.0.7' ],
+113 silly audit   '@types/unist': [ '3.0.3', '2.0.11' ],
+113 silly audit   '@types/ws': [ '8.18.1' ],
+113 silly audit   '@types/zen-observable': [ '0.8.7' ],
+113 silly audit   '@ungap/structured-clone': [ '1.3.0' ],
+113 silly audit   '@vercel/functions': [ '2.2.13' ],
+113 silly audit   '@vercel/nft': [ '0.30.3' ],
+113 silly audit   '@vercel/oidc': [ '2.0.2' ],
+113 silly audit   '@vercel/postgres': [ '0.10.0' ],
+113 silly audit   '@vercel/routing-utils': [ '5.3.0' ],
+113 silly audit   '@vercel/stega': [ '0.1.2' ],
+113 silly audit   '@vitejs/plugin-react': [ '4.7.0' ],
+113 silly audit   '@volar/kit': [ '2.4.27' ],
+113 silly audit   '@volar/language-core': [ '2.4.27' ],
+113 silly audit   '@volar/language-server': [ '2.4.27' ],
+113 silly audit   '@volar/language-service': [ '2.4.27' ],
+113 silly audit   '@volar/source-map': [ '2.4.27' ],
+113 silly audit   '@volar/typescript': [ '2.4.27' ],
+113 silly audit   '@vscode/emmet-helper': [ '2.11.0' ],
+113 silly audit   '@vscode/l10n': [ '0.0.18' ],
+113 silly audit   '@wry/caches': [ '1.0.1' ],
+113 silly audit   '@wry/context': [ '0.7.4', '0.4.4' ],
+113 silly audit   '@wry/equality': [ '0.5.7', '0.1.11' ],
+113 silly audit   '@wry/trie': [ '0.5.0' ],
+113 silly audit   '@xata.io/client': [ '0.28.4' ],
+113 silly audit   abbrev: [ '3.0.1' ],
+113 silly audit   acorn: [ '8.15.0' ],
+113 silly audit   'acorn-import-attributes': [ '1.9.5' ],
+113 silly audit   'agent-base': [ '7.1.4' ],
+113 silly audit   ajv: [ '6.12.6', '8.17.1' ],
+113 silly audit   'ansi-align': [ '3.0.1' ],
+113 silly audit   'ansi-regex': [ '5.0.1', '6.2.2' ],
+113 silly audit   'strip-ansi': [ '6.0.1', '7.1.2' ],
+113 silly audit   'ansi-styles': [ '6.2.3', '4.3.0' ],
+113 silly audit   'any-promise': [ '1.3.0' ],
+113 silly audit   anymatch: [ '3.1.3' ],
+113 silly audit   picomatch: [ '2.3.1', '4.0.3' ],
+113 silly audit   'apollo-link-context': [ '1.0.20' ],
+113 silly audit   'apollo-link': [ '1.2.14' ],
+113 silly audit   'apollo-utilities': [ '1.3.4' ],
+113 silly audit   graphql: [ '15.10.1', '16.12.0' ],
+113 silly audit   'ts-invariant': [ '0.4.4', '0.10.3' ],
+113 silly audit   tslib: [ '1.14.1', '2.8.1' ],
+113 silly audit   'zen-observable-ts': [ '0.8.21', '1.2.5' ],
+113 silly audit   arg: [ '5.0.2' ],
+113 silly audit   argparse: [ '2.0.1', '1.0.10' ],
+113 silly audit   'aria-query': [ '5.3.2' ],
+113 silly audit   'array-iterate': [ '2.0.1' ],
+113 silly audit   'array-move': [ '4.0.0' ],
+113 silly audit   astro: [ '5.16.15' ],
+113 silly audit   chokidar: [ '5.0.0', '4.0.3', '3.6.0' ],
+113 silly audit   'estree-walker': [ '3.0.3', '2.0.2' ],
+113 silly audit   'lru-cache': [ '11.2.5', '6.0.0', '5.1.1', '10.4.3' ],
+113 silly audit   readdirp: [ '5.0.0', '4.1.2', '3.6.0' ],
+113 silly audit   unstorage: [ '1.17.4' ],
+113 silly audit   'async-sema': [ '3.1.1' ],
+113 silly audit   asynckit: [ '0.4.0' ],
+113 silly audit   autoprefixer: [ '10.4.22' ],
+113 silly audit   axios: [ '1.13.2' ],
+113 silly audit   'axobject-query': [ '4.1.0' ],
+113 silly audit   'babel-plugin-macros': [ '3.1.0' ],
+113 silly audit   bail: [ '2.0.2', '1.0.5' ],
+113 silly audit   'balanced-match': [ '1.0.2' ],
+113 silly audit   'base-64': [ '1.0.0' ],
+113 silly audit   'base64-js': [ '1.5.1' ],
+113 silly audit   'baseline-browser-mapping': [ '2.9.6' ],
+113 silly audit   'binary-extensions': [ '2.3.0' ],
+113 silly audit   bindings: [ '1.5.0' ],
+113 silly audit   boolbase: [ '1.0.0' ],
+113 silly audit   boxen: [ '8.0.1' ],
+113 silly audit   'brace-expansion': [ '2.0.2' ],
+113 silly audit   braces: [ '3.0.3' ],
+113 silly audit   browserslist: [ '4.28.1' ],
+113 silly audit   buffer: [ '6.0.3' ],
+113 silly audit   bufferutil: [ '4.0.9' ],
+113 silly audit   'call-bind': [ '1.0.8' ],
+113 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+113 silly audit   'call-bound': [ '1.0.4' ],
+113 silly audit   callsites: [ '3.1.0' ],
+113 silly audit   camelcase: [ '8.0.0' ],
+113 silly audit   'camelcase-css': [ '2.0.1' ],
+113 silly audit   'caniuse-lite': [ '1.0.30001760' ],
+113 silly audit   ccount: [ '2.0.1', '1.1.0' ],
+113 silly audit   'chain-function': [ '1.0.1' ],
+113 silly audit   chalk: [ '5.6.2' ],
+113 silly audit   'character-entities': [ '2.0.2', '1.2.4' ],
+113 silly audit   'character-entities-html4': [ '2.1.0', '1.1.4' ],
+113 silly audit   'character-entities-legacy': [ '1.1.4', '3.0.0' ],
+113 silly audit   'character-reference-invalid': [ '1.1.4' ],
+113 silly audit   chownr: [ '3.0.0' ],
+113 silly audit   'ci-info': [ '4.3.1' ],
+113 silly audit   'clean-stack': [ '5.3.0' ],
+113 silly audit   'escape-string-regexp': [ '5.0.0', '4.0.0' ],
+113 silly audit   'cli-boxes': [ '3.0.0' ],
+113 silly audit   cliui: [ '8.0.1' ],
+113 silly audit   clsx: [ '2.1.1', '1.2.1' ],
+113 silly audit   codemirror: [ '5.65.20' ],
+113 silly audit   'collapse-white-space': [ '1.0.6' ],
+113 silly audit   'color-convert': [ '2.0.1' ],
+113 silly audit   'color-name': [ '1.1.4' ],
+113 silly audit   'combined-stream': [ '1.0.8' ],
+113 silly audit   'comma-separated-tokens': [ '2.0.3', '1.0.8' ],
+113 silly audit   commander: [ '11.1.0', '4.1.1' ],
+113 silly audit   'common-ancestor-path': [ '1.0.1' ],
+113 silly audit   'common-tags': [ '1.8.2' ],
+113 silly audit   'compute-scroll-into-view': [ '3.1.1' ],
+113 silly audit   consola: [ '3.4.2' ],
+113 silly audit   'consolidated-events': [ '2.0.2' ],
+113 silly audit   cookie: [ '1.1.1' ],
+113 silly audit   'cookie-es': [ '1.2.2' ],
+113 silly audit   'copy-text-to-clipboard': [ '3.2.2' ],
+113 silly audit   cosmiconfig: [ '7.1.0' ],
+113 silly audit   yaml: [ '1.10.2', '2.8.2', '2.7.1' ],
+113 silly audit   'create-react-class': [ '15.7.0' ],
+113 silly audit   'cross-spawn': [ '7.0.6' ],
+113 silly audit   crossws: [ '0.3.5' ],
+113 silly audit   'css-select': [ '5.2.2' ],
+113 silly audit   'css-tree': [ '3.1.0', '2.2.1' ],
+113 silly audit   'css-what': [ '6.2.2' ],
+113 silly audit   csscolorparser: [ '1.0.3' ],
+113 silly audit   cssesc: [ '3.0.0' ],
+113 silly audit   csso: [ '5.0.5' ],
+113 silly audit   'mdn-data': [ '2.0.28', '2.12.2' ],
+113 silly audit   csstype: [ '3.2.3' ],
+113 silly audit   dayjs: [ '1.11.19' ],
+113 silly audit   debug: [ '4.4.3' ],
+113 silly audit   'decap-cms-app': [ '3.9.0' ],
+113 silly audit   'ajv-errors': [ '3.0.0' ],
+113 silly audit   'ajv-keywords': [ '5.1.0' ],
+113 silly audit   'json-schema-traverse': [ '1.0.0', '0.4.1' ],
+113 silly audit   'decap-cms-backend-aws-cognito-github-proxy': [ '3.4.1' ],
+113 silly audit   'apollo-cache': [ '1.3.5' ],
+113 silly audit   'apollo-cache-inmemory': [ '1.6.6' ],
+113 silly audit   'apollo-client': [ '2.6.10' ],
+113 silly audit   'apollo-link-http': [ '1.5.17' ],
+113 silly audit   'apollo-link-http-common': [ '0.2.16' ],
+113 silly audit   optimism: [ '0.10.3', '0.18.1' ],
+113 silly audit   'symbol-observable': [ '1.2.0', '4.0.0' ],
+113 silly audit   'decap-cms-backend-azure': [ '3.3.0' ],
+113 silly audit   'decap-cms-backend-bitbucket': [ '3.3.0' ],
+113 silly audit   'decap-cms-backend-git-gateway': [ '3.4.1' ],
+113 silly audit   'decap-cms-backend-gitea': [ '3.3.0' ],
+113 silly audit   'decap-cms-backend-github': [ '3.4.0' ],
+113 silly audit   'decap-cms-backend-gitlab': [ '3.4.0' ],
+113 silly audit   'decap-cms-backend-proxy': [ '3.3.0' ],
+113 silly audit   'decap-cms-backend-test': [ '3.2.1' ],
+113 silly audit   'decap-cms-core': [ '3.9.0' ],
+113 silly audit   'longest-streak': [ '2.0.4', '3.1.0' ],
+113 silly audit   'markdown-table': [ '2.0.0', '3.0.4', '1.1.3' ],
+113 silly audit   'mdast-util-find-and-replace': [ '1.1.1', '3.0.2' ],
+113 silly audit   'mdast-util-gfm': [ '0.1.2', '3.1.0' ],
+113 silly audit   'mdast-util-gfm-autolink-literal': [ '0.1.3', '2.0.1' ],
+113 silly audit   'mdast-util-gfm-strikethrough': [ '0.2.3', '2.0.0' ],
+113 silly audit   'mdast-util-gfm-table': [ '0.1.6', '2.0.0' ],
+113 silly audit   'mdast-util-gfm-task-list-item': [ '0.1.6', '2.0.0' ],
+113 silly audit   'mdast-util-to-markdown': [ '0.6.5', '1.5.0', '2.1.2' ],
+113 silly audit   'mdast-util-to-string': [ '2.0.0', '4.0.0', '3.2.0', '1.1.0' ],
+113 silly audit   micromark: [ '2.11.4', '4.0.2' ],
+113 silly audit   'micromark-extension-gfm': [ '0.3.3', '3.0.0' ],
+113 silly audit   'micromark-extension-gfm-autolink-literal': [ '0.5.7', '2.1.0' ],
+113 silly audit   'micromark-extension-gfm-strikethrough': [ '0.6.5', '2.1.0' ],
+113 silly audit   'micromark-extension-gfm-table': [ '0.4.3', '2.1.1' ],
+113 silly audit   'micromark-extension-gfm-tagfilter': [ '0.3.0', '2.0.0' ],
+113 silly audit   'micromark-extension-gfm-task-list-item': [ '0.3.3', '2.1.0' ],
+113 silly audit   'parse-entities': [ '2.0.0', '1.2.2' ],
+113 silly audit   'remark-gfm': [ '1.0.0', '4.0.1' ],
+113 silly audit   'unist-util-visit-parents': [ '3.1.1', '2.1.2', '5.1.3', '6.0.2' ],
+113 silly audit   zwitch: [ '1.0.5', '2.0.4' ],
+113 silly audit   'decap-cms-editor-component-image': [ '3.2.1' ],
+113 silly audit   'decap-cms-lib-auth': [ '3.0.6' ],
+113 silly audit   'decap-cms-lib-util': [ '3.3.1' ],
+113 silly audit   'decap-cms-lib-widgets': [ '3.2.1' ],
+113 silly audit   'decap-cms-locales': [ '3.5.0' ],
+113 silly audit   'decap-cms-ui-auth': [ '3.3.0' ],
+113 silly audit   'decap-cms-ui-default': [ '3.5.0' ],
+113 silly audit   'decap-cms-widget-boolean': [ '3.2.0' ],
+113 silly audit   'decap-cms-widget-code': [ '3.3.0' ],
+113 silly audit   'decap-cms-widget-colorstring': [ '3.2.0' ],
+113 silly audit   'decap-cms-widget-datetime': [ '3.4.0' ],
+113 silly audit   'decap-cms-widget-file': [ '3.2.0' ],
+113 silly audit   'decap-cms-widget-image': [ '3.2.1' ],
+113 silly audit   'decap-cms-widget-list': [ '3.5.0' ],
+113 silly audit   'decap-cms-widget-map': [ '3.2.0' ],
+113 silly audit   'decap-cms-widget-markdown': [ '3.6.0' ],
+113 silly audit   'hast-util-is-element': [ '1.1.0', '3.0.0' ],
+113 silly audit   'hast-util-to-html': [ '7.1.3', '9.0.5' ],
+113 silly audit   'html-void-elements': [ '1.0.5', '3.0.0' ],
+113 silly audit   'is-plain-obj': [ '2.1.0', '4.1.0' ],
+113 silly audit   'mdast-util-definitions': [ '1.2.5', '6.0.0', '4.0.0' ],
+113 silly audit   'mdast-util-to-hast': [ '4.0.0', '13.2.1', '10.2.0' ],
+113 silly audit   'property-information': [ '5.6.0', '7.1.0' ],
+113 silly audit   'rehype-stringify': [ '7.0.0', '10.0.1' ],
+113 silly audit   'remark-parse': [ '6.0.3', '9.0.0', '11.0.0' ],
+113 silly audit   'remark-rehype': [ '4.0.1', '8.1.0', '11.1.2' ],
+113 silly audit   'space-separated-tokens': [ '1.1.5', '2.0.2' ],
+113 silly audit   'stringify-entities': [ '3.1.0', '1.3.2', '4.0.4' ],
+113 silly audit   'trim-lines': [ '1.1.3', '3.0.1' ],
+113 silly audit   trough: [ '1.0.5', '2.2.0' ],
+113 silly audit   unified: [ '9.2.2', '11.0.5' ],
+113 silly audit   'unist-util-position': [ '3.1.0', '5.0.0' ],
+113 silly audit   'unist-util-remove-position': [ '1.1.4', '5.0.0' ],
+113 silly audit   'unist-util-stringify-position': [ '2.0.3', '4.0.0' ],
+113 silly audit   'unist-util-visit': [ '1.4.1', '2.0.3', '4.1.2', '5.0.0' ],
+113 silly audit   'unist-util-is': [ '3.0.0', '6.0.1', '5.2.1', '4.1.0' ],
+113 silly audit   vfile: [ '4.2.1', '6.0.3' ],
+113 silly audit   'vfile-message': [ '2.0.4', '4.0.3' ],
+113 silly audit   'decap-cms-widget-number': [ '3.2.0' ],
+113 silly audit   'decap-cms-widget-object': [ '3.4.0' ],
+113 silly audit   'decap-cms-widget-relation': [ '3.5.2' ],
+113 silly audit   'decap-cms-widget-select': [ '3.3.0' ],
+113 silly audit   'decap-cms-widget-string': [ '3.2.0' ],
+113 silly audit   'decap-cms-widget-text': [ '3.2.0' ],
+113 silly audit   'decode-named-character-reference': [ '1.2.0' ],
+113 silly audit   deepmerge: [ '4.3.1' ],
+113 silly audit   'define-data-property': [ '1.1.4' ],
+113 silly audit   'define-properties': [ '1.2.1' ],
+113 silly audit   defu: [ '6.1.4' ],
+113 silly audit   'delayed-stream': [ '1.0.0' ],
+113 silly audit   dequal: [ '2.0.3' ],
+113 silly audit   destr: [ '2.0.5' ],
+113 silly audit   detab: [ '2.0.4' ],
+113 silly audit   'detect-libc': [ '2.1.2' ],
+113 silly audit   'deterministic-object-hash': [ '2.0.2' ],
+113 silly audit   devalue: [ '5.6.2' ],
+113 silly audit   devlop: [ '1.1.0' ],
+113 silly audit   diacritics: [ '1.3.0' ],
+113 silly audit   didyoumean: [ '1.2.2' ],
+113 silly audit   diff: [ '8.0.3' ],
+113 silly audit   direction: [ '1.0.4' ],
+113 silly audit   dlv: [ '1.1.3' ],
+113 silly audit   'dnd-core': [ '14.0.1' ],
+113 silly audit   'dom-helpers': [ '5.2.1', '3.4.0' ],
+113 silly audit   'dom-serializer': [ '2.0.0' ],
+113 silly audit   entities: [ '4.5.0', '6.0.1' ],
+113 silly audit   domelementtype: [ '2.3.0' ],
+113 silly audit   domhandler: [ '5.0.3' ],
+113 silly audit   dompurify: [ '3.3.1' ],
+113 silly audit   domutils: [ '3.2.2' ],
+113 silly audit   dset: [ '3.1.4' ],
+113 silly audit   'dunder-proto': [ '1.0.1' ],
+113 silly audit   eastasianwidth: [ '0.2.0' ],
+113 silly audit   'electron-to-chromium': [ '1.5.267' ],
+113 silly audit   emmet: [ '2.4.11' ],
+113 silly audit   'error-ex': [ '1.3.4' ],
+113 silly audit   'es-define-property': [ '1.0.1' ],
+113 silly audit   'es-errors': [ '1.3.0' ],
+113 silly audit   'es-module-lexer': [ '1.7.0' ],
+113 silly audit   'es-object-atoms': [ '1.1.1' ],
+113 silly audit   'es-set-tostringtag': [ '2.1.0' ],
+113 silly audit   esbuild: [ '0.25.12' ],
+113 silly audit   escalade: [ '3.2.0' ],
+113 silly audit   'escape-html': [ '1.0.3' ],
+113 silly audit   esprima: [ '4.0.1' ],
+113 silly audit   eventemitter3: [ '5.0.1' ],
+113 silly audit   exenv: [ '1.2.2' ],
+113 silly audit   extend: [ '3.0.2' ],
+113 silly audit   'extend-shallow': [ '2.0.1' ],
+113 silly audit   'fast-deep-equal': [ '3.1.3' ],
+113 silly audit   'fast-glob': [ '3.3.3' ],
+113 silly audit   'fast-json-stable-stringify': [ '2.1.0' ],
+113 silly audit   'fast-uri': [ '3.1.0' ],
+113 silly audit   fastq: [ '1.19.1' ],
+113 silly audit   fdir: [ '6.5.0' ],
+113 silly audit   'file-uri-to-path': [ '1.0.0' ],
+113 silly audit   'fill-range': [ '7.1.1' ],
+113 silly audit   'find-root': [ '1.1.0' ],
+113 silly audit   flattie: [ '1.1.1' ],
+113 silly audit   'focus-group': [ '0.3.1' ],
+113 silly audit   'follow-redirects': [ '1.15.11' ],
+113 silly audit   fontace: [ '0.4.0' ],
+113 silly audit   fontkitten: [ '1.0.2' ],
+113 silly audit   'foreground-child': [ '3.3.1' ],
+113 silly audit   'form-data': [ '4.0.5' ],
+113 silly audit   'fraction.js': [ '5.3.4' ],
+113 silly audit   fsevents: [ '2.3.3', '2.3.2' ],
+113 silly audit   'function-bind': [ '1.1.2' ],
+113 silly audit   fuzzy: [ '0.1.3' ],
+113 silly audit   gensync: [ '1.0.0-beta.2' ],
+113 silly audit   geotiff: [ '2.0.4' ],
+113 silly audit   yallist: [ '4.0.0', '5.0.0', '3.1.1' ],
+113 silly audit   'get-caller-file': [ '2.0.5' ],
+113 silly audit   'get-east-asian-width': [ '1.4.0' ],
+113 silly audit   'get-intrinsic': [ '1.3.0' ],
+113 silly audit   'get-proto': [ '1.0.1' ],
+113 silly audit   'github-slugger': [ '2.0.0' ],
+113 silly audit   glob: [ '10.5.0' ],
+113 silly audit   'glob-parent': [ '5.1.2', '6.0.2' ],
+113 silly audit   minimatch: [ '9.0.5', '7.4.6' ],
+113 silly audit   gopd: [ '1.2.0' ],
+113 silly audit   'gotrue-js': [ '0.9.29' ],
+113 silly audit   'graceful-fs': [ '4.2.11' ],
+113 silly audit   'graphql-tag': [ '2.12.6' ],
+113 silly audit   'gray-matter': [ '4.0.3' ],
+113 silly audit   'js-yaml': [ '3.14.2', '4.1.1' ],
+113 silly audit   h3: [ '1.15.5' ],
+113 silly audit   'has-property-descriptors': [ '1.0.2' ],
+113 silly audit   'has-symbols': [ '1.1.0' ],
+113 silly audit   'has-tostringtag': [ '1.0.2' ],
+113 silly audit   hasown: [ '2.0.2' ],
+113 silly audit   'hast-util-embedded': [ '1.0.6' ],
+113 silly audit   'hast-util-from-html': [ '2.0.3' ],
+113 silly audit   'hast-util-from-parse5': [ '8.0.3', '5.0.3' ],
+113 silly audit   'vfile-location': [ '5.0.3', '2.0.6' ],
+113 silly audit   'hast-util-has-property': [ '1.0.4' ],
+113 silly audit   'hast-util-parse-selector': [ '4.0.0', '2.2.5' ],
+113 silly audit   'hast-util-raw': [ '9.1.0' ],
+113 silly audit   'hast-util-whitespace': [ '3.0.0', '1.0.4' ],
+113 silly audit   'hast-util-to-mdast': [ '7.1.3' ],
+113 silly audit   'hast-util-to-text': [ '2.0.1', '4.0.2' ],
+113 silly audit   'unist-util-find-after': [ '3.0.0', '5.0.0' ],
+113 silly audit   'hast-util-to-parse5': [ '8.0.1' ],
+113 silly audit   hastscript: [ '9.0.1', '5.1.2' ],
+113 silly audit   history: [ '4.10.1' ],
+113 silly audit   'hoist-non-react-statics': [ '3.3.2' ],
+113 silly audit   'html-escaper': [ '3.0.3' ],
+113 silly audit   'http-cache-semantics': [ '4.2.0' ],
+113 silly audit   'https-proxy-agent': [ '7.0.6' ],
+113 silly audit   'iceberg-js': [ '0.8.1' ],
+113 silly audit   ieee754: [ '1.2.1' ],
+113 silly audit   immediate: [ '3.0.6' ],
+113 silly audit   immer: [ '9.0.21', '10.2.0' ],
+113 silly audit   immutable: [ '3.8.2' ],
+113 silly audit   'import-fresh': [ '3.3.1' ],
+113 silly audit   'resolve-from': [ '4.0.0', '5.0.0' ],
+113 silly audit   'import-meta-resolve': [ '4.2.0' ],
+113 silly audit   inherits: [ '2.0.4' ],
+113 silly audit   ini: [ '2.0.0' ],
+113 silly audit   'inline-style-parser': [ '0.1.1' ],
+113 silly audit   invariant: [ '2.2.4' ],
+113 silly audit   'iron-webcrypto': [ '1.2.1' ],
+113 silly audit   'is-alphabetical': [ '1.0.4' ],
+113 silly audit   'is-alphanumeric': [ '1.0.0' ],
+113 silly audit   'is-alphanumerical': [ '1.0.4' ],
+113 silly audit   'is-arrayish': [ '0.2.1' ],
+113 silly audit   'is-binary-path': [ '2.1.0' ],
+113 silly audit   'is-buffer': [ '2.0.5' ],
+113 silly audit   'is-core-module': [ '2.16.1' ],
+113 silly audit   'is-decimal': [ '1.0.4' ],
+113 silly audit   'is-docker': [ '3.0.0' ],
+113 silly audit   'is-extendable': [ '0.1.1' ],
+113 silly audit   'is-extglob': [ '2.1.1' ],
+113 silly audit   'is-fullwidth-code-point': [ '3.0.0' ],
+113 silly audit   'is-glob': [ '4.0.3' ],
+113 silly audit   'is-hexadecimal': [ '1.0.4' ],
+113 silly audit   'is-hotkey': [ '0.2.0' ],
+113 silly audit   'is-inside-container': [ '1.0.0' ],
+113 silly audit   'is-number': [ '7.0.0' ],
+113 silly audit   'is-plain-object': [ '5.0.0' ],
+113 silly audit   'is-url': [ '1.2.4' ],
+113 silly audit   'is-whitespace-character': [ '1.0.4' ],
+113 silly audit   'is-word-character': [ '1.0.4' ],
+113 silly audit   'is-wsl': [ '3.1.0' ],
+113 silly audit   isarray: [ '0.0.1' ],
+113 silly audit   isexe: [ '2.0.0' ],
+113 silly audit   'isomorphic-base64': [ '1.0.2' ],
+113 silly audit   jackspeak: [ '3.4.3' ],
+113 silly audit   jiti: [ '1.21.7' ],
+113 silly audit   'js-base64': [ '3.7.8' ],
+113 silly audit   'js-sha256': [ '0.9.0' ],
+113 silly audit   'js-tokens': [ '4.0.0' ],
+113 silly audit   jsesc: [ '3.1.0' ],
+113 silly audit   'json-parse-even-better-errors': [ '2.3.1' ],
+113 silly audit   'json-stringify-pretty-compact': [ '2.0.0' ],
+113 silly audit   json5: [ '2.2.3' ],
+113 silly audit   'jsonc-parser': [ '2.3.1', '3.3.1' ],
+113 silly audit   'jwt-decode': [ '3.1.2' ],
+113 silly audit   'kind-of': [ '6.0.3' ],
+113 silly audit   kleur: [ '4.1.5', '3.0.3' ],
+113 silly audit   lerc: [ '3.0.0' ],
+113 silly audit   lie: [ '3.1.1' ],
+113 silly audit   lilconfig: [ '3.1.3' ],
+113 silly audit   'lines-and-columns': [ '1.2.4' ],
+113 silly audit   localforage: [ '1.10.0' ],
+113 silly audit   lodash: [ '4.17.21' ],
+113 silly audit   'lodash-es': [ '4.17.21' ],
+113 silly audit   'loose-envify': [ '1.4.0' ],
+113 silly audit   'magic-string': [ '0.30.21' ],
+113 silly audit   magicast: [ '0.5.1' ],
+113 silly audit   'mapbox-to-css-font': [ '2.4.5' ],
+113 silly audit   'markdown-escapes': [ '1.0.4' ],
+113 silly audit   marked: [ '11.2.0' ],
+113 silly audit   'material-colors': [ '1.2.6' ],
+113 silly audit   'math-intrinsics': [ '1.1.0' ],
+113 silly audit   'md-block': [ '0.0.1' ],
+113 silly audit   'mdast-util-compact': [ '1.0.4' ],
+113 silly audit   'mdast-util-from-markdown': [ '2.0.2', '0.8.5' ],
+113 silly audit   'mdast-util-gfm-footnote': [ '2.1.0' ],
+113 silly audit   'mdast-util-math': [ '2.0.2' ],
+113 silly audit   'mdast-util-phrasing': [ '3.0.1', '2.0.0', '4.1.0' ],
+113 silly audit   'micromark-util-character': [ '1.2.0', '2.1.1' ],
+113 silly audit   'micromark-util-decode-numeric-character-reference': [ '1.1.0', '2.0.2' ],
+113 silly audit   'micromark-util-decode-string': [ '1.1.0', '2.0.1' ],
+113 silly audit   'micromark-util-symbol': [ '1.1.0', '2.0.1' ],
+113 silly audit   'micromark-util-types': [ '1.1.0', '2.0.2' ],
+113 silly audit   mdurl: [ '1.0.1' ],
+113 silly audit   'memoize-one': [ '6.0.0', '5.2.1' ],
+113 silly audit   merge2: [ '1.4.1' ],
+113 silly audit   'micro-api-client': [ '3.3.0' ],
+113 silly audit   'micromark-core-commonmark': [ '2.0.3' ],
+113 silly audit   'micromark-extension-gfm-footnote': [ '2.1.0' ],
+113 silly audit   'micromark-factory-destination': [ '2.0.1' ],
+113 silly audit   'micromark-factory-label': [ '2.0.1' ],
+113 silly audit   'micromark-factory-space': [ '2.0.1' ],
+113 silly audit   'micromark-factory-title': [ '2.0.1' ],
+113 silly audit   'micromark-factory-whitespace': [ '2.0.1' ],
+113 silly audit   'micromark-util-chunked': [ '2.0.1' ],
+113 silly audit   'micromark-util-classify-character': [ '2.0.1' ],
+113 silly audit   'micromark-util-combine-extensions': [ '2.0.1' ],
+113 silly audit   'micromark-util-encode': [ '2.0.1' ],
+113 silly audit   'micromark-util-html-tag-name': [ '2.0.1' ],
+113 silly audit   'micromark-util-normalize-identifier': [ '2.0.1' ],
+113 silly audit   'micromark-util-resolve-all': [ '2.0.1' ],
+113 silly audit   'micromark-util-sanitize-uri': [ '2.0.1' ],
+113 silly audit   'micromark-util-subtokenize': [ '2.1.0' ],
+113 silly audit   micromatch: [ '4.0.8' ],
+113 silly audit   'mime-db': [ '1.52.0' ],
+113 silly audit   'mime-types': [ '2.1.35' ],
+113 silly audit   minimist: [ '1.2.8' ],
+113 silly audit   minipass: [ '7.1.2' ],
+113 silly audit   minizlib: [ '3.1.0' ],
+113 silly audit   mrmime: [ '2.0.1' ],
+113 silly audit   ms: [ '2.1.3' ],
+113 silly audit   'muggle-string': [ '0.4.1' ],
+113 silly audit   mz: [ '2.7.0' ],
+113 silly audit   nanoid: [ '3.3.11' ],
+113 silly audit   neotraverse: [ '0.6.18' ],
+113 silly audit   'nlcst-to-string': [ '4.0.0' ],
+113 silly audit   'node-fetch': [ '2.7.0' ],
+113 silly audit   'node-fetch-native': [ '1.6.7' ],
+113 silly audit   'node-gyp-build': [ '4.8.4' ],
+113 silly audit   'node-mock-http': [ '1.0.4' ],
+113 silly audit   'node-polyglot': [ '2.6.0' ],
+113 silly audit   'node-releases': [ '2.0.27' ],
+113 silly audit   nopt: [ '8.1.0' ],
+113 silly audit   'normalize-path': [ '3.0.0' ],
+113 silly audit   'normalize-range': [ '0.1.2' ],
+113 silly audit   'nth-check': [ '2.1.1' ],
+113 silly audit   'object-assign': [ '4.1.1' ],
+113 silly audit   'object-hash': [ '3.0.0' ],
+113 silly audit   'object-inspect': [ '1.13.4' ],
+113 silly audit   'object-keys': [ '1.1.1' ],
+113 silly audit   'object.entries': [ '1.1.9' ],
+113 silly audit   obuf: [ '1.1.2' ],
+113 silly audit   ofetch: [ '1.5.1' ],
+113 silly audit   ohash: [ '2.0.11' ],
+113 silly audit   ol: [ '6.15.1' ],
+113 silly audit   'ol-mapbox-style': [ '8.2.1' ],
+113 silly audit   'oniguruma-parser': [ '0.12.1' ],
+113 silly audit   'oniguruma-to-es': [ '4.3.4' ],
+113 silly audit   'p-limit': [ '6.2.0' ],
+113 silly audit   'p-queue': [ '8.1.1' ],
+113 silly audit   'p-timeout': [ '6.1.4' ],
+113 silly audit   'package-json-from-dist': [ '1.0.1' ],
+113 silly audit   'package-manager-detector': [ '1.6.0' ],
+113 silly audit   pako: [ '2.1.0' ],
+113 silly audit   'parent-module': [ '1.0.1' ],
+113 silly audit   'parse-headers': [ '2.0.6' ],
+113 silly audit   'parse-json': [ '5.2.0' ],
+113 silly audit   'parse-latin': [ '7.0.0' ],
+113 silly audit   parse5: [ '7.3.0', '5.1.1' ],
+113 silly audit   'path-browserify': [ '1.0.1' ],
+113 silly audit   'path-key': [ '3.1.1' ],
+113 silly audit   'path-parse': [ '1.0.7' ],
+113 silly audit   'path-scurry': [ '1.11.1' ],
+113 silly audit   'path-to-regexp': [ '6.1.0', '6.3.0', '1.9.0' ],
+113 silly audit   'path-type': [ '4.0.0' ],
+113 silly audit   pbf: [ '3.2.1' ],
+113 silly audit   'pg-int8': [ '1.0.1' ],
+113 silly audit   'pg-numeric': [ '1.0.2' ],
+113 silly audit   'pg-protocol': [ '1.10.3' ],
+113 silly audit   'pg-types': [ '4.1.0' ],
+113 silly audit   piccolore: [ '0.1.3' ],
+113 silly audit   picocolors: [ '1.1.1' ],
+113 silly audit   pify: [ '2.3.0' ],
+113 silly audit   pirates: [ '4.0.7' ],
+113 silly audit   postcss: [ '8.5.6' ],
+113 silly audit   'postcss-import': [ '15.1.0' ],
+113 silly audit   'postcss-js': [ '4.1.0' ],
+113 silly audit   'postcss-load-config': [ '4.0.2' ],
+113 silly audit   'postcss-nested': [ '6.2.0' ],
+113 silly audit   'postcss-selector-parser': [ '6.1.2', '6.0.10' ],
+113 silly audit   'postcss-value-parser': [ '4.2.0' ],
+113 silly audit   'postgres-array': [ '3.0.4' ],
+113 silly audit   'postgres-bytea': [ '3.0.0' ],
+113 silly audit   'postgres-date': [ '2.1.0' ],
+113 silly audit   'postgres-interval': [ '3.0.0' ],
+113 silly audit   'postgres-range': [ '1.1.4' ],
+113 silly audit   prettier: [ '3.7.4' ],
+113 silly audit   prismjs: [ '1.30.0' ],
+113 silly audit   prompts: [ '2.4.2' ],
+113 silly audit   'prop-types': [ '15.8.1' ],
+113 silly audit   'protocol-buffers-schema': [ '3.6.0' ],
+113 silly audit   'proxy-from-env': [ '1.1.0' ],
+113 silly audit   punycode: [ '2.3.1', '1.4.1' ],
+113 silly audit   qs: [ '6.14.0' ],
+113 silly audit   'queue-microtask': [ '1.2.3' ],
+113 silly audit   quickselect: [ '2.0.0' ],
+113 silly audit   radix3: [ '1.1.2' ],
+113 silly audit   rbush: [ '3.0.1' ],
+113 silly audit   react: [ '19.2.1' ],
+113 silly audit   'react-aria-menubutton': [ '7.0.3' ],
+113 silly audit   'react-codemirror2': [ '7.3.0' ],
+113 silly audit   'react-color': [ '2.19.3' ],
+113 silly audit   'react-dnd': [ '14.0.5' ],
+113 silly audit   'react-dnd-html5-backend': [ '14.1.0' ],
+113 silly audit   'react-dom': [ '19.2.1' ],
+113 silly audit   'react-frame-component': [ '5.2.7' ],
+113 silly audit   'react-immutable-proptypes': [ '2.2.0' ],
+113 silly audit   'react-is': [ '16.13.1', '17.0.2', '18.3.1' ],
+113 silly audit   'react-lifecycles-compat': [ '3.0.4' ],
+113 silly audit   'react-markdown': [ '6.0.3' ],
+113 silly audit   'unist-builder': [ '2.0.3', '1.0.4' ],
+113 silly audit   'react-modal': [ '3.16.3' ],
+113 silly audit   'react-polyglot': [ '0.7.2' ],
+113 silly audit   'react-redux': [ '7.2.9', '4.4.10' ],
+113 silly audit   'react-refresh': [ '0.17.0' ],
+113 silly audit   'react-router': [ '5.3.4' ],
+113 silly audit   'react-router-dom': [ '5.3.4' ],
+113 silly audit   'react-scroll-sync': [ '0.11.3' ],
+113 silly audit   'react-select': [ '5.10.2' ],
+113 silly audit   'react-split-pane': [ '0.1.92' ],
+113 silly audit   'react-style-proptype': [ '3.2.2' ],
+113 silly audit   'react-textarea-autosize': [ '8.5.9' ],
+113 silly audit   'react-toastify': [ '9.1.3' ],
+113 silly audit   'react-topbar-progress-indicator': [ '4.1.1' ],
+113 silly audit   'react-transition-group': [ '4.4.5', '1.2.1' ],
+113 silly audit   'react-virtualized-auto-sizer': [ '1.0.26' ],
+113 silly audit   'react-waypoint': [ '10.3.0' ],
+113 silly audit   'react-window': [ '1.8.11' ],
+113 silly audit   reactcss: [ '1.2.3' ],
+113 silly audit   'read-cache': [ '1.0.0' ],
+113 silly audit   redux: [ '4.2.1', '3.7.2' ],
+113 silly audit   'redux-devtools-extension': [ '2.13.9' ],
+113 silly audit   'redux-notifications': [ '4.0.1' ],
+113 silly audit   warning: [ '3.0.0', '4.0.3' ],
+113 silly audit   'redux-thunk': [ '2.4.2' ],
+113 silly audit   regex: [ '6.1.0' ],
+113 silly audit   'regex-recursion': [ '6.0.2' ],
+113 silly audit   'regex-utilities': [ '2.3.0' ],
+113 silly audit   rehackt: [ '0.1.0' ],
+113 silly audit   rehype: [ '13.0.2' ],
+113 silly audit   'rehype-minify-whitespace': [ '4.0.5' ],
+113 silly audit   'rehype-parse': [ '6.0.2', '9.0.1' ],
+113 silly audit   'web-namespaces': [ '1.1.4', '2.0.1' ],
+113 silly audit   'rehype-raw': [ '7.0.0' ],
+113 silly audit   'rehype-remark': [ '8.1.1' ],
+113 silly audit   'remark-stringify': [ '11.0.0', '6.0.4' ],
+113 silly audit   'remark-slate': [ '1.8.6' ],
+113 silly audit   'remark-slate-transformer': [ '0.7.5' ],
+113 silly audit   'remark-smartypants': [ '3.0.2' ],
+113 silly audit   'repeat-string': [ '1.6.1' ],
+113 silly audit   'request-light': [ '0.7.0', '0.5.8' ],
+113 silly audit   'require-directory': [ '2.1.1' ],
+113 silly audit   'require-from-string': [ '2.0.2' ],
+113 silly audit   reselect: [ '4.1.8' ],
+113 silly audit   resolve: [ '1.22.11' ],
+113 silly audit   'resolve-pathname': [ '3.0.0' ],
+113 silly audit   'resolve-protobuf-schema': [ '2.1.0' ],
+113 silly audit   retext: [ '9.0.0' ],
+113 silly audit   'retext-latin': [ '4.0.0' ],
+113 silly audit   'retext-smartypants': [ '6.2.0' ],
+113 silly audit   'retext-stringify': [ '4.0.0' ],
+113 silly audit   reusify: [ '1.1.0' ],
+113 silly audit   rollup: [ '4.53.3' ],
+113 silly audit   'run-parallel': [ '1.2.0' ],
+113 silly audit   rw: [ '1.3.3' ],
+113 silly audit   'sanitize-filename': [ '1.6.3' ],
+113 silly audit   sax: [ '1.4.3' ],
+113 silly audit   scheduler: [ '0.27.0' ],
+113 silly audit   'scroll-into-view-if-needed': [ '3.1.0' ],
+113 silly audit   'section-matter': [ '1.0.0' ],
+113 silly audit   semaphore: [ '1.1.0' ],
+113 silly audit   'set-function-length': [ '1.2.2' ],
+113 silly audit   sharp: [ '0.34.5' ],
+113 silly audit   'shebang-command': [ '2.0.0' ],
+113 silly audit   'shebang-regex': [ '3.0.0' ],
+113 silly audit   shiki: [ '3.21.0' ],
+113 silly audit   'side-channel': [ '1.1.0' ],
+113 silly audit   'side-channel-list': [ '1.0.0' ],
+113 silly audit   'side-channel-map': [ '1.0.1' ],
+113 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+113 silly audit   'signal-exit': [ '4.1.0' ],
+113 silly audit   sisteransi: [ '1.0.5' ],
+113 silly audit   slate: [ '0.118.1' ],
+113 silly audit   'slate-base64-serializer': [ '0.2.115' ],
+113 silly audit   'slate-dom': [ '0.118.1' ],
+113 silly audit   'tiny-invariant': [ '1.3.1', '1.3.3' ],
+113 silly audit   'slate-history': [ '0.113.1' ],
+113 silly audit   'slate-hyperscript': [ '0.100.0' ],
+113 silly audit   'slate-plain-serializer': [ '0.7.13' ],
+113 silly audit   'slate-react': [ '0.117.4' ],
+113 silly audit   'slate-soft-break': [ '0.9.0' ],
+113 silly audit   'smol-toml': [ '1.6.0' ],
+113 silly audit   'sort-asc': [ '0.1.0' ],
+113 silly audit   'sort-desc': [ '0.1.1' ],
+113 silly audit   'sort-object': [ '0.3.2' ],
+113 silly audit   'source-map': [ '0.5.7' ],
+113 silly audit   'source-map-js': [ '1.2.1' ],
+113 silly audit   'sprintf-js': [ '1.0.3' ],
+113 silly audit   'state-toggle': [ '1.0.3' ],
+113 silly audit   'strip-bom-string': [ '1.0.0' ],
+113 silly audit   'style-to-object': [ '0.3.0' ],
+113 silly audit   stylis: [ '4.2.0' ],
+113 silly audit   sucrase: [ '3.35.1' ],
+113 silly audit   'supports-preserve-symlinks-flag': [ '1.0.0' ],
+113 silly audit   svgo: [ '4.0.0' ],
+113 silly audit   tailwindcss: [ '3.4.19' ],
+113 silly audit   tar: [ '7.5.2' ],
+113 silly audit   'teeny-tap': [ '0.2.0' ],
+113 silly audit   thenify: [ '3.3.1' ],
+113 silly audit   'thenify-all': [ '1.6.0' ],
+113 silly audit   'tiny-inflate': [ '1.0.3' ],
+113 silly audit   'tiny-warning': [ '1.0.3' ],
+113 silly audit   tinycolor2: [ '1.6.0' ],
+113 silly audit   tinyexec: [ '1.0.2' ],
+113 silly audit   tinyglobby: [ '0.2.15' ],
+113 silly audit   'to-regex-range': [ '5.0.1' ],
+113 silly audit   'tomlify-j0.4': [ '3.0.0' ],
+113 silly audit   topbar: [ '0.1.4' ],
+113 silly audit   tr46: [ '0.0.3' ],
+113 silly audit   trim: [ '0.0.1' ],
+113 silly audit   'trim-trailing-lines': [ '1.1.4' ],
+113 silly audit   'truncate-utf8-bytes': [ '1.0.2' ],
+113 silly audit   'ts-interface-checker': [ '0.1.13' ],
+113 silly audit   tsconfck: [ '3.1.6' ],
+113 silly audit   'type-fest': [ '4.41.0' ],
+113 silly audit   'typesafe-path': [ '0.2.2' ],
+113 silly audit   typescript: [ '5.9.3' ],
+113 silly audit   'typescript-auto-import-cache': [ '0.3.6' ],
+113 silly audit   ufo: [ '1.6.3' ],
+113 silly audit   ultrahtml: [ '1.6.0' ],
+113 silly audit   uncrypto: [ '0.1.3' ],
+113 silly audit   'undici-types': [ '7.16.0' ],
+113 silly audit   unherit: [ '1.1.3' ],
+113 silly audit   unifont: [ '0.7.3' ],
+113 silly audit   'unist-util-generated': [ '1.1.6' ],
+113 silly audit   'unist-util-modify-children': [ '4.0.0' ],
+113 silly audit   'unist-util-visit-children': [ '3.0.0' ],
+113 silly audit   'update-browserslist-db': [ '1.2.2' ],
+113 silly audit   'uri-js': [ '4.4.1' ],
+113 silly audit   url: [ '0.11.4' ],
+113 silly audit   'url-join': [ '4.0.1' ],
+113 silly audit   'use-composed-ref': [ '1.4.0' ],
+113 silly audit   'use-isomorphic-layout-effect': [ '1.2.1' ],
+113 silly audit   'use-latest': [ '1.3.0' ],
+113 silly audit   'utf8-byte-length': [ '1.0.5' ],
+113 silly audit   'util-deprecate': [ '1.0.2' ],
+113 silly audit   uuid: [ '8.3.2' ],
+113 silly audit   'value-equal': [ '1.0.1' ],
+113 silly audit   vite: [ '6.4.1' ],
+113 silly audit   vitefu: [ '1.1.1' ],
+113 silly audit   'volar-service-css': [ '0.0.67' ],
+113 silly audit   'volar-service-emmet': [ '0.0.67' ],
+113 silly audit   'volar-service-html': [ '0.0.67' ],
+113 silly audit   'volar-service-prettier': [ '0.0.67' ],
+113 silly audit   'volar-service-typescript': [ '0.0.67' ],
+113 silly audit   'volar-service-typescript-twoslash-queries': [ '0.0.67' ],
+113 silly audit   'volar-service-yaml': [ '0.0.67' ],
+113 silly audit   'vscode-css-languageservice': [ '6.3.9' ],
+113 silly audit   'vscode-html-languageservice': [ '5.6.1' ],
+113 silly audit   'vscode-json-languageservice': [ '4.1.8' ],
+113 silly audit   'vscode-jsonrpc': [ '8.2.0' ],
+113 silly audit   'vscode-languageserver': [ '9.0.1' ],
+113 silly audit   'vscode-languageserver-protocol': [ '3.17.5' ],
+113 silly audit   'vscode-languageserver-textdocument': [ '1.0.12' ],
+113 silly audit   'vscode-languageserver-types': [ '3.17.5' ],
+113 silly audit   'vscode-nls': [ '5.2.0' ],
+113 silly audit   'vscode-uri': [ '3.1.0' ],
+113 silly audit   'web-worker': [ '1.5.0' ],
+113 silly audit   'webidl-conversions': [ '3.0.1' ],
+113 silly audit   'what-input': [ '5.2.12' ],
+113 silly audit   'what-the-diff': [ '0.6.0' ],
+113 silly audit   'whatwg-url': [ '5.0.0' ],
+113 silly audit   which: [ '2.0.2' ],
+113 silly audit   'which-pm-runs': [ '1.1.0' ],
+113 silly audit   'widest-line': [ '5.0.0' ],
+113 silly audit   ws: [ '8.18.3' ],
+113 silly audit   'xml-utils': [ '1.10.2' ],
+113 silly audit   xtend: [ '4.0.2' ],
+113 silly audit   'xxhash-wasm': [ '1.1.0' ],
+113 silly audit   y18n: [ '5.0.8' ],
+113 silly audit   'yaml-language-server': [ '1.19.2' ],
+113 silly audit   'ajv-draft-04': [ '1.0.0' ],
+113 silly audit   yargs: [ '17.7.2' ],
+113 silly audit   'yargs-parser': [ '21.1.1' ],
+113 silly audit   'yocto-queue': [ '1.2.2' ],
+113 silly audit   'yocto-spinner': [ '0.2.3' ],
+113 silly audit   yoctocolors: [ '2.1.2' ],
+113 silly audit   'zen-observable': [ '0.8.15' ],
+113 silly audit   zod: [ '3.25.76' ],
+113 silly audit   'zod-to-json-schema': [ '3.25.1' ],
+113 silly audit   'zod-to-ts': [ '1.2.0' ],
+113 silly audit   playwright: [ '1.58.0' ],
+113 silly audit   'playwright-core': [ '1.58.0' ]
+113 silly audit }
+114 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-x64-msvc
+115 silly reify mark deleted [
+115 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-x64-msvc'
+115 silly reify ]
+116 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-x64-gnu
+117 silly reify mark deleted [
+117 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-x64-gnu'
+117 silly reify ]
+118 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-ia32-msvc
+119 silly reify mark deleted [
+119 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-ia32-msvc'
+119 silly reify ]
+120 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-arm64-msvc
+121 silly reify mark deleted [
+121 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-win32-arm64-msvc'
+121 silly reify ]
+122 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-openharmony-arm64
+123 silly reify mark deleted [
+123 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-openharmony-arm64'
+123 silly reify ]
+124 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-x64-musl
+125 silly reify mark deleted [
+125 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-x64-musl'
+125 silly reify ]
+126 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-x64-gnu
+127 silly reify mark deleted [
+127 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-x64-gnu'
+127 silly reify ]
+128 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-s390x-gnu
+129 silly reify mark deleted [
+129 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-s390x-gnu'
+129 silly reify ]
+130 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-riscv64-musl
+131 silly reify mark deleted [
+131 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-riscv64-musl'
+131 silly reify ]
+132 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-riscv64-gnu
+133 silly reify mark deleted [
+133 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-riscv64-gnu'
+133 silly reify ]
+134 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-ppc64-gnu
+135 silly reify mark deleted [
+135 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-ppc64-gnu'
+135 silly reify ]
+136 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-loong64-gnu
+137 silly reify mark deleted [
+137 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-loong64-gnu'
+137 silly reify ]
+138 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm64-musl
+139 silly reify mark deleted [
+139 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm64-musl'
+139 silly reify ]
+140 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm64-gnu
+141 silly reify mark deleted [
+141 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm64-gnu'
+141 silly reify ]
+142 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm-musleabihf
+143 silly reify mark deleted [
+143 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm-musleabihf'
+143 silly reify ]
+144 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm-gnueabihf
+145 silly reify mark deleted [
+145 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-linux-arm-gnueabihf'
+145 silly reify ]
+146 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-freebsd-x64
+147 silly reify mark deleted [
+147 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-freebsd-x64'
+147 silly reify ]
+148 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-freebsd-arm64
+149 silly reify mark deleted [
+149 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-freebsd-arm64'
+149 silly reify ]
+150 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-darwin-x64
+151 silly reify mark deleted [
+151 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-darwin-x64'
+151 silly reify ]
+152 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-android-arm64
+153 silly reify mark deleted [
+153 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-android-arm64'
+153 silly reify ]
+154 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-android-arm-eabi
+155 silly reify mark deleted [
+155 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@rollup/rollup-android-arm-eabi'
+155 silly reify ]
+156 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-win32-x64
+157 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-win32-x64' ]
+158 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-win32-ia32
+159 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-win32-ia32' ]
+160 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-win32-arm64
+161 silly reify mark deleted [
+161 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-win32-arm64'
+161 silly reify ]
+162 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-wasm32
+163 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-wasm32' ]
+164 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@emnapi/runtime
+165 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@emnapi/runtime' ]
+166 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linuxmusl-x64
+167 silly reify mark deleted [
+167 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linuxmusl-x64'
+167 silly reify ]
+168 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linuxmusl-arm64
+169 silly reify mark deleted [
+169 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linuxmusl-arm64'
+169 silly reify ]
+170 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-x64
+171 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-x64' ]
+172 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-s390x
+173 silly reify mark deleted [
+173 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-s390x'
+173 silly reify ]
+174 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-riscv64
+175 silly reify mark deleted [
+175 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-riscv64'
+175 silly reify ]
+176 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-ppc64
+177 silly reify mark deleted [
+177 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-ppc64'
+177 silly reify ]
+178 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-arm64
+179 silly reify mark deleted [
+179 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-arm64'
+179 silly reify ]
+180 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-arm
+181 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-linux-arm' ]
+182 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linuxmusl-x64
+183 silly reify mark deleted [
+183 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linuxmusl-x64'
+183 silly reify ]
+184 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linuxmusl-arm64
+185 silly reify mark deleted [
+185 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linuxmusl-arm64'
+185 silly reify ]
+186 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-x64
+187 silly reify mark deleted [
+187 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-x64'
+187 silly reify ]
+188 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-s390x
+189 silly reify mark deleted [
+189 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-s390x'
+189 silly reify ]
+190 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-riscv64
+191 silly reify mark deleted [
+191 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-riscv64'
+191 silly reify ]
+192 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-ppc64
+193 silly reify mark deleted [
+193 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-ppc64'
+193 silly reify ]
+194 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-arm64
+195 silly reify mark deleted [
+195 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-arm64'
+195 silly reify ]
+196 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-arm
+197 silly reify mark deleted [
+197 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-linux-arm'
+197 silly reify ]
+198 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-darwin-x64
+199 silly reify mark deleted [
+199 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-libvips-darwin-x64'
+199 silly reify ]
+200 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-darwin-x64
+201 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@img/sharp-darwin-x64' ]
+202 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/win32-x64
+203 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/win32-x64' ]
+204 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/win32-ia32
+205 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/win32-ia32' ]
+206 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/win32-arm64
+207 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/win32-arm64' ]
+208 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/sunos-x64
+209 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/sunos-x64' ]
+210 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/openharmony-arm64
+211 silly reify mark deleted [
+211 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/openharmony-arm64'
+211 silly reify ]
+212 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/openbsd-x64
+213 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/openbsd-x64' ]
+214 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/openbsd-arm64
+215 silly reify mark deleted [
+215 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/openbsd-arm64'
+215 silly reify ]
+216 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/netbsd-x64
+217 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/netbsd-x64' ]
+218 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/netbsd-arm64
+219 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/netbsd-arm64' ]
+220 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-x64
+221 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-x64' ]
+222 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-s390x
+223 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-s390x' ]
+224 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-riscv64
+225 silly reify mark deleted [
+225 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-riscv64'
+225 silly reify ]
+226 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-ppc64
+227 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-ppc64' ]
+228 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-mips64el
+229 silly reify mark deleted [
+229 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-mips64el'
+229 silly reify ]
+230 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-loong64
+231 silly reify mark deleted [
+231 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-loong64'
+231 silly reify ]
+232 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-ia32
+233 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-ia32' ]
+234 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-arm64
+235 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-arm64' ]
+236 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-arm
+237 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/linux-arm' ]
+238 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/freebsd-x64
+239 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/freebsd-x64' ]
+240 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/freebsd-arm64
+241 silly reify mark deleted [
+241 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/freebsd-arm64'
+241 silly reify ]
+242 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/darwin-x64
+243 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/darwin-x64' ]
+244 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/android-x64
+245 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/android-x64' ]
+246 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/android-arm64
+247 silly reify mark deleted [
+247 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/android-arm64'
+247 silly reify ]
+248 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/android-arm
+249 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/android-arm' ]
+250 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/@esbuild/aix-ppc64
+251 silly reify mark deleted [ '/Users/mohammad/Projects/OIAC2/node_modules/@esbuild/aix-ppc64' ]
+252 http cache playwright-core@https://registry.npmjs.org/playwright-core/-/playwright-core-1.58.0.tgz 0ms (cache hit)
+253 http cache playwright@https://registry.npmjs.org/playwright/-/playwright-1.58.0.tgz 0ms (cache hit)
+254 http cache fsevents@https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz 0ms (cache hit)
+255 http cache @emnapi/runtime@https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.7.1.tgz 0ms (cache hit)
+256 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 58ms
+257 silly audit report {
+257 silly audit report   lodash: [
+257 silly audit report     {
+257 silly audit report       id: 1112455,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-xxjr-mmjv-4gpg',
+257 silly audit report       title: 'Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions',
+257 silly audit report       severity: 'moderate',
+257 silly audit report       vulnerable_versions: '>=4.0.0 <=4.17.22',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     }
+257 silly audit report   ],
+257 silly audit report   'lodash-es': [
+257 silly audit report     {
+257 silly audit report       id: 1112453,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-xxjr-mmjv-4gpg',
+257 silly audit report       title: 'Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions',
+257 silly audit report       severity: 'moderate',
+257 silly audit report       vulnerable_versions: '>=4.0.0 <=4.17.22',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     }
+257 silly audit report   ],
+257 silly audit report   'path-to-regexp': [
+257 silly audit report     {
+257 silly audit report       id: 1101846,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-9wv6-86v2-598j',
+257 silly audit report       title: 'path-to-regexp outputs backtracking regular expressions',
+257 silly audit report       severity: 'high',
+257 silly audit report       vulnerable_versions: '>=4.0.0 <6.3.0',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     }
+257 silly audit report   ],
+257 silly audit report   qs: [
+257 silly audit report     {
+257 silly audit report       id: 1111755,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-6rw7-vpxm-498p',
+257 silly audit report       title: "qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion",
+257 silly audit report       severity: 'high',
+257 silly audit report       vulnerable_versions: '<6.14.1',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     }
+257 silly audit report   ],
+257 silly audit report   tar: [
+257 silly audit report     {
+257 silly audit report       id: 1112255,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-8qq5-rm4j-mr97',
+257 silly audit report       title: 'node-tar is Vulnerable to Arbitrary File Overwrite and Symlink Poisoning via Insufficient Path Sanitization',
+257 silly audit report       severity: 'high',
+257 silly audit report       vulnerable_versions: '<=7.5.2',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     },
+257 silly audit report     {
+257 silly audit report       id: 1112329,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-r6q2-hw4h-h46w',
+257 silly audit report       title: 'Race Condition in node-tar Path Reservations via Unicode Ligature Collisions on macOS APFS',
+257 silly audit report       severity: 'high',
+257 silly audit report       vulnerable_versions: '<=7.5.3',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     }
+257 silly audit report   ],
+257 silly audit report   trim: [
+257 silly audit report     {
+257 silly audit report       id: 1089867,
+257 silly audit report       url: 'https://github.com/advisories/GHSA-w5p7-h5w8-2hfq',
+257 silly audit report       title: 'Regular Expression Denial of Service in trim',
+257 silly audit report       severity: 'high',
+257 silly audit report       vulnerable_versions: '<0.0.3',
+257 silly audit report       cwe: [Array],
+257 silly audit report       cvss: [Object]
+257 silly audit report     }
+257 silly audit report   ]
+257 silly audit report }
+258 silly packumentCache corgi:https://registry.npmjs.org/lodash cache-miss
+259 silly packumentCache corgi:https://registry.npmjs.org/lodash-es cache-miss
+260 silly packumentCache corgi:https://registry.npmjs.org/path-to-regexp cache-miss
+261 silly packumentCache corgi:https://registry.npmjs.org/qs cache-miss
+262 silly packumentCache corgi:https://registry.npmjs.org/tar cache-miss
+263 silly packumentCache corgi:https://registry.npmjs.org/trim cache-miss
+264 http fetch GET 200 https://registry.npmjs.org/lodash-es 45ms (cache revalidated)
+265 silly packumentCache corgi:https://registry.npmjs.org/lodash-es set size:41564 disposed:false
+266 info run fsevents@2.3.2 install node_modules/playwright/node_modules/fsevents node-gyp rebuild
+267 http fetch GET 200 https://registry.npmjs.org/path-to-regexp 127ms (cache revalidated)
+268 silly packumentCache corgi:https://registry.npmjs.org/path-to-regexp set size:63416 disposed:false
+269 http fetch GET 200 https://registry.npmjs.org/trim 127ms (cache revalidated)
+270 silly packumentCache corgi:https://registry.npmjs.org/trim set size:6650 disposed:false
+271 http fetch GET 200 https://registry.npmjs.org/qs 127ms (cache revalidated)
+272 silly packumentCache corgi:https://registry.npmjs.org/qs set size:111251 disposed:false
+273 http fetch GET 200 https://registry.npmjs.org/lodash 128ms (cache revalidated)
+274 silly packumentCache corgi:https://registry.npmjs.org/lodash set size:68481 disposed:false
+275 http fetch GET 200 https://registry.npmjs.org/tar 150ms (cache updated)
+276 silly packumentCache corgi:https://registry.npmjs.org/tar set size:undefined disposed:false
+277 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-app cache-miss
+278 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-aws-cognito-github-proxy cache-miss
+279 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-azure cache-miss
+280 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-bitbucket cache-miss
+281 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-git-gateway cache-miss
+282 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-gitea cache-miss
+283 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-github cache-miss
+284 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-gitlab cache-miss
+285 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-test cache-miss
+286 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-core cache-miss
+287 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-lib-auth cache-miss
+288 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-lib-util cache-miss
+289 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-lib-widgets cache-miss
+290 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-ui-auth cache-miss
+291 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-ui-default cache-miss
+292 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-boolean cache-miss
+293 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-code cache-miss
+294 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-list cache-miss
+295 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-map cache-miss
+296 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-markdown cache-miss
+297 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-object cache-miss
+298 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-relation cache-miss
+299 silly packumentCache corgi:https://registry.npmjs.org/react-color cache-miss
+300 silly packumentCache corgi:https://registry.npmjs.org/reactcss cache-miss
+301 silly packumentCache corgi:https://registry.npmjs.org/react-redux cache-miss
+302 silly packumentCache corgi:https://registry.npmjs.org/redux cache-miss
+303 silly packumentCache corgi:https://registry.npmjs.org/slate-dom cache-miss
+304 silly packumentCache corgi:https://registry.npmjs.org/slate-react cache-miss
+305 silly packumentCache corgi:https://registry.npmjs.org/yaml-language-server cache-miss
+306 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-azure 66ms (cache revalidated)
+307 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-azure set size:13282 disposed:false
+308 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-gitea 67ms (cache revalidated)
+309 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-gitea set size:10554 disposed:false
+310 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-gitlab 69ms (cache revalidated)
+311 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-gitlab set size:17080 disposed:false
+312 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-test 71ms (cache revalidated)
+313 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-test set size:10268 disposed:false
+314 http fetch GET 200 https://registry.npmjs.org/decap-cms-core 77ms (cache revalidated)
+315 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-core set size:93549 disposed:false
+316 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-bitbucket 90ms (cache revalidated)
+317 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-bitbucket set size:14210 disposed:false
+318 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-object 102ms (cache revalidated)
+319 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-object set size:12755 disposed:false
+320 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-map 120ms (cache revalidated)
+321 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-map set size:10061 disposed:false
+322 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-code 120ms (cache revalidated)
+323 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-code set size:11642 disposed:false
+324 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-relation 122ms (cache revalidated)
+325 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-relation set size:18144 disposed:false
+326 http fetch GET 200 https://registry.npmjs.org/react-redux 123ms (cache revalidated)
+327 silly packumentCache corgi:https://registry.npmjs.org/react-redux set size:327243 disposed:false
+328 http fetch GET 200 https://registry.npmjs.org/reactcss 135ms (cache revalidated)
+329 silly packumentCache corgi:https://registry.npmjs.org/reactcss set size:40181 disposed:false
+330 http fetch GET 200 https://registry.npmjs.org/decap-cms-lib-auth 136ms (cache revalidated)
+331 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-lib-auth set size:5720 disposed:false
+332 http fetch GET 200 https://registry.npmjs.org/react-color 138ms (cache revalidated)
+333 silly packumentCache corgi:https://registry.npmjs.org/react-color set size:125320 disposed:false
+334 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-list 143ms (cache revalidated)
+335 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-list set size:16180 disposed:false
+336 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-boolean 152ms (cache revalidated)
+337 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-boolean set size:9060 disposed:false
+338 http fetch GET 200 https://registry.npmjs.org/redux 163ms (cache revalidated)
+339 silly packumentCache corgi:https://registry.npmjs.org/redux set size:116281 disposed:false
+340 info run fsevents@2.3.2 install { code: 1, signal: null }
+341 verbose reify failed optional dependency /Users/mohammad/Projects/OIAC2/node_modules/playwright/node_modules/fsevents
+342 silly reify mark deleted [
+342 silly reify   '/Users/mohammad/Projects/OIAC2/node_modules/playwright/node_modules/fsevents'
+342 silly reify ]
+343 http fetch GET 200 https://registry.npmjs.org/slate-react 249ms (cache revalidated)
+344 silly packumentCache corgi:https://registry.npmjs.org/slate-react set size:1558708 disposed:false
+345 http fetch GET 200 https://registry.npmjs.org/decap-cms-widget-markdown 315ms (cache revalidated)
+346 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-widget-markdown set size:33862 disposed:false
+347 http fetch GET 200 https://registry.npmjs.org/decap-cms-ui-default 316ms (cache revalidated)
+348 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-ui-default set size:14919 disposed:false
+349 http fetch GET 200 https://registry.npmjs.org/decap-cms-lib-util 316ms (cache revalidated)
+350 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-lib-util set size:8338 disposed:false
+351 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-aws-cognito-github-proxy 317ms (cache revalidated)
+352 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-aws-cognito-github-proxy set size:13695 disposed:false
+353 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-git-gateway 317ms (cache revalidated)
+354 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-git-gateway set size:18888 disposed:false
+355 http fetch GET 200 https://registry.npmjs.org/slate-dom 317ms (cache revalidated)
+356 silly packumentCache corgi:https://registry.npmjs.org/slate-dom set size:22612 disposed:false
+357 http fetch GET 200 https://registry.npmjs.org/decap-cms-lib-widgets 317ms (cache revalidated)
+358 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-lib-widgets set size:7296 disposed:false
+359 http fetch GET 200 https://registry.npmjs.org/decap-cms-app 318ms (cache revalidated)
+360 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-app set size:105809 disposed:false
+361 http fetch GET 200 https://registry.npmjs.org/yaml-language-server 318ms (cache revalidated)
+362 silly packumentCache corgi:https://registry.npmjs.org/yaml-language-server set size:1098194 disposed:false
+363 http fetch GET 200 https://registry.npmjs.org/decap-cms-backend-github 322ms (cache revalidated)
+364 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-backend-github set size:19982 disposed:false
+365 http fetch GET 200 https://registry.npmjs.org/decap-cms-ui-auth 321ms (cache revalidated)
+366 silly packumentCache corgi:https://registry.npmjs.org/decap-cms-ui-auth set size:1656 disposed:false
+367 silly packumentCache corgi:https://registry.npmjs.org/@vercel%2frouting-utils cache-miss
+368 http fetch GET 200 https://registry.npmjs.org/@vercel%2frouting-utils 123ms (cache revalidated)
+369 silly packumentCache corgi:https://registry.npmjs.org/@vercel%2frouting-utils set size:145210 disposed:false
+370 silly packumentCache corgi:https://registry.npmjs.org/url cache-miss
+371 http fetch GET 200 https://registry.npmjs.org/url 52ms (cache revalidated)
+372 silly packumentCache corgi:https://registry.npmjs.org/url set size:6951 disposed:false
+373 silly packumentCache corgi:https://registry.npmjs.org/@mapbox%2fnode-pre-gyp cache-miss
+374 http fetch GET 200 https://registry.npmjs.org/@mapbox%2fnode-pre-gyp 57ms (cache revalidated)
+375 silly packumentCache corgi:https://registry.npmjs.org/@mapbox%2fnode-pre-gyp set size:47144 disposed:false
+376 silly packumentCache corgi:https://registry.npmjs.org/mdast-util-to-hast cache-miss
+377 silly packumentCache corgi:https://registry.npmjs.org/remark-parse cache-miss
+378 http fetch GET 200 https://registry.npmjs.org/mdast-util-to-hast 46ms (cache revalidated)
+379 silly packumentCache corgi:https://registry.npmjs.org/mdast-util-to-hast set size:102498 disposed:false
+380 http fetch GET 200 https://registry.npmjs.org/remark-parse 54ms (cache revalidated)
+381 silly packumentCache corgi:https://registry.npmjs.org/remark-parse set size:41997 disposed:false
+382 silly packumentCache corgi:https://registry.npmjs.org/volar-service-yaml cache-miss
+383 http fetch GET 200 https://registry.npmjs.org/volar-service-yaml 55ms (cache revalidated)
+384 silly packumentCache corgi:https://registry.npmjs.org/volar-service-yaml set size:45552 disposed:false
+385 silly packumentCache corgi:https://registry.npmjs.org/@astrojs%2fvercel cache-miss
+386 http fetch GET 200 https://registry.npmjs.org/@astrojs%2fvercel 140ms (cache revalidated)
+387 silly packumentCache corgi:https://registry.npmjs.org/@astrojs%2fvercel set size:334939 disposed:false
+388 silly packumentCache corgi:https://registry.npmjs.org/remark-rehype cache-miss
+389 http fetch GET 200 https://registry.npmjs.org/remark-rehype 50ms (cache revalidated)
+390 silly packumentCache corgi:https://registry.npmjs.org/remark-rehype set size:33925 disposed:false
+391 silly packumentCache corgi:https://registry.npmjs.org/@astrojs%2flanguage-server cache-miss
+392 http fetch GET 200 https://registry.npmjs.org/@astrojs%2flanguage-server 142ms (cache revalidated)
+393 silly packumentCache corgi:https://registry.npmjs.org/@astrojs%2flanguage-server set size:319520 disposed:false
+394 silly packumentCache corgi:https://registry.npmjs.org/@astrojs%2fcheck cache-miss
+395 http fetch GET 200 https://registry.npmjs.org/@astrojs%2fcheck 139ms (cache revalidated)
+396 silly packumentCache corgi:https://registry.npmjs.org/@astrojs%2fcheck set size:33620 disposed:false
+397 verbose cwd /Users/mohammad/Projects/OIAC2
+398 verbose os Darwin 25.2.0
+399 verbose node v22.17.1
+400 verbose npm  v10.9.2
+401 verbose exit 0
+402 info ok

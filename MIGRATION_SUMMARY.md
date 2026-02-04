@@ -346,3 +346,58 @@ Once deployed, visit: `https://oiac.ca/admin`
 - **Astro Content Collections**: https://docs.astro.build/en/guides/content-collections/
 
 **Questions?** Let me know!
+
+---
+
+## 🎬 Slideshow Management (Added)
+
+The home page video slideshow is now managed through the admin panel instead of being hardcoded.
+
+### Step 1 — Create the table in Supabase SQL Editor
+
+```sql
+CREATE TABLE IF NOT EXISTS oiac_slideshow (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  url TEXT NOT NULL,
+  thumbnail TEXT,
+  video_type VARCHAR(20) NOT NULL DEFAULT 'other',
+  featured BOOLEAN DEFAULT FALSE,
+  display_order INTEGER,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+### Step 2 — Migrate existing videos
+
+Go to **Admin → Slideshow**. When the list is empty you will see a
+**"Migrate Existing Slideshow Data"** button. Click it once — it imports the
+4 videos that were previously hardcoded in `VideoShowcase.astro`.
+
+### Step 3 — Upload the Facebook video thumbnail
+
+The "Fundraiser Event Highlights" card originally used a local image
+(`src/assets/OIAC.Fundraiser.AhmedShehab.png`). That file cannot be
+referenced from the database, so its thumbnail is left blank after migration.
+
+1. Go to **Admin → Media Library** and upload `OIAC.Fundraiser.AhmedShehab.png`.
+2. Copy the public URL it gives you.
+3. Go back to **Admin → Slideshow**, click **Edit** on "Fundraiser Event Highlights".
+4. Paste the URL into the Thumbnail field and save.
+
+### New files
+
+| File | Purpose |
+|---|---|
+| `src/pages/admin/slideshow.astro` | Admin CRUD page |
+| `src/pages/api/cms/slideshow.ts` | REST API (GET / POST / PUT / DELETE) |
+
+### Modified files
+
+| File | What changed |
+|---|---|
+| `src/lib/db.ts` | Added `SlideshowItem*` types + CRUD helpers |
+| `src/layouts/AdminLayout.astro` | Added **Slideshow** nav link |
+| `src/components/VideoShowcase.astro` | Fetches videos from DB at build time instead of using a static array |

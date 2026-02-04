@@ -223,6 +223,111 @@ export async function deleteNewCentreUpdate(id: string) {
   return true;
 }
 
+// Slideshow items table
+export type SlideshowItemInput = {
+  title: string;
+  description?: string;
+  url: string;
+  thumbnail?: string;
+  videoType: 'youtube' | 'facebook' | 'other';
+  featured?: boolean;
+  displayOrder?: number;
+};
+
+export type SlideshowItemRecord = SlideshowItemInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapSlideshowRecord(record: Record<string, any>): SlideshowItemRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    description: record.description,
+    url: record.url,
+    thumbnail: record.thumbnail,
+    videoType: record.video_type,
+    featured: record.featured,
+    displayOrder: record.display_order,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createSlideshowItem(data: SlideshowItemInput): Promise<SlideshowItemRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_slideshow')
+    .insert([{
+      title: data.title,
+      description: data.description || null,
+      url: data.url,
+      thumbnail: data.thumbnail || null,
+      video_type: data.videoType,
+      featured: data.featured ?? false,
+      display_order: data.displayOrder || null,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapSlideshowRecord);
+}
+
+export async function getSlideshowItems(): Promise<SlideshowItemRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_slideshow')
+    .select('*')
+    .order('display_order', { ascending: true, nullsLast: true });
+
+  if (error) throw error;
+  return (data || []).map(mapSlideshowRecord);
+}
+
+export async function getSlideshowItemById(id: string): Promise<SlideshowItemRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_slideshow')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapSlideshowRecord(data);
+}
+
+export async function updateSlideshowItem(id: string, data: Partial<SlideshowItemInput>) {
+  const updateData: Record<string, unknown> = {};
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.description !== undefined) updateData.description = data.description;
+  if (data.url !== undefined) updateData.url = data.url;
+  if (data.thumbnail !== undefined) updateData.thumbnail = data.thumbnail;
+  if (data.videoType !== undefined) updateData.video_type = data.videoType;
+  if (data.featured !== undefined) updateData.featured = data.featured;
+  if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+
+  const { data: result, error } = await supabase
+    .from('oiac_slideshow')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteSlideshowItem(id: string) {
+  const { error } = await supabase
+    .from('oiac_slideshow')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor
