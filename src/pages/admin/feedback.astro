@@ -1,0 +1,210 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Feedback" currentPage="feedback">
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">Feedback</h1>
+      <p class="text-gray-600 mt-1">View and manage feedback, suggestions, and complaints</p>
+    </div>
+    <div id="statusCount" class="text-sm text-gray-500"></div>
+  </div>
+
+  <!-- Filter Tabs -->
+  <div class="flex gap-2 mb-6">
+    <button data-filter="all" class="filter-btn px-4 py-2 rounded-lg font-medium text-sm bg-blue-600 text-white">
+      All
+    </button>
+    <button data-filter="new" class="filter-btn px-4 py-2 rounded-lg font-medium text-sm bg-gray-200 text-gray-700 hover:bg-gray-300">
+      New
+    </button>
+    <button data-filter="viewed" class="filter-btn px-4 py-2 rounded-lg font-medium text-sm bg-gray-200 text-gray-700 hover:bg-gray-300">
+      Viewed
+    </button>
+  </div>
+
+  <!-- Feedback List -->
+  <div id="feedbackList" class="space-y-4">
+    <p class="text-gray-500">Loading...</p>
+  </div>
+
+  <script is:inline>
+    const API_URL = '/api/cms/feedback';
+    let items = [];
+    let activeFilter = 'all';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadItems();
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilter = btn.dataset.filter;
+          document.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('bg-blue-600', 'text-white');
+            b.classList.add('bg-gray-200', 'text-gray-700');
+          });
+          btn.classList.remove('bg-gray-200', 'text-gray-700');
+          btn.classList.add('bg-blue-600', 'text-white');
+          renderItems();
+        });
+      });
+    });
+
+    async function loadItems() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || 'Unknown error');
+        }
+        items = await response.json();
+        renderItems();
+      } catch (error) {
+        console.error('Error loading feedback:', error);
+        document.getElementById('feedbackList').innerHTML = `
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="font-semibold text-red-800 mb-2">Could not load feedback</h3>
+            <p class="text-red-600 text-sm mb-3">
+              The <code class="bg-red-100 px-1 rounded">oiac_feedback</code> table may not exist yet.
+              Create it in the Supabase SQL Editor:
+            </p>
+            <pre class="bg-red-100 text-red-800 p-3 rounded text-xs overflow-x-auto whitespace-pre-wrap">CREATE TABLE IF NOT EXISTS oiac_feedback (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT,
+  email TEXT,
+  category TEXT NOT NULL DEFAULT 'feedback',
+  message TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'new',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);</pre>
+            <button onclick="loadItems()" class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderItems() {
+      const container = document.getElementById('feedbackList');
+      const filtered = activeFilter === 'all' ? items : items.filter(i => i.status === activeFilter);
+
+      // Status count
+      const newCount = items.filter(i => i.status === 'new').length;
+      const viewedCount = items.filter(i => i.status === 'viewed').length;
+      document.getElementById('statusCount').textContent = `${items.length} total | ${newCount} new | ${viewedCount} viewed`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
+            <p class="text-gray-500 text-lg font-medium">No feedback found</p>
+            <p class="text-gray-400 text-sm mt-1">${activeFilter !== 'all' ? 'Try a different filter.' : 'Submissions will appear here.'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-white rounded-lg shadow p-5 ${item.status === 'new' ? 'border-l-4 border-blue-500' : ''}">
+          <div class="flex justify-between items-start gap-4">
+            <div class="flex-1 min-w-0">
+              <!-- Top row: category badge + name/email -->
+              <div class="flex items-center flex-wrap gap-2 mb-2">
+                ${getCategoryBadge(item.category)}
+                ${item.status === 'new' ? '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">New</span>' : ''}
+                <span class="text-gray-500 text-sm">
+                  ${item.name ? escapeHtml(item.name) : '<em class="text-gray-400">Anonymous</em>'}
+                  ${item.email ? ' &middot; <a href="mailto:' + escapeHtml(item.email) + '" class="text-blue-600 hover:underline">' + escapeHtml(item.email) + '</a>' : ''}
+                </span>
+              </div>
+
+              <!-- Message -->
+              <p class="text-gray-800 whitespace-pre-wrap break-words">${escapeHtml(item.message)}</p>
+
+              <!-- Timestamp -->
+              <p class="text-gray-400 text-xs mt-2">${formatDate(item.created_at)}</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex gap-2 flex-shrink-0">
+              ${item.status === 'new' ? `
+                <button onclick="markViewed('${item.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 border border-blue-600 rounded text-sm whitespace-nowrap">
+                  Mark Viewed
+                </button>
+              ` : `
+                <button onclick="markNew('${item.id}')" class="text-gray-500 hover:text-gray-700 px-3 py-1 border border-gray-300 rounded text-sm whitespace-nowrap">
+                  Mark New
+                </button>
+              `}
+              <button onclick="deleteItem('${item.id}')" class="text-red-600 hover:text-red-800 px-3 py-1 border border-red-600 rounded text-sm">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getCategoryBadge(category) {
+      const styles = {
+        feedback: 'bg-blue-100 text-blue-800',
+        suggestion: 'bg-green-100 text-green-800',
+        complaint: 'bg-red-100 text-red-800',
+      };
+      const style = styles[category] || styles.feedback;
+      const label = category.charAt(0).toUpperCase() + category.slice(1);
+      return `<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full ${style}">${label}</span>`;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', {
+        year: 'numeric', month: 'short', day: 'numeric',
+        hour: '2-digit', minute: '2-digit',
+      });
+    }
+
+    window.markViewed = async function(id) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, status: 'viewed' }),
+        });
+        if (!res.ok) throw new Error('Failed to update');
+        await loadItems();
+      } catch (e) { alert('Error: ' + e.message); }
+    };
+
+    window.markNew = async function(id) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, status: 'new' }),
+        });
+        if (!res.ok) throw new Error('Failed to update');
+        await loadItems();
+      } catch (e) { alert('Error: ' + e.message); }
+    };
+
+    window.deleteItem = async function(id) {
+      if (!confirm('Delete this feedback submission? This cannot be undone.')) return;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
+        if (!res.ok) throw new Error('Failed to delete');
+        await loadItems();
+      } catch (e) { alert('Error: ' + e.message); }
+    };
+  </script>
+</AdminLayout>

@@ -440,6 +440,81 @@ export async function deletePoster(id: string) {
   return true;
 }
 
+// Feedback table
+export type FeedbackInput = {
+  name?: string;
+  email?: string;
+  category: 'feedback' | 'suggestion' | 'complaint';
+  message: string;
+};
+
+export type FeedbackRecord = FeedbackInput & {
+  id: string;
+  status: 'new' | 'viewed';
+  created_at: string;
+  updated_at: string;
+};
+
+export async function createFeedback(data: FeedbackInput): Promise<FeedbackRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_feedback')
+    .insert([{
+      name: data.name || null,
+      email: data.email || null,
+      category: data.category,
+      message: data.message,
+    }])
+    .select();
+
+  if (error) throw error;
+  return result as FeedbackRecord[];
+}
+
+export async function getFeedbacks(): Promise<FeedbackRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_feedback')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return (data || []) as FeedbackRecord[];
+}
+
+export async function getFeedbackById(id: string): Promise<FeedbackRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_feedback')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return data as FeedbackRecord;
+}
+
+export async function updateFeedback(id: string, data: { status: string }) {
+  const { data: result, error } = await supabase
+    .from('oiac_feedback')
+    .update({ status: data.status, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteFeedback(id: string) {
+  const { error } = await supabase
+    .from('oiac_feedback')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor

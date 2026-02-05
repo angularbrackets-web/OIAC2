@@ -33,6 +33,7 @@
     "md-block": "^0.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^6.9.1",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2"
   },

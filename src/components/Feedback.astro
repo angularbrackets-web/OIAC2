@@ -1,0 +1,176 @@
+---
+---
+
+<div class="px-4 py-8 md:px-8 md:py-12 mx-auto max-w-7xl">
+  <div class="container mt-5">
+    <div class="bg-gray-800 rounded-xl text-gray-100 p-8 md:p-12">
+      <div class="w-full max-w-2xl mx-auto">
+        <h4 class="text-4xl font-black mb-4">Share Your Feedback</h4>
+        <p class="mb-2">
+          We value your input. Whether it's a suggestion, feedback, or a complaint,
+          your voice helps us improve our services and community.
+        </p>
+        <p class="mb-8 text-gray-400 text-sm">
+          All fields except message are optional — you can submit anonymously.
+        </p>
+
+        <form id="feedback-form" class="w-full space-y-6">
+          <!-- Honeypot field — hidden from real users -->
+          <div class="absolute opacity-0 h-0 overflow-hidden" aria-hidden="true" tabindex="-1">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div>
+            <label
+              class="block uppercase tracking-wide text-xs font-bold mb-2"
+              for="feedback-name"
+            >
+              Name <span class="text-gray-500 normal-case font-normal">(optional)</span>
+            </label>
+            <input
+              class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
+              id="feedback-name"
+              name="feedback-name"
+              placeholder="Your name"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block uppercase tracking-wide text-xs font-bold mb-2"
+              for="feedback-email"
+            >
+              Email <span class="text-gray-500 normal-case font-normal">(optional)</span>
+            </label>
+            <input
+              type="email"
+              class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
+              id="feedback-email"
+              name="feedback-email"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block uppercase tracking-wide text-xs font-bold mb-2"
+              for="feedback-category"
+            >
+              Category
+            </label>
+            <select
+              class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
+              id="feedback-category"
+              name="feedback-category"
+              required
+            >
+              <option value="feedback">Feedback</option>
+              <option value="suggestion">Suggestion</option>
+              <option value="complaint">Complaint</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              class="block uppercase tracking-wide text-xs font-bold mb-2"
+              for="feedback-message"
+            >
+              Message
+            </label>
+            <textarea
+              class="appearance-none block w-full bg-gray-700 text-gray-100 border border-gray-600 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-600 focus:border-emerald-500"
+              id="feedback-message"
+              name="feedback-message"
+              rows="5"
+              maxlength="1000"
+              required
+              placeholder="Write your message here..."></textarea>
+            <p class="text-gray-400 text-xs mt-1 text-right">
+              <span id="feedback-char-count">0</span>/1000 characters
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-wood hover:bg-wood-lighter text-gray-900 text-lg font-bold py-4 px-10 rounded transition duration-300"
+            id="btn-submit-feedback">Submit</button
+          >
+
+          <div class="h-[50px] py-5">
+            <div
+              class="alert-div-feedback hidden min-w-[20rem] text-center p-3 rounded-xl border-4"
+            >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { showNotification } from "../components/Alert";
+
+  const feedbackForm = document.querySelector("#feedback-form") as HTMLFormElement;
+  const messageInput = document.querySelector("#feedback-message") as HTMLTextAreaElement;
+  const charCount = document.querySelector("#feedback-char-count") as HTMLSpanElement;
+  const submitBtn = document.querySelector("#btn-submit-feedback") as HTMLButtonElement;
+
+  // Character count
+  messageInput?.addEventListener("input", () => {
+    charCount.textContent = String(messageInput.value.length);
+  });
+
+  feedbackForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    const name = (document.querySelector("#feedback-name") as HTMLInputElement).value.trim();
+    const email = (document.querySelector("#feedback-email") as HTMLInputElement).value.trim();
+    const category = (document.querySelector("#feedback-category") as HTMLSelectElement).value;
+    const message = messageInput.value.trim();
+    const website = (document.querySelector("#website") as HTMLInputElement).value;
+
+    if (!message) {
+      showNotification("error", "Please enter a message.", "alert-div-feedback");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit";
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || undefined,
+          email: email || undefined,
+          category,
+          message,
+          website,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        showNotification("error", data.error || "Something went wrong.", "alert-div-feedback");
+      } else {
+        showNotification(
+          "success",
+          "Thank you! Your feedback has been submitted.",
+          "alert-div-feedback"
+        );
+        feedbackForm.reset();
+        charCount.textContent = "0";
+      }
+    } catch {
+      showNotification("error", "Something went wrong. Please try again.", "alert-div-feedback");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit";
+    }
+  });
+</script>

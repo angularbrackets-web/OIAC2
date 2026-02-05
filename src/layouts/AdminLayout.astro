@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  currentPage?: 'dashboard' | 'slideshow' | 'posters' | 'newcentre-updates' | 'media' | 'cms';
+  currentPage?: 'dashboard' | 'slideshow' | 'posters' | 'newcentre-updates' | 'media' | 'cms' | 'feedback';
 }
 
 const { title, currentPage = 'dashboard' } = Astro.props;
@@ -13,6 +13,7 @@ const navItems = [
   { id: 'newcentre-updates', label: 'New Centre Updates', href: '/admin/newcentre-updates', icon: '🏗️' },
   { id: 'media', label: 'Media Library', href: '/admin/media', icon: '🖼️' },
   { id: 'cms', label: 'Content CMS', href: '/admin/cms', icon: '📝' },
+  { id: 'feedback', label: 'Feedback', href: '/admin/feedback', icon: '💬' },
 ];
 ---
 
