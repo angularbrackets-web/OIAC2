@@ -5,12 +5,12 @@ const posts = defineCollection({
   type: 'data',
   schema: z.object({
     title: z.string(),
-    image: z.array(z.object({ url: z.string() })).optional(),
+    image: z.array(z.object({ url: z.string() })),
     link: z.object({
       text: z.string(),
       url: z.string(),
-    }).optional(),
-    content: z.array(z.string()).optional(),
+    }),
+    content: z.array(z.string()).default([]),
     priority: z.number().optional(),
   }),
 });
