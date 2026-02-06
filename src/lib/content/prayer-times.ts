@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getJummahTimesFromDB, getPrayerTimeByDay, getPrayerTimesByMonth } from '../db';
 
 export type PrayerTime = {
   id: string;
@@ -24,19 +24,27 @@ export type JummahTime = {
 
 export async function getPrayerTimesForCurrentDay(): Promise<PrayerTime | undefined> {
   const now = new Date();
-  const month = now.getMonth() + 1; // JavaScript months are 0-indexed
+  const month = now.getMonth() + 1;
   const day = now.getDate();
 
-  const prayerTimes = await getCollection('prayer-times');
-  const todayPrayerTime = prayerTimes.find(
-    pt => pt.data.month === month && pt.data.day === day
-  );
-
-  if (!todayPrayerTime) return undefined;
+  const record = await getPrayerTimeByDay(month, day);
+  if (!record) return undefined;
 
   return {
-    id: todayPrayerTime.id,
-    ...todayPrayerTime.data,
+    id: record.id,
+    month: record.month,
+    day: record.day,
+    fajrBegins: record.fajrBegins,
+    fajrJamah: record.fajrJamah,
+    sunrise: record.sunrise,
+    zuhrBegins: record.zuhrBegins,
+    zuhrJamah: record.zuhrJamah,
+    asrBegins: record.asrBegins,
+    asrJamah: record.asrJamah,
+    maghribBegins: record.maghribBegins,
+    maghribJamah: record.maghribJamah,
+    ishaBegins: record.ishaBegins,
+    ishaJamah: record.ishaJamah,
   };
 }
 
@@ -44,31 +52,31 @@ export async function getPrayerTimesForCurrentMonth(): Promise<PrayerTime[]> {
   const now = new Date();
   const month = now.getMonth() + 1;
 
-  const prayerTimes = await getCollection('prayer-times', (entry) => {
-    return entry.data.month === month;
-  });
+  const records = await getPrayerTimesByMonth(month);
 
-  // Sort by day
-  const sortedPrayerTimes = prayerTimes.sort((a, b) => a.data.day - b.data.day);
-
-  return sortedPrayerTimes.map(pt => ({
-    id: pt.id,
-    ...pt.data,
+  return records.map(record => ({
+    id: record.id,
+    month: record.month,
+    day: record.day,
+    fajrBegins: record.fajrBegins,
+    fajrJamah: record.fajrJamah,
+    sunrise: record.sunrise,
+    zuhrBegins: record.zuhrBegins,
+    zuhrJamah: record.zuhrJamah,
+    asrBegins: record.asrBegins,
+    asrJamah: record.asrJamah,
+    maghribBegins: record.maghribBegins,
+    maghribJamah: record.maghribJamah,
+    ishaBegins: record.ishaBegins,
+    ishaJamah: record.ishaJamah,
   }));
 }
 
 export async function getJummahTimes(): Promise<JummahTime[]> {
-  const jummahTimes = await getCollection('jummah-times');
+  const records = await getJummahTimesFromDB();
 
-  // Sort by order if available
-  const sortedJummahTimes = jummahTimes.sort((a, b) => {
-    const orderA = a.data.order ?? 999;
-    const orderB = b.data.order ?? 999;
-    return orderA - orderB;
-  });
-
-  return sortedJummahTimes.map(jt => ({
-    name: jt.data.name,
-    time: jt.data.time,
+  return records.map(jt => ({
+    name: jt.name,
+    time: jt.time,
   }));
 }

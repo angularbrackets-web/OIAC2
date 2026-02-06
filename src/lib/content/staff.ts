@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getStaffFromDB, getStaffByType } from '../db';
 
 export interface Staff {
   id: string;
@@ -17,32 +17,17 @@ export interface Staff {
 }
 
 export async function getStaffMembers(staffType?: string): Promise<Staff[]> {
-  let staff = await getCollection('staff');
+  const records = staffType ? await getStaffByType(staffType) : await getStaffFromDB();
 
-  // Filter by staff type if specified
-  if (staffType) {
-    staff = staff.filter(member => member.data.staffType === staffType);
-  }
-
-  // Sort by displayOrder, then by name
-  const sortedStaff = staff.sort((a, b) => {
-    const orderA = a.data.displayOrder ?? 999;
-    const orderB = b.data.displayOrder ?? 999;
-    if (orderA !== orderB) {
-      return orderA - orderB;
-    }
-    return a.data.name.localeCompare(b.data.name);
-  });
-
-  return sortedStaff.map(member => ({
-    id: member.id,
-    name: member.data.name,
-    title: member.data.title,
-    displayOrder: member.data.displayOrder,
-    profilePicture: member.data.profilePicture,
+  return records.map(record => ({
+    id: record.id,
+    name: record.name,
+    title: record.title || null,
+    displayOrder: record.displayOrder || null,
+    profilePicture: record.profilePictureUrl ? { url: record.profilePictureUrl } : null,
     staffType: {
-      name: member.data.staffType,
+      name: record.staffType,
     },
-    description: member.data.description ? { html: member.data.description } : null,
+    description: record.description ? { html: record.description } : null,
   }));
 }

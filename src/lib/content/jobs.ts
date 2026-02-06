@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getJobsFromDB, getJobById } from '../db';
 
 export type Job = {
   id: string;
@@ -12,32 +12,31 @@ export type Job = {
 };
 
 export async function getJobs(): Promise<Job[]> {
-  const jobs = await getCollection('jobs', (entry) => {
-    return entry.data.active !== false;
-  });
+  const records = await getJobsFromDB();
 
-  return jobs.map(job => ({
-    id: job.id,
-    title: job.data.title,
-    postedDate: job.data.postedDate,
-    description: job.data.description ? { html: job.data.description } : null,
-    requireAlbertaCertification: job.data.requireAlbertaCertification ?? undefined,
-    active: job.data.active,
-  }));
+  return records
+    .filter(record => record.active !== false)
+    .map(record => ({
+      id: record.id,
+      title: record.title,
+      postedDate: record.postedDate,
+      description: record.description ? { html: record.description } : null,
+      requireAlbertaCertification: record.requireAlbertaCertification ?? undefined,
+      active: record.active,
+    }));
 }
 
 export async function getJob(id: string): Promise<Job | undefined> {
-  const jobs = await getCollection('jobs');
-  const job = jobs.find(j => j.id === id);
+  const record = await getJobById(id);
 
-  if (!job) return undefined;
+  if (!record) return undefined;
 
   return {
-    id: job.id,
-    title: job.data.title,
-    postedDate: job.data.postedDate,
-    description: job.data.description ? { html: job.data.description } : null,
-    requireAlbertaCertification: job.data.requireAlbertaCertification ?? undefined,
-    active: job.data.active,
+    id: record.id,
+    title: record.title,
+    postedDate: record.postedDate,
+    description: record.description ? { html: record.description } : null,
+    requireAlbertaCertification: record.requireAlbertaCertification ?? undefined,
+    active: record.active,
   };
 }

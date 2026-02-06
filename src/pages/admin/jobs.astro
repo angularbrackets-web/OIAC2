@@ -1,0 +1,291 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Jobs" currentPage="jobs">
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">Jobs</h1>
+      <p class="text-gray-600 mt-1">Manage job postings displayed on the careers page</p>
+    </div>
+    <button id="addNewBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium">
+      + Add Job
+    </button>
+  </div>
+
+  <!-- Items List -->
+  <div id="itemList" class="space-y-4">
+    <p class="text-gray-500">Loading...</p>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto mx-4">
+      <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add New Job</h2>
+      <form id="itemForm" class="space-y-4">
+        <input type="hidden" id="itemId" />
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+          <input type="text" id="title" required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Posted Date *</label>
+          <input type="date" id="postedDate" required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Description (HTML)</label>
+          <textarea id="description" rows="12"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"></textarea>
+        </div>
+
+        <div class="flex gap-6">
+          <label class="flex items-center gap-2">
+            <input type="checkbox" id="requireAlbertaCertification" class="w-4 h-4" />
+            <span class="text-sm text-gray-700">Requires Alberta Teaching Certificate</span>
+          </label>
+
+          <label class="flex items-center gap-2">
+            <input type="checkbox" id="active" checked class="w-4 h-4" />
+            <span class="text-sm text-gray-700">Active</span>
+          </label>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-4 border-t">
+          <button type="button" id="cancelBtn" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script is:inline>
+    const API_URL = '/api/cms/jobs';
+    let items = [];
+
+    const SEED_DATA = [
+      {
+        title: 'Elementary Teacher (Full Time)',
+        postedDate: '2025-05-15',
+        description: '<h2><strong>Inspire young hearts, illuminate bright minds and shape the leaders of tomorrow with Islam &amp; Academics</strong></h2><h2><strong>About Omar Ibn Al-Khattab Academy (OIAA) </strong></h2><p>At OIAA, Islamic values are at the heart of everything we do. </p><p>We believe education is a sacred trust one that connects home, school, and the wider ummah. Our commitment to strong academics is inseparable from our dedication to fostering spiritually grounded, intellectually curious, and morally upright students.</p><p>We are seeking passionate, knowledgeable, and values driven educators who reflect the diverse families we serve and who are committed to upholding the principles of Islamic education alongside academic rigor.</p><h2><strong>Position Overview - Elementary Teacher(s), Grade KG-6</strong></h2><p>We are seeking an enthusiastic and dynamic elementary grade Teacher(s) to join our team. The ideal candidate will have the ability to create an engaging classroom environment, have a strong commitment to student learning and be inspired by teaching young learners from am Islamic centred point of view. This role involves planning and creatively delivering Alberta curriculum-aligned lessons that cater to diverse learning styles while building a supportive and collaborative classroom community.</p><h2><strong>Education/Qualifications</strong></h2><p>The ideal candidate will possess:</p><ul><li><div><p>A valid Alberta Teaching Certificate (Interim or Permanent)</p></div></li><li><div><p>A Bachelor of Education degree from a recognized institution</p></div></li><li><div><p>Demonstrated ability to create inclusive, high-performing learning environments rooted in Islamic values</p></div></li><li><div><p>Strong classroom management skills and a commitment to student well-being</p></div></li><li><div><p>Excellent communication skills (verbal and written)</p></div></li><li><div><p>Commitment to professional growth and ongoing learning</p></div></li><li><div><p>Works collaboratively with parents and administration.</p></div></li><li><div><p>Deep respect for Islamic teachings, with the ability to integrate Islamic principles into daily teaching and school culture</p></div></li><li><div><p>Participate in various staff meetings, professional development and other extra-curricular activities</p></div></li><li><div><p>A clear criminal record check, including a vulnerable sector search</p></div></li><li><div><p>Familiarity with the Alberta curriculum and a desire to inspire students to achieve both academically and spiritually</p></div></li></ul><h2><strong>Hours:</strong></h2><ul><li><div><p>Approx. 1.00 FTE – Mondays to Fridays, full time</p></div></li></ul><h2><strong>Compensation:</strong></h2><ul><li><div><p>Based on Experience and Education.</p></div></li></ul><h2><strong>Deadline for applications:</strong></h2><p>Closing date for this competition is June 30, 2025</p><p>Send resume and cover letter to info@oiacedmonton.ca</p>',
+        requireAlbertaCertification: true,
+        active: true,
+      },
+      {
+        title: 'Quran Teachers (Part Time)',
+        postedDate: '2024-11-01',
+        description: '<p>We are seeking passionate and knowledgeable Quran Teachers to join our team in a part-time capacity.</p><p><strong>How to Apply</strong>:<br>Please send your resume to <strong>info@oiacedmonton.ca</strong>.</p>',
+        requireAlbertaCertification: false,
+        active: true,
+      },
+      {
+        title: 'Academic Teachers (Part Time)',
+        postedDate: '2024-11-01',
+        description: '<p>We are looking for passionate, qualified, and dedicated part-time Academic Teachers to join our team.</p><p><strong>How to Apply</strong>:<br>Please send your resume to <strong>info@oiacedmonton.ca</strong>.</p>',
+        requireAlbertaCertification: false,
+        active: true,
+      },
+    ];
+
+    document.addEventListener('DOMContentLoaded', loadItems);
+
+    async function loadItems() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || 'Unknown error');
+        }
+        items = await response.json();
+        renderItems();
+      } catch (error) {
+        console.error('Error loading jobs:', error);
+        document.getElementById('itemList').innerHTML = `
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="font-semibold text-red-800 mb-2">Could not load jobs</h3>
+            <p class="text-red-600 text-sm mb-3">
+              The <code class="bg-red-100 px-1 rounded">oiac_jobs</code> table may not exist yet.
+              Create it in the Supabase SQL Editor:
+            </p>
+            <pre class="bg-red-100 text-red-800 p-3 rounded text-xs overflow-x-auto whitespace-pre-wrap">CREATE TABLE oiac_jobs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  posted_date TEXT NOT NULL,
+  description TEXT,
+  require_alberta_certification BOOLEAN DEFAULT false,
+  active BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);</pre>
+            <button onclick="loadItems()" class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderItems() {
+      const container = document.getElementById('itemList');
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
+            <p class="text-gray-500 mb-2 text-lg font-medium">No jobs yet</p>
+            <p class="text-gray-400 text-sm mb-5">
+              Click below to import the existing job postings.
+            </p>
+            <button onclick="seedData()" id="seedBtn"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">
+              Seed Job Data
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="bg-white rounded-lg shadow p-4 flex justify-between items-start">
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center flex-wrap gap-2">
+              <h3 class="font-semibold text-lg">${escapeHtml(item.title)}</h3>
+              ${item.active
+                ? '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>'
+                : '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-gray-100 text-gray-600">Inactive</span>'}
+              ${item.requireAlbertaCertification
+                ? '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">AB Cert Required</span>'
+                : ''}
+            </div>
+            <p class="text-gray-500 text-sm mt-1">Posted: ${escapeHtml(item.postedDate)}</p>
+          </div>
+          <div class="flex gap-2 ml-4 flex-shrink-0">
+            <button onclick="toggleActive('${item.id}', ${!item.active})" class="text-gray-600 hover:text-gray-800 px-3 py-1 border border-gray-300 rounded text-sm">
+              ${item.active ? 'Deactivate' : 'Activate'}
+            </button>
+            <button onclick="editItem('${item.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 border border-blue-600 rounded text-sm">Edit</button>
+            <button onclick="deleteItem('${item.id}')" class="text-red-600 hover:text-red-800 px-3 py-1 border border-red-600 rounded text-sm">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Seed
+    window.seedData = async function() {
+      const btn = document.getElementById('seedBtn');
+      btn.textContent = 'Seeding...';
+      btn.disabled = true;
+
+      let success = 0;
+      for (const item of SEED_DATA) {
+        try {
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(item)
+          });
+          if (res.ok) success++;
+        } catch (e) { console.error('Seed error:', e); }
+      }
+
+      if (success > 0) await loadItems();
+      else { btn.textContent = 'Seed failed'; btn.disabled = false; }
+    };
+
+    // Toggle active
+    window.toggleActive = async function(id, active) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, active })
+        });
+        if (!res.ok) throw new Error('Failed to update');
+        await loadItems();
+      } catch (e) { alert('Error: ' + e.message); }
+    };
+
+    // Modal
+    const modal = document.getElementById('modal');
+    const form = document.getElementById('itemForm');
+
+    document.getElementById('addNewBtn').addEventListener('click', () => {
+      document.getElementById('modalTitle').textContent = 'Add New Job';
+      form.reset();
+      document.getElementById('itemId').value = '';
+      document.getElementById('active').checked = true;
+      showModal();
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+
+    function showModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+    function hideModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+
+    // Edit
+    window.editItem = function(id) {
+      const item = items.find(i => i.id === id);
+      if (!item) return;
+
+      document.getElementById('modalTitle').textContent = 'Edit Job';
+      document.getElementById('itemId').value = item.id;
+      document.getElementById('title').value = item.title;
+      document.getElementById('postedDate').value = item.postedDate;
+      document.getElementById('description').value = item.description || '';
+      document.getElementById('requireAlbertaCertification').checked = !!item.requireAlbertaCertification;
+      document.getElementById('active').checked = item.active !== false;
+      showModal();
+    };
+
+    // Delete
+    window.deleteItem = async function(id) {
+      if (!confirm('Delete this job posting?')) return;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id })
+        });
+        if (!res.ok) throw new Error('Failed to delete');
+        await loadItems();
+      } catch (e) { alert('Error: ' + e.message); }
+    };
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('itemId').value;
+
+      const data = {
+        title: document.getElementById('title').value,
+        postedDate: document.getElementById('postedDate').value,
+        description: document.getElementById('description').value || undefined,
+        requireAlbertaCertification: document.getElementById('requireAlbertaCertification').checked,
+        active: document.getElementById('active').checked,
+      };
+
+      try {
+        const res = await fetch(API_URL, {
+          method: id ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(id ? { id, ...data } : data)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to save');
+        }
+        hideModal();
+        await loadItems();
+      } catch (e) { alert('Error: ' + e.message); }
+    });
+  </script>
+</AdminLayout>

@@ -9,34 +9,53 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Database-Managed Collections -->
     <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white shadow-lg">
       <div class="flex items-center gap-3 mb-4">
         <span class="text-3xl">🏗️</span>
         <h2 class="text-xl font-bold">New Centre Updates</h2>
       </div>
-      <p class="text-blue-100 mb-4 text-sm">Timeline updates with videos, images, and links. Changes appear instantly (no rebuild).</p>
+      <p class="text-blue-100 mb-4 text-sm">Timeline updates with videos, images, and links.</p>
       <a href="/admin/newcentre-updates" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
         Manage Updates →
       </a>
     </div>
 
-    <!-- Git-Based Collections (Decap CMS) -->
     <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl p-6 text-white shadow-lg">
       <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">📝</span>
-        <h2 class="text-xl font-bold">Content Collections</h2>
+        <span class="text-3xl">💼</span>
+        <h2 class="text-xl font-bold">Jobs</h2>
       </div>
-      <p class="text-green-100 mb-4 text-sm">Git-based content managed via Decap CMS. Triggers rebuild on save.</p>
-      <a href="/admin/cms" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
-        Open Decap CMS →
+      <p class="text-green-100 mb-4 text-sm">Manage job postings displayed on the careers page.</p>
+      <a href="/admin/jobs" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
+        Manage Jobs →
       </a>
-      <div class="mt-3 text-green-200 text-xs">
-        Jobs, Posts, Staff, Prayer Times, Jummah Times
-      </div>
     </div>
 
-    <!-- Media Library -->
+    <div class="bg-gradient-to-br from-teal-600 to-teal-800 rounded-xl p-6 text-white shadow-lg">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-3xl">👥</span>
+        <h2 class="text-xl font-bold">Staff</h2>
+      </div>
+      <p class="text-teal-100 mb-4 text-sm">Manage staff members, board, and teachers.</p>
+      <a href="/admin/staff" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
+        Manage Staff →
+      </a>
+    </div>
+
+    <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-6 text-white shadow-lg">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-3xl">🕌</span>
+        <h2 class="text-xl font-bold">Prayer Times</h2>
+      </div>
+      <p class="text-indigo-100 mb-4 text-sm">Manage daily prayer and jummah times for the year.</p>
+      <a href="/admin/prayer-times" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold mb-2">
+        Prayer Times →
+      </a>
+      <a href="/admin/jummah-times" class="block bg-white/10 hover:bg-white/20 rounded-lg px-4 py-2 transition text-center text-sm">
+        Jummah Times →
+      </a>
+    </div>
+
     <div class="bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-6 text-white shadow-lg">
       <div class="flex items-center gap-3 mb-4">
         <span class="text-3xl">🖼️</span>
@@ -45,6 +64,17 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       <p class="text-purple-100 mb-4 text-sm">Upload and manage images and videos for use across the site.</p>
       <a href="/admin/media" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
         Manage Media →
+      </a>
+    </div>
+
+    <div class="bg-gradient-to-br from-amber-600 to-amber-800 rounded-xl p-6 text-white shadow-lg">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="text-3xl">💬</span>
+        <h2 class="text-xl font-bold">Feedback</h2>
+      </div>
+      <p class="text-amber-100 mb-4 text-sm">View and manage feedback, suggestions, and complaints.</p>
+      <a href="/admin/feedback" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
+        View Feedback →
       </a>
     </div>
   </div>

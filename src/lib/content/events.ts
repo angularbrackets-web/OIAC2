@@ -1,5 +1,3 @@
-import { getCollection } from 'astro:content';
-
 export type OIAC_EventSchedule = {
   date: string;
   time: string;

@@ -515,6 +515,488 @@ export async function deleteFeedback(id: string) {
   return true;
 }
 
+// Jummah Times table
+export type JummahTimeInput = {
+  name: string;
+  time: string;
+  displayOrder?: number;
+};
+
+export type JummahTimeRecord = JummahTimeInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapJummahTimeRecord(record: Record<string, any>): JummahTimeRecord {
+  return {
+    id: record.id,
+    name: record.name,
+    time: record.time,
+    displayOrder: record.display_order,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createJummahTime(data: JummahTimeInput): Promise<JummahTimeRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_jummah_times')
+    .insert([{
+      name: data.name,
+      time: data.time,
+      display_order: data.displayOrder || 0,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapJummahTimeRecord);
+}
+
+export async function getJummahTimesFromDB(): Promise<JummahTimeRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_jummah_times')
+    .select('*')
+    .order('display_order', { ascending: true });
+
+  if (error) throw error;
+  return (data || []).map(mapJummahTimeRecord);
+}
+
+export async function getJummahTimeById(id: string): Promise<JummahTimeRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_jummah_times')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapJummahTimeRecord(data);
+}
+
+export async function updateJummahTime(id: string, data: Partial<JummahTimeInput>) {
+  const updateData: Record<string, unknown> = {};
+
+  if (data.name !== undefined) updateData.name = data.name;
+  if (data.time !== undefined) updateData.time = data.time;
+  if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+
+  const { data: result, error } = await supabase
+    .from('oiac_jummah_times')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteJummahTime(id: string) {
+  const { error } = await supabase
+    .from('oiac_jummah_times')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+// Jobs table
+export type JobInput = {
+  title: string;
+  postedDate: string;
+  description?: string;
+  requireAlbertaCertification?: boolean;
+  active?: boolean;
+};
+
+export type JobRecord = JobInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapJobRecord(record: Record<string, any>): JobRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    postedDate: record.posted_date,
+    description: record.description,
+    requireAlbertaCertification: record.require_alberta_certification,
+    active: record.active,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createJob(data: JobInput): Promise<JobRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_jobs')
+    .insert([{
+      title: data.title,
+      posted_date: data.postedDate,
+      description: data.description || null,
+      require_alberta_certification: data.requireAlbertaCertification ?? false,
+      active: data.active ?? true,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapJobRecord);
+}
+
+export async function getJobsFromDB(): Promise<JobRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_jobs')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return (data || []).map(mapJobRecord);
+}
+
+export async function getJobById(id: string): Promise<JobRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_jobs')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapJobRecord(data);
+}
+
+export async function updateJob(id: string, data: Partial<JobInput>) {
+  const updateData: Record<string, unknown> = {};
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.postedDate !== undefined) updateData.posted_date = data.postedDate;
+  if (data.description !== undefined) updateData.description = data.description;
+  if (data.requireAlbertaCertification !== undefined) updateData.require_alberta_certification = data.requireAlbertaCertification;
+  if (data.active !== undefined) updateData.active = data.active;
+
+  const { data: result, error } = await supabase
+    .from('oiac_jobs')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteJob(id: string) {
+  const { error } = await supabase
+    .from('oiac_jobs')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+// Staff table
+export type StaffInput = {
+  name: string;
+  title?: string;
+  displayOrder?: number;
+  profilePictureUrl?: string;
+  staffType: string;
+  description?: string;
+};
+
+export type StaffRecord = StaffInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapStaffRecord(record: Record<string, any>): StaffRecord {
+  return {
+    id: record.id,
+    name: record.name,
+    title: record.title,
+    displayOrder: record.display_order,
+    profilePictureUrl: record.profile_picture_url,
+    staffType: record.staff_type,
+    description: record.description,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createStaffMember(data: StaffInput): Promise<StaffRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_staff')
+    .insert([{
+      name: data.name,
+      title: data.title || null,
+      display_order: data.displayOrder || 0,
+      profile_picture_url: data.profilePictureUrl || null,
+      staff_type: data.staffType,
+      description: data.description || null,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapStaffRecord);
+}
+
+export async function getStaffFromDB(): Promise<StaffRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_staff')
+    .select('*')
+    .order('display_order', { ascending: true })
+    .order('name', { ascending: true });
+
+  if (error) throw error;
+  return (data || []).map(mapStaffRecord);
+}
+
+export async function getStaffByType(staffType: string): Promise<StaffRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_staff')
+    .select('*')
+    .eq('staff_type', staffType)
+    .order('display_order', { ascending: true })
+    .order('name', { ascending: true });
+
+  if (error) throw error;
+  return (data || []).map(mapStaffRecord);
+}
+
+export async function getStaffMemberById(id: string): Promise<StaffRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_staff')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapStaffRecord(data);
+}
+
+export async function updateStaffMember(id: string, data: Partial<StaffInput>) {
+  const updateData: Record<string, unknown> = {};
+
+  if (data.name !== undefined) updateData.name = data.name;
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+  if (data.profilePictureUrl !== undefined) updateData.profile_picture_url = data.profilePictureUrl;
+  if (data.staffType !== undefined) updateData.staff_type = data.staffType;
+  if (data.description !== undefined) updateData.description = data.description;
+
+  const { data: result, error } = await supabase
+    .from('oiac_staff')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteStaffMember(id: string) {
+  const { error } = await supabase
+    .from('oiac_staff')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+// Prayer Times table
+export type PrayerTimeInput = {
+  month: number;
+  day: number;
+  fajrBegins: string;
+  fajrJamah: string;
+  sunrise: string;
+  zuhrBegins: string;
+  zuhrJamah: string;
+  asrBegins: string;
+  asrJamah: string;
+  maghribBegins: string;
+  maghribJamah: string;
+  ishaBegins: string;
+  ishaJamah: string;
+};
+
+export type PrayerTimeRecord = PrayerTimeInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapPrayerTimeRecord(record: Record<string, any>): PrayerTimeRecord {
+  return {
+    id: record.id,
+    month: record.month,
+    day: record.day,
+    fajrBegins: record.fajr_begins,
+    fajrJamah: record.fajr_jamah,
+    sunrise: record.sunrise,
+    zuhrBegins: record.zuhr_begins,
+    zuhrJamah: record.zuhr_jamah,
+    asrBegins: record.asr_begins,
+    asrJamah: record.asr_jamah,
+    maghribBegins: record.maghrib_begins,
+    maghribJamah: record.maghrib_jamah,
+    ishaBegins: record.isha_begins,
+    ishaJamah: record.isha_jamah,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createPrayerTime(data: PrayerTimeInput): Promise<PrayerTimeRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_prayer_times')
+    .insert([{
+      month: data.month,
+      day: data.day,
+      fajr_begins: data.fajrBegins,
+      fajr_jamah: data.fajrJamah,
+      sunrise: data.sunrise,
+      zuhr_begins: data.zuhrBegins,
+      zuhr_jamah: data.zuhrJamah,
+      asr_begins: data.asrBegins,
+      asr_jamah: data.asrJamah,
+      maghrib_begins: data.maghribBegins,
+      maghrib_jamah: data.maghribJamah,
+      isha_begins: data.ishaBegins,
+      isha_jamah: data.ishaJamah,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapPrayerTimeRecord);
+}
+
+export async function getPrayerTimesFromDB(): Promise<PrayerTimeRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_prayer_times')
+    .select('*')
+    .order('month', { ascending: true })
+    .order('day', { ascending: true });
+
+  if (error) throw error;
+  return (data || []).map(mapPrayerTimeRecord);
+}
+
+export async function getPrayerTimesByMonth(month: number): Promise<PrayerTimeRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_prayer_times')
+    .select('*')
+    .eq('month', month)
+    .order('day', { ascending: true });
+
+  if (error) throw error;
+  return (data || []).map(mapPrayerTimeRecord);
+}
+
+export async function getPrayerTimeByDay(month: number, day: number): Promise<PrayerTimeRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_prayer_times')
+    .select('*')
+    .eq('month', month)
+    .eq('day', day)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapPrayerTimeRecord(data);
+}
+
+export async function getPrayerTimeById(id: string): Promise<PrayerTimeRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_prayer_times')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapPrayerTimeRecord(data);
+}
+
+export async function updatePrayerTime(id: string, data: Partial<PrayerTimeInput>) {
+  const updateData: Record<string, unknown> = {};
+
+  if (data.month !== undefined) updateData.month = data.month;
+  if (data.day !== undefined) updateData.day = data.day;
+  if (data.fajrBegins !== undefined) updateData.fajr_begins = data.fajrBegins;
+  if (data.fajrJamah !== undefined) updateData.fajr_jamah = data.fajrJamah;
+  if (data.sunrise !== undefined) updateData.sunrise = data.sunrise;
+  if (data.zuhrBegins !== undefined) updateData.zuhr_begins = data.zuhrBegins;
+  if (data.zuhrJamah !== undefined) updateData.zuhr_jamah = data.zuhrJamah;
+  if (data.asrBegins !== undefined) updateData.asr_begins = data.asrBegins;
+  if (data.asrJamah !== undefined) updateData.asr_jamah = data.asrJamah;
+  if (data.maghribBegins !== undefined) updateData.maghrib_begins = data.maghribBegins;
+  if (data.maghribJamah !== undefined) updateData.maghrib_jamah = data.maghribJamah;
+  if (data.ishaBegins !== undefined) updateData.isha_begins = data.ishaBegins;
+  if (data.ishaJamah !== undefined) updateData.isha_jamah = data.ishaJamah;
+
+  const { data: result, error } = await supabase
+    .from('oiac_prayer_times')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deletePrayerTime(id: string) {
+  const { error } = await supabase
+    .from('oiac_prayer_times')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+export async function bulkUpsertPrayerTimes(records: PrayerTimeInput[]): Promise<number> {
+  let success = 0;
+  for (const record of records) {
+    const { error } = await supabase
+      .from('oiac_prayer_times')
+      .upsert({
+        month: record.month,
+        day: record.day,
+        fajr_begins: record.fajrBegins,
+        fajr_jamah: record.fajrJamah,
+        sunrise: record.sunrise,
+        zuhr_begins: record.zuhrBegins,
+        zuhr_jamah: record.zuhrJamah,
+        asr_begins: record.asrBegins,
+        asr_jamah: record.asrJamah,
+        maghrib_begins: record.maghribBegins,
+        maghrib_jamah: record.maghribJamah,
+        isha_begins: record.ishaBegins,
+        isha_jamah: record.ishaJamah,
+      }, { onConflict: 'month,day' });
+
+    if (!error) success++;
+  }
+  return success;
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor

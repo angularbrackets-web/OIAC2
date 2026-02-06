@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  currentPage?: 'dashboard' | 'slideshow' | 'posters' | 'newcentre-updates' | 'media' | 'cms' | 'feedback';
+  currentPage?: 'dashboard' | 'slideshow' | 'posters' | 'newcentre-updates' | 'media' | 'feedback' | 'jummah-times' | 'jobs' | 'staff' | 'prayer-times';
 }
 
 const { title, currentPage = 'dashboard' } = Astro.props;
@@ -11,8 +11,11 @@ const navItems = [
   { id: 'slideshow', label: 'Slideshow', href: '/admin/slideshow', icon: '🎬' },
   { id: 'posters', label: 'Posters', href: '/admin/posters', icon: '📋' },
   { id: 'newcentre-updates', label: 'New Centre Updates', href: '/admin/newcentre-updates', icon: '🏗️' },
+  { id: 'jobs', label: 'Jobs', href: '/admin/jobs', icon: '💼' },
+  { id: 'staff', label: 'Staff', href: '/admin/staff', icon: '👥' },
+  { id: 'prayer-times', label: 'Prayer Times', href: '/admin/prayer-times', icon: '🕌' },
+  { id: 'jummah-times', label: 'Jummah Times', href: '/admin/jummah-times', icon: '📿' },
   { id: 'media', label: 'Media Library', href: '/admin/media', icon: '🖼️' },
-  { id: 'cms', label: 'Content CMS', href: '/admin/cms', icon: '📝' },
   { id: 'feedback', label: 'Feedback', href: '/admin/feedback', icon: '💬' },
 ];
 ---
