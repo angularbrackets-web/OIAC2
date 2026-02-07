@@ -23,60 +23,75 @@ export type JummahTime = {
 };
 
 export async function getPrayerTimesForCurrentDay(): Promise<PrayerTime | undefined> {
-  const now = new Date();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
+  try {
+    const now = new Date();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
 
-  const record = await getPrayerTimeByDay(month, day);
-  if (!record) return undefined;
+    const record = await getPrayerTimeByDay(month, day);
+    if (!record) return undefined;
 
-  return {
-    id: record.id,
-    month: record.month,
-    day: record.day,
-    fajrBegins: record.fajrBegins,
-    fajrJamah: record.fajrJamah,
-    sunrise: record.sunrise,
-    zuhrBegins: record.zuhrBegins,
-    zuhrJamah: record.zuhrJamah,
-    asrBegins: record.asrBegins,
-    asrJamah: record.asrJamah,
-    maghribBegins: record.maghribBegins,
-    maghribJamah: record.maghribJamah,
-    ishaBegins: record.ishaBegins,
-    ishaJamah: record.ishaJamah,
-  };
+    return {
+      id: record.id,
+      month: record.month,
+      day: record.day,
+      fajrBegins: record.fajrBegins,
+      fajrJamah: record.fajrJamah,
+      sunrise: record.sunrise,
+      zuhrBegins: record.zuhrBegins,
+      zuhrJamah: record.zuhrJamah,
+      asrBegins: record.asrBegins,
+      asrJamah: record.asrJamah,
+      maghribBegins: record.maghribBegins,
+      maghribJamah: record.maghribJamah,
+      ishaBegins: record.ishaBegins,
+      ishaJamah: record.ishaJamah,
+    };
+  } catch (error) {
+    console.error('Error fetching prayer times for current day:', error);
+    return undefined;
+  }
 }
 
 export async function getPrayerTimesForCurrentMonth(): Promise<PrayerTime[]> {
-  const now = new Date();
-  const month = now.getMonth() + 1;
+  try {
+    const now = new Date();
+    const month = now.getMonth() + 1;
 
-  const records = await getPrayerTimesByMonth(month);
+    const records = await getPrayerTimesByMonth(month);
 
-  return records.map(record => ({
-    id: record.id,
-    month: record.month,
-    day: record.day,
-    fajrBegins: record.fajrBegins,
-    fajrJamah: record.fajrJamah,
-    sunrise: record.sunrise,
-    zuhrBegins: record.zuhrBegins,
-    zuhrJamah: record.zuhrJamah,
-    asrBegins: record.asrBegins,
-    asrJamah: record.asrJamah,
-    maghribBegins: record.maghribBegins,
-    maghribJamah: record.maghribJamah,
-    ishaBegins: record.ishaBegins,
-    ishaJamah: record.ishaJamah,
-  }));
+    return records.map(record => ({
+      id: record.id,
+      month: record.month,
+      day: record.day,
+      fajrBegins: record.fajrBegins,
+      fajrJamah: record.fajrJamah,
+      sunrise: record.sunrise,
+      zuhrBegins: record.zuhrBegins,
+      zuhrJamah: record.zuhrJamah,
+      asrBegins: record.asrBegins,
+      asrJamah: record.asrJamah,
+      maghribBegins: record.maghribBegins,
+      maghribJamah: record.maghribJamah,
+      ishaBegins: record.ishaBegins,
+      ishaJamah: record.ishaJamah,
+    }));
+  } catch (error) {
+    console.error('Error fetching prayer times for current month:', error);
+    return [];
+  }
 }
 
 export async function getJummahTimes(): Promise<JummahTime[]> {
-  const records = await getJummahTimesFromDB();
+  try {
+    const records = await getJummahTimesFromDB();
 
-  return records.map(jt => ({
-    name: jt.name,
-    time: jt.time,
-  }));
+    return records.map(jt => ({
+      name: jt.name,
+      time: jt.time,
+    }));
+  } catch (error) {
+    console.error('Error fetching jummah times:', error);
+    return [];
+  }
 }

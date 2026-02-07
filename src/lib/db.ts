@@ -972,27 +972,32 @@ export async function deletePrayerTime(id: string) {
 }
 
 export async function bulkUpsertPrayerTimes(records: PrayerTimeInput[]): Promise<number> {
+  const rows = records.map(record => ({
+    month: record.month,
+    day: record.day,
+    fajr_begins: record.fajrBegins,
+    fajr_jamah: record.fajrJamah,
+    sunrise: record.sunrise,
+    zuhr_begins: record.zuhrBegins,
+    zuhr_jamah: record.zuhrJamah,
+    asr_begins: record.asrBegins,
+    asr_jamah: record.asrJamah,
+    maghrib_begins: record.maghribBegins,
+    maghrib_jamah: record.maghribJamah,
+    isha_begins: record.ishaBegins,
+    isha_jamah: record.ishaJamah,
+  }));
+
+  // Batch in chunks of 50 to avoid payload limits
   let success = 0;
-  for (const record of records) {
+  for (let i = 0; i < rows.length; i += 50) {
+    const batch = rows.slice(i, i + 50);
     const { error } = await supabase
       .from('oiac_prayer_times')
-      .upsert({
-        month: record.month,
-        day: record.day,
-        fajr_begins: record.fajrBegins,
-        fajr_jamah: record.fajrJamah,
-        sunrise: record.sunrise,
-        zuhr_begins: record.zuhrBegins,
-        zuhr_jamah: record.zuhrJamah,
-        asr_begins: record.asrBegins,
-        asr_jamah: record.asrJamah,
-        maghrib_begins: record.maghribBegins,
-        maghrib_jamah: record.maghribJamah,
-        isha_begins: record.ishaBegins,
-        isha_jamah: record.ishaJamah,
-      }, { onConflict: 'month,day' });
+      .upsert(batch, { onConflict: 'month,day' });
 
-    if (!error) success++;
+    if (!error) success += batch.length;
+    else console.error('Bulk upsert error at batch', i, error);
   }
   return success;
 }
