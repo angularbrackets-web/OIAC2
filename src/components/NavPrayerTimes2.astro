@@ -1,196 +1,498 @@
 ---
 import {getJummahTimes, getPrayerTimesForCurrentDay, type JummahTime, type PrayerTime} from '../lib/content/prayer-times'
-const prayerTimesForCurrentDay : PrayerTime | undefined = await getPrayerTimesForCurrentDay()
-const jummahTimes : Array<JummahTime> = await getJummahTimes()
+
+let prayerTimesForCurrentDay: PrayerTime | undefined;
+let jummahTimes: Array<JummahTime> = [];
+let hasError = false;
+
+try {
+  prayerTimesForCurrentDay = await getPrayerTimesForCurrentDay();
+  jummahTimes = await getJummahTimes();
+
+  // If data fetch succeeded but no data found
+  if (!prayerTimesForCurrentDay) {
+    hasError = true;
+  }
+} catch (error) {
+  console.error('Failed to load prayer times:', error);
+  hasError = true;
+}
+
+// Helper function to convert time string to minutes since midnight
+function timeToMinutes(timeStr: string): number {
+  const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  if (!match) return 0;
+
+  let hours = parseInt(match[1]);
+  const minutes = parseInt(match[2]);
+  const period = match[3].toUpperCase();
+
+  if (period === 'PM' && hours !== 12) hours += 12;
+  if (period === 'AM' && hours === 12) hours = 0;
+
+  return hours * 60 + minutes;
+}
+
+// Get current time in minutes
+const now = new Date();
+const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+// Determine which prayer is next or current
+let nextPrayer = '';
+if (prayerTimesForCurrentDay) {
+  const prayers = [
+    { name: 'fajr', time: prayerTimesForCurrentDay.fajrJamah },
+    { name: 'dhuhr', time: prayerTimesForCurrentDay.zuhrJamah },
+    { name: 'asr', time: prayerTimesForCurrentDay.asrJamah },
+    { name: 'maghrib', time: prayerTimesForCurrentDay.maghribJamah },
+    { name: 'isha', time: prayerTimesForCurrentDay.ishaJamah },
+  ];
+
+  for (let i = 0; i < prayers.length; i++) {
+    const prayerMinutes = timeToMinutes(prayers[i].time);
+    if (currentMinutes < prayerMinutes) {
+      nextPrayer = prayers[i].name;
+      break;
+    }
+  }
+
+  // If no next prayer found, next prayer is Fajr (tomorrow)
+  if (!nextPrayer) nextPrayer = 'fajr';
+}
+
+// Prepare structured data for SEO
+const structuredData = prayerTimesForCurrentDay ? {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Daily Prayer Times",
+  "description": "Islamic prayer times at Omar Ibn Al Khattab Centre",
+  "startDate": new Date().toISOString().split('T')[0],
+  "location": {
+    "@type": "Place",
+    "name": "Omar Ibn Al Khattab Centre",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "110 - 1011 Parsons Rd SW",
+      "addressLocality": "Edmonton",
+      "addressRegion": "AB",
+      "postalCode": "T6X 0X2",
+      "addressCountry": "CA"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Omar Ibn Al Khattab Centre",
+    "url": "https://oiacedmonton.ca"
+  },
+  "subEvent": [
+    {
+      "@type": "Event",
+      "name": "Fajr Prayer",
+      "startDate": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.fajrBegins}`,
+      "doorTime": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.fajrJamah}`
+    },
+    {
+      "@type": "Event",
+      "name": "Dhuhr Prayer",
+      "startDate": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.zuhrBegins}`,
+      "doorTime": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.zuhrJamah}`
+    },
+    {
+      "@type": "Event",
+      "name": "Asr Prayer",
+      "startDate": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.asrBegins}`,
+      "doorTime": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.asrJamah}`
+    },
+    {
+      "@type": "Event",
+      "name": "Maghrib Prayer",
+      "startDate": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.maghribBegins}`,
+      "doorTime": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.maghribJamah}`
+    },
+    {
+      "@type": "Event",
+      "name": "Isha Prayer",
+      "startDate": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.ishaBegins}`,
+      "doorTime": `${new Date().toISOString().split('T')[0]}T${prayerTimesForCurrentDay.ishaJamah}`
+    }
+  ]
+} : null;
 ---
-{prayerTimesForCurrentDay && (
-<>
-<!-- Mobile View -->
 
-<div class="text-sm md:hidden z-10 w-full grid grid-cols-5 mt-24">
-    <div class="">
-        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Fajr</h4>
-        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.fajrBegins}</h6>
-        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
-    </div>
-    <div class="">
-        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Dhuhr</h4>
-        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.zuhrBegins}</h6>
-        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.zuhrJamah}</h6>
-    </div>
-    <div class="">
-        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Asr</h4>
-        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.asrBegins}</h6>
-        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.asrJamah}</h6>
-    </div>
-    <div class="">
-        <h4 class="font-bold bg-softBeige text-darkTeal text-center py-1">Maghrib</h4>
-        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.maghribBegins}</h6>
-        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.maghribJamah}</h6>
-    </div>
-    <div class="">
-        <h4 class="font-bold bg-softBeige darkTeal text-center py-1">Isha</h4>
-        <h6 class="bg-lightWood text-darkTeal text-center">{prayerTimesForCurrentDay.ishaBegins}</h6>
-        <h6 class="bg-lightWood text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.ishaJamah}</h6>
-    </div>
-    
-</div>
-<div class="text-sm md:hidden z-10 w-full grid grid-cols-3">
-    <div class="">
-        <h4 class="text-white font-bold bg-sageGreen text-center py-1">Sunrise</h4>
-        <h6 class="bg-softBeige text-darkTeal font-bold text-center">{prayerTimesForCurrentDay.sunrise}</h6>
-    </div>
-    <div class="">
-        <h4 class="text-white font-bold bg-sageGreen text-center py-1">{jummahTimes[0].name}</h4>
-        <h6 class="bg-softBeige text-darkTeal font-bold text-center">{jummahTimes[0].time}</h6>
-    </div>
-    <div class="">
-        <h4 class="text-white font-bold bg-sageGreen text-center py-1">{jummahTimes[1].name}</h4>
-        <h6 class="bg-softBeige text-darkTeal font-bold text-center">{jummahTimes[1].time}</h6>
-    </div>
-    <!-- <div class="bg-cyan-500 border-r border-cyan-300">
-        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">&nbsp;</h4>
-        <h6 class="bg-cyan-500 font-bold text-center">&nbsp;</h6>
-    </div>
-    <div class="bg-cyan-500">
-        <h4 class="font-bold bg-cyan-800 text-cyan-300 text-center mb-1">&nbsp;</h4>
-        <h6 class="bg-cyan-500 font-bold text-center">&nbsp;</h6>
-    </div> -->
-</div>
-
-
-<!-- <div class="bg-teal-500 p-2 text-sm md:hidden z-10 w-full">
-    <div class="container flex justify-between">
-        <div class="p-1 border border-teal-500 rounded-lg w-fit bg-teal-950">
-            <h4 class="font-bold bg-teal-800 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Fajr</h4>
-            <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.fajrBegins}</h6>
-            <h6 class="font-bold text-center">{prayerTimesForCurrentDay.fajrJamah}</h6>
-        </div>
-        <div class="p-1">
-            <h4 class="font-bold bg-emerald-900 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Dhuhr</h4>
-            <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.zuhrBegins}</h6>
-            <h6 class="font-bold text-center">{prayerTimesForCurrentDay.zuhrJamah}</h6>
-        </div>
-        <div class="p-1">
-            <h4 class="font-bold bg-emerald-900 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Asr</h4>
-            <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.asrBegins}</h6>
-            <h6 class="font-bold text-center">{prayerTimesForCurrentDay.asrJamah}</h6>
-        </div>
-        <div class="p-1">
-            <h4 class="font-bold bg-emerald-900 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Maghrib</h4>
-            <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.maghribBegins}</h6>
-            <h6 class="font-bold text-center">{prayerTimesForCurrentDay.maghribJamah}</h6>
-        </div>
-        <div class="p-1">
-            <h4 class="font-bold bg-emerald-900 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Isha</h4>
-            <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.ishaBegins}</h6>
-            <h6 class="font-bold text-center">{prayerTimesForCurrentDay.ishaJamah}</h6>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="bg-cyan-200 p-2 text-sm md:hidden z-10 w-full">
-    <div class="container flex justify-between">
-        <div class="p-1">
-            <h4 class="font-bold bg-sky-500 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Sunrise</h4>
-            <h6 class="text-gray-500 text-center">{prayerTimesForCurrentDay.sunrise}</h6>
-        </div>
-        <div class="p-1">
-            <h4 class="font-bold bg-sky-500 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Jummah 1</h4>
-            <h6 class="font-bold text-center">02:00 PM</h6>
-        </div>
-        <div class="p-1">
-            <h4 class="font-bold bg-sky-500 text-gray-50 px-1 py-2 rounded-md text-center mb-1">Jummah 2</h4>
-            <h6 class="font-bold text-center">03:00 PM</h6>
-        </div>
-    </div>
-</div> -->
-
-<!-- Web View -->
-<!-- <div class="bg-teal-950 text-teal-100 text-xs hidden md:flex space-x-5 mx-auto px-8 py-2 z-10 w-full">
-    <span>5 DAILY PRAYERS</span>
-    <span>COUNSELLING WITH OUR IMAM ABOUT LIFE RELATED ISSUES</span>
-    <span>PRAYER AREA FOR SISTERS WITH SEPARATE ENTERANCE</span>
-    <span>VARIOUS SOCIAL ACTIVITIES</span>
-</div> -->
-<div class="bg-lightWood-lighter text-warmWhite mx-auto px-8 py-2 text-sm md:text-md lg:text-lg hidden md:block z-10 w-full mt-24">
-    <div class="container flex items-center justify-between">
-        <div class="flex rounded-lg w-fit bg-lightWood border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
-                <h4 class="mt-2">Fajr</h4>
-            </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
-            <h6>{prayerTimesForCurrentDay.fajrBegins}</h6>
-            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.fajrJamah}</h6>
-            </div>
-        </div>
-        <div class="flex rounded-lg w-fit bg-lightWood border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
-                <h4 class="mt-2">Dhuhr</h4>
-            </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
-            <h6>{prayerTimesForCurrentDay.zuhrBegins}</h6>
-            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.zuhrJamah}</h6>
-            </div>
-        </div>
-        <div class="flex rounded-lg w-fit bg-lightWood border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
-                <h4 class="mt-2">Asr</h4>
-            </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
-            <h6>{prayerTimesForCurrentDay.asrBegins}</h6>
-            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.asrJamah}</h6>
-            </div>
-        </div>
-        <div class="flex rounded-lg w-fit bg-lightWood border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
-                <h4 class="mt-2">Maghrib</h4>
-            </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
-            <h6>{prayerTimesForCurrentDay.maghribBegins}</h6>
-            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.maghribJamah}</h6>
-            </div>
-        </div>
-        <div class="flex rounded-lg w-fit bg-lightWood border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 rounded-l-lg ">
-                <h4 class="mt-2">Isha</h4>
-            </div>
-            <div class="px-1 md:px-1 lg:px-2 xl:px-3 2xl:px-4 text-deepTeal rounded-r-lg">
-            <h6>{prayerTimesForCurrentDay.ishaBegins}</h6>
-            <h6 class="text-deepTeal font-bold">{prayerTimesForCurrentDay.ishaJamah}</h6>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="bg-lightWood mx-auto px-8 py-2 text-sm md:text-md lg:text-lg hidden md:block z-10 w-full">
-    <div class="container flex items-center justify-left space-x-10">
-        <div class="flex rounded-lg border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
-                <h4 class="p-2">Sunrise</h4>
-            </div>
-            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-deepTeal bg-lightWood-lighter rounded-r-lg">
-            <h6>{prayerTimesForCurrentDay.sunrise}</h6>
-            </div>
-        </div>
-        <div class="flex rounded-lg border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
-                <h4 class="p-2">{jummahTimes[0].name}</h4>
-            </div>
-            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-deepTeal bg-lightWood-lighter rounded-r-lg">
-            <h6 class="font-bold">{jummahTimes[0].time}</h6>
-            </div>
-        </div>
-        <div class="flex rounded-lg border border-lightWood-dark">
-            <div class="font-bold bg-softBeige text-deepTeal px-1 md:px-2 lg:px-3 xl:px-4 2xl:px-5 rounded-l-lg ">
-                <h4 class="p-2">{jummahTimes[1].name}</h4>
-            </div>
-            <div class="px-1 py-2 md:px-2 lg:px-3 xl:px-4 2xl:px-5 text-deepTeal bg-lightWood-lighter rounded-r-lg">
-            <h6 class="font-bold">{jummahTimes[1].time}</h6>
-            </div>
-        </div>
-    </div>
-</div>
-</>
+<!-- Structured Data for SEO -->
+{structuredData && (
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 )}
+
+<!-- Error State -->
+{hasError && (
+<section
+  class="w-full bg-red-50 border-b border-red-200 sticky top-0 z-40 py-3"
+  role="alert"
+  aria-live="polite"
+>
+  <div class="container mx-auto px-4 text-center">
+    <p class="text-red-800 text-sm md:text-base">
+      <svg class="inline w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+      </svg>
+      Unable to load prayer times. Please <button onclick="window.location.reload()" class="underline font-semibold hover:text-red-900">refresh the page</button> or try again later.
+    </p>
+  </div>
+</section>
+)}
+
+{!hasError && prayerTimesForCurrentDay && (
+<section
+  class="w-full bg-warmWhite border-b border-terracottaRed/20 sticky z-40"
+  style="top: var(--nav-height, 0px);"
+  role="region"
+  aria-label="Today's Prayer Times"
+>
+  <!-- Mobile View -->
+  <div class="md:hidden">
+    <!-- 5 Daily Prayers -->
+    <div class="grid grid-cols-5 gap-1 bg-softBeige-lightest p-1.5">
+      <!-- Fajr -->
+      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'fajr' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
+        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'fajr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div>Fajr</div>
+          <span data-countdown="fajr" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'fajr' ? '' : 'hidden'}`}>in --</span>
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.fajrBegins}</time>
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-terracottaRed-darker mt-1 whitespace-nowrap">{prayerTimesForCurrentDay.fajrJamah}</time>
+        </div>
+      </div>
+
+      <!-- Dhuhr -->
+      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'dhuhr' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
+        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'dhuhr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div>Dhuhr</div>
+          <span data-countdown="dhuhr" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'dhuhr' ? '' : 'hidden'}`}>in --</span>
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.zuhrBegins}</time>
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-terracottaRed-darker mt-1 whitespace-nowrap">{prayerTimesForCurrentDay.zuhrJamah}</time>
+        </div>
+      </div>
+
+      <!-- Asr -->
+      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'asr' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
+        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'asr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div>Asr</div>
+          <span data-countdown="asr" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'asr' ? '' : 'hidden'}`}>in --</span>
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.asrBegins}</time>
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-terracottaRed-darker mt-1 whitespace-nowrap">{prayerTimesForCurrentDay.asrJamah}</time>
+        </div>
+      </div>
+
+      <!-- Maghrib -->
+      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'maghrib' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
+        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'maghrib' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div>Maghrib</div>
+          <span data-countdown="maghrib" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'maghrib' ? '' : 'hidden'}`}>in --</span>
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.maghribBegins}</time>
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-terracottaRed-darker mt-1 whitespace-nowrap">{prayerTimesForCurrentDay.maghribJamah}</time>
+        </div>
+      </div>
+
+      <!-- Isha -->
+      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'isha' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
+        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'isha' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div>Isha</div>
+          <span data-countdown="isha" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'isha' ? '' : 'hidden'}`}>in --</span>
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.ishaBegins}</time>
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-terracottaRed-darker mt-1 whitespace-nowrap">{prayerTimesForCurrentDay.ishaJamah}</time>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sunrise & Jummah Times -->
+    <div class="grid grid-cols-3 gap-1 bg-softBeige p-1.5">
+      <!-- Sunrise -->
+      <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold">
+          Sunrise
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">{prayerTimesForCurrentDay.sunrise}</time>
+        </div>
+      </div>
+
+      <!-- Jummah 1 -->
+      <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
+          {jummahTimes[0]?.name || 'Jummah 1'}
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">{jummahTimes[0]?.time || '02:00 PM'}</time>
+        </div>
+      </div>
+
+      <!-- Jummah 2 -->
+      <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
+          {jummahTimes[1]?.name || 'Jummah 2'}
+        </div>
+        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+          <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">{jummahTimes[1]?.time || '03:00 PM'}</time>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop View -->
+  <div class="hidden md:block">
+    <!-- 5 Daily Prayers -->
+    <div class="bg-softBeige-lightest py-1.5 md:py-2">
+      <div class="container mx-auto px-4 md:px-6 lg:px-8">
+        <div class="flex items-stretch justify-between gap-1 md:gap-1.5">
+          <!-- Fajr -->
+          <div data-prayer="fajr" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'fajr' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
+            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'fajr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+              <span>Fajr</span>
+              <span data-countdown="fajr" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'fajr' ? '' : 'hidden'}`}>in --</span>
+            </div>
+            <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
+              <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.fajrBegins}</time>
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-terracottaRed-darker mt-0.5 truncate" title="Iqamah (Congregation)">{prayerTimesForCurrentDay.fajrJamah}</time>
+            </div>
+          </div>
+
+          <!-- Dhuhr -->
+          <div data-prayer="dhuhr" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'dhuhr' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
+            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'dhuhr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+              <span>Dhuhr</span>
+              <span data-countdown="dhuhr" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'dhuhr' ? '' : 'hidden'}`}>in --</span>
+            </div>
+            <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
+              <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.zuhrBegins}</time>
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-terracottaRed-darker mt-0.5 truncate" title="Iqamah (Congregation)">{prayerTimesForCurrentDay.zuhrJamah}</time>
+            </div>
+          </div>
+
+          <!-- Asr -->
+          <div data-prayer="asr" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'asr' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
+            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'asr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+              <span>Asr</span>
+              <span data-countdown="asr" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'asr' ? '' : 'hidden'}`}>in --</span>
+            </div>
+            <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
+              <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.asrBegins}</time>
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-terracottaRed-darker mt-0.5 truncate" title="Iqamah (Congregation)">{prayerTimesForCurrentDay.asrJamah}</time>
+            </div>
+          </div>
+
+          <!-- Maghrib -->
+          <div data-prayer="maghrib" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'maghrib' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
+            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'maghrib' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+              <span>Maghrib</span>
+              <span data-countdown="maghrib" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'maghrib' ? '' : 'hidden'}`}>in --</span>
+            </div>
+            <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
+              <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.maghribBegins}</time>
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-terracottaRed-darker mt-0.5 truncate" title="Iqamah (Congregation)">{prayerTimesForCurrentDay.maghribJamah}</time>
+            </div>
+          </div>
+
+          <!-- Isha -->
+          <div data-prayer="isha" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'isha' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
+            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'isha' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+              <span>Isha</span>
+              <span data-countdown="isha" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'isha' ? '' : 'hidden'}`}>in --</span>
+            </div>
+            <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
+              <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.ishaBegins}</time>
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-terracottaRed-darker mt-0.5 truncate" title="Iqamah (Congregation)">{prayerTimesForCurrentDay.ishaJamah}</time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sunrise & Jummah Times -->
+    <div class="bg-softBeige py-1.5">
+      <div class="container mx-auto px-4 md:px-6 lg:px-8">
+        <div class="flex items-center justify-center gap-2 md:gap-3 lg:gap-4">
+          <!-- Sunrise -->
+          <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
+            <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+              Sunrise
+            </div>
+            <div class="px-2 md:px-3 lg:px-4 py-1.5">
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">{prayerTimesForCurrentDay.sunrise}</time>
+            </div>
+          </div>
+
+          <!-- Jummah 1 -->
+          <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
+            <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+              {jummahTimes[0]?.name || 'Jummah 1'}
+            </div>
+            <div class="px-2 md:px-3 lg:px-4 py-1.5">
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">{jummahTimes[0]?.time || '02:00 PM'}</time>
+            </div>
+          </div>
+
+          <!-- Jummah 2 -->
+          <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
+            <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+              {jummahTimes[1]?.name || 'Jummah 2'}
+            </div>
+            <div class="px-2 md:px-3 lg:px-4 py-1.5">
+              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">{jummahTimes[1]?.time || '03:00 PM'}</time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+)}
+
+<script>
+  // Auto-refresh next prayer indicator and countdown
+  function updateNextPrayer() {
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // Helper function to convert time string to minutes
+    function timeToMinutes(timeStr: string): number {
+      const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+      if (!match) return 0;
+
+      let hours = parseInt(match[1]);
+      const minutes = parseInt(match[2]);
+      const period = match[3].toUpperCase();
+
+      if (period === 'PM' && hours !== 12) hours += 12;
+      if (period === 'AM' && hours === 12) hours = 0;
+
+      return hours * 60 + minutes;
+    }
+
+    // Get all prayer cards
+    const prayers = [
+      { name: 'fajr', displayName: 'Fajr', selector: '[data-prayer="fajr"]' },
+      { name: 'dhuhr', displayName: 'Dhuhr', selector: '[data-prayer="dhuhr"]' },
+      { name: 'asr', displayName: 'Asr', selector: '[data-prayer="asr"]' },
+      { name: 'maghrib', displayName: 'Maghrib', selector: '[data-prayer="maghrib"]' },
+      { name: 'isha', displayName: 'Isha', selector: '[data-prayer="isha"]' },
+    ];
+
+    let nextPrayerName = '';
+    let nextPrayerDisplayName = '';
+    let nextPrayerMinutes = 0;
+
+    // Find next prayer by checking time elements
+    for (const prayer of prayers) {
+      const prayerCard = document.querySelector(prayer.selector);
+      if (!prayerCard) continue;
+
+      const timeElement = prayerCard.querySelector('time[title="Iqamah (Congregation)"]');
+      if (!timeElement) continue;
+
+      const prayerTime = timeElement.textContent?.trim() || '';
+      const prayerMinutes = timeToMinutes(prayerTime);
+
+      if (currentMinutes < prayerMinutes) {
+        nextPrayerName = prayer.name;
+        nextPrayerDisplayName = prayer.displayName;
+        nextPrayerMinutes = prayerMinutes;
+        break;
+      }
+    }
+
+    // If no next prayer found, next is Fajr (tomorrow)
+    if (!nextPrayerName) {
+      nextPrayerName = 'fajr';
+      nextPrayerDisplayName = 'Fajr';
+
+      // Get Fajr time for tomorrow (add 24 hours)
+      const fajrCard = document.querySelector('[data-prayer="fajr"]');
+      if (fajrCard) {
+        const timeElement = fajrCard.querySelector('time[title="Iqamah (Congregation)"]');
+        if (timeElement) {
+          const fajrTime = timeElement.textContent?.trim() || '';
+          nextPrayerMinutes = timeToMinutes(fajrTime) + (24 * 60); // Add 24 hours
+        }
+      }
+    }
+
+    // Update countdown in the next prayer card
+    if (nextPrayerMinutes > 0 && nextPrayerName) {
+      const minutesUntilPrayer = nextPrayerMinutes - currentMinutes;
+      const hours = Math.floor(minutesUntilPrayer / 60);
+      const mins = minutesUntilPrayer % 60;
+
+      let countdownText = '';
+      if (hours > 0) {
+        countdownText = `in ${hours}h ${mins}m`;
+      } else {
+        countdownText = `in ${mins}m`;
+      }
+
+      // Update countdown in all matching cards
+      const countdownElements = document.querySelectorAll(`[data-countdown="${nextPrayerName}"]`);
+      countdownElements.forEach(el => {
+        el.textContent = countdownText;
+      });
+    }
+
+    // Update UI for all prayers
+    prayers.forEach(prayer => {
+      const isNext = prayer.name === nextPrayerName;
+      const cards = document.querySelectorAll(prayer.selector);
+
+      cards.forEach(card => {
+        const header = card.querySelector('[data-prayer-header]');
+        const countdown = card.querySelector(`[data-countdown="${prayer.name}"]`);
+
+        if (isNext) {
+          // Add highlight classes
+          card.classList.remove('border', 'border-terracottaRed/20');
+          card.classList.add('border-2', 'border-sageGreen', 'ring-2', 'ring-sageGreen/20');
+
+          if (header) {
+            header.classList.remove('bg-terracottaRed');
+            header.classList.add('bg-sageGreen');
+          }
+
+          if (countdown) {
+            countdown.classList.remove('hidden');
+          }
+        } else {
+          // Remove highlight classes
+          card.classList.add('border', 'border-terracottaRed/20');
+          card.classList.remove('border-2', 'border-sageGreen', 'ring-2', 'ring-sageGreen/20');
+
+          if (header) {
+            header.classList.add('bg-terracottaRed');
+            header.classList.remove('bg-sageGreen');
+          }
+
+          if (countdown) {
+            countdown.classList.add('hidden');
+          }
+        }
+      });
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNextPrayer);
+  } else {
+    updateNextPrayer();
+  }
+
+  // Update every 30 seconds for accurate countdown
+  setInterval(updateNextPrayer, 30000);
+</script>

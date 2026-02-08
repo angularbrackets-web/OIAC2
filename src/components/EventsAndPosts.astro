@@ -1,10 +1,5 @@
 ---
-import { getPosters, type PosterRecord } from "../lib/db";
 import { getEventsForMonths, type OIAC_Event } from "../lib/content/events";
-import interacLogo from "../assets/Interac.Logo1.png";
-import PostersCarousel from "./PostersCarousel.astro";
-
-const posters: Array<PosterRecord> = await getPosters();
 
 let currentMonth = new Date().getMonth() + 1;
 const eventsForTheMonth: Array<OIAC_Event> = await getEventsForMonths([
@@ -16,83 +11,9 @@ const monthName = date.toLocaleString("default", { month: "long" });
 const year = date.getFullYear();
 ---
 
+{eventsForTheMonth.length > 0 && (
 <div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
   <div class="container mt-5">
-    <!-- Web View -->
-    <div class="block md:flex md:gap-5">
-      <!-- LEFT -->
-      <div class="w-full mb-16 md:w-[49%]">
-        <!-- NEW CENTRE -->
-        <div class="p-10 rounded-2xl mt-6">
-          <label
-            class="align-right bg-sageGreen text-white font-black rounded-xl px-5"
-            >UPCOMING</label
-          >
-          <h4 class="text-4xl md:text-6xl font-black text-terracottaRed-darker">
-            New Omar Ibn Al Khattab Centre
-          </h4>
-          <div class="py-5 text-terracottaRed">
-            <p class="mb-3">
-              Introducing the new Omar bin-al-Khattab centre, a beacon of
-              progress and possibility. This purpose-built facility will be more
-              than just a building. It will be a hub of activity. A place where
-              our children can learn and grow, where families can come together
-              in prayer and fellowship and where the bonds of community are
-              strengthened.
-            </p>
-            <p>
-              <a href="/newcentre" class="underline text-gray-900 font-bold"
-                >Learn more</a
-              >
-            </p>
-          </div>
-          <div class="py-5">
-            <div
-              style="position:relative; width:100%; height:0px; padding-bottom:56.250%"
-            >
-              <iframe
-                allow="fullscreen;autoplay"
-                allowfullscreen
-                height="100%"
-                src="https://streamable.com/e/cvo5ln?autoplay=1&muted=1"
-                width="100%"
-                style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"
-                class="rounded-3xl"></iframe>
-            </div>
-          </div>
-          <div>
-            <p class="mb-3 text-terracottaRed">
-              Donate now and be a part of something truly transformative,
-              empowering our community, building our future.
-            </p>
-          </div>
-          <div class="flex-row mt-10">
-            <div>
-              <a
-                href="/donatetonewcentre"
-                class="bg-terracottaRed text-white hover:bg-terracottaRed-darker hover:text-white text-2xl rounded-xl px-24 py-2"
-                >Donate</a
-              >
-            </div>
-
-            <div class="flex flex-wrap gap-3 py-8">
-              <img src={interacLogo.src} width="40px" alt="Interac" />
-              <div
-                class="font-bold bg-sageGreen text-warmWhite rounded-lg text-center mt-3 w-fit px-3"
-              >
-                <span>new.project@oiacedmonton.ca</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT -->
-      <div class="w-full md:w-[49%] my-3">
-        <PostersCarousel posters={posters} />
-      </div>
-    </div>
-
     <div class="my-10">
       <!-- Events -->
       <div
@@ -135,3 +56,5 @@ const year = date.getFullYear();
     </div>
   </div>
 </div>
+)}
+

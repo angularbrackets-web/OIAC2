@@ -1,0 +1,135 @@
+---
+import type { PrayerTime, JummahTime } from "../../lib/content/prayer-times";
+import { Clock } from "@lucide/astro";
+
+interface Props {
+  prayerTimes: PrayerTime;
+  jummahTimes: JummahTime[];
+}
+
+const { prayerTimes, jummahTimes } = Astro.props;
+
+const prayers = [
+  { name: "Fajr", athan: prayerTimes.fajrBegins, iqamah: prayerTimes.fajrJamah },
+  { name: "Dhuhr", athan: prayerTimes.zuhrBegins, iqamah: prayerTimes.zuhrJamah },
+  { name: "Asr", athan: prayerTimes.asrBegins, iqamah: prayerTimes.asrJamah },
+  { name: "Maghrib", athan: prayerTimes.maghribBegins, iqamah: prayerTimes.maghribJamah },
+  { name: "Isha", athan: prayerTimes.ishaBegins, iqamah: prayerTimes.ishaJamah },
+];
+
+const today = new Date();
+const dateString = today.toLocaleDateString("en-CA", {
+  weekday: "short",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<section class="bg-deepTeal border-b-4 border-sageGreen" id="prayer-strip-b">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Date + Countdown Bar -->
+    <div class="flex items-center justify-between py-3 border-b border-warmWhite/10">
+      <div class="flex items-center gap-2 text-warmWhite/60 text-sm">
+        <Clock class="w-4 h-4" />
+        <span>Prayer Times &mdash; {dateString}</span>
+      </div>
+      <div id="countdown-b" class="text-sageGreen-light text-sm font-semibold"></div>
+    </div>
+
+    <!-- Prayer Columns -->
+    <div class="grid grid-cols-5 divide-x divide-warmWhite/10">
+      {prayers.map((prayer, index) => (
+        <div
+          class="prayer-col-b py-4 md:py-5 text-center transition-all duration-300 bg-transparent"
+          data-prayer-index={index}
+          data-athan={prayer.athan}
+          data-iqamah={prayer.iqamah}
+          data-name={prayer.name}
+        >
+          <p class="text-warmWhite/50 text-[10px] sm:text-xs uppercase tracking-wider mb-1 font-medium">{prayer.name}</p>
+          <p class="text-warmWhite/40 text-[10px] sm:text-xs mb-0.5">{prayer.athan}</p>
+          <p class="text-warmWhite text-xs sm:text-sm md:text-base font-bold">{prayer.iqamah}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Sunrise + Jummah (compact bottom row) -->
+    <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-6 py-2.5 border-t border-warmWhite/10 text-[10px] sm:text-xs text-warmWhite/40">
+      <span>Sunrise: <strong class="text-warmWhite/60">{prayerTimes.sunrise}</strong></span>
+      {jummahTimes.map(j => (
+        <span>{j.name}: <strong class="text-warmWhite/60">{j.time}</strong></span>
+      ))}
+      <a href="/prayertimes" class="text-sageGreen-light hover:text-sageGreen font-medium ml-2 transition-colors duration-200">
+        Full Calendar &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initPrayerStripB() {
+    const cols = document.querySelectorAll(".prayer-col-b");
+    const countdownEl = document.getElementById("countdown-b");
+    if (!cols.length) return;
+
+    function timeToMinutes(timeStr: string): number {
+      const cleaned = timeStr.trim().toUpperCase();
+      const match = cleaned.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+      if (!match) return -1;
+      let hours = parseInt(match[1], 10);
+      const mins = parseInt(match[2], 10);
+      const period = match[3];
+      if (period === "AM" && hours === 12) hours = 0;
+      if (period === "PM" && hours !== 12) hours += 12;
+      return hours * 60 + mins;
+    }
+
+    function update() {
+      const now = new Date();
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      let nextIndex = -1;
+      let nextMinutes = -1;
+
+      cols.forEach((col, i) => {
+        const el = col as HTMLElement;
+        const iqamahStr = el.dataset.iqamah || "";
+        const mins = timeToMinutes(iqamahStr);
+        if (mins > currentMinutes && nextIndex === -1) {
+          nextIndex = i;
+          nextMinutes = mins;
+        }
+      });
+
+      // Highlight next prayer
+      cols.forEach((col, i) => {
+        const el = col as HTMLElement;
+        if (i === nextIndex) {
+          el.classList.add("bg-sageGreen/20");
+          el.classList.remove("bg-transparent");
+          el.style.boxShadow = "inset 0 3px 0 #8B8F65";
+        } else {
+          el.classList.remove("bg-sageGreen/20");
+          el.classList.add("bg-transparent");
+          el.style.boxShadow = "none";
+        }
+      });
+
+      // Countdown
+      if (countdownEl && nextMinutes > 0 && nextIndex >= 0) {
+        const diff = nextMinutes - currentMinutes;
+        const hours = Math.floor(diff / 60);
+        const mins = diff % 60;
+        const prayerName = (cols[nextIndex] as HTMLElement).dataset.name || "";
+        countdownEl.textContent = `${prayerName} in ${hours > 0 ? hours + "h " : ""}${mins}m`;
+      } else if (countdownEl) {
+        countdownEl.textContent = "";
+      }
+    }
+
+    update();
+    setInterval(update, 30000);
+  }
+
+  document.addEventListener("DOMContentLoaded", initPrayerStripB);
+</script>

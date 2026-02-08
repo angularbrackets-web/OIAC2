@@ -1,0 +1,239 @@
+---
+import { getPosters, type PosterRecord } from "../lib/db";
+import interacLogo from "../assets/Interac.Logo1.png";
+import PostersCarousel from "./PostersCarousel.astro";
+
+const posters: Array<PosterRecord> = await getPosters();
+---
+
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto">
+  <div class="container mt-5">
+    <!-- Web View -->
+    <div class="block lg:flex lg:gap-5">
+      <!-- LEFT -->
+      <div class="w-full mb-12 lg:mb-0 lg:w-[49%]">
+        <!-- NEW CENTRE CARD -->
+        <div
+          class="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group flex flex-col"
+        >
+          <!-- 
+            TOP SECTION: Dark Background 
+            Contains Badge and Title.
+            Ends with an SVG Wave that transitions to white.
+          -->
+          <div class="relative bg-gradient-to-br from-terracottaRed-darker to-terracottaRed pt-10 px-8 md:px-10 pb-24 md:pb-32">
+            <!-- Content -->
+            <div class="relative z-10">
+              <!-- Badge -->
+              <span
+                class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white font-bold text-xs tracking-wider mb-6 backdrop-blur-sm border border-white/10 shadow-sm"
+              >
+                UPCOMING PROJECT
+              </span>
+
+              <!-- Heading -->
+              <h2
+                class="text-3xl md:text-5xl font-black text-white leading-tight drop-shadow-sm"
+              >
+                New Omar Ibn Al Khattab Centre
+              </h2>
+            </div>
+
+            <!-- 
+              SVG Shape Divider 
+              Positioned absolute at the bottom.
+              Fill matches the bottom section (Very Dark Terracotta).
+            -->
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+              <svg
+                data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1200 120"
+                preserveAspectRatio="none"
+                class="relative block w-[calc(100%+1.3px)] h-[60px] md:h-[120px]"
+                style="fill: #3d1a12;"
+              >
+                <!-- 
+                  Gentle/Elegant Curve Path:
+                  A single smooth asymmetric wave.
+                  Starts high on left, dips gently, rises slightly on right.
+                  Refined to be less "humpy".
+                -->
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="hidden"></path>
+                
+                <!-- NEW SMOOTH PATH -->
+                <path d="M0,60 C400,130 800,10 1200,50 V120 H0 Z" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- 
+            BOTTOM SECTION: Very Dark Terracotta Background 
+            Contains Body, Video, CTA.
+            The visual "top" of this section is actually the SVG wave above.
+          -->
+          <div class="relative px-8 md:px-10 pb-10 md:pb-12 pt-0 -mt-2" style="background-color: #3d1a12;">
+            <!-- 
+                Review Content 
+            -->
+             <p class="text-gray-300 text-lg leading-relaxed mb-8 font-medium">
+              Introducing the new Omar bin-al-Khattab centre, a beacon of
+              progress and possibility. This purpose-built facility will be more
+              than just a building. It will be a hub of activity. A place where
+              our children can learn and grow, where families can come together
+              in prayer and fellowship and where the bonds of community are
+              strengthened.
+            </p>
+
+            <!-- Video Wrapper -->
+            <div
+              class="relative rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-800 aspect-video ring-4 ring-terracottaRed-darker/30"
+            >
+              <iframe
+                allow="fullscreen;autoplay"
+                allowfullscreen
+                height="100%"
+                src="https://streamable.com/e/cvo5ln?autoplay=1&muted=1"
+                width="100%"
+                class="absolute inset-0 w-full h-full border-0"></iframe>
+            </div>
+
+            <!-- Donation Encouragement -->
+            <div class="mb-6">
+              <p
+                class="text-lg md:text-xl font-bold text-white leading-snug"
+              >
+                Donate now and be a part of something truly transformative,
+                empowering our community, building our future.
+              </p>
+            </div>
+
+            <!-- Action Area -->
+            <div
+              class="flex flex-col sm:flex-row gap-4 items-center justify-between border-t pt-6"
+              style="border-color: rgba(139, 69, 19, 0.3);"
+            >
+              <a
+                href="/newcentre"
+                class="font-semibold text-white hover:text-terracottaRed transition-colors"
+                >View Construction Updates →</a
+              >
+
+              <a
+                href="/donatetonewcentre"
+                class="w-full sm:w-auto px-8 py-3 bg-terracottaRed text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:bg-terracottaRed-dark hover:-translate-y-0.5 transition-all text-center"
+                >Donate Now</a
+              >
+            </div>
+
+            <!-- E-Transfer Donation Card -->
+          <div class="mt-6 border-2 border-white/20 rounded-xl p-4 md:p-5 bg-gradient-to-br from-terracottaRed-darker/30 to-terracottaRed/20 backdrop-blur-sm">
+            <!-- Label -->
+            <p class="text-white/90 text-sm md:text-base font-semibold mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              Or donate via e-Transfer to:
+            </p>
+
+            <!-- Unified Card: Interac + Email + Copy Button -->
+            <div class="bg-white/10 rounded-lg p-3 md:p-4 border border-white/20">
+              <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">
+                <!-- Interac Logo (Trust Badge) -->
+                <div class="flex-shrink-0">
+                  <img
+                    src={interacLogo.src}
+                    alt="Interac e-Transfer"
+                    class="h-7 md:h-8 lg:h-9 w-auto object-contain"
+                  />
+                </div>
+
+                <!-- Email Address -->
+                <a
+                  href="mailto:new.project@oiacedmonton.ca"
+                  class="flex-1 min-w-0 text-white font-bold text-sm md:text-base lg:text-lg hover:text-warmWhite transition-colors break-words"
+                  title="Click to email"
+                >
+                  new.project@oiacedmonton.ca
+                </a>
+
+                <!-- Copy Button -->
+                <button
+                  id="copyEmailBtn"
+                  type="button"
+                  class="flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 bg-white/10 hover:bg-white/20 rounded-lg transition-all group border border-white/30 hover:border-white/50"
+                  title="Copy email address"
+                  aria-label="Copy email address to clipboard"
+                >
+                  <svg class="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-warmWhite transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                  </svg>
+                  <span class="text-white text-xs md:text-sm font-semibold hidden sm:inline">Copy</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Success Message -->
+            <div id="copySuccess" class="hidden mt-2 text-sm text-green-300 font-medium flex items-center gap-1 animate-fade-in">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              Email address copied!
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="w-full lg:w-[49%] my-3">
+        <PostersCarousel posters={posters} />
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const successMsg = document.getElementById('copySuccess');
+    const emailAddress = 'new.project@oiacedmonton.ca';
+
+    if (copyBtn && successMsg) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(emailAddress);
+
+          // Show success message
+          successMsg.classList.remove('hidden');
+
+          // Change button icon to checkmark temporarily
+          const svg = copyBtn.querySelector('svg');
+          const originalPath = svg?.innerHTML;
+          if (svg) {
+            svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+          }
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            successMsg.classList.add('hidden');
+            if (svg && originalPath) {
+              svg.innerHTML = originalPath;
+            }
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy email:', err);
+          // Fallback: select the email text
+          const emailLink = document.querySelector('a[href="mailto:new.project@oiacedmonton.ca"]');
+          if (emailLink) {
+            const range = document.createRange();
+            range.selectNode(emailLink);
+            window.getSelection()?.removeAllRanges();
+            window.getSelection()?.addRange(range);
+          }
+        }
+      });
+    }
+  });
+</script>

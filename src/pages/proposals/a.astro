@@ -1,0 +1,42 @@
+---
+import ProposalLayout from "../../layouts/ProposalLayout.astro";
+import HeroA from "../../components/proposals/HeroA.astro";
+import PrayerTimesCardA from "../../components/proposals/PrayerTimesCardA.astro";
+
+// Existing components (reused as-is)
+import VideoShowcase from "../../components/VideoShowcase.astro";
+import Announcements from "../../components/Announcements.astro";
+import EventsAndPosts from "../../components/EventsAndPosts.astro";
+import Donate from "../../components/Donate2.astro";
+import Volunteer from "../../components/Volunteer2.astro";
+import Imams from "../../components/Imams.astro";
+import Newsletter from "../../components/Newsletter2.astro";
+import Contact from "../../components/Contact.astro";
+import Feedback from "../../components/Feedback.astro";
+
+import {
+  getPrayerTimesForCurrentDay,
+  getJummahTimes,
+} from "../../lib/content/prayer-times";
+
+const prayerTimes = await getPrayerTimesForCurrentDay();
+const jummahTimes = await getJummahTimes();
+---
+
+<ProposalLayout title="OIAC — Proposal A: Warm & Welcoming" variant="a">
+  <HeroA />
+
+  {prayerTimes && (
+    <PrayerTimesCardA prayerTimes={prayerTimes} jummahTimes={jummahTimes} />
+  )}
+
+  <div class="animate-on-scroll"><VideoShowcase /></div>
+  <div class="animate-on-scroll"><Announcements /></div>
+  <div class="animate-on-scroll"><EventsAndPosts /></div>
+  <div class="animate-on-scroll"><Donate /></div>
+  <div class="animate-on-scroll"><Volunteer /></div>
+  <div class="animate-on-scroll"><Imams /></div>
+  <div class="animate-on-scroll"><Newsletter /></div>
+  <div class="animate-on-scroll"><Contact /></div>
+  <div class="animate-on-scroll"><Feedback /></div>
+</ProposalLayout>

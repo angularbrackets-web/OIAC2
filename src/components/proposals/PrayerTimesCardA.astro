@@ -1,0 +1,132 @@
+---
+import type { PrayerTime, JummahTime } from "../../lib/content/prayer-times";
+import { Clock, Sunrise } from "@lucide/astro";
+
+interface Props {
+  prayerTimes: PrayerTime;
+  jummahTimes: JummahTime[];
+}
+
+const { prayerTimes, jummahTimes } = Astro.props;
+
+const prayers = [
+  { name: "Fajr", athan: prayerTimes.fajrBegins, iqamah: prayerTimes.fajrJamah },
+  { name: "Dhuhr", athan: prayerTimes.zuhrBegins, iqamah: prayerTimes.zuhrJamah },
+  { name: "Asr", athan: prayerTimes.asrBegins, iqamah: prayerTimes.asrJamah },
+  { name: "Maghrib", athan: prayerTimes.maghribBegins, iqamah: prayerTimes.maghribJamah },
+  { name: "Isha", athan: prayerTimes.ishaBegins, iqamah: prayerTimes.ishaJamah },
+];
+
+const today = new Date();
+const dateString = today.toLocaleDateString("en-CA", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<div class="relative z-20 -mt-24 md:-mt-20 mb-8 px-4 sm:px-6 lg:px-8 animate-on-scroll">
+  <div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-xl shadow-deepTeal/10 border border-softBeige-lighter overflow-hidden">
+      <!-- Card Header -->
+      <div class="bg-deepTeal px-4 sm:px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <Clock class="w-5 h-5 text-sageGreen-light" />
+          <h2 class="text-warmWhite font-semibold text-base sm:text-lg">Today's Prayer Times</h2>
+        </div>
+        <span class="text-warmWhite/70 text-xs sm:text-sm hidden sm:block">{dateString}</span>
+      </div>
+
+      <!-- Prayer Times Grid -->
+      <div class="p-4 md:p-6">
+        <!-- Column Headers (desktop) -->
+        <div class="hidden sm:grid sm:grid-cols-3 gap-4 pb-2 mb-2 border-b border-softBeige-lighter text-xs font-semibold uppercase tracking-wider text-deepTeal/50">
+          <span>Prayer</span>
+          <span class="text-center">Athan</span>
+          <span class="text-center">Iqamah</span>
+        </div>
+
+        <!-- Prayer Rows -->
+        <div id="prayer-rows-a">
+          {prayers.map((prayer, index) => (
+            <div
+              class="prayer-row-a grid grid-cols-3 gap-4 py-3 sm:py-2.5 px-3 rounded-lg transition-all duration-300"
+              data-prayer-index={index}
+              data-iqamah={prayer.iqamah}
+            >
+              <span class="font-semibold text-deepTeal text-sm sm:text-base">{prayer.name}</span>
+              <span class="text-center text-deepTeal/60 text-sm sm:text-base">{prayer.athan}</span>
+              <span class="text-center font-semibold text-deepTeal text-sm sm:text-base">{prayer.iqamah}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Sunrise + Jummah Row -->
+        <div class="mt-4 pt-4 border-t border-softBeige flex flex-wrap gap-3 text-sm">
+          <div class="flex items-center gap-2 bg-sageGreen-lighter rounded-lg px-3 py-2">
+            <Sunrise class="w-4 h-4 text-sageGreen-darker" />
+            <span class="text-sageGreen-darker font-medium">Sunrise: {prayerTimes.sunrise}</span>
+          </div>
+          {jummahTimes.map(jummah => (
+            <div class="flex items-center gap-2 bg-wood-lighter/30 rounded-lg px-3 py-2">
+              <span class="text-wood-darker font-medium">{jummah.name}: {jummah.time}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Footer Link -->
+      <div class="bg-softBeige-lightest px-4 sm:px-6 py-3 border-t border-softBeige-lighter">
+        <a href="/prayertimes" class="text-terracottaRed hover:text-terracottaRed-darker text-sm font-medium transition-colors duration-200">
+          View full monthly calendar &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function highlightNextPrayerA() {
+    const rows = document.querySelectorAll(".prayer-row-a");
+    if (!rows.length) return;
+
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    function timeToMinutes(timeStr: string): number {
+      const cleaned = timeStr.trim().toUpperCase();
+      const match = cleaned.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+      if (!match) return -1;
+      let hours = parseInt(match[1], 10);
+      const mins = parseInt(match[2], 10);
+      const period = match[3];
+      if (period === "AM" && hours === 12) hours = 0;
+      if (period === "PM" && hours !== 12) hours += 12;
+      return hours * 60 + mins;
+    }
+
+    let nextIndex = -1;
+    rows.forEach((row, i) => {
+      const el = row as HTMLElement;
+      const iqamahStr = el.dataset.iqamah || "";
+      const mins = timeToMinutes(iqamahStr);
+      if (mins > currentMinutes && nextIndex === -1) {
+        nextIndex = i;
+      }
+    });
+
+    rows.forEach((row, i) => {
+      if (i === nextIndex) {
+        row.classList.add("bg-sageGreen-lighter", "ring-1", "ring-sageGreen");
+      } else {
+        row.classList.remove("bg-sageGreen-lighter", "ring-1", "ring-sageGreen");
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    highlightNextPrayerA();
+    setInterval(highlightNextPrayerA, 60000);
+  });
+</script>

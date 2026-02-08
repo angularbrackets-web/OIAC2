@@ -76,15 +76,15 @@ const featuredVideo = videos.find(v => v.featured);
 </style>
 
 {videos.length > 0 && (
-<section class="py-16 px-4 md:px-8 bg-gray-50">
+<section class="py-16 px-4 md:px-8 bg-deepTeal">
     <div class="container mx-auto max-w-7xl">
         <!-- Section Header -->
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-4">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
                 See Our Journey in Action
                 <span class="inline-block ml-2">▶️</span>
             </h2>
-            <p class="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+            <p class="text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
                 Watch how your support is transforming lives and building the future of Islamic education in South Edmonton
             </p>
         </div>
@@ -92,7 +92,7 @@ const featuredVideo = videos.find(v => v.featured);
         <!-- Videos Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {videos.map((video) => (
-                <div class={`video-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl ${video.featured ? 'md:col-span-2 lg:col-span-2' : ''}`}>
+                <div class={`video-card bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl border border-white/20 ${video.featured ? 'md:col-span-2 lg:col-span-2' : ''}`}>
                     <!-- Thumbnail -->
                     <a href={video.url} target="_blank" rel="noopener noreferrer" class="block relative group">
                         <div class="video-thumbnail">
@@ -120,10 +120,10 @@ const featuredVideo = videos.find(v => v.featured);
 
                     <!-- Video Info -->
                     <div class="p-5">
-                        <h3 class="font-bold text-lg md:text-xl text-gray-900 mb-2">
+                        <h3 class="font-bold text-lg md:text-xl text-white mb-2">
                             {video.title}
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4">
+                        <p class="text-gray-300 text-sm mb-4">
                             {video.description || ''}
                         </p>
 
@@ -175,7 +175,7 @@ const featuredVideo = videos.find(v => v.featured);
         <!-- Bottom CTA — dynamically linked to the featured video -->
         {featuredVideo && (
         <div class="text-center mt-12">
-            <p class="text-gray-600 mb-4">Couldn't attend the event? Watch the full presentation and highlights</p>
+            <p class="text-gray-300 mb-4">Couldn't attend the event? Watch the full presentation and highlights</p>
             <a
                 href={featuredVideo.url}
                 target="_blank"

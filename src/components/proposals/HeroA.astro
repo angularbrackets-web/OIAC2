@@ -1,0 +1,58 @@
+---
+// Hero A: "Warm & Welcoming" — warm gradient with Islamic geometric pattern overlay
+---
+
+<section class="relative min-h-[80vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#2E3F44] via-[#3a5259] to-[#723A36]">
+  <!-- Islamic Geometric Pattern Overlay -->
+  <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="islamic-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <!-- 8-pointed star pattern -->
+          <path d="M40 0 L50 15 L65 10 L55 25 L70 30 L55 35 L65 50 L50 45 L40 60 L30 45 L15 50 L25 35 L10 30 L25 25 L15 10 L30 15 Z" fill="none" stroke="white" stroke-width="0.5" />
+          <circle cx="40" cy="30" r="8" fill="none" stroke="white" stroke-width="0.5" />
+          <!-- Corner connectors -->
+          <path d="M0 0 L10 10 M80 0 L70 10 M0 80 L10 70 M80 80 L70 70" stroke="white" stroke-width="0.3" />
+          <!-- Diamond accents -->
+          <path d="M40 72 L44 80 L40 88 L36 80 Z" fill="none" stroke="white" stroke-width="0.4" />
+          <path d="M0 30 L-4 40 L0 50 L4 40 Z" fill="none" stroke="white" stroke-width="0.4" />
+          <path d="M80 30 L76 40 L80 50 L84 40 Z" fill="none" stroke="white" stroke-width="0.4" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#islamic-pattern)" />
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-4 sm:px-6 max-w-3xl mx-auto">
+    <p class="text-lightWood font-medium text-sm md:text-base tracking-[0.25em] uppercase mb-4 animate-on-scroll">
+      Welcome to
+    </p>
+
+    <h1 class="text-warmWhite text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 animate-on-scroll">
+      Omar Ibn Al Khattab Centre
+    </h1>
+
+    <p class="text-warmWhite/80 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-on-scroll">
+      Serving the best interests of Islam and the Muslim community of Edmonton
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-on-scroll">
+      <a
+        href="/prayertimes"
+        class="w-full sm:w-auto bg-warmWhite text-deepTeal hover:bg-softBeige font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base min-h-[44px] flex items-center justify-center"
+      >
+        Prayer Times
+      </a>
+      <a
+        href="/donate"
+        class="w-full sm:w-auto bg-terracottaRed hover:bg-terracottaRed-darker text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 text-base min-h-[44px] flex items-center justify-center"
+      >
+        Donate Now
+      </a>
+    </div>
+  </div>
+
+  <!-- Bottom fade for smooth transition to prayer card -->
+  <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#FAF4EC] to-transparent"></div>
+</section>

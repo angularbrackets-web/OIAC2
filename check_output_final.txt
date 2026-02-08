@@ -1,0 +1,309 @@
+
+Auto-generating collections for folders in "src/content/" that are not defined as collections.
+This is deprecated, so you should define these collections yourself in "src/content.config.ts".
+The following collections have been auto-generated: jobs, jummah-times, prayer-times, staff
+
+21:26:53 [content] Syncing content
+21:26:53 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/jobs"
+21:26:53 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/jummah-times"
+21:26:53 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/prayer-times"
+21:26:53 [WARN] [glob-loader] No files found matching "**/*.md,!**/_*/**/*.md,!**/_*.md" in directory "src/content/staff"
+21:26:53 [content] Synced content
+21:26:53 [types] Generated 124ms
+21:26:53 [check] Getting diagnostics for Astro files in /Users/mohammad/Projects/OIAC2...
+[96mscripts/migrate-to-content-collections.ts[0m:[93m5[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'stripHtml' is declared but its value is never read.
+
+[7m5[0m function stripHtml(html: string): string {
+[7m [0m [93m         ~~~~~~~~~[0m
+
+[96msrc/components/Announcements.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'FundraiserPoster' is declared but its value is never read.
+
+[7m3[0m import FundraiserPoster from '../assets/OIAACADEMY.FUNDRAISER.28SEP2025.jpeg'
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Announcements.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'EidPoster1' is declared but its value is never read.
+
+[7m2[0m import EidPoster1 from '../assets/Eid.Mubarak.1.png'
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Donate.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'radioButtonCheckedIcon' is declared but its value is never read.
+
+[7m6[0m import radioButtonCheckedIcon from "../assets/icons8-choice-67.png"
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Donate.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'donateImage' is declared but its value is never read.
+
+[7m3[0m import donateImage from "../assets/donate-image.jpg"
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Header.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'NavPrayerTimes' is declared but its value is never read.
+
+[7m3[0m import NavPrayerTimes from "./NavPrayerTimes.astro"
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/InfiniteCarousel.astro[0m:[93m8[0m:[93m28[0m - [93mwarning[0m[90m ts(6387): [0mThe signature '(globStr: string): Promise<Record<string, any>[]>' of 'Astro.glob' is deprecated.
+
+[7m8[0m const images = await Astro.glob('/src/assets/new-centre/*.(png|jpg|jpeg|webp)');
+[7m [0m [93m                           ~~~~[0m
+[96msrc/components/InfiniteCarousel.astro[0m:[93m8[0m:[93m28[0m - [93mwarning[0m[90m ts(6385): [0m'glob' is deprecated.
+
+[7m8[0m const images = await Astro.glob('/src/assets/new-centre/*.(png|jpg|jpeg|webp)');
+[7m [0m [93m                           ~~~~[0m
+
+[96msrc/components/Nav.astro[0m:[93m5[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'youtubeIcon' is declared but its value is never read.
+
+[7m5[0m import youtubeIcon from "../assets/youtube.png";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Nav.astro[0m:[93m4[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'instagramIcon' is declared but its value is never read.
+
+[7m4[0m import instagramIcon from "../assets/instagram.png";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Nav.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'facebookIcon' is declared but its value is never read.
+
+[7m3[0m import facebookIcon from "../assets/facebook.png";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Newsletter.astro[0m:[93m92[0m:[93m10[0m - [93mwarning[0m[90m ts(6196): [0m'mailchimpError' is declared but never used.
+
+[7m92[0m     type mailchimpError = {
+[7m  [0m [93m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/components/PrayerTimes.astro[0m:[93m10[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'prayerTimesForCurrentMonth' is declared but its value is never read.
+
+[7m10[0m const prayerTimesForCurrentMonth: Array<PrayerTime> =
+[7m  [0m [93m      ~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Volunteer.astro[0m:[93m124[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'btnSubmitAddVolunteer' is declared but its value is never read.
+
+[7m124[0m   const btnSubmitAddVolunteer = document.querySelector(
+[7m   [0m [93m        ~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Volunteer2.astro[0m:[93m26[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'frameborder' is deprecated.
+
+[7m26[0m           frameborder="0"
+[7m  [0m [93m          ~~~~~~~~~~~[0m
+[96msrc/components/Volunteer2.astro[0m:[93m20[0m:[93m11[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m20[0m           type="text/javascript"
+[7m  [0m [93m          ~~~~[0m
+
+[96msrc/components/proposals/ProposalFooter.astro[0m:[93m24[0m:[93m95[0m - [93mwarning[0m[90m ts(6385): [0m'Youtube' is deprecated.
+
+[7m24[0m   { label: "YouTube", href: "https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA", Icon: Youtube },
+[7m  [0m [93m                                                                                              ~~~~~~~[0m
+[96msrc/components/proposals/ProposalFooter.astro[0m:[93m23[0m:[93m77[0m - [93mwarning[0m[90m ts(6385): [0m'Instagram' is deprecated.
+
+[7m23[0m   { label: "Instagram", href: "https://www.instagram.com/oiacentre/", Icon: Instagram },
+[7m  [0m [93m                                                                            ~~~~~~~~~[0m
+[96msrc/components/proposals/ProposalFooter.astro[0m:[93m22[0m:[93m73[0m - [93mwarning[0m[90m ts(6385): [0m'Facebook' is deprecated.
+
+[7m22[0m   { label: "Facebook", href: "http://www.facebook.com/oiacentre", Icon: Facebook },
+[7m  [0m [93m                                                                        ~~~~~~~~[0m
+[96msrc/components/proposals/ProposalFooter.astro[0m:[93m3[0m:[93m52[0m - [93mwarning[0m[90m ts(6385): [0m'Youtube' is deprecated.
+
+[7m3[0m import { MapPin, Mail, Phone, Facebook, Instagram, Youtube } from "@lucide/astro";
+[7m [0m [93m                                                   ~~~~~~~[0m
+[96msrc/components/proposals/ProposalFooter.astro[0m:[93m3[0m:[93m41[0m - [93mwarning[0m[90m ts(6385): [0m'Instagram' is deprecated.
+
+[7m3[0m import { MapPin, Mail, Phone, Facebook, Instagram, Youtube } from "@lucide/astro";
+[7m [0m [93m                                        ~~~~~~~~~[0m
+[96msrc/components/proposals/ProposalFooter.astro[0m:[93m3[0m:[93m31[0m - [93mwarning[0m[90m ts(6385): [0m'Facebook' is deprecated.
+
+[7m3[0m import { MapPin, Mail, Phone, Facebook, Instagram, Youtube } from "@lucide/astro";
+[7m [0m [93m                              ~~~~~~~~[0m
+
+[96msrc/graphql/apollo-client.ts[0m:[93m9[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'gql' is declared but its value is never read.
+
+[7m9[0m   gql,
+[7m [0m [93m  ~~~[0m
+
+[96msrc/graphql/prayer-times.ts[0m:[93m111[0m:[93m11[0m - [93mwarning[0m[90m ts(6133): [0m'result' is declared but its value is never read.
+
+[7m111[0m     const result = await client.mutate({mutation:ADD_PRAYERTIME})
+[7m   [0m [93m          ~~~~~~[0m
+
+[96msrc/layouts/oiac-layout.astro[0m:[93m29[0m:[93m13[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m29[0m     <script async>
+[7m  [0m [93m            ~~~~~[0m
+[96msrc/layouts/oiac-layout.astro[0m:[93m26[0m:[93m7[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m26[0m       async
+[7m  [0m [93m      ~~~~~[0m
+
+[96msrc/layouts/oiac-layout2.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Footer' is declared but its value is never read.
+
+[7m3[0m import Footer from "../components/Footer.astro"
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/layouts/oiac-layout2.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Header' is declared but its value is never read.
+
+[7m2[0m import Header from "../components/Header.astro"
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/lib/content/events.ts[0m:[93m18[0m:[93m42[0m - [93mwarning[0m[90m ts(6133): [0m'months' is declared but its value is never read.
+
+[7m18[0m export async function getEventsForMonths(months: Array<number>): Promise<OIAC_Event[]> {
+[7m  [0m [93m                                         ~~~~~~[0m
+
+[96msrc/pages/aboutus.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'OIACFront' is declared but its value is never read.
+
+[7m3[0m import OIACFront from "../assets/OIAC.Front.webp"
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/contactus.astro[0m:[93m11[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'emailIcon' is declared but its value is never read.
+
+[7m11[0m import emailIcon from "../assets/email-icon-outline.svg";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/contactus.astro[0m:[93m10[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'callIcon' is declared but its value is never read.
+
+[7m10[0m import callIcon from "../assets/call-icon-outline.svg";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/contactus.astro[0m:[93m9[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'locationIcon' is declared but its value is never read.
+
+[7m9[0m import locationIcon from "../assets/location-icon-outline.svg";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/contactus.astro[0m:[93m8[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'youtubeIcon' is declared but its value is never read.
+
+[7m8[0m import youtubeIcon from "../assets/youtube-icon-outline.svg";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/contactus.astro[0m:[93m7[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'instagramIcon' is declared but its value is never read.
+
+[7m7[0m import instagramIcon from "../assets/instagram-icon-outline.svg";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/contactus.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'facebookIcon' is declared but its value is never read.
+
+[7m6[0m import facebookIcon from "../assets/facebook-icon-outline.svg";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/oiac.astro[0m:[93m49[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'ticketUrl' is declared but its value is never read.
+
+[7m49[0m const ticketUrl = "https://give-can.keela.co/OIAC-dinner-tickets";
+[7m  [0m [93m      ~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m48[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'eventLocation' is declared but its value is never read.
+
+[7m48[0m const eventLocation = "Edmonton, Alberta";
+[7m  [0m [93m      ~~~~~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m47[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'eventDate' is declared but its value is never read.
+
+[7m47[0m const eventDate = "September 28, 2025";
+[7m  [0m [93m      ~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m38[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'NEW_CENTRE_IMG_8' is declared but its value is never read.
+
+[7m38[0m import NEW_CENTRE_IMG_8 from "../assets/new-centre/new.oiac.8.png";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m37[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'NEW_CENTRE_IMG_5' is declared but its value is never read.
+
+[7m37[0m import NEW_CENTRE_IMG_5 from "../assets/new-centre/new.oiac.5.png";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m35[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'FundraiserPoster' is declared but its value is never read.
+
+[7m35[0m import FundraiserPoster from "../assets/OIAACADEMY.FUNDRAISER.28SEP2025.jpeg"
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m1210[0m:[93m53[0m - [93mwarning[0m[90m ts(6133): [0m'e' is declared but its value is never read.
+
+[7m1210[0m             button.addEventListener('click', async (e) => {
+[7m    [0m [93m                                                    ~[0m
+[96msrc/pages/oiac.astro[0m:[93m1178[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'utmId' is declared but its value is never read.
+
+[7m1178[0m     let utmId = null;
+[7m    [0m [93m        ~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m362[0m:[93m151[0m - [93mwarning[0m[90m ts(7027): [0mUnreachable code detected.
+
+[7m362[0m                 <a href="https://give-can.keela.co/donate-to-southside-islamic-school" target="_blank" class="donate-btn-1 donate-keela p-3" onclick="return window.gtag_report_conversion('https://give-can.keela.co/donate-to-southside-islamic-school', true)">Donate Now</a>
+[7m   [0m [93m                                                                                                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m1177[0m:[93m11[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m1177[0m   <script define:vars={{ source, validUtmSources }}>
+[7m    [0m [93m          ~~~~~~~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m84[0m:[93m13[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m84[0m     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17128140550"></script>
+[7m  [0m [93m            ~~~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m63[0m:[93m11[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m63[0m   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+[7m  [0m [93m          ~~~[0m
+[96msrc/pages/oiac.astro[0m:[93m62[0m:[93m11[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m62[0m   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+[7m  [0m [93m          ~~~[0m
+
+[96msrc/pages/prayertimes.astro[0m:[93m7[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'currentMonthNameShort' is declared but its value is never read.
+
+[7m7[0m const currentMonthNameShort = getMonthShortName()
+[7m [0m [93m      ~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/prayertimes.astro[0m:[93m4[0m:[93m112[0m - [93mwarning[0m[90m ts(6133): [0m'getWeekday' is declared but its value is never read.
+
+[7m4[0m import { getMonthShortName, getHijriDateAsString, getHijriShortDateAsString, getCurrentDateInEdmontonAsString, getWeekday, getWeekdayByDay, currentDay, currentMonth, currentYear, getMonthName } from "../helper"
+[7m [0m [93m                                                                                                               ~~~~~~~~~~[0m
+
+[96msrc/pages/admin/login.astro[0m:[93m155[0m:[93m78[0m - [93mwarning[0m[90m ts(6133): [0m'e' is declared but its value is never read.
+
+[7m155[0m     document.getElementById('loginForm').addEventListener('submit', function(e) {
+[7m   [0m [93m                                                                             ~[0m
+
+[96msrc/pages/admin/newcentre-updates.astro[0m:[93m365[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'event' is deprecated.
+
+[7m365[0m       const btn = event.target;
+[7m   [0m [93m                  ~~~~~[0m
+
+[96msrc/pages/admin/prayer-times.astro[0m:[93m42[0m:[93m11[0m - [93mwarning[0m[90m ts(6133): [0m'MONTH_NAMES' is declared but its value is never read.
+
+[7m42[0m     const MONTH_NAMES = ['', 'January', 'February', 'March', 'April', 'May', 'June',
+[7m  [0m [93m          ~~~~~~~~~~~[0m
+
+[96msrc/pages/api/cms/media.ts[0m:[93m89[0m:[93m13[0m - [93mwarning[0m[90m ts(6133): [0m'data' is declared but its value is never read.
+
+[7m89[0m     const { data, error } = await supabase.storage
+[7m  [0m [93m            ~~~~[0m
+
+[96msrc/pages/api/email/index.ts[0m:[93m53[0m:[93m15[0m - [93mwarning[0m[90m ts(6133): [0m'jsonResponse' is declared but its value is never read.
+
+[7m53[0m         const jsonResponse = await apiResponse.json()
+[7m  [0m [93m              ~~~~~~~~~~~~[0m
+
+[96msrc/pages/api/newsletter/index.ts[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'isObjectEmpty' is declared but its value is never read.
+
+[7m3[0m import { isObjectEmpty } from "../../../helper";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/scripts/utmTracker.ts[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'trackDonation' is declared but its value is never read.
+
+[7m2[0m import { trackDonation } from '../lib/trackDonation';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/scripts/utmTracker.ts[0m:[93m1[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'trackVisit' is declared but its value is never read.
+
+[7m1[0m import { trackVisit } from '../lib/trackVisit';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+Result (143 files): 
+- 0 errors
+- 0 warnings
+- 59 hints
+

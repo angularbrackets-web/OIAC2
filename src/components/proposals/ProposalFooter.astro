@@ -1,0 +1,112 @@
+---
+import oiacLogoLight from "../../assets/OIAC.Logo.Light.png";
+import { MapPin, Mail, Phone, Facebook, Instagram, Youtube } from "@lucide/astro";
+
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/aboutus" },
+  { label: "Prayer Times", href: "/prayertimes" },
+  { label: "Programs", href: "/programs" },
+  { label: "Events", href: "/events" },
+  { label: "New Centre", href: "/newcentre" },
+  { label: "Contact Us", href: "/contactus" },
+];
+
+const moreLinks = [
+  { label: "Jobs", href: "/jobs" },
+  { label: "Our Staff", href: "/staff" },
+  { label: "Privacy Policy", href: "/privacypolicy" },
+];
+
+const socialLinks = [
+  { label: "Facebook", href: "http://www.facebook.com/oiacentre", Icon: Facebook },
+  { label: "Instagram", href: "https://www.instagram.com/oiacentre/", Icon: Instagram },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA", Icon: Youtube },
+];
+---
+
+<footer class="bg-deepTeal text-warmWhite">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+      <!-- Branding -->
+      <div>
+        <img src={oiacLogoLight.src} alt="OIAC Logo" class="h-20 w-auto mb-6" />
+        <p class="text-warmWhite/70 text-sm leading-relaxed">
+          Striving to serve the best interests of Islam and the Muslims of Edmonton
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-semibold text-wood mb-4 text-sm uppercase tracking-wider">Quick Links</h3>
+        <ul class="space-y-3">
+          {quickLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-warmWhite/70 hover:text-warmWhite text-sm transition-colors duration-200">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- More -->
+      <div>
+        <h3 class="font-semibold text-wood mb-4 text-sm uppercase tracking-wider">More</h3>
+        <ul class="space-y-3">
+          {moreLinks.map(link => (
+            <li>
+              <a href={link.href} class="text-warmWhite/70 hover:text-warmWhite text-sm transition-colors duration-200">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact + Social -->
+      <div>
+        <h3 class="font-semibold text-wood mb-4 text-sm uppercase tracking-wider">Contact</h3>
+        <ul class="space-y-3 text-sm text-warmWhite/70">
+          <li class="flex items-start gap-2">
+            <MapPin class="w-4 h-4 mt-0.5 flex-shrink-0 text-wood" />
+            <span>110 - 1011 Parsons Rd SW, Edmonton, AB T6X 0X2</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <Mail class="w-4 h-4 flex-shrink-0 text-wood" />
+            <a href="mailto:info@oiacedmonton.ca" class="hover:text-warmWhite transition-colors duration-200">
+              info@oiacedmonton.ca
+            </a>
+          </li>
+          <li class="flex items-center gap-2">
+            <Phone class="w-4 h-4 flex-shrink-0 text-wood" />
+            <a href="tel:5878823202" class="hover:text-warmWhite transition-colors duration-200">
+              (587) 882-3202
+            </a>
+          </li>
+        </ul>
+
+        <div class="flex gap-3 mt-6">
+          {socialLinks.map(({ label, href, Icon }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 rounded-full bg-warmWhite/10 hover:bg-terracottaRed flex items-center justify-center transition-colors duration-200"
+              aria-label={`OIAC on ${label}`}
+            >
+              <Icon class="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-warmWhite/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-xs text-warmWhite/50">
+      <p>&copy; {new Date().getFullYear()} Omar Ibn Al Khattab Centre. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
