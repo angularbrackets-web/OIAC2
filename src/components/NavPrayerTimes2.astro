@@ -18,47 +18,8 @@ try {
   hasError = true;
 }
 
-// Helper function to convert time string to minutes since midnight
-function timeToMinutes(timeStr: string): number {
-  const match = timeStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
-  if (!match) return 0;
-
-  let hours = parseInt(match[1]);
-  const minutes = parseInt(match[2]);
-  const period = match[3].toUpperCase();
-
-  if (period === 'PM' && hours !== 12) hours += 12;
-  if (period === 'AM' && hours === 12) hours = 0;
-
-  return hours * 60 + minutes;
-}
-
-// Get current time in minutes
-const now = new Date();
-const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-// Determine which prayer is next or current
-let nextPrayer = '';
-if (prayerTimesForCurrentDay) {
-  const prayers = [
-    { name: 'fajr', time: prayerTimesForCurrentDay.fajrJamah },
-    { name: 'dhuhr', time: prayerTimesForCurrentDay.zuhrJamah },
-    { name: 'asr', time: prayerTimesForCurrentDay.asrJamah },
-    { name: 'maghrib', time: prayerTimesForCurrentDay.maghribJamah },
-    { name: 'isha', time: prayerTimesForCurrentDay.ishaJamah },
-  ];
-
-  for (let i = 0; i < prayers.length; i++) {
-    const prayerMinutes = timeToMinutes(prayers[i].time);
-    if (currentMinutes < prayerMinutes) {
-      nextPrayer = prayers[i].name;
-      break;
-    }
-  }
-
-  // If no next prayer found, next prayer is Fajr (tomorrow)
-  if (!nextPrayer) nextPrayer = 'fajr';
-}
+// Note: Next prayer calculation moved to client-side only to avoid timezone issues
+// between server (Vercel) and client (user's device)
 
 // Prepare structured data for SEO
 const structuredData = prayerTimesForCurrentDay ? {
@@ -154,10 +115,10 @@ const structuredData = prayerTimesForCurrentDay ? {
     <!-- 5 Daily Prayers -->
     <div class="grid grid-cols-5 gap-1 bg-softBeige-lightest p-1.5">
       <!-- Fajr -->
-      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'fajr' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
-        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'fajr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+      <div data-prayer="fajr" class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div data-prayer-header class="text-white text-center px-1 py-1.5 text-[10px] font-bold bg-terracottaRed">
           <div>Fajr</div>
-          <span data-countdown="fajr" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'fajr' ? '' : 'hidden'}`}>in --</span>
+          <span data-countdown="fajr" class="block text-[8px] font-normal mt-0.5 hidden">in --</span>
         </div>
         <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
           <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.fajrBegins}</time>
@@ -166,10 +127,10 @@ const structuredData = prayerTimesForCurrentDay ? {
       </div>
 
       <!-- Dhuhr -->
-      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'dhuhr' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
-        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'dhuhr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+      <div data-prayer="dhuhr" class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div data-prayer-header class="text-white text-center px-1 py-1.5 text-[10px] font-bold bg-terracottaRed">
           <div>Dhuhr</div>
-          <span data-countdown="dhuhr" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'dhuhr' ? '' : 'hidden'}`}>in --</span>
+          <span data-countdown="dhuhr" class="block text-[8px] font-normal mt-0.5 hidden">in --</span>
         </div>
         <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
           <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.zuhrBegins}</time>
@@ -178,10 +139,10 @@ const structuredData = prayerTimesForCurrentDay ? {
       </div>
 
       <!-- Asr -->
-      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'asr' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
-        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'asr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+      <div data-prayer="asr" class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div data-prayer-header class="text-white text-center px-1 py-1.5 text-[10px] font-bold bg-terracottaRed">
           <div>Asr</div>
-          <span data-countdown="asr" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'asr' ? '' : 'hidden'}`}>in --</span>
+          <span data-countdown="asr" class="block text-[8px] font-normal mt-0.5 hidden">in --</span>
         </div>
         <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
           <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.asrBegins}</time>
@@ -190,10 +151,10 @@ const structuredData = prayerTimesForCurrentDay ? {
       </div>
 
       <!-- Maghrib -->
-      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'maghrib' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
-        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'maghrib' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+      <div data-prayer="maghrib" class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div data-prayer-header class="text-white text-center px-1 py-1.5 text-[10px] font-bold bg-terracottaRed">
           <div>Maghrib</div>
-          <span data-countdown="maghrib" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'maghrib' ? '' : 'hidden'}`}>in --</span>
+          <span data-countdown="maghrib" class="block text-[8px] font-normal mt-0.5 hidden">in --</span>
         </div>
         <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
           <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.maghribBegins}</time>
@@ -202,10 +163,10 @@ const structuredData = prayerTimesForCurrentDay ? {
       </div>
 
       <!-- Isha -->
-      <div class={`bg-white rounded-lg overflow-hidden shadow-sm ${nextPrayer === 'isha' ? 'ring-2 ring-sageGreen' : 'border border-gray-200'}`}>
-        <div class={`text-white text-center px-1 py-1.5 text-[10px] font-bold ${nextPrayer === 'isha' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+      <div data-prayer="isha" class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div data-prayer-header class="text-white text-center px-1 py-1.5 text-[10px] font-bold bg-terracottaRed">
           <div>Isha</div>
-          <span data-countdown="isha" class={`block text-[8px] font-normal mt-0.5 ${nextPrayer === 'isha' ? '' : 'hidden'}`}>in --</span>
+          <span data-countdown="isha" class="block text-[8px] font-normal mt-0.5 hidden">in --</span>
         </div>
         <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
           <time class="block text-[9px] min-[416px]:text-[10px] text-gray-600 font-medium leading-tight whitespace-nowrap">{prayerTimesForCurrentDay.ishaBegins}</time>
@@ -255,10 +216,10 @@ const structuredData = prayerTimesForCurrentDay ? {
       <div class="container mx-auto px-4 md:px-6 lg:px-8">
         <div class="flex items-stretch justify-between gap-1 md:gap-1.5">
           <!-- Fajr -->
-          <div data-prayer="fajr" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'fajr' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
-            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'fajr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div data-prayer="fajr" class="flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all border border-terracottaRed/20">
+            <div data-prayer-header class="text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] bg-terracottaRed">
               <span>Fajr</span>
-              <span data-countdown="fajr" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'fajr' ? '' : 'hidden'}`}>in --</span>
+              <span data-countdown="fajr" class="text-[8px] md:text-[9px] font-normal mt-1 hidden">in --</span>
             </div>
             <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
               <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.fajrBegins}</time>
@@ -267,10 +228,10 @@ const structuredData = prayerTimesForCurrentDay ? {
           </div>
 
           <!-- Dhuhr -->
-          <div data-prayer="dhuhr" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'dhuhr' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
-            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'dhuhr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div data-prayer="dhuhr" class="flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all border border-terracottaRed/20">
+            <div data-prayer-header class="text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] bg-terracottaRed">
               <span>Dhuhr</span>
-              <span data-countdown="dhuhr" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'dhuhr' ? '' : 'hidden'}`}>in --</span>
+              <span data-countdown="dhuhr" class="text-[8px] md:text-[9px] font-normal mt-1 hidden">in --</span>
             </div>
             <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
               <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.zuhrBegins}</time>
@@ -279,10 +240,10 @@ const structuredData = prayerTimesForCurrentDay ? {
           </div>
 
           <!-- Asr -->
-          <div data-prayer="asr" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'asr' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
-            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'asr' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div data-prayer="asr" class="flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all border border-terracottaRed/20">
+            <div data-prayer-header class="text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] bg-terracottaRed">
               <span>Asr</span>
-              <span data-countdown="asr" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'asr' ? '' : 'hidden'}`}>in --</span>
+              <span data-countdown="asr" class="text-[8px] md:text-[9px] font-normal mt-1 hidden">in --</span>
             </div>
             <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
               <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.asrBegins}</time>
@@ -291,10 +252,10 @@ const structuredData = prayerTimesForCurrentDay ? {
           </div>
 
           <!-- Maghrib -->
-          <div data-prayer="maghrib" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'maghrib' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
-            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'maghrib' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div data-prayer="maghrib" class="flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all border border-terracottaRed/20">
+            <div data-prayer-header class="text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] bg-terracottaRed">
               <span>Maghrib</span>
-              <span data-countdown="maghrib" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'maghrib' ? '' : 'hidden'}`}>in --</span>
+              <span data-countdown="maghrib" class="text-[8px] md:text-[9px] font-normal mt-1 hidden">in --</span>
             </div>
             <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
               <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.maghribBegins}</time>
@@ -303,10 +264,10 @@ const structuredData = prayerTimesForCurrentDay ? {
           </div>
 
           <!-- Isha -->
-          <div data-prayer="isha" class={`flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all ${nextPrayer === 'isha' ? 'border-2 border-sageGreen ring-2 ring-sageGreen/20' : 'border border-terracottaRed/20'}`}>
-            <div data-prayer-header class={`text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] ${nextPrayer === 'isha' ? 'bg-sageGreen' : 'bg-terracottaRed'}`}>
+          <div data-prayer="isha" class="flex flex-1 min-w-0 bg-white rounded-lg shadow-sm overflow-hidden transition-all border border-terracottaRed/20">
+            <div data-prayer-header class="text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base flex flex-col items-center justify-center whitespace-nowrap w-[40%] bg-terracottaRed">
               <span>Isha</span>
-              <span data-countdown="isha" class={`text-[8px] md:text-[9px] font-normal mt-1 ${nextPrayer === 'isha' ? '' : 'hidden'}`}>in --</span>
+              <span data-countdown="isha" class="text-[8px] md:text-[9px] font-normal mt-1 hidden">in --</span>
             </div>
             <div class="w-[60%] px-2 md:px-3 lg:px-4 py-2 text-center flex flex-col justify-center">
               <time class="block text-[9px] md:text-[10px] lg:text-xs text-gray-600 truncate" title="Adhan (Call to Prayer)">{prayerTimesForCurrentDay.ishaBegins}</time>
@@ -486,13 +447,19 @@ const structuredData = prayerTimesForCurrentDay ? {
     });
   }
 
-  // Run on page load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateNextPrayer);
-  } else {
+  // Run immediately if DOM is ready, otherwise wait for DOMContentLoaded
+  function initPrayerTimes() {
+    // Run immediately
     updateNextPrayer();
+
+    // Update every 30 seconds for accurate countdown
+    setInterval(updateNextPrayer, 30000);
   }
 
-  // Update every 30 seconds for accurate countdown
-  setInterval(updateNextPrayer, 30000);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPrayerTimes);
+  } else {
+    // DOM is already loaded, run immediately
+    initPrayerTimes();
+  }
 </script>
