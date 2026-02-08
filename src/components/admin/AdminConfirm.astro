@@ -1,0 +1,76 @@
+---
+interface Props {
+  id?: string;
+}
+const { id = 'confirm-dialog' } = Astro.props;
+---
+
+<dialog id={id} class="rounded-xl shadow-2xl backdrop:bg-black/40 p-0 w-full max-w-sm border border-gray-200">
+  <div class="p-6">
+    <h3 id={`${id}-title`} class="text-lg font-semibold text-gray-900 mb-2">Are you sure?</h3>
+    <p id={`${id}-message`} class="text-sm text-gray-600 mb-6">This action cannot be undone.</p>
+    <div class="flex justify-end gap-3">
+      <button
+        type="button"
+        id={`${id}-cancel`}
+        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        id={`${id}-ok`}
+        class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<script is:inline>
+(function() {
+  /**
+   * Show a styled confirmation dialog.
+   * @param {string} dialogId - The dialog element id
+   * @param {Function} onConfirm - Callback when user confirms
+   * @param {Object} [opts] - Options: title, message, confirmLabel, variant
+   */
+  window.showConfirm = function(dialogId, onConfirm, opts = {}) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog) return;
+
+    const titleEl = document.getElementById(dialogId + '-title');
+    const msgEl = document.getElementById(dialogId + '-message');
+    const okBtn = document.getElementById(dialogId + '-ok');
+    const cancelBtn = document.getElementById(dialogId + '-cancel');
+
+    if (titleEl) titleEl.textContent = opts.title || 'Are you sure?';
+    if (msgEl) msgEl.textContent = opts.message || 'This action cannot be undone.';
+    if (okBtn) okBtn.textContent = opts.confirmLabel || 'Delete';
+
+    // Variant styling for confirm button
+    if (okBtn) {
+      okBtn.className = 'px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors ' +
+        (opts.variant === 'danger' || !opts.variant ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700');
+    }
+
+    // Cleanup old listeners
+    const newOk = okBtn.cloneNode(true);
+    const newCancel = cancelBtn.cloneNode(true);
+    okBtn.replaceWith(newOk);
+    cancelBtn.replaceWith(newCancel);
+
+    newOk.addEventListener('click', () => {
+      dialog.close();
+      onConfirm();
+    });
+    newCancel.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    }, { once: true });
+
+    dialog.showModal();
+  };
+})();
+</script>

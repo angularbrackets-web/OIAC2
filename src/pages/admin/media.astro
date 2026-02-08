@@ -1,61 +1,65 @@
 ---
-import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminLayout2 from '../../layouts/AdminLayout2.astro';
+import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
 ---
 
-<AdminLayout title="Media Library" currentPage="media">
-  <div class="flex justify-between items-center mb-8">
-    <div>
-      <h1 class="text-3xl font-bold text-gray-800">Media Library</h1>
-      <p class="text-gray-600 mt-1">Upload and manage images and videos</p>
-    </div>
-    <label class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer font-medium">
-      + Upload File
+<AdminLayout2 title="Media Library" currentPage="media">
+  <AdminPageHeader title="Media Library" description="Upload and manage images and videos">
+    <label class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg cursor-pointer text-sm font-medium transition-colors">
+      Upload File
       <input type="file" id="fileInput" class="hidden" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/avif,image/heic,image/heif,video/mp4,video/webm,video/quicktime,.jpg,.jpeg,.png,.gif,.webp,.svg,.avif,.heic,.heif,.mp4,.webm,.mov" multiple />
     </label>
-  </div>
+  </AdminPageHeader>
 
   <!-- Upload Progress -->
   <div id="uploadProgress" class="hidden mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
     <div class="flex items-center gap-3">
       <div class="animate-spin w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full"></div>
-      <span class="text-blue-800">Uploading...</span>
+      <span class="text-blue-800 text-sm">Uploading...</span>
     </div>
   </div>
 
   <!-- Drag & Drop Area -->
-  <div id="dropZone" class="mb-6 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-white transition hover:border-blue-400 hover:bg-blue-50">
-    <div class="text-4xl mb-2">📤</div>
-    <p class="text-gray-600">Drag & drop files here, or click "Upload File" above</p>
-    <p class="text-gray-400 text-sm mt-1">Supports images (JPG, PNG, GIF, WebP, AVIF, HEIC) and videos (MP4, WebM)</p>
+  <div id="dropZone" class="mb-6 border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-white transition-colors hover:border-blue-400 hover:bg-blue-50/50">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-gray-400 mb-3">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="17 8 12 3 7 8"></polyline>
+      <line x1="12" y1="3" x2="12" y2="15"></line>
+    </svg>
+    <p class="text-sm text-gray-600">Drag and drop files here, or click "Upload File" above</p>
+    <p class="text-xs text-gray-400 mt-1">Images (JPG, PNG, GIF, WebP, AVIF, HEIC) and videos (MP4, WebM)</p>
   </div>
 
   <!-- Media Grid -->
-  <div id="mediaGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-    <p class="col-span-full text-gray-500">Loading media...</p>
+  <div id="mediaGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+    <p class="col-span-full text-gray-500 text-sm">Loading media...</p>
   </div>
 
-  <!-- Preview Modal -->
-  <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-4 max-w-4xl max-h-[90vh] overflow-auto mx-4">
-      <div class="flex justify-between items-center mb-4">
-        <h3 id="previewTitle" class="font-semibold text-lg">File Preview</h3>
-        <button onclick="closePreview()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+  <!-- Preview Dialog -->
+  <dialog id="preview-dialog" class="rounded-xl shadow-2xl backdrop:bg-black/60 p-0 w-full max-w-3xl border border-gray-200 animate-modal-in">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+      <h3 id="previewTitle" class="text-lg font-semibold text-gray-900 truncate">File Preview</h3>
+      <button type="button" id="previewCloseBtn" class="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded-lg hover:bg-gray-100">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div id="previewContent" class="px-6 py-4 flex items-center justify-center min-h-[200px]"></div>
+    <div class="px-6 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
+      <div class="flex items-center gap-2 mb-3">
+        <input type="text" id="previewUrl" readonly class="flex-1 px-3 py-2 border border-gray-300 rounded-lg bg-white text-sm text-gray-600" />
+        <button type="button" id="copyUrlBtn" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors whitespace-nowrap">Copy URL</button>
       </div>
-      <div id="previewContent" class="mb-4"></div>
-      <div class="flex justify-between items-center">
-        <input type="text" id="previewUrl" readonly class="flex-1 px-3 py-2 border rounded-l bg-gray-50 text-sm" />
-        <button onclick="copyUrl()" class="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700">Copy URL</button>
-      </div>
-      <div class="mt-4 flex justify-end gap-3">
-        <button onclick="deleteFile()" class="px-4 py-2 border border-red-500 text-red-500 rounded hover:bg-red-50">
-          Delete File
-        </button>
+      <div class="flex justify-end">
+        <button type="button" id="deleteFileBtn" class="px-4 py-2 text-sm font-medium text-red-600 bg-white border border-red-300 rounded-lg hover:bg-red-50 transition-colors">Delete File</button>
       </div>
     </div>
-  </div>
+  </dialog>
 
   <script is:inline>
     const MEDIA_API = '/api/cms/media';
+    const MAX_FILE_SIZE = 4 * 1024 * 1024;
     let mediaFiles = [];
     let currentFile = null;
 
@@ -67,163 +71,151 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       e.target.value = '';
     });
 
-    // Drag & drop handlers
+    // Drag & drop
     const dropZone = document.getElementById('dropZone');
-
     dropZone.addEventListener('dragover', (e) => {
       e.preventDefault();
       dropZone.classList.add('border-blue-500', 'bg-blue-50');
     });
-
     dropZone.addEventListener('dragleave', () => {
       dropZone.classList.remove('border-blue-500', 'bg-blue-50');
     });
-
     dropZone.addEventListener('drop', async (e) => {
       e.preventDefault();
       dropZone.classList.remove('border-blue-500', 'bg-blue-50');
       await uploadFiles(e.dataTransfer.files);
     });
 
-    // File size limit (4MB to be safe with Vercel's 4.5MB limit)
-    const MAX_FILE_SIZE = 4 * 1024 * 1024;
-
     async function uploadFiles(files) {
       if (files.length === 0) return;
-
       const progress = document.getElementById('uploadProgress');
       progress.classList.remove('hidden');
 
+      let uploaded = 0;
       for (const file of files) {
-        // Check file size
         if (file.size > MAX_FILE_SIZE) {
-          alert(`File "${file.name}" is too large (${formatSize(file.size)}). Maximum size is 4MB. Please compress or resize before uploading.`);
+          showToast(`"${file.name}" is too large (${formatSize(file.size)}). Max is 4 MB.`, 'error');
           continue;
         }
-
         const formData = new FormData();
         formData.append('file', file);
-
         try {
-          const response = await fetch(MEDIA_API, {
-            method: 'POST',
-            body: formData
-          });
-
-          if (!response.ok) {
-            if (response.status === 413) {
-              throw new Error('File too large. Server limit is 4MB.');
-            }
-            const err = await response.json();
-            throw new Error(err.error || 'Upload failed');
-          }
+          const res = await fetch(MEDIA_API, { method: 'POST', body: formData });
+          if (!res.ok) throw new Error('Upload failed');
+          uploaded++;
         } catch (error) {
-          alert('Error uploading ' + file.name + ': ' + error.message);
+          showToast('Error uploading ' + file.name + ': ' + error.message, 'error');
         }
       }
 
       progress.classList.add('hidden');
-      await loadMedia();
+      if (uploaded > 0) {
+        showToast(`Uploaded ${uploaded} file${uploaded > 1 ? 's' : ''}`, 'success');
+        await loadMedia();
+      }
     }
 
     async function loadMedia() {
       try {
-        const response = await fetch(MEDIA_API);
-        mediaFiles = await response.json();
+        const res = await fetch(MEDIA_API);
+        mediaFiles = await res.json();
         renderMedia();
       } catch (error) {
-        console.error('Error loading media:', error);
-        document.getElementById('mediaGrid').innerHTML =
-          '<p class="col-span-full text-red-500">Error loading media</p>';
+        document.getElementById('mediaGrid').innerHTML = '<p class="col-span-full text-red-500 text-sm">Error loading media</p>';
       }
     }
 
     function renderMedia() {
       const grid = document.getElementById('mediaGrid');
-
       if (mediaFiles.length === 0) {
-        grid.innerHTML = '<p class="col-span-full text-gray-500 bg-white rounded-lg p-8 text-center">No media files yet. Upload some!</p>';
+        grid.innerHTML = `
+          <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-400"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2z"></path></svg>
+            </div>
+            <p class="text-sm text-gray-500">No media files yet. Upload some.</p>
+          </div>
+        `;
         return;
       }
 
       grid.innerHTML = mediaFiles.map(file => `
-        <div class="bg-white rounded-lg shadow overflow-hidden cursor-pointer hover:shadow-lg transition"
-             onclick="showPreview('${file.name}')">
-          <div class="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+        <button type="button" data-file-name="${escapeAttr(file.name)}"
+          class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-sm transition-all text-left group">
+          <div class="aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
             ${file.type === 'video'
-              ? `<div class="text-4xl">🎥</div>`
-              : `<img src="${file.url}" alt="${file.name}" class="w-full h-full object-cover" />`
-            }
+              ? `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-400"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`
+              : `<img src="${escapeAttr(file.url)}" alt="${escapeAttr(file.name)}" class="w-full h-full object-cover" loading="lazy" />`}
           </div>
-          <div class="p-2">
-            <p class="text-xs text-gray-600 truncate">${file.name}</p>
+          <div class="px-2 py-1.5">
+            <p class="text-xs text-gray-700 truncate">${escapeHtml(file.name)}</p>
             <p class="text-xs text-gray-400">${formatSize(file.size)}</p>
           </div>
-        </div>
+        </button>
       `).join('');
     }
 
+    function escapeHtml(text) {
+      if (!text) return '';
+      const d = document.createElement('div');
+      d.textContent = text;
+      return d.innerHTML;
+    }
+    function escapeAttr(text) {
+      if (!text) return '';
+      return text.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
     function formatSize(bytes) {
+      if (!bytes) return '0 B';
       if (bytes < 1024) return bytes + ' B';
       if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
       return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
     }
 
-    window.showPreview = function(fileName) {
-      currentFile = mediaFiles.find(f => f.name === fileName);
+    // Preview dialog
+    const previewDialog = document.getElementById('preview-dialog');
+
+    document.getElementById('mediaGrid').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-file-name]');
+      if (!btn) return;
+      const name = btn.dataset.fileName;
+      currentFile = mediaFiles.find(f => f.name === name);
       if (!currentFile) return;
 
       document.getElementById('previewTitle').textContent = currentFile.name;
       document.getElementById('previewUrl').value = currentFile.url;
-
       const content = document.getElementById('previewContent');
       if (currentFile.type === 'video') {
-        content.innerHTML = `<video src="${currentFile.url}" controls class="max-w-full max-h-96 mx-auto"></video>`;
+        content.innerHTML = `<video src="${escapeAttr(currentFile.url)}" controls class="max-w-full max-h-80 rounded-lg"></video>`;
       } else {
-        content.innerHTML = `<img src="${currentFile.url}" alt="${currentFile.name}" class="max-w-full max-h-96 mx-auto" />`;
+        content.innerHTML = `<img src="${escapeAttr(currentFile.url)}" alt="${escapeAttr(currentFile.name)}" class="max-w-full max-h-80 rounded-lg" />`;
       }
+      previewDialog.showModal();
+    });
 
-      const modal = document.getElementById('previewModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    };
+    document.getElementById('previewCloseBtn').addEventListener('click', () => previewDialog.close());
+    previewDialog.addEventListener('click', (e) => { if (e.target === previewDialog) previewDialog.close(); });
 
-    window.closePreview = function() {
-      const modal = document.getElementById('previewModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      currentFile = null;
-    };
+    document.getElementById('copyUrlBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('previewUrl').value);
+      showToast('URL copied to clipboard', 'success');
+    });
 
-    window.copyUrl = function() {
-      const input = document.getElementById('previewUrl');
-      input.select();
-      navigator.clipboard.writeText(input.value);
-      alert('URL copied to clipboard!');
-    };
-
-    window.deleteFile = async function() {
+    document.getElementById('deleteFileBtn').addEventListener('click', () => {
       if (!currentFile) return;
-      if (!confirm('Are you sure you want to delete ' + currentFile.name + '?')) return;
-
-      try {
-        const response = await fetch(MEDIA_API, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fileName: currentFile.name })
-        });
-
-        if (!response.ok) throw new Error('Delete failed');
-
-        closePreview();
-        await loadMedia();
-      } catch (error) {
-        alert('Error deleting file: ' + error.message);
-      }
-    };
-
-    document.getElementById('previewModal').addEventListener('click', (e) => {
-      if (e.target.id === 'previewModal') closePreview();
+      showConfirm('confirm-dialog', async () => {
+        try {
+          const res = await fetch(MEDIA_API, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fileName: currentFile.name })
+          });
+          if (!res.ok) throw new Error('Delete failed');
+          previewDialog.close();
+          showToast('File deleted', 'success');
+          await loadMedia();
+        } catch (e) { showToast('Error: ' + e.message, 'error'); }
+      }, { title: 'Delete File', message: `"${currentFile.name}" will be permanently deleted.` });
     });
   </script>
-</AdminLayout>
+</AdminLayout2>

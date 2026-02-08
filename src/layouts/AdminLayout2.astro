@@ -1,0 +1,50 @@
+---
+import AdminSidebar from '../components/admin/AdminSidebar.astro';
+import AdminToast from '../components/admin/AdminToast.astro';
+import AdminConfirm from '../components/admin/AdminConfirm.astro';
+import { Menu } from '@lucide/astro';
+
+interface Props {
+  title: string;
+  currentPage: string;
+}
+
+const { title, currentPage } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} - OIAC Admin</title>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Sidebar -->
+  <AdminSidebar currentPage={currentPage} />
+
+  <!-- Mobile header -->
+  <header class="sticky top-0 z-30 flex items-center h-14 bg-white border-b border-gray-200 px-4 lg:hidden">
+    <button
+      id="sidebar-open-btn"
+      type="button"
+      class="p-2 -ml-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+      aria-label="Open navigation"
+    >
+      <Menu size={22} />
+    </button>
+    <span class="ml-3 text-sm font-semibold text-gray-900">{title}</span>
+  </header>
+
+  <!-- Main content -->
+  <main class="lg:ml-64 min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <slot />
+    </div>
+  </main>
+
+  <!-- Global components -->
+  <AdminToast />
+  <AdminConfirm />
+</body>
+</html>

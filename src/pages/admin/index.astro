@@ -1,97 +1,166 @@
 ---
-import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminLayout2 from '../../layouts/AdminLayout2.astro';
+import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
+import { Play, Image, Building2, Briefcase, Users, Clock, BookOpen, FolderOpen, MessageSquare, ArrowRight } from '@lucide/astro';
 ---
 
-<AdminLayout title="Dashboard" currentPage="dashboard">
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
-    <p class="text-gray-600 mt-2">Manage website content and settings</p>
-  </div>
+<AdminLayout2 title="Dashboard" currentPage="dashboard">
+  <AdminPageHeader title="Dashboard" description="Manage website content and settings" />
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white shadow-lg">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">🏗️</span>
-        <h2 class="text-xl font-bold">New Centre Updates</h2>
-      </div>
-      <p class="text-blue-100 mb-4 text-sm">Timeline updates with videos, images, and links.</p>
-      <a href="/admin/newcentre-updates" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
-        Manage Updates →
-      </a>
+  <!-- Stats row (populated client-side) -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <p class="text-sm font-medium text-gray-500">Staff Members</p>
+      <p id="stat-staff" class="text-2xl font-bold text-gray-900 mt-1">—</p>
     </div>
-
-    <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl p-6 text-white shadow-lg">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">💼</span>
-        <h2 class="text-xl font-bold">Jobs</h2>
-      </div>
-      <p class="text-green-100 mb-4 text-sm">Manage job postings displayed on the careers page.</p>
-      <a href="/admin/jobs" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
-        Manage Jobs →
-      </a>
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <p class="text-sm font-medium text-gray-500">Active Jobs</p>
+      <p id="stat-jobs" class="text-2xl font-bold text-gray-900 mt-1">—</p>
     </div>
-
-    <div class="bg-gradient-to-br from-teal-600 to-teal-800 rounded-xl p-6 text-white shadow-lg">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">👥</span>
-        <h2 class="text-xl font-bold">Staff</h2>
-      </div>
-      <p class="text-teal-100 mb-4 text-sm">Manage staff members, board, and teachers.</p>
-      <a href="/admin/staff" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
-        Manage Staff →
-      </a>
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <p class="text-sm font-medium text-gray-500">Media Files</p>
+      <p id="stat-media" class="text-2xl font-bold text-gray-900 mt-1">—</p>
     </div>
-
-    <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-xl p-6 text-white shadow-lg">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">🕌</span>
-        <h2 class="text-xl font-bold">Prayer Times</h2>
-      </div>
-      <p class="text-indigo-100 mb-4 text-sm">Manage daily prayer and jummah times for the year.</p>
-      <a href="/admin/prayer-times" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold mb-2">
-        Prayer Times →
-      </a>
-      <a href="/admin/jummah-times" class="block bg-white/10 hover:bg-white/20 rounded-lg px-4 py-2 transition text-center text-sm">
-        Jummah Times →
-      </a>
-    </div>
-
-    <div class="bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-6 text-white shadow-lg">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">🖼️</span>
-        <h2 class="text-xl font-bold">Media Library</h2>
-      </div>
-      <p class="text-purple-100 mb-4 text-sm">Upload and manage images and videos for use across the site.</p>
-      <a href="/admin/media" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
-        Manage Media →
-      </a>
-    </div>
-
-    <div class="bg-gradient-to-br from-amber-600 to-amber-800 rounded-xl p-6 text-white shadow-lg">
-      <div class="flex items-center gap-3 mb-4">
-        <span class="text-3xl">💬</span>
-        <h2 class="text-xl font-bold">Feedback</h2>
-      </div>
-      <p class="text-amber-100 mb-4 text-sm">View and manage feedback, suggestions, and complaints.</p>
-      <a href="/admin/feedback" class="block bg-white/20 hover:bg-white/30 rounded-lg px-4 py-3 transition text-center font-semibold">
-        View Feedback →
-      </a>
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <p class="text-sm font-medium text-gray-500">Unread Feedback</p>
+      <p id="stat-feedback" class="text-2xl font-bold text-gray-900 mt-1">—</p>
     </div>
   </div>
 
-  <!-- Quick Links -->
-  <div class="mt-8 bg-white rounded-xl p-6 shadow">
-    <h3 class="text-lg font-bold text-gray-800 mb-4">Quick Links</h3>
-    <div class="flex flex-wrap gap-3">
-      <a href="/" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition">
-        ← View Website
-      </a>
-      <a href="/newcentre" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition">
-        New Centre Page
-      </a>
-      <a href="/prayertimes" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition">
-        Prayer Times
-      </a>
-    </div>
+  <!-- Quick actions grid -->
+  <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">Content</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <a href="/admin/slideshow" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <Play size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Slideshow</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Manage homepage slideshow images</p>
+    </a>
+
+    <a href="/admin/posters" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <Image size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Posters</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Event posters and announcements</p>
+    </a>
+
+    <a href="/admin/newcentre-updates" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <Building2 size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">New Centre Updates</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Timeline updates with videos, images, and links</p>
+    </a>
   </div>
-</AdminLayout>
+
+  <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">Management</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <a href="/admin/jobs" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <Briefcase size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Jobs</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Manage job postings for the careers page</p>
+    </a>
+
+    <a href="/admin/staff" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <Users size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Staff</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Staff members, board, and teachers</p>
+    </a>
+  </div>
+
+  <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">Prayer</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+    <a href="/admin/prayer-times" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <Clock size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Prayer Times</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Daily prayer times for the year</p>
+    </a>
+
+    <a href="/admin/jummah-times" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <BookOpen size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Jummah Times</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Friday prayer schedule</p>
+    </a>
+  </div>
+
+  <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">System</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <a href="/admin/media" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <FolderOpen size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Media Library</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">Upload and manage images and videos</p>
+    </a>
+
+    <a href="/admin/feedback" class="group bg-white rounded-xl border border-gray-200 p-5 hover:border-blue-300 hover:shadow-sm transition-all no-underline">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
+          <MessageSquare size={18} class="text-blue-600" />
+        </div>
+        <h3 class="font-semibold text-gray-900">Feedback</h3>
+        <ArrowRight size={16} class="ml-auto text-gray-300 group-hover:text-blue-500 transition-colors" />
+      </div>
+      <p class="text-sm text-gray-500">View feedback, suggestions, and complaints</p>
+    </a>
+  </div>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', async () => {
+      async function fetchCount(url) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) return null;
+          const data = await res.json();
+          return Array.isArray(data) ? data.length : null;
+        } catch { return null; }
+      }
+
+      const [staff, jobs, media, feedback] = await Promise.all([
+        fetchCount('/api/cms/staff'),
+        fetchCount('/api/cms/jobs'),
+        fetchCount('/api/cms/media'),
+        fetchCount('/api/cms/feedback'),
+      ]);
+
+      if (staff !== null) document.getElementById('stat-staff').textContent = staff;
+      if (jobs !== null) document.getElementById('stat-jobs').textContent = jobs;
+      if (media !== null) document.getElementById('stat-media').textContent = media;
+      if (feedback !== null) document.getElementById('stat-feedback').textContent = feedback;
+    });
+  </script>
+</AdminLayout2>

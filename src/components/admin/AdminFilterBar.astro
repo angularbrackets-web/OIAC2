@@ -1,0 +1,27 @@
+---
+interface Props {
+  filters: { label: string; value: string }[];
+  activeValue?: string;
+  filterId?: string;
+}
+const { filters, activeValue = '', filterId = 'filter-bar' } = Astro.props;
+---
+
+<div id={filterId} class="flex items-center gap-2 flex-wrap" role="tablist">
+  {filters.map((f) => (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={f.value === activeValue ? 'true' : 'false'}
+      data-filter-value={f.value}
+      class:list={[
+        'px-3 py-1.5 text-sm font-medium rounded-lg transition-colors',
+        f.value === activeValue
+          ? 'bg-blue-50 text-blue-700'
+          : 'text-gray-600 hover:bg-gray-100',
+      ]}
+    >
+      {f.label}
+    </button>
+  ))}
+</div>

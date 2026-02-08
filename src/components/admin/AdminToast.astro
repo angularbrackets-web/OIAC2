@@ -1,0 +1,49 @@
+<!-- Toast notification container + global showToast() function -->
+<div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col-reverse gap-2 pointer-events-none"></div>
+
+<script is:inline>
+(function() {
+  const MAX_TOASTS = 3;
+  const VARIANTS = {
+    success: { bg: 'bg-green-600', icon: '&#10003;' },
+    error:   { bg: 'bg-red-600',   icon: '&#10007;' },
+    warning: { bg: 'bg-amber-500', icon: '&#9888;' },
+    info:    { bg: 'bg-blue-600',  icon: '&#8505;' },
+  };
+
+  window.showToast = function(message, variant = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const v = VARIANTS[variant] || VARIANTS.info;
+
+    const toast = document.createElement('div');
+    toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-white text-sm font-medium ${v.bg} transform translate-x-full transition-transform duration-300 ease-out max-w-sm`;
+    toast.innerHTML = `<span class="text-base leading-none">${v.icon}</span><span class="flex-1">${message}</span><button class="ml-2 opacity-70 hover:opacity-100 text-white text-lg leading-none" onclick="this.parentElement.remove()">&times;</button>`;
+
+    container.appendChild(toast);
+
+    // Animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-x-full');
+        toast.classList.add('translate-x-0');
+      });
+    });
+
+    // Enforce max toasts
+    const toasts = container.children;
+    while (toasts.length > MAX_TOASTS) {
+      toasts[0].remove();
+    }
+
+    // Auto-dismiss (errors persist longer)
+    const delay = variant === 'error' ? 8000 : 4000;
+    setTimeout(() => {
+      toast.classList.remove('translate-x-0');
+      toast.classList.add('translate-x-full');
+      setTimeout(() => toast.remove(), 300);
+    }, delay);
+  };
+})();
+</script>

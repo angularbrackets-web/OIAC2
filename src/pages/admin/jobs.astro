@@ -1,95 +1,66 @@
 ---
-import AdminLayout from '../../layouts/AdminLayout.astro';
+import AdminLayout2 from '../../layouts/AdminLayout2.astro';
+import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
+import AdminModal from '../../components/admin/AdminModal.astro';
 ---
 
-<AdminLayout title="Jobs" currentPage="jobs">
-  <div class="flex justify-between items-center mb-8">
-    <div>
-      <h1 class="text-3xl font-bold text-gray-800">Jobs</h1>
-      <p class="text-gray-600 mt-1">Manage job postings displayed on the careers page</p>
-    </div>
-    <button id="addNewBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-medium">
-      + Add Job
+<AdminLayout2 title="Jobs" currentPage="jobs">
+  <AdminPageHeader title="Jobs" description="Manage job postings displayed on the careers page">
+    <button id="addNewBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+      Add Job
     </button>
+  </AdminPageHeader>
+
+  <div id="itemList" class="space-y-3">
+    <p class="text-gray-500 text-sm">Loading...</p>
   </div>
 
-  <!-- Items List -->
-  <div id="itemList" class="space-y-4">
-    <p class="text-gray-500">Loading...</p>
-  </div>
+  <AdminModal id="item-modal" title="Add Job" maxWidth="max-w-3xl">
+    <form id="itemForm" class="space-y-4">
+      <input type="hidden" id="itemId" />
 
-  <!-- Add/Edit Modal -->
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 w-full max-w-3xl max-h-[90vh] overflow-y-auto mx-4">
-      <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add New Job</h2>
-      <form id="itemForm" class="space-y-4">
-        <input type="hidden" id="itemId" />
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+        <input type="text" id="title" required
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
-          <input type="text" id="title" required
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Posted Date *</label>
+        <input type="date" id="postedDate" required
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description (HTML)</label>
+        <textarea id="description" rows="12"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"></textarea>
+      </div>
+
+      <div class="flex gap-6">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" id="requireAlbertaCertification" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+          <span class="text-sm text-gray-700">Requires Alberta Teaching Certificate</span>
+        </label>
+
+        <label class="flex items-center gap-2">
+          <input type="checkbox" id="active" checked class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+          <span class="text-sm text-gray-700">Active</span>
+        </label>
+      </div>
+
+      <Fragment slot="footer">
+        <div class="flex justify-end gap-3">
+          <button type="button" id="cancelBtn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+          <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">Save</button>
         </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Posted Date *</label>
-          <input type="date" id="postedDate" required
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Description (HTML)</label>
-          <textarea id="description" rows="12"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"></textarea>
-        </div>
-
-        <div class="flex gap-6">
-          <label class="flex items-center gap-2">
-            <input type="checkbox" id="requireAlbertaCertification" class="w-4 h-4" />
-            <span class="text-sm text-gray-700">Requires Alberta Teaching Certificate</span>
-          </label>
-
-          <label class="flex items-center gap-2">
-            <input type="checkbox" id="active" checked class="w-4 h-4" />
-            <span class="text-sm text-gray-700">Active</span>
-          </label>
-        </div>
-
-        <div class="flex justify-end gap-3 pt-4 border-t">
-          <button type="button" id="cancelBtn" class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
-          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
+      </Fragment>
+    </form>
+  </AdminModal>
 
   <script is:inline>
     const API_URL = '/api/cms/jobs';
     let items = [];
-
-    const SEED_DATA = [
-      {
-        title: 'Elementary Teacher (Full Time)',
-        postedDate: '2025-05-15',
-        description: '<h2><strong>Inspire young hearts, illuminate bright minds and shape the leaders of tomorrow with Islam &amp; Academics</strong></h2><h2><strong>About Omar Ibn Al-Khattab Academy (OIAA) </strong></h2><p>At OIAA, Islamic values are at the heart of everything we do. </p><p>We believe education is a sacred trust one that connects home, school, and the wider ummah. Our commitment to strong academics is inseparable from our dedication to fostering spiritually grounded, intellectually curious, and morally upright students.</p><p>We are seeking passionate, knowledgeable, and values driven educators who reflect the diverse families we serve and who are committed to upholding the principles of Islamic education alongside academic rigor.</p><h2><strong>Position Overview - Elementary Teacher(s), Grade KG-6</strong></h2><p>We are seeking an enthusiastic and dynamic elementary grade Teacher(s) to join our team. The ideal candidate will have the ability to create an engaging classroom environment, have a strong commitment to student learning and be inspired by teaching young learners from am Islamic centred point of view. This role involves planning and creatively delivering Alberta curriculum-aligned lessons that cater to diverse learning styles while building a supportive and collaborative classroom community.</p><h2><strong>Education/Qualifications</strong></h2><p>The ideal candidate will possess:</p><ul><li><div><p>A valid Alberta Teaching Certificate (Interim or Permanent)</p></div></li><li><div><p>A Bachelor of Education degree from a recognized institution</p></div></li><li><div><p>Demonstrated ability to create inclusive, high-performing learning environments rooted in Islamic values</p></div></li><li><div><p>Strong classroom management skills and a commitment to student well-being</p></div></li><li><div><p>Excellent communication skills (verbal and written)</p></div></li><li><div><p>Commitment to professional growth and ongoing learning</p></div></li><li><div><p>Works collaboratively with parents and administration.</p></div></li><li><div><p>Deep respect for Islamic teachings, with the ability to integrate Islamic principles into daily teaching and school culture</p></div></li><li><div><p>Participate in various staff meetings, professional development and other extra-curricular activities</p></div></li><li><div><p>A clear criminal record check, including a vulnerable sector search</p></div></li><li><div><p>Familiarity with the Alberta curriculum and a desire to inspire students to achieve both academically and spiritually</p></div></li></ul><h2><strong>Hours:</strong></h2><ul><li><div><p>Approx. 1.00 FTE – Mondays to Fridays, full time</p></div></li></ul><h2><strong>Compensation:</strong></h2><ul><li><div><p>Based on Experience and Education.</p></div></li></ul><h2><strong>Deadline for applications:</strong></h2><p>Closing date for this competition is June 30, 2025</p><p>Send resume and cover letter to info@oiacedmonton.ca</p>',
-        requireAlbertaCertification: true,
-        active: true,
-      },
-      {
-        title: 'Quran Teachers (Part Time)',
-        postedDate: '2024-11-01',
-        description: '<p>We are seeking passionate and knowledgeable Quran Teachers to join our team in a part-time capacity.</p><p><strong>How to Apply</strong>:<br>Please send your resume to <strong>info@oiacedmonton.ca</strong>.</p>',
-        requireAlbertaCertification: false,
-        active: true,
-      },
-      {
-        title: 'Academic Teachers (Part Time)',
-        postedDate: '2024-11-01',
-        description: '<p>We are looking for passionate, qualified, and dedicated part-time Academic Teachers to join our team.</p><p><strong>How to Apply</strong>:<br>Please send your resume to <strong>info@oiacedmonton.ca</strong>.</p>',
-        requireAlbertaCertification: false,
-        active: true,
-      },
-    ];
 
     document.addEventListener('DOMContentLoaded', loadItems);
 
@@ -107,21 +78,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         document.getElementById('itemList').innerHTML = `
           <div class="bg-red-50 border border-red-200 rounded-lg p-6">
             <h3 class="font-semibold text-red-800 mb-2">Could not load jobs</h3>
-            <p class="text-red-600 text-sm mb-3">
-              The <code class="bg-red-100 px-1 rounded">oiac_jobs</code> table may not exist yet.
-              Create it in the Supabase SQL Editor:
-            </p>
-            <pre class="bg-red-100 text-red-800 p-3 rounded text-xs overflow-x-auto whitespace-pre-wrap">CREATE TABLE oiac_jobs (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  title TEXT NOT NULL,
-  posted_date TEXT NOT NULL,
-  description TEXT,
-  require_alberta_certification BOOLEAN DEFAULT false,
-  active BOOLEAN DEFAULT true,
-  created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now()
-);</pre>
-            <button onclick="loadItems()" class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm">Retry</button>
+            <p class="text-red-600 text-sm">Please check your database connection and try again.</p>
+            <button onclick="loadItems()" class="mt-3 text-sm font-medium text-red-700 hover:text-red-800">Retry</button>
           </div>
         `;
       }
@@ -132,40 +90,41 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
       if (items.length === 0) {
         container.innerHTML = `
-          <div class="bg-white rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
-            <p class="text-gray-500 mb-2 text-lg font-medium">No jobs yet</p>
-            <p class="text-gray-400 text-sm mb-5">
-              Click below to import the existing job postings.
-            </p>
-            <button onclick="seedData()" id="seedBtn"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">
-              Seed Job Data
-            </button>
+          <div class="flex flex-col items-center justify-center py-16 text-center">
+            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-400"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">No jobs yet</p>
+            <p class="text-xs text-gray-400">Click "Add Job" to create a posting.</p>
           </div>
         `;
         return;
       }
 
       container.innerHTML = items.map(item => `
-        <div class="bg-white rounded-lg shadow p-4 flex justify-between items-start">
+        <div class="bg-white rounded-lg border border-gray-200 px-4 py-3 flex justify-between items-start">
           <div class="flex-1 min-w-0">
             <div class="flex items-center flex-wrap gap-2">
-              <h3 class="font-semibold text-lg">${escapeHtml(item.title)}</h3>
+              <p class="font-medium text-gray-900 text-sm">${escapeHtml(item.title)}</p>
               ${item.active
-                ? '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>'
-                : '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-gray-100 text-gray-600">Inactive</span>'}
+                ? '<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>'
+                : '<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-gray-50 text-gray-600 ring-1 ring-inset ring-gray-500/20">Inactive</span>'}
               ${item.requireAlbertaCertification
-                ? '<span class="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">AB Cert Required</span>'
+                ? '<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20">AB Cert</span>'
                 : ''}
             </div>
-            <p class="text-gray-500 text-sm mt-1">Posted: ${escapeHtml(item.postedDate)}</p>
+            <p class="text-gray-500 text-xs mt-1">Posted: ${escapeHtml(item.postedDate)}</p>
           </div>
-          <div class="flex gap-2 ml-4 flex-shrink-0">
-            <button onclick="toggleActive('${item.id}', ${!item.active})" class="text-gray-600 hover:text-gray-800 px-3 py-1 border border-gray-300 rounded text-sm">
+          <div class="flex items-center gap-1 ml-4 flex-shrink-0">
+            <button onclick="toggleActive('${item.id}', ${!item.active})" class="px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${item.active ? 'text-gray-600 bg-gray-50 hover:bg-gray-100' : 'text-green-700 bg-green-50 hover:bg-green-100'}">
               ${item.active ? 'Deactivate' : 'Activate'}
             </button>
-            <button onclick="editItem('${item.id}')" class="text-blue-600 hover:text-blue-800 px-3 py-1 border border-blue-600 rounded text-sm">Edit</button>
-            <button onclick="deleteItem('${item.id}')" class="text-red-600 hover:text-red-800 px-3 py-1 border border-red-600 rounded text-sm">Delete</button>
+            <button onclick="editItem('${item.id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Edit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path></svg>
+            </button>
+            <button onclick="deleteItem('${item.id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+            </button>
           </div>
         </div>
       `).join('');
@@ -178,28 +137,6 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       return div.innerHTML;
     }
 
-    // Seed
-    window.seedData = async function() {
-      const btn = document.getElementById('seedBtn');
-      btn.textContent = 'Seeding...';
-      btn.disabled = true;
-
-      let success = 0;
-      for (const item of SEED_DATA) {
-        try {
-          const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(item)
-          });
-          if (res.ok) success++;
-        } catch (e) { console.error('Seed error:', e); }
-      }
-
-      if (success > 0) await loadItems();
-      else { btn.textContent = 'Seed failed'; btn.disabled = false; }
-    };
-
     // Toggle active
     window.toggleActive = async function(id, active) {
       try {
@@ -209,55 +146,54 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           body: JSON.stringify({ id, active })
         });
         if (!res.ok) throw new Error('Failed to update');
+        showToast(active ? 'Job activated' : 'Job deactivated', 'success');
         await loadItems();
-      } catch (e) { alert('Error: ' + e.message); }
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
     };
 
     // Modal
-    const modal = document.getElementById('modal');
+    const dialog = document.getElementById('item-modal');
     const form = document.getElementById('itemForm');
 
     document.getElementById('addNewBtn').addEventListener('click', () => {
-      document.getElementById('modalTitle').textContent = 'Add New Job';
+      dialog.querySelector('h2').textContent = 'Add Job';
       form.reset();
       document.getElementById('itemId').value = '';
       document.getElementById('active').checked = true;
-      showModal();
+      dialog.showModal();
     });
 
-    document.getElementById('cancelBtn').addEventListener('click', hideModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
-
-    function showModal() { modal.classList.remove('hidden'); modal.classList.add('flex'); }
-    function hideModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+    document.getElementById('cancelBtn').addEventListener('click', () => dialog.close());
 
     // Edit
     window.editItem = function(id) {
       const item = items.find(i => i.id === id);
       if (!item) return;
 
-      document.getElementById('modalTitle').textContent = 'Edit Job';
+      dialog.querySelector('h2').textContent = 'Edit Job';
       document.getElementById('itemId').value = item.id;
       document.getElementById('title').value = item.title;
       document.getElementById('postedDate').value = item.postedDate;
       document.getElementById('description').value = item.description || '';
       document.getElementById('requireAlbertaCertification').checked = !!item.requireAlbertaCertification;
       document.getElementById('active').checked = item.active !== false;
-      showModal();
+      dialog.showModal();
     };
 
     // Delete
-    window.deleteItem = async function(id) {
-      if (!confirm('Delete this job posting?')) return;
-      try {
-        const res = await fetch(API_URL, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id })
-        });
-        if (!res.ok) throw new Error('Failed to delete');
-        await loadItems();
-      } catch (e) { alert('Error: ' + e.message); }
+    window.deleteItem = function(id) {
+      showConfirm('confirm-dialog', async () => {
+        try {
+          const res = await fetch(API_URL, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+          });
+          if (!res.ok) throw new Error('Failed to delete');
+          showToast('Job deleted', 'success');
+          await loadItems();
+        } catch (e) { showToast('Error: ' + e.message, 'error'); }
+      }, { title: 'Delete Job', message: 'This job posting will be permanently removed.' });
     };
 
     // Submit
@@ -283,9 +219,10 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           const err = await res.json();
           throw new Error(err.error || 'Failed to save');
         }
-        hideModal();
+        dialog.close();
+        showToast(id ? 'Job updated' : 'Job created', 'success');
         await loadItems();
-      } catch (e) { alert('Error: ' + e.message); }
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
     });
   </script>
-</AdminLayout>
+</AdminLayout2>
