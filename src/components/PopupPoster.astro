@@ -1,18 +1,31 @@
 ---
-const posterUrl = "https://eqifzqosnyhgglrkzkur.supabase.co/storage/v1/object/public/media/1770825226988_oiac_fundraiserdinner_28feb2026.jpeg";
+import { getActiveEvent } from '../lib/db';
+
+const event = await getActiveEvent();
+const showPopup = event?.isActive && event?.showPopup && event?.posterImageUrl;
 ---
+
+{showPopup && (
 <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-8 hidden z-50">
   <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-w-lg w-full">
     <button id="closeBtn" class="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 text-white text-xl transition-colors" aria-label="Close popup">&times;</button>
-    <img src={posterUrl} alt="OIAC Fundraising Night - February 28, 2026" class="block w-full h-auto object-contain" loading="eager" />
+    <img src={event.posterImageUrl} alt={event.title} class="block w-full h-auto object-contain" loading="eager" />
+    {event.ticketUrl && (
+    <div class="p-4 text-center">
+      <a href={event.ticketUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-2.5 bg-terracottaRed-600 hover:bg-terracottaRed-700 text-white font-semibold rounded-lg transition-colors text-sm">
+        {event.ticketLabel || 'Get Tickets'}
+      </a>
+    </div>
+    )}
   </div>
 </div>
 
-<script>
+<script is:inline>
 const popupDuration = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
 document.addEventListener('DOMContentLoaded', () => {
-    const popup = document.getElementById('popup') as HTMLDivElement;
-    const closeBtn = document.getElementById('closeBtn') as HTMLButtonElement;
+    const popup = document.getElementById('popup');
+    const closeBtn = document.getElementById('closeBtn');
+    if (!popup || !closeBtn) return;
 
     const showPopup = () => {
       popup.classList.remove('hidden');
@@ -52,3 +65,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 </script>
+)}

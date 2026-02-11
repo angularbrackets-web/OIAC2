@@ -1,5 +1,5 @@
 ---
-import { Play, Image, Building2, Briefcase, Users, Clock, BookOpen, FolderOpen, MessageSquare, ExternalLink, LogOut, LayoutDashboard } from '@lucide/astro';
+import { Play, Image, Building2, Briefcase, Users, Clock, BookOpen, FolderOpen, MessageSquare, ExternalLink, LogOut, LayoutDashboard, CalendarDays } from '@lucide/astro';
 
 interface Props {
   currentPage: string;
@@ -13,6 +13,7 @@ const navGroups = [
       { id: 'slideshow', label: 'Slideshow', href: '/admin/slideshow', icon: Play },
       { id: 'posters', label: 'Posters', href: '/admin/posters', icon: Image },
       { id: 'newcentre-updates', label: 'New Centre Updates', href: '/admin/newcentre-updates', icon: Building2 },
+      { id: 'events', label: 'Events', href: '/admin/events', icon: CalendarDays },
     ],
   },
   {

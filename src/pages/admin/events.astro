@@ -1,0 +1,337 @@
+---
+import AdminLayout2 from '../../layouts/AdminLayout2.astro';
+import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
+import AdminModal from '../../components/admin/AdminModal.astro';
+import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
+---
+
+<AdminLayout2 title="Events" currentPage="events">
+  <AdminPageHeader title="Events" description="Manage announcement banners and popup posters for events">
+    <button id="addNewBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+      Add Event
+    </button>
+  </AdminPageHeader>
+
+  <div id="eventList" class="space-y-3">
+    <p class="text-gray-500 text-sm">Loading...</p>
+  </div>
+
+  <AdminModal id="event-modal" title="Add Event" maxWidth="max-w-3xl">
+    <form id="eventForm" class="space-y-4">
+      <input type="hidden" id="itemId" />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Title *</label>
+          <input type="text" id="title" required
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+          <textarea id="description" rows="3"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Event Date *</label>
+          <input type="date" id="eventDate" required
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Event Time</label>
+          <input type="text" id="eventTime" placeholder="e.g. 6:15 PM — Iftaar Time"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Venue</label>
+          <input type="text" id="venue" placeholder="e.g. 1011 Parsons RD #110 SW, Edmonton"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Poster Image</label>
+          <div class="flex gap-2">
+            <input type="url" id="posterImageUrl" placeholder="Paste image URL"
+              class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+            <button type="button" id="browseMediaBtn"
+              class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap">
+              Browse
+            </button>
+          </div>
+          <div id="imgPreview" class="mt-3 hidden">
+            <img id="imgPreviewImg" src="" alt="Preview" class="max-h-40 rounded-lg border border-gray-200" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Ticket URL</label>
+          <input type="url" id="ticketUrl" placeholder="https://..."
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Ticket Button Label</label>
+          <input type="text" id="ticketLabel" placeholder="Get Tickets"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Contact Phone</label>
+          <input type="text" id="contactPhone" placeholder="e.g. 587-882-3202"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Contact Email</label>
+          <input type="email" id="contactEmail" placeholder="e.g. info@oiacedmonton.ca"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+
+        <div class="md:col-span-2 flex gap-6">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="isActive" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <span class="text-sm font-medium text-gray-700">Active (show banner site-wide)</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="showPopup" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+            <span class="text-sm font-medium text-gray-700">Show Popup (poster on homepage)</span>
+          </label>
+        </div>
+      </div>
+
+      <Fragment slot="footer">
+        <div class="flex justify-end gap-3">
+          <button type="button" id="cancelBtn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+          <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">Save</button>
+        </div>
+      </Fragment>
+    </form>
+  </AdminModal>
+
+  <AdminMediaPicker />
+
+  <script is:inline>
+    const API_URL = '/api/cms/events';
+    let items = [];
+
+    document.addEventListener('DOMContentLoaded', loadItems);
+
+    async function loadItems() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || 'Unknown error');
+        }
+        items = await response.json();
+        renderItems();
+      } catch (error) {
+        console.error('Error loading events:', error);
+        document.getElementById('eventList').innerHTML = `
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="font-semibold text-red-800 mb-2">Could not load events</h3>
+            <p class="text-red-600 text-sm">Please check your database connection and try again.</p>
+            <button onclick="loadItems()" class="mt-3 text-sm font-medium text-red-700 hover:text-red-800">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function renderItems() {
+      const container = document.getElementById('eventList');
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="flex flex-col items-center justify-center py-16 text-center">
+            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-400"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">No events yet</p>
+            <p class="text-xs text-gray-400">Click "Add Event" to create one.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map((item) => `
+        <div class="bg-white rounded-lg border border-gray-200 px-4 py-3 flex items-center gap-4">
+          ${item.posterImageUrl
+            ? `<img src="${escapeHtml(item.posterImageUrl)}" alt="${escapeHtml(item.title)}" class="w-16 h-20 object-cover rounded-lg border border-gray-100 flex-shrink-0" />`
+            : `<div class="w-16 h-20 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center flex-shrink-0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-300"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg></div>`
+          }
+          <div class="flex-1 min-w-0">
+            <p class="font-medium text-gray-900 text-sm">${escapeHtml(item.title)}</p>
+            <p class="text-gray-500 text-xs mt-0.5">${formatDate(item.eventDate)}${item.venue ? ' &middot; ' + escapeHtml(item.venue) : ''}</p>
+            <div class="flex gap-2 mt-1.5">
+              ${item.isActive
+                ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>'
+                : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">Inactive</span>'
+              }
+              ${item.showPopup
+                ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">Popup On</span>'
+                : ''
+              }
+              ${item.ticketUrl
+                ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Has Tickets</span>'
+                : ''
+              }
+            </div>
+          </div>
+          <div class="flex items-center gap-1 flex-shrink-0">
+            ${item.isActive
+              ? `<button onclick="toggleActive('${item.id}', false)" class="px-3 py-1.5 rounded-lg text-xs font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors" title="Deactivate">Deactivate</button>`
+              : `<button onclick="toggleActive('${item.id}', true)" class="px-3 py-1.5 rounded-lg text-xs font-medium text-green-700 bg-green-50 hover:bg-green-100 border border-green-200 transition-colors" title="Activate">Activate</button>`
+            }
+            <button onclick="editItem('${item.id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Edit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path></svg>
+            </button>
+            <button onclick="deleteItem('${item.id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Modal
+    const dialog = document.getElementById('event-modal');
+    const form = document.getElementById('eventForm');
+
+    document.getElementById('addNewBtn').addEventListener('click', () => {
+      dialog.querySelector('h2').textContent = 'Add Event';
+      form.reset();
+      document.getElementById('itemId').value = '';
+      hideImgPreview();
+      dialog.showModal();
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => dialog.close());
+
+    // Browse media
+    document.getElementById('browseMediaBtn').addEventListener('click', () => {
+      openMediaPicker('image', (url) => {
+        document.getElementById('posterImageUrl').value = url;
+        showImgPreview(url);
+      });
+    });
+
+    // Image preview
+    function showImgPreview(url) {
+      document.getElementById('imgPreview').classList.remove('hidden');
+      document.getElementById('imgPreviewImg').src = url;
+    }
+    function hideImgPreview() {
+      document.getElementById('imgPreview').classList.add('hidden');
+    }
+    document.getElementById('posterImageUrl').addEventListener('input', function() {
+      if (this.value.trim()) showImgPreview(this.value.trim());
+      else hideImgPreview();
+    });
+
+    // Toggle active
+    window.toggleActive = async function(id, activate) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, isActive: activate })
+        });
+        if (!res.ok) throw new Error('Failed to update');
+        showToast(activate ? 'Event activated — banner is now live' : 'Event deactivated', 'success');
+        await loadItems();
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    };
+
+    // Edit
+    window.editItem = function(id) {
+      const item = items.find(i => i.id === id);
+      if (!item) return;
+
+      dialog.querySelector('h2').textContent = 'Edit Event';
+      document.getElementById('itemId').value = item.id;
+      document.getElementById('title').value = item.title;
+      document.getElementById('description').value = item.description || '';
+      document.getElementById('eventDate').value = item.eventDate || '';
+      document.getElementById('eventTime').value = item.eventTime || '';
+      document.getElementById('venue').value = item.venue || '';
+      document.getElementById('posterImageUrl').value = item.posterImageUrl || '';
+      document.getElementById('ticketUrl').value = item.ticketUrl || '';
+      document.getElementById('ticketLabel').value = item.ticketLabel || '';
+      document.getElementById('contactPhone').value = item.contactPhone || '';
+      document.getElementById('contactEmail').value = item.contactEmail || '';
+      document.getElementById('isActive').checked = !!item.isActive;
+      document.getElementById('showPopup').checked = !!item.showPopup;
+
+      if (item.posterImageUrl) showImgPreview(item.posterImageUrl);
+      else hideImgPreview();
+
+      dialog.showModal();
+    };
+
+    // Delete
+    window.deleteItem = function(id) {
+      showConfirm('confirm-dialog', async () => {
+        try {
+          const res = await fetch(API_URL, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+          });
+          if (!res.ok) throw new Error('Failed to delete');
+          showToast('Event deleted', 'success');
+          await loadItems();
+        } catch (e) { showToast('Error: ' + e.message, 'error'); }
+      }, { title: 'Delete Event', message: 'This event will be permanently removed.' });
+    };
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('itemId').value;
+      const data = {
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value || undefined,
+        eventDate: document.getElementById('eventDate').value,
+        eventTime: document.getElementById('eventTime').value || undefined,
+        venue: document.getElementById('venue').value || undefined,
+        posterImageUrl: document.getElementById('posterImageUrl').value || undefined,
+        ticketUrl: document.getElementById('ticketUrl').value || undefined,
+        ticketLabel: document.getElementById('ticketLabel').value || undefined,
+        contactPhone: document.getElementById('contactPhone').value || undefined,
+        contactEmail: document.getElementById('contactEmail').value || undefined,
+        isActive: document.getElementById('isActive').checked,
+        showPopup: document.getElementById('showPopup').checked,
+      };
+      try {
+        const res = await fetch(API_URL, {
+          method: id ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(id ? { id, ...data } : data)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to save');
+        }
+        dialog.close();
+        showToast(id ? 'Event updated' : 'Event created', 'success');
+        await loadItems();
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    });
+  </script>
+</AdminLayout2>

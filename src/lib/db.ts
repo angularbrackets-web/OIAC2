@@ -1002,6 +1002,153 @@ export async function bulkUpsertPrayerTimes(records: PrayerTimeInput[]): Promise
   return success;
 }
 
+// Events table
+export type EventInput = {
+  title: string;
+  description?: string;
+  eventDate: string;
+  eventTime?: string;
+  venue?: string;
+  posterImageUrl?: string;
+  ticketUrl?: string;
+  ticketLabel?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  isActive?: boolean;
+  showPopup?: boolean;
+};
+
+export type EventRecord = EventInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapEventRecord(record: Record<string, any>): EventRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    description: record.description,
+    eventDate: record.event_date,
+    eventTime: record.event_time,
+    venue: record.venue,
+    posterImageUrl: record.poster_image_url,
+    ticketUrl: record.ticket_url,
+    ticketLabel: record.ticket_label,
+    contactPhone: record.contact_phone,
+    contactEmail: record.contact_email,
+    isActive: record.is_active,
+    showPopup: record.show_popup,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createEvent(data: EventInput): Promise<EventRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_events')
+    .insert([{
+      title: data.title,
+      description: data.description || null,
+      event_date: data.eventDate,
+      event_time: data.eventTime || null,
+      venue: data.venue || null,
+      poster_image_url: data.posterImageUrl || null,
+      ticket_url: data.ticketUrl || null,
+      ticket_label: data.ticketLabel || 'Get Tickets',
+      contact_phone: data.contactPhone || null,
+      contact_email: data.contactEmail || null,
+      is_active: data.isActive ?? false,
+      show_popup: data.showPopup ?? false,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapEventRecord);
+}
+
+export async function getEvents(): Promise<EventRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_events')
+    .select('*')
+    .order('event_date', { ascending: false });
+
+  if (error) throw error;
+  return (data || []).map(mapEventRecord);
+}
+
+export async function getEventById(id: string): Promise<EventRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_events')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapEventRecord(data);
+}
+
+export async function getActiveEvent(): Promise<EventRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_events')
+    .select('*')
+    .eq('is_active', true)
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+  return mapEventRecord(data);
+}
+
+export async function deactivateAllEvents(): Promise<void> {
+  const { error } = await supabase
+    .from('oiac_events')
+    .update({ is_active: false, updated_at: new Date().toISOString() })
+    .eq('is_active', true);
+
+  if (error) throw error;
+}
+
+export async function updateEvent(id: string, data: Partial<EventInput>) {
+  const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.description !== undefined) updateData.description = data.description;
+  if (data.eventDate !== undefined) updateData.event_date = data.eventDate;
+  if (data.eventTime !== undefined) updateData.event_time = data.eventTime;
+  if (data.venue !== undefined) updateData.venue = data.venue;
+  if (data.posterImageUrl !== undefined) updateData.poster_image_url = data.posterImageUrl;
+  if (data.ticketUrl !== undefined) updateData.ticket_url = data.ticketUrl;
+  if (data.ticketLabel !== undefined) updateData.ticket_label = data.ticketLabel;
+  if (data.contactPhone !== undefined) updateData.contact_phone = data.contactPhone;
+  if (data.contactEmail !== undefined) updateData.contact_email = data.contactEmail;
+  if (data.isActive !== undefined) updateData.is_active = data.isActive;
+  if (data.showPopup !== undefined) updateData.show_popup = data.showPopup;
+
+  const { data: result, error } = await supabase
+    .from('oiac_events')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteEvent(id: string) {
+  const { error } = await supabase
+    .from('oiac_events')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor
