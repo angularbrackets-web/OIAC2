@@ -1002,29 +1002,28 @@ export async function bulkUpsertPrayerTimes(records: PrayerTimeInput[]): Promise
   return success;
 }
 
-// Events table
-export type EventInput = {
+// Announcements table (site-wide banner)
+export type AnnouncementInput = {
   title: string;
   description?: string;
-  eventDate: string;
+  eventDate?: string;
   eventTime?: string;
   venue?: string;
   posterImageUrl?: string;
-  ticketUrl?: string;
-  ticketLabel?: string;
+  linkUrl?: string;
+  linkLabel?: string;
   contactPhone?: string;
   contactEmail?: string;
   isActive?: boolean;
-  showPopup?: boolean;
 };
 
-export type EventRecord = EventInput & {
+export type AnnouncementRecord = AnnouncementInput & {
   id: string;
   created_at: string;
   updated_at: string;
 };
 
-function mapEventRecord(record: Record<string, any>): EventRecord {
+function mapAnnouncementRecord(record: Record<string, any>): AnnouncementRecord {
   return {
     id: record.id,
     title: record.title,
@@ -1033,53 +1032,51 @@ function mapEventRecord(record: Record<string, any>): EventRecord {
     eventTime: record.event_time,
     venue: record.venue,
     posterImageUrl: record.poster_image_url,
-    ticketUrl: record.ticket_url,
-    ticketLabel: record.ticket_label,
+    linkUrl: record.link_url,
+    linkLabel: record.link_label,
     contactPhone: record.contact_phone,
     contactEmail: record.contact_email,
     isActive: record.is_active,
-    showPopup: record.show_popup,
     created_at: record.created_at,
     updated_at: record.updated_at,
   };
 }
 
-export async function createEvent(data: EventInput): Promise<EventRecord[]> {
+export async function createAnnouncement(data: AnnouncementInput): Promise<AnnouncementRecord[]> {
   const { data: result, error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
     .insert([{
       title: data.title,
       description: data.description || null,
-      event_date: data.eventDate,
+      event_date: data.eventDate || null,
       event_time: data.eventTime || null,
       venue: data.venue || null,
       poster_image_url: data.posterImageUrl || null,
-      ticket_url: data.ticketUrl || null,
-      ticket_label: data.ticketLabel || 'Get Tickets',
+      link_url: data.linkUrl || null,
+      link_label: data.linkLabel || 'Learn More',
       contact_phone: data.contactPhone || null,
       contact_email: data.contactEmail || null,
       is_active: data.isActive ?? false,
-      show_popup: data.showPopup ?? false,
     }])
     .select();
 
   if (error) throw error;
-  return (result || []).map(mapEventRecord);
+  return (result || []).map(mapAnnouncementRecord);
 }
 
-export async function getEvents(): Promise<EventRecord[]> {
+export async function getAnnouncements(): Promise<AnnouncementRecord[]> {
   const { data, error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
     .select('*')
-    .order('event_date', { ascending: false });
+    .order('created_at', { ascending: false });
 
   if (error) throw error;
-  return (data || []).map(mapEventRecord);
+  return (data || []).map(mapAnnouncementRecord);
 }
 
-export async function getEventById(id: string): Promise<EventRecord | null> {
+export async function getAnnouncementById(id: string): Promise<AnnouncementRecord | null> {
   const { data, error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
     .select('*')
     .eq('id', id)
     .single();
@@ -1088,12 +1085,12 @@ export async function getEventById(id: string): Promise<EventRecord | null> {
     if (error.code === 'PGRST116') return null;
     throw error;
   }
-  return mapEventRecord(data);
+  return mapAnnouncementRecord(data);
 }
 
-export async function getActiveEvent(): Promise<EventRecord | null> {
+export async function getActiveAnnouncement(): Promise<AnnouncementRecord | null> {
   const { data, error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
     .select('*')
     .eq('is_active', true)
     .limit(1)
@@ -1101,19 +1098,19 @@ export async function getActiveEvent(): Promise<EventRecord | null> {
 
   if (error) throw error;
   if (!data) return null;
-  return mapEventRecord(data);
+  return mapAnnouncementRecord(data);
 }
 
-export async function deactivateAllEvents(): Promise<void> {
+export async function deactivateAllAnnouncements(): Promise<void> {
   const { error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
     .update({ is_active: false, updated_at: new Date().toISOString() })
     .eq('is_active', true);
 
   if (error) throw error;
 }
 
-export async function updateEvent(id: string, data: Partial<EventInput>) {
+export async function updateAnnouncement(id: string, data: Partial<AnnouncementInput>) {
   const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
 
   if (data.title !== undefined) updateData.title = data.title;
@@ -1122,15 +1119,14 @@ export async function updateEvent(id: string, data: Partial<EventInput>) {
   if (data.eventTime !== undefined) updateData.event_time = data.eventTime;
   if (data.venue !== undefined) updateData.venue = data.venue;
   if (data.posterImageUrl !== undefined) updateData.poster_image_url = data.posterImageUrl;
-  if (data.ticketUrl !== undefined) updateData.ticket_url = data.ticketUrl;
-  if (data.ticketLabel !== undefined) updateData.ticket_label = data.ticketLabel;
+  if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.linkLabel !== undefined) updateData.link_label = data.linkLabel;
   if (data.contactPhone !== undefined) updateData.contact_phone = data.contactPhone;
   if (data.contactEmail !== undefined) updateData.contact_email = data.contactEmail;
   if (data.isActive !== undefined) updateData.is_active = data.isActive;
-  if (data.showPopup !== undefined) updateData.show_popup = data.showPopup;
 
   const { data: result, error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
     .update(updateData)
     .eq('id', id)
     .select();
@@ -1139,9 +1135,128 @@ export async function updateEvent(id: string, data: Partial<EventInput>) {
   return result;
 }
 
-export async function deleteEvent(id: string) {
+export async function deleteAnnouncement(id: string) {
   const { error } = await supabase
-    .from('oiac_events')
+    .from('oiac_announcements')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+// Popups table (homepage popup poster)
+export type PopupInput = {
+  title: string;
+  imageUrl: string;
+  linkUrl?: string;
+  linkLabel?: string;
+  isActive?: boolean;
+};
+
+export type PopupRecord = PopupInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapPopupRecord(record: Record<string, any>): PopupRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    imageUrl: record.image_url,
+    linkUrl: record.link_url,
+    linkLabel: record.link_label,
+    isActive: record.is_active,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createPopup(data: PopupInput): Promise<PopupRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_popups')
+    .insert([{
+      title: data.title,
+      image_url: data.imageUrl,
+      link_url: data.linkUrl || null,
+      link_label: data.linkLabel || 'Learn More',
+      is_active: data.isActive ?? false,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapPopupRecord);
+}
+
+export async function getPopups(): Promise<PopupRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_popups')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return (data || []).map(mapPopupRecord);
+}
+
+export async function getPopupById(id: string): Promise<PopupRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_popups')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapPopupRecord(data);
+}
+
+export async function getActivePopup(): Promise<PopupRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_popups')
+    .select('*')
+    .eq('is_active', true)
+    .limit(1)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+  return mapPopupRecord(data);
+}
+
+export async function deactivateAllPopups(): Promise<void> {
+  const { error } = await supabase
+    .from('oiac_popups')
+    .update({ is_active: false, updated_at: new Date().toISOString() })
+    .eq('is_active', true);
+
+  if (error) throw error;
+}
+
+export async function updatePopup(id: string, data: Partial<PopupInput>) {
+  const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.imageUrl !== undefined) updateData.image_url = data.imageUrl;
+  if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.linkLabel !== undefined) updateData.link_label = data.linkLabel;
+  if (data.isActive !== undefined) updateData.is_active = data.isActive;
+
+  const { data: result, error } = await supabase
+    .from('oiac_popups')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deletePopup(id: string) {
+  const { error } = await supabase
+    .from('oiac_popups')
     .delete()
     .eq('id', id);
 

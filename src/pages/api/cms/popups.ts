@@ -1,12 +1,12 @@
 import type { APIRoute } from 'astro';
 import {
-  createEvent,
-  getEvents,
-  getEventById,
-  updateEvent,
-  deleteEvent,
-  deactivateAllEvents,
-  type EventInput
+  createPopup,
+  getPopups,
+  getPopupById,
+  updatePopup,
+  deletePopup,
+  deactivateAllPopups,
+  type PopupInput
 } from '../../../lib/db';
 
 export const GET: APIRoute = async ({ url }) => {
@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ url }) => {
     const id = url.searchParams.get('id');
 
     if (id) {
-      const item = await getEventById(id);
+      const item = await getPopupById(id);
       if (!item) {
         return new Response(JSON.stringify({ error: 'Not found' }), {
           status: 404,
@@ -27,13 +27,13 @@ export const GET: APIRoute = async ({ url }) => {
       });
     }
 
-    const items = await getEvents();
+    const items = await getPopups();
     return new Response(JSON.stringify(items), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error('Error fetching popups:', error);
     return new Response(JSON.stringify({ error: String(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -43,28 +43,27 @@ export const GET: APIRoute = async ({ url }) => {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const data: EventInput = await request.json();
+    const data: PopupInput = await request.json();
 
-    if (!data.title || !data.eventDate) {
-      return new Response(JSON.stringify({ error: 'Missing required fields: title, eventDate' }), {
+    if (!data.title || !data.imageUrl) {
+      return new Response(JSON.stringify({ error: 'Missing required fields: title, imageUrl' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
-    // If creating as active, deactivate all others first
     if (data.isActive) {
-      await deactivateAllEvents();
+      await deactivateAllPopups();
     }
 
-    const result = await createEvent(data);
+    const result = await createPopup(data);
 
     return new Response(JSON.stringify({ success: true, data: result }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    console.error('Error creating event:', error);
+    console.error('Error creating popup:', error);
     return new Response(JSON.stringify({ error: String(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -84,19 +83,18 @@ export const PUT: APIRoute = async ({ request }) => {
       });
     }
 
-    // If activating this event, deactivate all others first
     if (data.isActive === true) {
-      await deactivateAllEvents();
+      await deactivateAllPopups();
     }
 
-    const result = await updateEvent(id, data);
+    const result = await updatePopup(id, data);
 
     return new Response(JSON.stringify({ success: true, data: result }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    console.error('Error updating event:', error);
+    console.error('Error updating popup:', error);
     return new Response(JSON.stringify({ error: String(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
@@ -115,14 +113,14 @@ export const DELETE: APIRoute = async ({ request }) => {
       });
     }
 
-    await deleteEvent(id);
+    await deletePopup(id);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
-    console.error('Error deleting event:', error);
+    console.error('Error deleting popup:', error);
     return new Response(JSON.stringify({ error: String(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
