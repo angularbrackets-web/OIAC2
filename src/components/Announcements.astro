@@ -3,10 +3,10 @@ import { getActiveAnnouncement } from '../lib/db';
 
 const event = await getActiveAnnouncement();
 
-// Build cycling headlines from event data
+// Build cycling headlines from announcement data
 const headlines: string[] = [];
 if (event) {
-  headlines.push(`You Are Invited to ${event.title}!`);
+  headlines.push(event.title);
   if (event.eventDate) {
     const d = new Date(event.eventDate + 'T00:00:00');
     const formatted = d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -17,35 +17,38 @@ if (event) {
   if (event.contactPhone) headlines.push(`Call ${event.contactPhone} for Details`);
 }
 
-// CSS cycling animation needs to know the count
-const cycleTotal = headlines.length * 4; // 4s per headline
+// Ensure at least 1 headline; compute animation timing
+const headlineCount = Math.max(headlines.length, 1);
+// Each headline visible for ~3.6s (18% of cycle), total cycle = count * 4s
+const cycleTotal = headlineCount * 4;
+// Percentage each headline occupies: show for 18%/count-adjusted, hide the rest
+const showPercent = Math.floor(80 / headlineCount);
 ---
 
-{event && (
-<style define:vars={{ cycleTotal: `${cycleTotal}s` }}>
-@keyframes gradient {
+<style is:global>
+@keyframes announce-gradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-@keyframes shimmer {
+@keyframes announce-shimmer {
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
 }
 
-@keyframes fadeInUp {
-    0% {
+@keyframes announce-fadeInUp {
+    from {
         opacity: 0;
         transform: translateY(20px);
     }
-    100% {
+    to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-@keyframes pulse-glow {
+@keyframes announce-pulse-glow {
     0%, 100% {
         text-shadow: 0 0 5px rgba(217, 202, 182, 0.5);
     }
@@ -54,26 +57,26 @@ const cycleTotal = headlines.length * 4; // 4s per headline
     }
 }
 
-@keyframes cycleText {
+@keyframes announce-cycleText {
     0%, 18% { opacity: 1; }
     20%, 98% { opacity: 0; }
     100% { opacity: 1; }
 }
 
 .announce-animate-gradient {
-    animation: gradient 6s ease infinite;
+    animation: announce-gradient 6s ease infinite;
 }
 
 .announce-animate-shimmer {
-    animation: shimmer 3s ease-in-out infinite;
+    animation: announce-shimmer 3s ease-in-out infinite;
 }
 
 .announce-animate-fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
+    animation: announce-fadeInUp 0.8s ease-out forwards;
 }
 
 .announce-animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
+    animation: announce-pulse-glow 3s ease-in-out infinite;
 }
 
 .announce-cycling-text {
@@ -87,7 +90,14 @@ const cycleTotal = headlines.length * 4; // 4s per headline
     left: 0;
     width: 100%;
     opacity: 0;
-    animation: cycleText var(--cycleTotal) infinite;
+    animation: announce-cycleText var(--cycle-total) infinite;
+}
+
+/* Single headline — just show it, no cycling */
+.announce-cycling-text[data-count="1"] span {
+    position: relative;
+    opacity: 1;
+    animation: announce-pulse-glow 3s ease-in-out infinite;
 }
 
 .announce-cycling-text span:nth-child(1) { animation-delay: 0s; }
@@ -97,7 +107,8 @@ const cycleTotal = headlines.length * 4; // 4s per headline
 .announce-cycling-text span:nth-child(5) { animation-delay: 16s; }
 </style>
 
-<div class="px-4 p-2 md:px-8 md:py-2 mx-auto mt-2">
+{event && (
+<div class="px-4 p-2 md:px-8 md:py-2 mx-auto mt-2" style={`--cycle-total: ${cycleTotal}s`}>
     <div class="container mt-2">
         <div class="w-full bg-gradient-to-br from-black via-terracottaRed-darkest to-gray-900 bg-[length:400%_400%] announce-animate-gradient text-white font-bold rounded-2xl shadow-2xl shadow-terracottaRed-500/30 border border-softBeige/20 relative overflow-hidden">
             <!-- Shimmer overlay -->
@@ -115,23 +126,23 @@ const cycleTotal = headlines.length * 4; // 4s per headline
                 </div>
                 )}
 
-                <!-- Event Details -->
+                <!-- Announcement Details -->
                 <div class="flex-1 text-center md:text-left">
                     <!-- Cycling headlines -->
-                    <h3 class="mb-3 text-lg md:text-2xl font-bold text-softBeige drop-shadow-lg announce-animate-pulse-glow announce-cycling-text">
+                    <h3 class="mb-3 text-lg md:text-2xl font-bold text-softBeige drop-shadow-lg announce-animate-pulse-glow announce-cycling-text" data-count={headlines.length}>
                         {headlines.map((h) => (
                             <span>{h}</span>
                         ))}
                     </h3>
 
                     {event.description && (
-                    <p class="mb-4 text-xs md:text-sm font-normal leading-relaxed drop-shadow-md announce-animate-fade-in-up opacity-0" style="animation-delay: 0.2s;">
+                    <p class="mb-4 text-xs md:text-sm font-normal leading-relaxed drop-shadow-md announce-animate-fade-in-up" style="opacity: 0; animation-delay: 0.2s;">
                         {event.description}
                     </p>
                     )}
 
-                    <!-- Contact info pills + ticket -->
-                    <div class="flex flex-wrap gap-3 justify-center md:justify-start announce-animate-fade-in-up opacity-0" style="animation-delay: 0.4s;">
+                    <!-- Contact info pills + link -->
+                    <div class="flex flex-wrap gap-3 justify-center md:justify-start announce-animate-fade-in-up" style="opacity: 0; animation-delay: 0.4s;">
                         {event.linkUrl && (
                         <a href={event.linkUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-softBeige/20 hover:bg-softBeige/30 border border-softBeige/40 text-sm font-semibold transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>

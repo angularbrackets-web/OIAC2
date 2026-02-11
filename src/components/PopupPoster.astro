@@ -5,8 +5,25 @@ const popup = await getActivePopup();
 ---
 
 {popup && (
-<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-8 hidden z-50">
-  <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-w-lg w-full">
+<style is:global>
+@keyframes popup-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes popup-scale-in {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+.popup-backdrop-animate {
+    animation: popup-fade-in 0.25s ease-out forwards;
+}
+.popup-card-animate {
+    animation: popup-scale-in 0.3s ease-out forwards;
+}
+</style>
+
+<div id="popup" data-popup-id={popup.id} class="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-8 hidden z-50">
+  <div class="relative bg-white rounded-2xl shadow-2xl overflow-hidden max-w-lg w-full popup-card-animate">
     <button id="closeBtn" class="absolute top-3 right-3 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/80 text-white text-xl transition-colors" aria-label="Close popup">&times;</button>
     <img src={popup.imageUrl} alt={popup.title} class="block w-full h-auto object-contain" loading="eager" />
     {popup.linkUrl && (
@@ -20,48 +37,48 @@ const popup = await getActivePopup();
 </div>
 
 <script is:inline>
-const popupDuration = 1 * 60 * 60 * 1000; // 1 hour in milliseconds
-document.addEventListener('DOMContentLoaded', () => {
-    const popup = document.getElementById('popup');
-    const closeBtn = document.getElementById('closeBtn');
-    if (!popup || !closeBtn) return;
+(function() {
+  var DISMISS_DURATION = 1 * 60 * 60 * 1000; // 1 hour
 
-    const showPopup = () => {
-      popup.classList.remove('hidden');
+  document.addEventListener('DOMContentLoaded', function() {
+    var popupEl = document.getElementById('popup');
+    var closeBtn = document.getElementById('closeBtn');
+    if (!popupEl || !closeBtn) return;
+
+    var popupId = popupEl.getAttribute('data-popup-id');
+    var storageKey = 'popupDismissed_' + popupId;
+
+    function show() {
+      popupEl.classList.remove('hidden');
+      popupEl.classList.add('popup-backdrop-animate');
       document.body.style.overflow = 'hidden';
-    };
-
-    const closePopup = () => {
-      popup.classList.add('hidden');
-      document.body.style.overflow = '';
-      const expirationTime = Date.now() + popupDuration;
-      localStorage.setItem('popupShown', JSON.stringify({ expiration: expirationTime }));
-    };
-
-    // Check if the popup has already been shown
-    const popupData = localStorage.getItem('popupShown');
-    if (popupData) {
-      const { expiration } = JSON.parse(popupData);
-      if (Date.now() < expiration) {
-        return;
-      }
     }
 
-    showPopup();
+    function dismiss() {
+      popupEl.classList.add('hidden');
+      document.body.style.overflow = '';
+      localStorage.setItem(storageKey, JSON.stringify({ expiration: Date.now() + DISMISS_DURATION }));
+    }
 
-    closeBtn.addEventListener('click', closePopup);
-
-    popup.addEventListener('click', (event) => {
-      if (event.target === popup) {
-        closePopup();
+    // Check if already dismissed for this specific popup
+    try {
+      var stored = localStorage.getItem(storageKey);
+      if (stored) {
+        var data = JSON.parse(stored);
+        if (Date.now() < data.expiration) return;
       }
+    } catch (e) { /* ignore parse errors */ }
+
+    show();
+
+    closeBtn.addEventListener('click', dismiss);
+    popupEl.addEventListener('click', function(e) {
+      if (e.target === popupEl) dismiss();
     });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !popup.classList.contains('hidden')) {
-        closePopup();
-      }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !popupEl.classList.contains('hidden')) dismiss();
     });
   });
+})();
 </script>
 )}
