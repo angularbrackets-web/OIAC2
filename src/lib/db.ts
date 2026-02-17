@@ -1264,6 +1264,134 @@ export async function deletePopup(id: string) {
   return true;
 }
 
+// Settings table (key-value store for site-wide settings)
+export async function getSetting(key: string): Promise<unknown | null> {
+  const { data, error } = await supabase
+    .from('oiac_settings')
+    .select('value')
+    .eq('key', key)
+    .maybeSingle();
+
+  if (error) throw error;
+  return data?.value ?? null;
+}
+
+export async function setSetting(key: string, value: unknown): Promise<void> {
+  const { error } = await supabase
+    .from('oiac_settings')
+    .upsert({ key, value, updated_at: new Date().toISOString() }, { onConflict: 'key' });
+
+  if (error) throw error;
+}
+
+// Featured Posters table (homepage featured poster grid)
+export type FeaturedPosterInput = {
+  title: string;
+  imageUrl: string;
+  linkUrl?: string;
+  displayOrder?: number;
+};
+
+export type FeaturedPosterRecord = FeaturedPosterInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapFeaturedPosterRecord(record: Record<string, any>): FeaturedPosterRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    imageUrl: record.image_url,
+    linkUrl: record.link_url,
+    displayOrder: record.display_order,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createFeaturedPoster(data: FeaturedPosterInput): Promise<FeaturedPosterRecord[]> {
+  const { data: result, error } = await supabase
+    .from('oiac_featured_posters')
+    .insert([{
+      title: data.title,
+      image_url: data.imageUrl,
+      link_url: data.linkUrl || null,
+      display_order: data.displayOrder || null,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapFeaturedPosterRecord);
+}
+
+export async function getFeaturedPosters(): Promise<FeaturedPosterRecord[]> {
+  const { data, error } = await supabase
+    .from('oiac_featured_posters')
+    .select('*')
+    .order('display_order', { ascending: true, nullsFirst: false });
+
+  if (error) throw error;
+  return (data || []).map(mapFeaturedPosterRecord);
+}
+
+export async function getFeaturedPosterById(id: string): Promise<FeaturedPosterRecord | null> {
+  const { data, error } = await supabase
+    .from('oiac_featured_posters')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+  return mapFeaturedPosterRecord(data);
+}
+
+export async function updateFeaturedPoster(id: string, data: Partial<FeaturedPosterInput>) {
+  const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.imageUrl !== undefined) updateData.image_url = data.imageUrl;
+  if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+
+  const { data: result, error } = await supabase
+    .from('oiac_featured_posters')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return result;
+}
+
+export async function deleteFeaturedPoster(id: string) {
+  const { error } = await supabase
+    .from('oiac_featured_posters')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+export async function shiftFeaturedPosterOrders(): Promise<void> {
+  const { data, error } = await supabase
+    .from('oiac_featured_posters')
+    .select('id, display_order');
+
+  if (error) throw error;
+
+  for (const poster of (data || [])) {
+    await supabase
+      .from('oiac_featured_posters')
+      .update({ display_order: (poster.display_order || 0) + 1 })
+      .eq('id', poster.id);
+  }
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor
