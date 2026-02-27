@@ -24,9 +24,14 @@ export type JummahTime = {
 
 export async function getPrayerTimesForCurrentDay(): Promise<PrayerTime | undefined> {
   try {
+    // Use Edmonton's local timezone to get the correct date.
+    // The server runs in UTC, so using `new Date()` directly would return
+    // the wrong date for Edmonton users after ~5–7pm MST/MDT.
     const now = new Date();
-    const month = now.getMonth() + 1;
-    const day = now.getDate();
+    const edmontonDateStr = now.toLocaleDateString('en-CA', { timeZone: 'America/Edmonton' }); // "YYYY-MM-DD"
+    const [, monthStr, dayStr] = edmontonDateStr.split('-');
+    const month = parseInt(monthStr, 10);
+    const day = parseInt(dayStr, 10);
 
     const record = await getPrayerTimeByDay(month, day);
     if (!record) return undefined;
