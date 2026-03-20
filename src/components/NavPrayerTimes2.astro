@@ -176,7 +176,7 @@ const structuredData = prayerTimesForCurrentDay ? {
     </div>
 
     <!-- Sunrise & Jummah Times -->
-    <div class="grid grid-cols-3 gap-1 bg-softBeige p-1.5">
+    <div class={`grid grid-cols-${1 + (jummahTimes.length || 2)} gap-1 bg-softBeige p-1.5`}>
       <!-- Sunrise -->
       <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
         <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold">
@@ -187,25 +187,39 @@ const structuredData = prayerTimesForCurrentDay ? {
         </div>
       </div>
 
-      <!-- Jummah 1 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
-        <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
-          {jummahTimes[0]?.name || 'Jummah 1'}
-        </div>
-        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
-          <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">{jummahTimes[0]?.time || '02:00 PM'}</time>
-        </div>
-      </div>
-
-      <!-- Jummah 2 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
-        <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
-          {jummahTimes[1]?.name || 'Jummah 2'}
-        </div>
-        <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
-          <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">{jummahTimes[1]?.time || '03:00 PM'}</time>
-        </div>
-      </div>
+      <!-- Dynamic Jummah Times -->
+      {jummahTimes.length > 0 ? (
+        jummahTimes.map((jt, index) => (
+          <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+            <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
+              {jt.name}
+            </div>
+            <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+              <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">{jt.time}</time>
+            </div>
+          </div>
+        ))
+      ) : (
+        /* Fallback if no Jummah times in DB */
+        <>
+          <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+            <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
+              Jummah 1
+            </div>
+            <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+              <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">01:30 PM</time>
+            </div>
+          </div>
+          <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+            <div class="bg-sageGreen text-white text-center py-2 text-[10px] font-bold leading-tight">
+              Jummah 2
+            </div>
+            <div class="p-1.5 min-[416px]:p-2 text-center bg-white">
+              <time class="block text-[11px] min-[416px]:text-xs font-bold text-gray-800 whitespace-nowrap">02:30 PM</time>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   </div>
 
@@ -292,25 +306,39 @@ const structuredData = prayerTimesForCurrentDay ? {
             </div>
           </div>
 
-          <!-- Jummah 1 -->
-          <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
-            <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
-              {jummahTimes[0]?.name || 'Jummah 1'}
-            </div>
-            <div class="px-2 md:px-3 lg:px-4 py-1.5">
-              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">{jummahTimes[0]?.time || '02:00 PM'}</time>
-            </div>
-          </div>
-
-          <!-- Jummah 2 -->
-          <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
-            <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
-              {jummahTimes[1]?.name || 'Jummah 2'}
-            </div>
-            <div class="px-2 md:px-3 lg:px-4 py-1.5">
-              <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">{jummahTimes[1]?.time || '03:00 PM'}</time>
-            </div>
-          </div>
+          <!-- Dynamic Jummah Times -->
+          {jummahTimes.length > 0 ? (
+            jummahTimes.map((jt) => (
+              <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
+                <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+                  {jt.name}
+                </div>
+                <div class="px-2 md:px-3 lg:px-4 py-1.5">
+                  <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">{jt.time}</time>
+                </div>
+              </div>
+            ))
+          ) : (
+            /* Fallback if no Jummah times in DB */
+            <>
+              <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
+                <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+                  Jummah 1
+                </div>
+                <div class="px-2 md:px-3 lg:px-4 py-1.5">
+                  <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">01:30 PM</time>
+                </div>
+              </div>
+              <div class="flex items-center bg-white rounded-lg border border-sageGreen/30 shadow-sm overflow-hidden">
+                <div class="bg-sageGreen text-white px-2 md:px-3 lg:px-4 py-2 font-bold text-[11px] md:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+                  Jummah 2
+                </div>
+                <div class="px-2 md:px-3 lg:px-4 py-1.5">
+                  <time class="block text-[11px] md:text-xs lg:text-sm xl:text-base font-bold text-gray-800 whitespace-nowrap">02:30 PM</time>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
