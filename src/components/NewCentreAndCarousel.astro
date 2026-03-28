@@ -1,7 +1,13 @@
 ---
-import { getPosters, type PosterRecord } from "../lib/db";
+import { getPosters, type PosterRecord, type HeroTemplateRecord } from "../lib/db";
 import interacLogo from "../assets/Interac.Logo1.png";
 import PostersCarousel from "./PostersCarousel.astro";
+
+interface Props {
+  heroTemplate?: HeroTemplateRecord | null;
+}
+
+const { heroTemplate } = Astro.props;
 
 const posters: Array<PosterRecord> = await getPosters();
 ---
@@ -21,22 +27,37 @@ const posters: Array<PosterRecord> = await getPosters();
             Contains Badge and Title.
             Ends with an SVG Wave that transitions to white.
           -->
-          <div class="relative bg-gradient-to-br from-terracottaRed-darker to-terracottaRed pt-10 px-8 md:px-10 pb-24 md:pb-32">
+          <div 
+            class="relative pt-10 px-8 md:px-10 pb-24 md:pb-32"
+            style={heroTemplate 
+              ? heroTemplate.backgroundType === 'color' 
+                ? `background: ${heroTemplate.backgroundColor};`
+                : `background-image: url('${heroTemplate.backgroundImageUrl}'); background-size: cover; background-position: center; background-attachment: fixed;`
+              : 'background: linear-gradient(to bottom right, #8B2E0C, #C84C3C);'
+            }
+          >
             <!-- Content -->
             <div class="relative z-10">
               <!-- Badge -->
               <span
                 class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white font-bold text-xs tracking-wider mb-6 backdrop-blur-sm border border-white/10 shadow-sm"
               >
-                UPCOMING PROJECT
+                {heroTemplate?.badge || 'UPCOMING PROJECT'}
               </span>
 
               <!-- Heading -->
               <h2
                 class="text-3xl md:text-5xl font-black text-white leading-tight drop-shadow-sm"
               >
-                New Omar Ibn Al Khattab Centre
+                {heroTemplate?.title || 'New Omar Ibn Al Khattab Centre'}
               </h2>
+
+              <!-- Subtitle (if provided) -->
+              {heroTemplate?.subtitle && (
+                <p class="text-lg text-white/90 leading-relaxed mt-4 drop-shadow-sm max-w-2xl">
+                  {heroTemplate.subtitle}
+                </p>
+              )}
             </div>
 
             <!-- 
@@ -77,110 +98,125 @@ const posters: Array<PosterRecord> = await getPosters();
                 Review Content 
             -->
              <p class="text-gray-300 text-lg leading-relaxed mb-8 font-medium">
-              Introducing the new Omar bin-al-Khattab centre, a beacon of
-              progress and possibility. This purpose-built facility will be more
-              than just a building. It will be a hub of activity. A place where
-              our children can learn and grow, where families can come together
-              in prayer and fellowship and where the bonds of community are
-              strengthened.
+              {heroTemplate 
+                ? `${heroTemplate.title} - ${heroTemplate.ctaText}`
+                : 'Introducing the new Omar bin-al-Khattab centre, a beacon of progress and possibility. This purpose-built facility will be more than just a building. It will be a hub of activity. A place where our children can learn and grow, where families can come together in prayer and fellowship and where the bonds of community are strengthened.'
+              }
             </p>
 
-            <!-- Video Wrapper -->
-            <div
-              class="relative rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-800 aspect-video ring-4 ring-terracottaRed-darker/30"
-            >
-              <iframe
-                allow="fullscreen;autoplay"
-                allowfullscreen
-                height="100%"
-                src="https://streamable.com/e/cvo5ln?autoplay=1&muted=1"
-                width="100%"
-                class="absolute inset-0 w-full h-full border-0"></iframe>
-            </div>
-
-            <!-- Donation Encouragement -->
-            <div class="mb-6">
-              <p
-                class="text-lg md:text-xl font-bold text-white leading-snug"
+            <!-- Video Wrapper (Only show if not using hero template) -->
+            {!heroTemplate && (
+              <div
+                class="relative rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-800 aspect-video ring-4 ring-terracottaRed-darker/30"
               >
-                Donate now and be a part of something truly transformative,
-                empowering our community, building our future.
-              </p>
-            </div>
+                <iframe
+                  allow="fullscreen;autoplay"
+                  allowfullscreen
+                  height="100%"
+                  src="https://streamable.com/e/cvo5ln?autoplay=1&muted=1"
+                  width="100%"
+                  class="absolute inset-0 w-full h-full border-0"></iframe>
+              </div>
+            )}
+
+            <!-- Donation Encouragement (Only show if not using hero template) -->
+            {!heroTemplate && (
+              <div class="mb-6">
+                <p
+                  class="text-lg md:text-xl font-bold text-white leading-snug"
+                >
+                  Donate now and be a part of something truly transformative,
+                  empowering our community, building our future.
+                </p>
+              </div>
+            )}
 
             <!-- Action Area -->
             <div
               class="flex flex-col sm:flex-row gap-4 items-center justify-between border-t pt-6"
               style="border-color: rgba(139, 69, 19, 0.3);"
             >
-              <a
-                href="/newcentre"
-                class="font-semibold text-white hover:text-terracottaRed transition-colors"
-                >View Construction Updates →</a
-              >
+              {heroTemplate ? (
+                <a
+                  href={heroTemplate.ctaLink}
+                  class="w-full sm:w-auto px-8 py-3 bg-terracottaRed text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:bg-terracottaRed-dark hover:-translate-y-0.5 transition-all text-center"
+                >
+                  {heroTemplate.ctaText}
+                </a>
+              ) : (
+                <>
+                  <a
+                    href="/newcentre"
+                    class="font-semibold text-white hover:text-terracottaRed transition-colors"
+                    >View Construction Updates →</a
+                  >
 
-              <a
-                href="/donatetonewcentre"
-                class="w-full sm:w-auto px-8 py-3 bg-terracottaRed text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:bg-terracottaRed-dark hover:-translate-y-0.5 transition-all text-center"
-                >Donate Now</a
-              >
+                  <a
+                    href="/donatetonewcentre"
+                    class="w-full sm:w-auto px-8 py-3 bg-terracottaRed text-white rounded-xl font-bold shadow-md hover:shadow-xl hover:bg-terracottaRed-dark hover:-translate-y-0.5 transition-all text-center"
+                    >Donate Now</a
+                  >
+                </>
+              )}
             </div>
 
-            <!-- E-Transfer Donation Card -->
-          <div class="mt-6 border-2 border-white/20 rounded-xl p-4 md:p-5 bg-gradient-to-br from-terracottaRed-darker/30 to-terracottaRed/20 backdrop-blur-sm">
-            <!-- Label -->
-            <p class="text-white/90 text-sm md:text-base font-semibold mb-3 flex items-center gap-2">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-              </svg>
-              Or donate via e-Transfer to:
-            </p>
+            <!-- E-Transfer Donation Card (Only show if not using hero template) -->
+            {!heroTemplate && (
+              <div class="mt-6 border-2 border-white/20 rounded-xl p-4 md:p-5 bg-gradient-to-br from-terracottaRed-darker/30 to-terracottaRed/20 backdrop-blur-sm">
+                <!-- Label -->
+                <p class="text-white/90 text-sm md:text-base font-semibold mb-3 flex items-center gap-2">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                  </svg>
+                  Or donate via e-Transfer to:
+                </p>
 
-            <!-- Unified Card: Interac + Email + Copy Button -->
-            <div class="bg-white/10 rounded-lg p-3 md:p-4 border border-white/20">
-              <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">
-                <!-- Interac Logo (Trust Badge) -->
-                <div class="flex-shrink-0">
-                  <img
-                    src={interacLogo.src}
-                    alt="Interac e-Transfer"
-                    class="h-7 md:h-8 lg:h-9 w-auto object-contain"
-                  />
+                <!-- Unified Card: Interac + Email + Copy Button -->
+                <div class="bg-white/10 rounded-lg p-3 md:p-4 border border-white/20">
+                  <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">
+                    <!-- Interac Logo (Trust Badge) -->
+                    <div class="flex-shrink-0">
+                      <img
+                        src={interacLogo.src}
+                        alt="Interac e-Transfer"
+                        class="h-7 md:h-8 lg:h-9 w-auto object-contain"
+                      />
+                    </div>
+
+                    <!-- Email Address -->
+                    <a
+                      href="mailto:new.project@oiacedmonton.ca"
+                      class="flex-1 min-w-0 text-white font-bold text-sm md:text-base lg:text-lg hover:text-warmWhite transition-colors break-words"
+                      title="Click to email"
+                    >
+                      new.project@oiacedmonton.ca
+                    </a>
+
+                    <!-- Copy Button -->
+                    <button
+                      id="copyEmailBtn"
+                      type="button"
+                      class="flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 bg-white/10 hover:bg-white/20 rounded-lg transition-all group border border-white/30 hover:border-white/50"
+                      title="Copy email address"
+                      aria-label="Copy email address to clipboard"
+                    >
+                      <svg class="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-warmWhite transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                      </svg>
+                      <span class="text-white text-xs md:text-sm font-semibold hidden sm:inline">Copy</span>
+                    </button>
+                  </div>
                 </div>
 
-                <!-- Email Address -->
-                <a
-                  href="mailto:new.project@oiacedmonton.ca"
-                  class="flex-1 min-w-0 text-white font-bold text-sm md:text-base lg:text-lg hover:text-warmWhite transition-colors break-words"
-                  title="Click to email"
-                >
-                  new.project@oiacedmonton.ca
-                </a>
-
-                <!-- Copy Button -->
-                <button
-                  id="copyEmailBtn"
-                  type="button"
-                  class="flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 md:px-4 md:py-2.5 bg-white/10 hover:bg-white/20 rounded-lg transition-all group border border-white/30 hover:border-white/50"
-                  title="Copy email address"
-                  aria-label="Copy email address to clipboard"
-                >
-                  <svg class="w-4 h-4 md:w-5 md:h-5 text-white group-hover:text-warmWhite transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                <!-- Success Message -->
+                <div id="copySuccess" class="hidden mt-2 text-sm text-green-300 font-medium flex items-center gap-1 animate-fade-in">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <span class="text-white text-xs md:text-sm font-semibold hidden sm:inline">Copy</span>
-                </button>
+                  Email address copied!
+                </div>
               </div>
-            </div>
-
-            <!-- Success Message -->
-            <div id="copySuccess" class="hidden mt-2 text-sm text-green-300 font-medium flex items-center gap-1 animate-fade-in">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
-              Email address copied!
-            </div>
-          </div>
+            )}
           </div>
         </div>
       </div>

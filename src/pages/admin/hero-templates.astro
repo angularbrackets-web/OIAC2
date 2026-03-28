@@ -1,0 +1,391 @@
+---
+import AdminLayout2 from '../../layouts/AdminLayout2.astro';
+import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
+import AdminModal from '../../components/admin/AdminModal.astro';
+import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
+---
+
+<AdminLayout2 title="Hero Templates" currentPage="hero-templates">
+  <AdminPageHeader title="Hero Templates" description="Manage hero section displayed on the homepage. Create multiple templates and set one as active.">
+    <button id="addNewBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+      Create Template
+    </button>
+  </AdminPageHeader>
+
+  <div id="templateList" class="space-y-3">
+    <p class="text-gray-500 text-sm">Loading...</p>
+  </div>
+
+  <AdminModal id="hero-modal" title="Create Hero Template">
+    <form id="heroForm" class="space-y-4">
+      <input type="hidden" id="itemId" />
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Template Title *</label>
+        <input type="text" id="title" required
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Badge Text *</label>
+        <input type="text" id="badge" required placeholder="e.g., UPCOMING PROJECT"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Subtitle</label>
+        <textarea id="subtitle" placeholder="Optional hero description"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3"></textarea>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-3">Background Type *</label>
+        <div class="flex gap-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" id="bgTypeColor" name="backgroundType" value="color" required
+              class="w-4 h-4 border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+            <span class="text-sm text-gray-700">Solid Color</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" id="bgTypeImage" name="backgroundType" value="image"
+              class="w-4 h-4 border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500" />
+            <span class="text-sm text-gray-700">Image</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="colorSection">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Background Color *</label>
+        <div class="flex gap-2">
+          <input type="color" id="backgroundColor" class="w-12 h-10 border border-gray-300 rounded-lg cursor-pointer" />
+          <input type="text" id="backgroundColorHex" placeholder="#C84C3C" required
+            class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <p class="text-xs text-gray-500 mt-1">Use hex color code or pick from color selector</p>
+      </div>
+
+      <div id="imageSection" class="hidden">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Background Image *</label>
+        <div class="flex gap-2">
+          <input type="url" id="backgroundImageUrl" placeholder="Paste image URL or browse"
+            class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+          <button type="button" id="browseMediaBtn"
+            class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap">
+            Browse
+          </button>
+        </div>
+        <div id="imgPreview" class="mt-3 hidden">
+          <img id="imgPreviewImg" src="" alt="Preview" class="max-h-40 rounded-lg border border-gray-200" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">CTA Button Text *</label>
+        <input type="text" id="ctaText" required placeholder="e.g., Learn More"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">CTA Button Link *</label>
+        <input type="url" id="ctaLink" required placeholder="https://..."
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      </div>
+
+      <Fragment slot="footer">
+        <div class="flex justify-end gap-3">
+          <button type="button" id="cancelBtn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
+          <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">Save Template</button>
+        </div>
+      </Fragment>
+    </form>
+  </AdminModal>
+
+  <AdminMediaPicker />
+
+  <script is:inline>
+    const API_URL = '/api/cms/hero-templates';
+    let items = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadItems();
+      setupFormToggle();
+      setupColorPicker();
+      setupMediaBrowser();
+    });
+
+    async function loadItems() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || 'Unknown error');
+        }
+        items = await response.json();
+        renderItems();
+      } catch (error) {
+        console.error('Error loading hero templates:', error);
+        document.getElementById('templateList').innerHTML = `
+          <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="font-semibold text-red-800 mb-2">Could not load templates</h3>
+            <p class="text-red-600 text-sm">Please check your database connection and try again.</p>
+            <button onclick="loadItems()" class="mt-3 text-sm font-medium text-red-700 hover:text-red-800">Retry</button>
+          </div>
+        `;
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderItems() {
+      const container = document.getElementById('templateList');
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="flex flex-col items-center justify-center py-16 text-center">
+            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-gray-400"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect></svg>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">No templates yet</p>
+            <p class="text-xs text-gray-400">Click "Create Template" to get started.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map((item) => {
+        const bgStyle = item.backgroundType === 'color'
+          ? `background-color: ${item.backgroundColor};`
+          : `background-image: url('${item.backgroundImageUrl}'); background-size: cover; background-position: center;`;
+
+        return `
+          <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <div class="flex items-center gap-4 p-4">
+              <!-- Preview -->
+              <div class="relative w-32 h-20 rounded-lg overflow-hidden flex-shrink-0 border border-gray-200" style="${bgStyle}">
+                <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+                  <span class="text-xs font-bold">${escapeHtml(item.badge)}</span>
+                  <span class="text-xs line-clamp-1 mt-1">${escapeHtml(item.title)}</span>
+                </div>
+              </div>
+
+              <!-- Info -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <p class="font-medium text-gray-900 text-sm">${escapeHtml(item.title)}</p>
+                  ${item.isActive ? '<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>' : ''}
+                </div>
+                <p class="text-gray-500 text-xs">${escapeHtml(item.badge)}</p>
+                ${item.subtitle ? `<p class="text-gray-400 text-xs mt-1 line-clamp-1">${escapeHtml(item.subtitle)}</p>` : ''}
+              </div>
+
+              <!-- Actions -->
+              <div class="flex items-center gap-2 flex-shrink-0">
+                <label class="flex items-center gap-2 cursor-pointer px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                  <input type="radio" name="activeTemplate" value="${item.id}" ${item.isActive ? 'checked' : ''} onchange="setActive('${item.id}')"
+                    class="w-4 h-4 border-gray-300 text-green-600" />
+                  <span class="text-xs text-gray-600">Active</span>
+                </label>
+                <button onclick="editItem('${item.id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors" title="Edit">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path></svg>
+                </button>
+                <button onclick="deleteItem('${item.id}')" class="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Form visibility toggle
+    function setupFormToggle() {
+      document.querySelectorAll('input[name="backgroundType"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          const colorSection = document.getElementById('colorSection');
+          const imageSection = document.getElementById('imageSection');
+          if (this.value === 'color') {
+            colorSection.classList.remove('hidden');
+            imageSection.classList.add('hidden');
+            document.getElementById('backgroundColorHex').required = true;
+            document.getElementById('backgroundImageUrl').required = false;
+          } else {
+            colorSection.classList.add('hidden');
+            imageSection.classList.remove('hidden');
+            document.getElementById('backgroundColorHex').required = false;
+            document.getElementById('backgroundImageUrl').required = true;
+          }
+        });
+      });
+    }
+
+    // Color picker sync
+    function setupColorPicker() {
+      const colorPicker = document.getElementById('backgroundColor');
+      const colorHex = document.getElementById('backgroundColorHex');
+      
+      colorPicker.addEventListener('input', function() {
+        colorHex.value = this.value;
+      });
+      
+      colorHex.addEventListener('input', function() {
+        if (/^#[0-9A-F]{6}$/i.test(this.value)) {
+          colorPicker.value = this.value;
+        }
+      });
+    }
+
+    // Media browser
+    function setupMediaBrowser() {
+      document.getElementById('browseMediaBtn').addEventListener('click', () => {
+        openMediaPicker('image', (url) => {
+          document.getElementById('backgroundImageUrl').value = url;
+          showImgPreview(url);
+        });
+      });
+    }
+
+    // Image preview
+    function showImgPreview(url) {
+      document.getElementById('imgPreview').classList.remove('hidden');
+      document.getElementById('imgPreviewImg').src = url;
+    }
+    function hideImgPreview() {
+      document.getElementById('imgPreview').classList.add('hidden');
+    }
+    document.getElementById('backgroundImageUrl').addEventListener('input', function() {
+      if (this.value.trim()) showImgPreview(this.value.trim());
+      else hideImgPreview();
+    });
+
+    // Modal
+    const dialog = document.getElementById('hero-modal');
+    const form = document.getElementById('heroForm');
+
+    document.getElementById('addNewBtn').addEventListener('click', () => {
+      dialog.querySelector('h2').textContent = 'Create Hero Template';
+      form.reset();
+      document.getElementById('itemId').value = '';
+      document.getElementById('bgTypeColor').checked = true;
+      setupFormToggle();
+      hideImgPreview();
+      dialog.showModal();
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => dialog.close());
+
+    // Edit
+    window.editItem = function(id) {
+      const item = items.find(i => i.id === id);
+      if (!item) return;
+
+      dialog.querySelector('h2').textContent = 'Edit Hero Template';
+      document.getElementById('itemId').value = item.id;
+      document.getElementById('title').value = item.title;
+      document.getElementById('badge').value = item.badge;
+      document.getElementById('subtitle').value = item.subtitle || '';
+      document.getElementById('ctaText').value = item.ctaText;
+      document.getElementById('ctaLink').value = item.ctaLink;
+
+      if (item.backgroundType === 'color') {
+        document.getElementById('bgTypeColor').checked = true;
+        document.getElementById('backgroundColor').value = item.backgroundColor || '#C84C3C';
+        document.getElementById('backgroundColorHex').value = item.backgroundColor || '#C84C3C';
+      } else {
+        document.getElementById('bgTypeImage').checked = true;
+        document.getElementById('backgroundImageUrl').value = item.backgroundImageUrl || '';
+        if (item.backgroundImageUrl) showImgPreview(item.backgroundImageUrl);
+      }
+
+      setupFormToggle();
+      dialog.showModal();
+    };
+
+    // Delete
+    window.deleteItem = function(id) {
+      const item = items.find(i => i.id === id);
+      if (item?.isActive) {
+        showToast('Cannot delete active template. Set another as active first.', 'error');
+        return;
+      }
+
+      showConfirm('confirm-dialog', async () => {
+        try {
+          const res = await fetch(API_URL, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id })
+          });
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Failed to delete');
+          }
+          showToast('Template deleted', 'success');
+          await loadItems();
+        } catch (e) { showToast('Error: ' + e.message, 'error'); }
+      }, { title: 'Delete Template', message: 'This template will be permanently removed.' });
+    };
+
+    // Set active
+    window.setActive = async function(id) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, isActive: true })
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to update');
+        }
+        showToast('Template set as active', 'success');
+        await loadItems();
+      } catch (e) { 
+        showToast('Error: ' + e.message, 'error');
+        await loadItems(); // Reload to sync UI
+      }
+    };
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('itemId').value;
+      
+      const backgroundType = document.querySelector('input[name="backgroundType"]:checked').value;
+      const data = {
+        title: document.getElementById('title').value,
+        badge: document.getElementById('badge').value,
+        subtitle: document.getElementById('subtitle').value || undefined,
+        backgroundType,
+        ctaText: document.getElementById('ctaText').value,
+        ctaLink: document.getElementById('ctaLink').value
+      };
+
+      if (backgroundType === 'color') {
+        data.backgroundColor = document.getElementById('backgroundColorHex').value;
+      } else {
+        data.backgroundImageUrl = document.getElementById('backgroundImageUrl').value;
+      }
+
+      try {
+        const res = await fetch(API_URL, {
+          method: id ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(id ? { id, ...data } : data)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to save');
+        }
+        dialog.close();
+        showToast(id ? 'Template updated' : 'Template created', 'success');
+        await loadItems();
+      } catch (e) { showToast('Error: ' + e.message, 'error'); }
+    });
+  </script>
+</AdminLayout2>

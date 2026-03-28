@@ -1392,6 +1392,158 @@ export async function shiftFeaturedPosterOrders(): Promise<void> {
   }
 }
 
+// Hero Templates table
+export type HeroTemplateInput = {
+  title: string;
+  badge: string;
+  subtitle?: string;
+  backgroundType: 'color' | 'image';
+  backgroundColor?: string; // Hex color or gradient CSS
+  backgroundImageUrl?: string;
+  ctaText: string;
+  ctaLink: string;
+  isActive?: boolean;
+  displayOrder?: number;
+};
+
+export type HeroTemplateRecord = HeroTemplateInput & {
+  id: string;
+  created_at: string;
+  updated_at: string;
+};
+
+function mapHeroTemplateRecord(record: Record<string, any>): HeroTemplateRecord {
+  return {
+    id: record.id,
+    title: record.title,
+    badge: record.badge,
+    subtitle: record.subtitle,
+    backgroundType: record.background_type,
+    backgroundColor: record.background_color,
+    backgroundImageUrl: record.background_image_url,
+    ctaText: record.cta_text,
+    ctaLink: record.cta_link,
+    isActive: record.is_active,
+    displayOrder: record.display_order,
+    created_at: record.created_at,
+    updated_at: record.updated_at,
+  };
+}
+
+export async function createHeroTemplate(data: HeroTemplateInput): Promise<HeroTemplateRecord[]> {
+  const { data: result, error } = await supabase
+    .from('hero_templates')
+    .insert([{
+      title: data.title,
+      badge: data.badge,
+      subtitle: data.subtitle || null,
+      background_type: data.backgroundType,
+      background_color: data.backgroundColor || null,
+      background_image_url: data.backgroundImageUrl || null,
+      cta_text: data.ctaText,
+      cta_link: data.ctaLink,
+      is_active: data.isActive || false,
+      display_order: data.displayOrder || null,
+    }])
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapHeroTemplateRecord);
+}
+
+export async function getHeroTemplates(): Promise<HeroTemplateRecord[]> {
+  const { data, error } = await supabase
+    .from('hero_templates')
+    .select('*')
+    .order('display_order', { ascending: true, nullsFirst: false })
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return (data || []).map(mapHeroTemplateRecord);
+}
+
+export async function getHeroTemplateById(id: string): Promise<HeroTemplateRecord | null> {
+  const { data, error } = await supabase
+    .from('hero_templates')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null;
+    throw error;
+  }
+
+  return mapHeroTemplateRecord(data);
+}
+
+export async function getActiveHeroTemplate(): Promise<HeroTemplateRecord | null> {
+  const { data, error } = await supabase
+    .from('hero_templates')
+    .select('*')
+    .eq('is_active', true)
+    .limit(1)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null; // Not found
+    throw error;
+  }
+
+  return mapHeroTemplateRecord(data);
+}
+
+export async function updateHeroTemplate(id: string, data: Partial<HeroTemplateInput>) {
+  const updateData: Record<string, unknown> = { updated_at: new Date().toISOString() };
+
+  if (data.title !== undefined) updateData.title = data.title;
+  if (data.badge !== undefined) updateData.badge = data.badge;
+  if (data.subtitle !== undefined) updateData.subtitle = data.subtitle;
+  if (data.backgroundType !== undefined) updateData.background_type = data.backgroundType;
+  if (data.backgroundColor !== undefined) updateData.background_color = data.backgroundColor;
+  if (data.backgroundImageUrl !== undefined) updateData.background_image_url = data.backgroundImageUrl;
+  if (data.ctaText !== undefined) updateData.cta_text = data.ctaText;
+  if (data.ctaLink !== undefined) updateData.cta_link = data.ctaLink;
+  if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+
+  // Handle isActive: if setting to true, deactivate all others
+  if (data.isActive === true) {
+    const { error: deactivateError } = await supabase
+      .from('hero_templates')
+      .update({ is_active: false })
+      .neq('id', id);
+
+    if (deactivateError) throw deactivateError;
+  }
+
+  if (data.isActive !== undefined) updateData.is_active = data.isActive;
+
+  const { data: result, error } = await supabase
+    .from('hero_templates')
+    .update(updateData)
+    .eq('id', id)
+    .select();
+
+  if (error) throw error;
+  return (result || []).map(mapHeroTemplateRecord);
+}
+
+export async function deleteHeroTemplate(id: string) {
+  // Prevent deletion of active template
+  const template = await getHeroTemplateById(id);
+  if (template?.isActive) {
+    throw new Error('Cannot delete active hero template. Please set another template as active first.');
+  }
+
+  const { error } = await supabase
+    .from('hero_templates')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
 // Initialize database tables (run this once via Supabase SQL Editor)
 // This function is not needed when using Supabase JS client
 // Create tables directly in Supabase dashboard or SQL Editor

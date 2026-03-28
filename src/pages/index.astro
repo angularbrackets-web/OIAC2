@@ -12,6 +12,15 @@ import NewCentreAndCarousel from "../components/NewCentreAndCarousel.astro";
 import VideoShowcase from "../components/VideoShowcase.astro";
 import PopupPoster from "../components/PopupPoster.astro";
 import FeaturedPosters from "../components/FeaturedPosters.astro";
+import { getActiveHeroTemplate } from "../lib/db";
+
+// Fetch active hero template (falls back gracefully if none exists)
+let activeHeroTemplate = null;
+try {
+  activeHeroTemplate = await getActiveHeroTemplate();
+} catch (error) {
+  console.warn('Failed to fetch active hero template:', error);
+}
 ---
 
 <OIACLayout title="Welcome to OIAC">
@@ -22,7 +31,7 @@ import FeaturedPosters from "../components/FeaturedPosters.astro";
       <FeaturedPosters />
 
       <!-- New Centre & Carousel -->
-      <NewCentreAndCarousel />
+      <NewCentreAndCarousel heroTemplate={activeHeroTemplate} />
 
       <!-- Fundraiser Success Campaign -->
       <VideoShowcase />
@@ -36,4 +45,3 @@ import FeaturedPosters from "../components/FeaturedPosters.astro";
     </div>
   </div>
 </OIACLayout>
-
