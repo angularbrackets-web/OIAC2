@@ -104,8 +104,8 @@ const posters: Array<PosterRecord> = await getPosters();
               }
             </p>
 
-            <!-- Video Wrapper (Only show if not using hero template) -->
-            {!heroTemplate && (
+            <!-- Video Wrapper -->
+            {(heroTemplate?.videoUrl || !heroTemplate) && (
               <div
                 class="relative rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-800 aspect-video ring-4 ring-terracottaRed-darker/30"
               >
@@ -113,7 +113,7 @@ const posters: Array<PosterRecord> = await getPosters();
                   allow="fullscreen;autoplay"
                   allowfullscreen
                   height="100%"
-                  src="https://streamable.com/e/cvo5ln?autoplay=1&muted=1"
+                  src={heroTemplate?.videoUrl || 'https://streamable.com/e/cvo5ln?autoplay=1&muted=1'}
                   width="100%"
                   class="absolute inset-0 w-full h-full border-0"></iframe>
               </div>

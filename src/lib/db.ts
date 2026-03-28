@@ -1400,8 +1400,10 @@ export type HeroTemplateInput = {
   backgroundType: 'color' | 'image';
   backgroundColor?: string; // Hex color or gradient CSS
   backgroundImageUrl?: string;
+  videoUrl?: string; // YouTube, Streamable, or media library URL
+  videoType?: 'youtube' | 'streamable' | 'other';
   ctaText: string;
-  ctaLink: string;
+  ctaLink: string; // Can be external URL or internal path like /donate
   isActive?: boolean;
   displayOrder?: number;
 };
@@ -1421,6 +1423,8 @@ function mapHeroTemplateRecord(record: Record<string, any>): HeroTemplateRecord 
     backgroundType: record.background_type,
     backgroundColor: record.background_color,
     backgroundImageUrl: record.background_image_url,
+    videoUrl: record.video_url,
+    videoType: record.video_type,
     ctaText: record.cta_text,
     ctaLink: record.cta_link,
     isActive: record.is_active,
@@ -1440,6 +1444,8 @@ export async function createHeroTemplate(data: HeroTemplateInput): Promise<HeroT
       background_type: data.backgroundType,
       background_color: data.backgroundColor || null,
       background_image_url: data.backgroundImageUrl || null,
+      video_url: data.videoUrl || null,
+      video_type: data.videoType || null,
       cta_text: data.ctaText,
       cta_link: data.ctaLink,
       is_active: data.isActive || false,
@@ -1502,6 +1508,8 @@ export async function updateHeroTemplate(id: string, data: Partial<HeroTemplateI
   if (data.backgroundType !== undefined) updateData.background_type = data.backgroundType;
   if (data.backgroundColor !== undefined) updateData.background_color = data.backgroundColor;
   if (data.backgroundImageUrl !== undefined) updateData.background_image_url = data.backgroundImageUrl;
+  if (data.videoUrl !== undefined) updateData.video_url = data.videoUrl;
+  if (data.videoType !== undefined) updateData.video_type = data.videoType;
   if (data.ctaText !== undefined) updateData.cta_text = data.ctaText;
   if (data.ctaLink !== undefined) updateData.cta_link = data.ctaLink;
   if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;

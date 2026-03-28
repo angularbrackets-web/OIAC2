@@ -73,6 +73,16 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    // Validate videoType if provided
+    if (data.videoType && !['youtube', 'streamable', 'other'].includes(data.videoType)) {
+      return new Response(JSON.stringify({
+        error: 'videoType must be one of: youtube, streamable, other'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
     // Validate backgroundType
     if (!['color', 'image'].includes(data.backgroundType)) {
       return new Response(JSON.stringify({
@@ -133,6 +143,16 @@ export const PUT: APIRoute = async ({ request }) => {
     if (data.backgroundType && !['color', 'image'].includes(data.backgroundType)) {
       return new Response(JSON.stringify({
         error: 'backgroundType must be either "color" or "image"'
+      }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Validate videoType if being changed
+    if (data.videoType && !['youtube', 'streamable', 'other'].includes(data.videoType)) {
+      return new Response(JSON.stringify({
+        error: 'videoType must be one of: youtube, streamable, other'
       }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }

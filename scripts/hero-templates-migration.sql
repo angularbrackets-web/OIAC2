@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS hero_templates (
   background_type TEXT NOT NULL CHECK (background_type IN ('color', 'image')),
   background_color TEXT,
   background_image_url TEXT,
+  video_url TEXT,
+  video_type TEXT CHECK (video_type IN ('youtube', 'streamable', 'other') OR video_type IS NULL),
   cta_text TEXT NOT NULL,
   cta_link TEXT NOT NULL,
   is_active BOOLEAN DEFAULT FALSE,
@@ -23,6 +25,11 @@ CREATE INDEX IF NOT EXISTS idx_hero_templates_is_active ON hero_templates(is_act
 
 -- Create index for display_order for sorting
 CREATE INDEX IF NOT EXISTS idx_hero_templates_display_order ON hero_templates(display_order);
+
+-- Add video columns to existing table (if upgrading from earlier version)
+ALTER TABLE hero_templates
+ADD COLUMN IF NOT EXISTS video_url TEXT,
+ADD COLUMN IF NOT EXISTS video_type TEXT CHECK (video_type IN ('youtube', 'streamable', 'other') OR video_type IS NULL);
 
 -- Seed initial hero template with current hardcoded values
 INSERT INTO hero_templates (

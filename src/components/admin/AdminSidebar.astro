@@ -1,5 +1,5 @@
 ---
-import { Play, Image, Building2, Briefcase, Users, Clock, BookOpen, FolderOpen, MessageSquare, ExternalLink, LogOut, LayoutDashboard, Megaphone, PanelTop, LayoutGrid } from '@lucide/astro';
+import { Play, Image, Building2, Briefcase, Users, Clock, BookOpen, FolderOpen, MessageSquare, ExternalLink, LogOut, LayoutDashboard, Megaphone, PanelTop, LayoutGrid, Monitor } from '@lucide/astro';
 
 interface Props {
   currentPage: string;
@@ -10,6 +10,7 @@ const navGroups = [
   {
     label: 'Content',
     items: [
+      { id: 'hero-templates', label: 'Hero Templates', href: '/admin/hero-templates', icon: Monitor },
       { id: 'slideshow', label: 'Slideshow', href: '/admin/slideshow', icon: Play },
       { id: 'posters', label: 'Posters', href: '/admin/posters', icon: Image },
       { id: 'newcentre-updates', label: 'New Centre Updates', href: '/admin/newcentre-updates', icon: Building2 },
