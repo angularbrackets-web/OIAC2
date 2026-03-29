@@ -17,19 +17,20 @@ function getEmbedUrl(url: string): string {
     const watchMatch = url.match(/[?&]v=([^&]+)/);
     if (watchMatch) {
       const videoId = watchMatch[1];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&muted=1`;
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&muted=1&controls=0&modestbranding=1&enablejsapi=1`;
     }
     
     // Handle youtu.be/ID format
     const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
     if (shortMatch) {
       const videoId = shortMatch[1];
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&muted=1`;
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&muted=1&controls=0&modestbranding=1&enablejsapi=1`;
     }
     
     // Already embed format
     if (url.includes('/embed/')) {
-      return url.includes('?') ? url : `${url}?autoplay=1&muted=1`;
+      const baseUrl = url.split('?')[0];
+      return `${baseUrl}?autoplay=1&muted=1&controls=0&modestbranding=1&enablejsapi=1`;
     }
   }
   
@@ -48,6 +49,13 @@ function getEmbedUrl(url: string): string {
   
   // Return URL as-is if no conversion needed
   return url.includes('?') ? url : `${url}?autoplay=1&muted=1`;
+}
+
+// Extract video type from URL
+function getVideoType(url: string): 'youtube' | 'streamable' | 'other' {
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'youtube';
+  if (url.includes('streamable.com')) return 'streamable';
+  return 'other';
 }
 
 const { heroTemplate } = Astro.props;
@@ -147,21 +155,59 @@ const posters: Array<PosterRecord> = await getPosters();
               }
             </p>
 
-            <!-- Video Wrapper -->
+            <!-- Video Wrapper with Custom Controls -->
             {(heroTemplate?.videoUrl || !heroTemplate) && (
-              <div
-                class="relative rounded-2xl overflow-hidden shadow-lg mb-8 bg-gray-800 aspect-video ring-4 ring-terracottaRed-darker/30"
-              >
-                <iframe
-                  allow="fullscreen;autoplay"
-                  allowfullscreen
-                  height="100%"
-                  src={heroTemplate?.videoUrl 
-                    ? getEmbedUrl(heroTemplate.videoUrl)
-                    : 'https://streamable.com/e/cvo5ln?autoplay=1&muted=1'
-                  }
-                  width="100%"
-                  class="absolute inset-0 w-full h-full border-0"></iframe>
+              <div class="mb-8">
+                <div
+                  class="relative rounded-2xl overflow-hidden shadow-lg bg-gray-800 aspect-video ring-4 ring-terracottaRed-darker/30 group"
+                  id="videoContainer"
+                  data-video-type={heroTemplate?.videoUrl ? getVideoType(heroTemplate.videoUrl) : 'streamable'}
+                >
+                  <iframe
+                    id="videoIframe"
+                    allow="fullscreen;autoplay"
+                    allowfullscreen
+                    height="100%"
+                    src={heroTemplate?.videoUrl 
+                      ? getEmbedUrl(heroTemplate.videoUrl)
+                      : 'https://streamable.com/e/cvo5ln?autoplay=1&muted=1'
+                    }
+                    width="100%"
+                    class="absolute inset-0 w-full h-full border-0"></iframe>
+                  
+                  <!-- Custom Controls Overlay -->
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between">
+                    <!-- Play/Pause Button -->
+                    <button
+                      id="playPauseBtn"
+                      class="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 transition-colors"
+                      title="Play/Pause"
+                      aria-label="Play or pause video"
+                    >
+                      <svg id="playIcon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"></path>
+                      </svg>
+                      <svg id="pauseIcon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
+                      </svg>
+                    </button>
+
+                    <!-- Mute/Unmute Button -->
+                    <button
+                      id="muteBtn"
+                      class="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 transition-colors"
+                      title="Mute/Unmute"
+                      aria-label="Mute or unmute video"
+                    >
+                      <svg id="volumeHighIcon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM14 3.1v2.02c2.84.86 4.93 3.5 4.93 6.85s-2.09 5.99-4.93 6.85v2.02c4.45-.9 7.75-4.9 7.75-8.87 0-3.97-3.3-7.97-7.75-8.87z"></path>
+                      </svg>
+                      <svg id="volumeMuteIcon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M16.6 21.9L4.7 10H4c-1.1 0-2-.9-2-2v-6c0-1.1.9-2 2-2h.7L16.6 21.9zM19.7 21L21 19.7 12 10.7V4l-5 5H4c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h3l9 9 3-3zM19 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.05-.2.05-.42.05-.63z"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -317,5 +363,119 @@ const posters: Array<PosterRecord> = await getPosters();
         }
       });
     }
+
+    // Video Control Functionality
+    let youtubePlayer: any = null;
+    let isPlaying = true; // Starts muted and autoplaying
+    let isMuted = true;
+
+    // Load YouTube API if YouTube video
+    const videoContainer = document.getElementById('videoContainer');
+    const videoType = videoContainer?.getAttribute('data-video-type');
+
+    if (videoType === 'youtube') {
+      // Load YouTube IFrame API
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+
+      // Wait for API to load
+      (window as any).onYouTubeIframeAPIReady = function() {
+        const iframe = document.getElementById('videoIframe') as any;
+        if (iframe) {
+          youtubePlayer = new (window as any).YT.Player('videoIframe', {
+            events: {
+              'onReady': onPlayerReady,
+              'onStateChange': onPlayerStateChange
+            }
+          });
+        }
+      };
+
+      function onPlayerReady(event: any) {
+        // Mute by default
+        event.target.mute();
+      }
+
+      function onPlayerStateChange(event: any) {
+        const YT = (window as any).YT;
+        if (event.data === YT.PlayerState.PLAYING) {
+          isPlaying = true;
+          updatePlayPauseIcon();
+        } else if (event.data === YT.PlayerState.PAUSED) {
+          isPlaying = false;
+          updatePlayPauseIcon();
+        }
+      }
+    }
+
+    // Play/Pause Button
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+
+    function updatePlayPauseIcon() {
+      if (isPlaying) {
+        playIcon?.classList.add('hidden');
+        pauseIcon?.classList.remove('hidden');
+      } else {
+        playIcon?.classList.remove('hidden');
+        pauseIcon?.classList.add('hidden');
+      }
+    }
+
+    playPauseBtn?.addEventListener('click', () => {
+      if (videoType === 'youtube' && youtubePlayer) {
+        if (isPlaying) {
+          youtubePlayer.pauseVideo();
+          isPlaying = false;
+        } else {
+          youtubePlayer.playVideo();
+          isPlaying = true;
+        }
+        updatePlayPauseIcon();
+      } else {
+        // For Streamable and other videos, we can't control directly
+        // Show a message or provide limited functionality
+        const iframe = document.getElementById('videoIframe') as any;
+        if (iframe) {
+          console.log('Play/pause is controlled by the video provider for non-YouTube videos');
+        }
+      }
+    });
+
+    // Mute/Unmute Button
+    const muteBtn = document.getElementById('muteBtn');
+    const volumeHighIcon = document.getElementById('volumeHighIcon');
+    const volumeMuteIcon = document.getElementById('volumeMuteIcon');
+
+    function updateMuteIcon() {
+      if (isMuted) {
+        volumeHighIcon?.classList.add('hidden');
+        volumeMuteIcon?.classList.remove('hidden');
+      } else {
+        volumeHighIcon?.classList.remove('hidden');
+        volumeMuteIcon?.classList.add('hidden');
+      }
+    }
+
+    muteBtn?.addEventListener('click', () => {
+      if (videoType === 'youtube' && youtubePlayer) {
+        if (isMuted) {
+          youtubePlayer.unMute();
+          isMuted = false;
+        } else {
+          youtubePlayer.mute();
+          isMuted = true;
+        }
+        updateMuteIcon();
+      } else {
+        // For other video providers, we can't directly control mute via iframe API
+        console.log('Mute control is managed by the video provider for non-YouTube videos');
+      }
+    });
+
+    // Initialize mute icon as muted state
+    updateMuteIcon();
   });
 </script>
