@@ -7,6 +7,49 @@ interface Props {
   heroTemplate?: HeroTemplateRecord | null;
 }
 
+// Function to convert video URLs to embeddable format
+function getEmbedUrl(url: string): string {
+  if (!url) return '';
+  
+  // YouTube - convert watch URLs to embed format
+  if (url.includes('youtube.com') || url.includes('youtu.be')) {
+    // Handle youtube.com/watch?v=ID format
+    const watchMatch = url.match(/[?&]v=([^&]+)/);
+    if (watchMatch) {
+      const videoId = watchMatch[1];
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&muted=1`;
+    }
+    
+    // Handle youtu.be/ID format
+    const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+    if (shortMatch) {
+      const videoId = shortMatch[1];
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&muted=1`;
+    }
+    
+    // Already embed format
+    if (url.includes('/embed/')) {
+      return url.includes('?') ? url : `${url}?autoplay=1&muted=1`;
+    }
+  }
+  
+  // Streamable - ensure it's in embed format with autoplay
+  if (url.includes('streamable.com')) {
+    if (url.includes('/e/')) {
+      return url.includes('?') ? url : `${url}?autoplay=1&muted=1`;
+    }
+    // Convert watch URL to embed format
+    const streamMatch = url.match(/streamable\.com\/([^/?]+)/);
+    if (streamMatch) {
+      const videoId = streamMatch[1];
+      return `https://streamable.com/e/${videoId}?autoplay=1&muted=1`;
+    }
+  }
+  
+  // Return URL as-is if no conversion needed
+  return url.includes('?') ? url : `${url}?autoplay=1&muted=1`;
+}
+
 const { heroTemplate } = Astro.props;
 
 const posters: Array<PosterRecord> = await getPosters();
@@ -113,7 +156,10 @@ const posters: Array<PosterRecord> = await getPosters();
                   allow="fullscreen;autoplay"
                   allowfullscreen
                   height="100%"
-                  src={heroTemplate?.videoUrl || 'https://streamable.com/e/cvo5ln?autoplay=1&muted=1'}
+                  src={heroTemplate?.videoUrl 
+                    ? getEmbedUrl(heroTemplate.videoUrl)
+                    : 'https://streamable.com/e/cvo5ln?autoplay=1&muted=1'
+                  }
                   width="100%"
                   class="absolute inset-0 w-full h-full border-0"></iframe>
               </div>
