@@ -107,6 +107,19 @@ import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
         <p class="text-xs text-gray-500 mt-1">Use internal path like /donate or external URL like https://example.com</p>
       </div>
 
+      <!-- Full Width Toggle -->
+      <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <input 
+          type="checkbox" 
+          id="fullWidth" 
+          class="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500 cursor-pointer"
+        />
+        <label for="fullWidth" class="text-sm font-medium text-gray-700 cursor-pointer">
+          Full Width Layout
+        </label>
+        <span class="text-xs text-gray-600 ml-auto">Makes carousel appear below hero instead of beside</span>
+      </div>
+
       <Fragment slot="footer">
         <div class="flex justify-end gap-3">
           <button type="button" id="cancelBtn" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
@@ -309,6 +322,7 @@ import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
       document.getElementById('videoType').value = item.videoType || '';
       document.getElementById('ctaText').value = item.ctaText;
       document.getElementById('ctaLink').value = item.ctaLink;
+      document.getElementById('fullWidth').checked = item.fullWidth || false;
 
       if (item.backgroundType === 'color') {
         document.getElementById('bgTypeColor').checked = true;
@@ -383,7 +397,8 @@ import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
         videoUrl: document.getElementById('videoUrl').value || undefined,
         videoType: document.getElementById('videoType').value || undefined,
         ctaText: document.getElementById('ctaText').value,
-        ctaLink: document.getElementById('ctaLink').value
+        ctaLink: document.getElementById('ctaLink').value,
+        fullWidth: document.getElementById('fullWidth').checked
       };
 
       if (backgroundType === 'color') {

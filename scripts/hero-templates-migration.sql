@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS hero_templates (
   cta_link TEXT NOT NULL,
   is_active BOOLEAN DEFAULT FALSE,
   display_order INTEGER,
+  full_width BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
@@ -29,7 +30,8 @@ CREATE INDEX IF NOT EXISTS idx_hero_templates_display_order ON hero_templates(di
 -- Add video columns to existing table (if upgrading from earlier version)
 ALTER TABLE hero_templates
 ADD COLUMN IF NOT EXISTS video_url TEXT,
-ADD COLUMN IF NOT EXISTS video_type TEXT CHECK (video_type IN ('youtube', 'streamable', 'other') OR video_type IS NULL);
+ADD COLUMN IF NOT EXISTS video_type TEXT CHECK (video_type IN ('youtube', 'streamable', 'other') OR video_type IS NULL),
+ADD COLUMN IF NOT EXISTS full_width BOOLEAN DEFAULT FALSE;
 
 -- Seed initial hero template with current hardcoded values
 INSERT INTO hero_templates (

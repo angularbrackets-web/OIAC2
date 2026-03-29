@@ -1406,6 +1406,7 @@ export type HeroTemplateInput = {
   ctaLink: string; // Can be external URL or internal path like /donate
   isActive?: boolean;
   displayOrder?: number;
+  fullWidth?: boolean; // If true, hero takes full width and carousel appears below
 };
 
 export type HeroTemplateRecord = HeroTemplateInput & {
@@ -1429,6 +1430,7 @@ function mapHeroTemplateRecord(record: Record<string, any>): HeroTemplateRecord 
     ctaLink: record.cta_link,
     isActive: record.is_active,
     displayOrder: record.display_order,
+    fullWidth: record.full_width || false,
     created_at: record.created_at,
     updated_at: record.updated_at,
   };
@@ -1450,6 +1452,7 @@ export async function createHeroTemplate(data: HeroTemplateInput): Promise<HeroT
       cta_link: data.ctaLink,
       is_active: data.isActive || false,
       display_order: data.displayOrder || null,
+      full_width: data.fullWidth || false,
     }])
     .select();
 
@@ -1513,6 +1516,7 @@ export async function updateHeroTemplate(id: string, data: Partial<HeroTemplateI
   if (data.ctaText !== undefined) updateData.cta_text = data.ctaText;
   if (data.ctaLink !== undefined) updateData.cta_link = data.ctaLink;
   if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
+  if (data.fullWidth !== undefined) updateData.full_width = data.fullWidth;
 
   // Handle isActive: if setting to true, deactivate all others
   if (data.isActive === true) {
