@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import vercel from "@astrojs/vercel";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 
@@ -8,7 +8,10 @@ import react from "@astrojs/react";
 export default defineConfig({
   output: "server",
   adapter: vercel(),
-  integrations: [tailwind(), react()],
+  integrations: [react()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   image: {
     domains: ["https://**.graphassets.com"],
   },

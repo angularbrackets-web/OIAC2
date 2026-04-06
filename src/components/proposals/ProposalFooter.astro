@@ -1,6 +1,9 @@
 ---
 import oiacLogoLight from "../../assets/OIAC.Logo.Light.png";
-import { MapPin, Mail, Phone, Facebook, Instagram, Youtube } from "@lucide/astro";
+import { MapPin, Mail, Phone } from "@lucide/astro";
+import facebookIcon from "../../assets/facebook-icon-outline.svg";
+import instagramIcon from "../../assets/instagram-icon-outline.svg";
+import youtubeIcon from "../../assets/youtube-icon-outline.svg";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -19,9 +22,9 @@ const moreLinks = [
 ];
 
 const socialLinks = [
-  { label: "Facebook", href: "http://www.facebook.com/oiacentre", Icon: Facebook },
-  { label: "Instagram", href: "https://www.instagram.com/oiacentre/", Icon: Instagram },
-  { label: "YouTube", href: "https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA", Icon: Youtube },
+  { label: "Facebook", href: "http://www.facebook.com/oiacentre", Icon: facebookIcon },
+  { label: "Instagram", href: "https://www.instagram.com/oiacentre/", Icon: instagramIcon },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA", Icon: youtubeIcon },
 ];
 ---
 
@@ -95,7 +98,7 @@ const socialLinks = [
               class="w-10 h-10 rounded-full bg-warmWhite/10 hover:bg-terracottaRed flex items-center justify-center transition-colors duration-200"
               aria-label={`OIAC on ${label}`}
             >
-              <Icon class="w-5 h-5" />
+              <img src={Icon.src} class="w-5 h-5" alt={label} />
             </a>
           ))}
         </div>

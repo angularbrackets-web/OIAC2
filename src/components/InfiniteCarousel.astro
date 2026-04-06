@@ -5,10 +5,11 @@ interface Props {
 const { initialSpeed = 90 } = Astro.props;
 
 // Import all images from the assets folder
-const images = await Astro.glob('/src/assets/new-centre/*.(png|jpg|jpeg|webp)');
+const imagesGlob = import.meta.glob<{ default: { src: string } }>('/src/assets/new-centre/*.{png,jpg,jpeg,webp}', { eager: true });
+const images = Object.values(imagesGlob);
 
 // Transform image data into the required format
-const imageData = images.map((image, index) => ({
+const imageData = images.map((image, index: number) => ({
   src: image.default.src,
   alt: `Carousel image ${index + 1}`
 }));

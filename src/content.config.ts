@@ -1,8 +1,9 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 // Posts Collection (still git-based)
 const posts = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: "*.json", base: "./src/content/posts" }),
   schema: z.object({
     title: z.string(),
     image: z.array(z.object({ url: z.string() })),

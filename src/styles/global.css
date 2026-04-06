@@ -1,3 +1,88 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+
+@source '../**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}';
+
+@utility container {
+  margin-inline: auto;
+}
+
+@theme {
+  --animate-modal-in: modal-in 0.15s ease-out;
+
+  --color-warmWhite: #f2f0ec;
+
+  --color-terracottaRed-darkest: #5a2d2a;
+  --color-terracottaRed-darker: #723a36;
+  --color-terracottaRed-dark: #81413c;
+  --color-terracottaRed: #8f4843;
+  --color-terracottaRed-light: #9a5a56;
+  --color-terracottaRed-lighter: #a56d69;
+
+  --color-wood-darker: #a56949;
+  --color-wood-dark: #b0764e;
+  --color-wood: #bb8452;
+  --color-wood-light: #c39365;
+  --color-wood-lighter: #c89d74;
+
+  --color-lightWood-darker: #9f8762;
+  --color-lightWood-dark: #b3986f;
+  --color-lightWood: #c7a97b;
+  --color-lightWood-light: #cdb288;
+  --color-lightWood-lighter: #d2ba95;
+
+  --color-softBeige-darker: #aea292;
+  --color-softBeige-dark: #c3b6a4;
+  --color-softBeige: #d9cab6;
+  --color-softBeige-light: #ddcfbd;
+  --color-softBeige-lighter: #e1d5c5;
+  --color-softBeige-lightest: #faf4ec;
+
+  --color-wood2-darker: #9f7c61;
+  --color-wood2-dark: #b38f6f;
+  --color-wood2: #c7a37c;
+  --color-wood2-light: #d2af8b;
+  --color-wood2-lighter: #ddbb9a;
+
+  --color-sageGreen-darker: #3f4409;
+  --color-sageGreen-dark: #5b5f32;
+  --color-sageGreen: #8b8f65;
+  --color-sageGreen-light: #bdc19c;
+  --color-sageGreen-lighter: #eef0e0;
+
+  --color-deepTeal: #2e3f44;
+
+  @keyframes modal-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
 .fade {
     position: absolute;
     top: 0;
