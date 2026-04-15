@@ -80,7 +80,7 @@ export async function getPrayerTimesForCurrentMonth(): Promise<PrayerTime[]> {
       maghribJamah: record.maghribJamah,
       ishaBegins: record.ishaBegins,
       ishaJamah: record.ishaJamah,
-    }));
+    })).sort((a, b) => a.day - b.day);
   } catch (error) {
     console.error('Error fetching prayer times for current month:', error);
     return [];
