@@ -1,74 +1,4 @@
 ---
-interface GridRow {
-  year: string;
-  salary: string;
-}
-
-interface SalaryGridProps {
-  title: string;
-  yearsOfEducation: string;
-  data: GridRow[];
-  headerBgClass: string;
-  bodyBgClass: string;
-}
-
-const salaryGrids: SalaryGridProps[] = [
-  
-  {
-    title: "4 Years of Education",
-    yearsOfEducation: "Alberta Certified Teacher",
-    headerBgClass: "bg-lightWood-darker",
-    bodyBgClass: "bg-white",
-    data: [
-      { year: "1st Year", salary: "$60,000" },
-      { year: "2nd Year", salary: "$60,000" },
-      { year: "3rd Year", salary: "$72,000" },
-      { year: "4th Year", salary: "$74,160" },
-      { year: "5th Year", salary: "$76,385" },
-      { year: "6th Year", salary: "$82,496" },
-      { year: "7th Year", salary: "$84,970" },
-      { year: "8th Year", salary: "$87,520" },
-      { year: "9th Year", salary: "$90,145" },
-      { year: "10th Year", salary: "$92,850" },
-    ],
-  },
-  {
-    title: "5 Years of Education",
-    yearsOfEducation: "Alberta Certified Teacher",
-    headerBgClass: "bg-wood2-darker",
-    bodyBgClass: "bg-white",
-    data: [
-      { year: "1st Year", salary: "$64,000" },
-      { year: "2nd Year", salary: "$64,000" },
-      { year: "3rd Year", salary: "$76,800" },
-      { year: "4th Year", salary: "$79,104" },
-      { year: "5th Year", salary: "$81,477" },
-      { year: "6th Year", salary: "$87,995" },
-      { year: "7th Year", salary: "$90,635" },
-      { year: "8th Year", salary: "$93,354" },
-      { year: "9th Year", salary: "$96,155" },
-      { year: "10th Year", salary: "$99,039" },
-    ],
-  },
-  {
-    title: "6 Years of Education",
-    yearsOfEducation: "Alberta Certified Teacher",
-    headerBgClass: "bg-wood-darker",
-    bodyBgClass: "bg-white",
-    data: [
-      { year: "1st Year", salary: "$68,000" },
-      { year: "2nd Year", salary: "$68,000" },
-      { year: "3rd Year", salary: "$81,600" },
-      { year: "4th Year", salary: "$84,048" },
-      { year: "5th Year", salary: "$86,569" },
-      { year: "6th Year", salary: "$93,495" },
-      { year: "7th Year", salary: "$96,300" },
-      { year: "8th Year", salary: "$99,189" },
-      { year: "9th Year", salary: "$102,165" },
-      { year: "10th Year", salary: "$105,229" },
-    ],
-  },
-];
 ---
 <div class="bg-gray-50 rounded-xl w-full min-w-0">
   <!-- Main Content Section -->
@@ -81,31 +11,14 @@ const salaryGrids: SalaryGridProps[] = [
               </p>
           </div>
 
-          <!-- Salary Grids -->
-<div class="grid gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 3xl:gap-16 grid-cols-1 2xl:grid-cols-2 3xl:grid-cols-3 w-full min-w-0 max-w-none" id="salaryGridsContainer">
-  {salaryGrids.map((grid) => (
-    <div class="flex flex-col rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden min-w-0 w-full bg-white">
-      <div class="px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12 py-4 md:py-5 lg:py-6 xl:py-7 2xl:py-8 ${grid.headerBgClass} text-white">
-        <h3 class="text-base md:text-md font-bold text-center leading-tight text-terracottaRed">{grid.title}</h3>
-        <p class="text-sm md:text-md font-bold text-center mt-2 lg:mt-3 xl:mt-4 bg-gray-800 px-3 lg:px-4 xl:px-5 py-1 lg:py-2 rounded-lg">{grid.yearsOfEducation}</p>
-      </div>
-      <div class="flex-grow px-4 md:px-6 lg:px-8 xl:px-10 2xl:px-12 pt-4 md:pt-5 lg:pt-6 xl:pt-7 2xl:pt-8 pb-6 md:pb-7 lg:pb-8 xl:pb-9 2xl:pb-10 ${grid.bodyBgClass}">
-        <ul role="list" class="space-y-2 md:space-y-3 lg:space-y-4 xl:space-y-5">
-          {grid.data.map(row => 
-            <li class="flex justify-between items-center border-b border-gray-200 pb-2 lg:pb-3 xl:pb-4">
-              <span class="text-gray-900 font-semibold text-sm md:text-base">{row.year}</span>
-              <span class="text-gray-900 font-bold text-sm md:text-base">{row.salary}</span>
-            </li>
-          )}
-        </ul>
-      </div>
-    </div>
-  ))}
-</div>
-          
-          <p class="mt-6 md:mt-8 lg:mt-10 text-center text-sm md:text-base text-wood-dark italic">
-              In the long term, OIAC aims to match or exceed the salary grids offered to our academic teachers.
-          </p>
+          <!-- Salary Grid Image -->
+          <div class="w-full flex justify-center">
+            <img
+              src="/images/Salary-Grid-1.png"
+              alt="OIA Academy Salary Grid 2026-2027"
+              class="w-full max-w-3xl rounded-lg shadow-md"
+            />
+          </div>
       </div>
   </div>
 
