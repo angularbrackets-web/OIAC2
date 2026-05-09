@@ -3,8 +3,24 @@ import { supabase } from '../../../lib/db';
 
 const BUCKET_NAME = 'media';
 
+function getConfigError(): Response | null {
+  const url = import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL;
+  const key = import.meta.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    const missing = [!url && 'SUPABASE_URL', !key && 'SUPABASE_SERVICE_ROLE_KEY'].filter(Boolean).join(', ');
+    return new Response(JSON.stringify({ error: `Missing env vars: ${missing}` }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  return null;
+}
+
 // GET: List all uploaded media files from Supabase Storage
 export const GET: APIRoute = async () => {
+  const configError = getConfigError();
+  if (configError) return configError;
+
   try {
     const { data: files, error } = await supabase.storage
       .from(BUCKET_NAME)
@@ -56,6 +72,9 @@ export const GET: APIRoute = async () => {
 
 // POST: Upload a new media file to Supabase Storage
 export const POST: APIRoute = async ({ request }) => {
+  const configError = getConfigError();
+  if (configError) return configError;
+
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;
@@ -129,6 +148,9 @@ export const POST: APIRoute = async ({ request }) => {
 
 // DELETE: Delete a media file from Supabase Storage
 export const DELETE: APIRoute = async ({ request }) => {
+  const configError = getConfigError();
+  if (configError) return configError;
+
   try {
     const { fileName } = await request.json();
 

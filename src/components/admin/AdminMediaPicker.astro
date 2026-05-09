@@ -64,9 +64,16 @@
   async function loadMedia() {
     try {
       const res = await fetch(MEDIA_API);
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Server error ${res.status}`);
+      }
       mediaPickerFiles = await res.json();
     } catch (e) {
       mediaPickerFiles = [];
+      if (typeof showToast === 'function') {
+        showToast('Failed to load media: ' + e.message, 'error');
+      }
     }
   }
 
@@ -132,7 +139,10 @@
 
     try {
       const res = await fetch(MEDIA_API, { method: 'POST', body: formData });
-      if (!res.ok) throw new Error('Upload failed');
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || `Server error ${res.status}`);
+      }
       const result = await res.json();
       if (result.url && mediaPickerOnSelect) {
         mediaPickerOnSelect(result.url);
