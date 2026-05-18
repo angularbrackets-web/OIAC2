@@ -24,12 +24,33 @@ if (!job) {
         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
       >
         <div class="p-6">
-          <div class="flex justify-between items-start mb-10">
+          <div class="flex justify-between items-start mb-6">
             <h2 class="text-4xl font-black text-terracottaRed-darker">
               {job.title}
             </h2>
           </div>
-  
+
+          {job.images && job.images.length > 0 && (
+            <div class={`mb-6 gap-3 ${
+              job.images.length === 1
+                ? 'block'
+                : job.images.length === 2
+                ? 'grid grid-cols-2'
+                : 'grid grid-cols-2 sm:grid-cols-3'
+            }`}>
+              {job.images.map((img) => (
+                <div class="overflow-hidden rounded-lg aspect-video">
+                  <img
+                    src={img.url}
+                    alt={job.title}
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
           {job.description && (
             <div
               class="prose prose-emerald max-w-none prose-p:mt-2 prose-p:mb-2 text-gray-600 mb-4"

@@ -2,6 +2,7 @@
 import AdminLayout2 from '../../layouts/AdminLayout2.astro';
 import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
 import AdminModal from '../../components/admin/AdminModal.astro';
+import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
 ---
 
 <AdminLayout2 title="Jobs" currentPage="jobs">
@@ -37,6 +38,15 @@ import AdminModal from '../../components/admin/AdminModal.astro';
           class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono"></textarea>
       </div>
 
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Images (optional)</label>
+        <div id="jobImageGrid" class="grid grid-cols-4 gap-2 mb-2"></div>
+        <button type="button" id="addImageBtn"
+          class="w-full py-2 text-sm border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors">
+          + Add Image from Media Library
+        </button>
+      </div>
+
       <div class="flex gap-6">
         <label class="flex items-center gap-2">
           <input type="checkbox" id="requireAlbertaCertification" class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
@@ -58,9 +68,12 @@ import AdminModal from '../../components/admin/AdminModal.astro';
     </form>
   </AdminModal>
 
+  <AdminMediaPicker />
+
   <script is:inline>
     const API_URL = '/api/cms/jobs';
     let items = [];
+    let jobImages = [];
 
     document.addEventListener('DOMContentLoaded', loadItems);
 
@@ -160,6 +173,8 @@ import AdminModal from '../../components/admin/AdminModal.astro';
       form.reset();
       document.getElementById('itemId').value = '';
       document.getElementById('active').checked = true;
+      jobImages = [];
+      renderJobImages();
       dialog.showModal();
     });
 
@@ -177,8 +192,39 @@ import AdminModal from '../../components/admin/AdminModal.astro';
       document.getElementById('description').value = item.description || '';
       document.getElementById('requireAlbertaCertification').checked = !!item.requireAlbertaCertification;
       document.getElementById('active').checked = item.active !== false;
+      jobImages = Array.isArray(item.images) ? [...item.images] : [];
+      renderJobImages();
       dialog.showModal();
     };
+
+    function renderJobImages() {
+      const grid = document.getElementById('jobImageGrid');
+      if (jobImages.length === 0) {
+        grid.innerHTML = '';
+        return;
+      }
+      grid.innerHTML = jobImages.map((img, i) => `
+        <div class="relative group aspect-square">
+          <img src="${escapeHtml(img.url)}" class="w-full h-full object-cover rounded border border-gray-200" />
+          <button type="button" onclick="removeJobImage(${i})"
+            class="absolute top-1 right-1 bg-white rounded-full w-5 h-5 flex items-center justify-center shadow text-gray-500 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold leading-none">
+            &times;
+          </button>
+        </div>
+      `).join('');
+    }
+
+    window.removeJobImage = function(index) {
+      jobImages.splice(index, 1);
+      renderJobImages();
+    };
+
+    document.getElementById('addImageBtn').addEventListener('click', () => {
+      openMediaPicker('image', (url) => {
+        jobImages.push({ url });
+        renderJobImages();
+      });
+    });
 
     // Delete
     window.deleteItem = function(id) {
@@ -207,6 +253,7 @@ import AdminModal from '../../components/admin/AdminModal.astro';
         description: document.getElementById('description').value || undefined,
         requireAlbertaCertification: document.getElementById('requireAlbertaCertification').checked,
         active: document.getElementById('active').checked,
+        images: jobImages,
       };
 
       try {

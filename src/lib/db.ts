@@ -611,6 +611,7 @@ export type JobInput = {
   description?: string;
   requireAlbertaCertification?: boolean;
   active?: boolean;
+  images?: Array<{ url: string }>;
 };
 
 export type JobRecord = JobInput & {
@@ -627,6 +628,7 @@ function mapJobRecord(record: Record<string, any>): JobRecord {
     description: record.description,
     requireAlbertaCertification: record.require_alberta_certification,
     active: record.active,
+    images: record.images || [],
     created_at: record.created_at,
     updated_at: record.updated_at,
   };
@@ -641,6 +643,7 @@ export async function createJob(data: JobInput): Promise<JobRecord[]> {
       description: data.description || null,
       require_alberta_certification: data.requireAlbertaCertification ?? false,
       active: data.active ?? true,
+      images: data.images || [],
     }])
     .select();
 
@@ -680,6 +683,7 @@ export async function updateJob(id: string, data: Partial<JobInput>) {
   if (data.description !== undefined) updateData.description = data.description;
   if (data.requireAlbertaCertification !== undefined) updateData.require_alberta_certification = data.requireAlbertaCertification;
   if (data.active !== undefined) updateData.active = data.active;
+  if (data.images !== undefined) updateData.images = data.images;
 
   const { data: result, error } = await supabase
     .from('oiac_jobs')

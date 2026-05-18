@@ -9,6 +9,7 @@ export type Job = {
   } | null;
   requireAlbertaCertification?: boolean;
   active?: boolean;
+  images?: Array<{ url: string }>;
 };
 
 export async function getJobs(): Promise<Job[]> {
@@ -24,6 +25,7 @@ export async function getJobs(): Promise<Job[]> {
         description: record.description ? { html: record.description } : null,
         requireAlbertaCertification: record.requireAlbertaCertification ?? undefined,
         active: record.active,
+        images: record.images || [],
       }));
   } catch (error) {
     console.error('Error fetching jobs:', error);
@@ -44,6 +46,7 @@ export async function getJob(id: string): Promise<Job | undefined> {
       description: record.description ? { html: record.description } : null,
       requireAlbertaCertification: record.requireAlbertaCertification ?? undefined,
       active: record.active,
+      images: record.images || [],
     };
   } catch (error) {
     console.error('Error fetching job:', error);
