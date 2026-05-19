@@ -334,6 +334,8 @@ export type PosterInput = {
   imageUrl: string;
   linkText?: string;
   linkUrl?: string;
+  link2Text?: string;
+  link2Url?: string;
   displayOrder?: number;
 };
 
@@ -350,6 +352,8 @@ function mapPosterRecord(record: Record<string, any>): PosterRecord {
     imageUrl: record.image_url,
     linkText: record.link_text,
     linkUrl: record.link_url,
+    link2Text: record.link2_text,
+    link2Url: record.link2_url,
     displayOrder: record.display_order,
     created_at: record.created_at,
     updated_at: record.updated_at,
@@ -379,6 +383,8 @@ export async function createPoster(data: PosterInput): Promise<PosterRecord[]> {
       image_url: data.imageUrl,
       link_text: data.linkText || null,
       link_url: data.linkUrl || null,
+      link2_text: data.link2Text || null,
+      link2_url: data.link2Url || null,
       display_order: data.displayOrder || null,
     }])
     .select();
@@ -418,6 +424,8 @@ export async function updatePoster(id: string, data: Partial<PosterInput>) {
   if (data.imageUrl !== undefined) updateData.image_url = data.imageUrl;
   if (data.linkText !== undefined) updateData.link_text = data.linkText;
   if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.link2Text !== undefined) updateData.link2_text = data.link2Text;
+  if (data.link2Url !== undefined) updateData.link2_url = data.link2Url;
   if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
 
   const { data: result, error } = await supabase

@@ -1,0 +1,172 @@
+---
+import AdminLayout2 from '../../layouts/AdminLayout2.astro';
+import AdminPageHeader from '../../components/admin/AdminPageHeader.astro';
+import AdminMediaPicker from '../../components/admin/AdminMediaPicker.astro';
+---
+
+<AdminLayout2 title="Contact Page" currentPage="contact">
+  <AdminPageHeader title="Contact Page" description="Edit the contact information, social links, and photo shown on the Contact Us page." />
+
+  <div class="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
+    <div id="saveStatus" class="hidden px-4 py-3 rounded-lg text-sm font-medium"></div>
+
+    <!-- Contact Info -->
+    <div>
+      <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">Contact Information</h3>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+          <input type="text" id="contact_address" placeholder="110 - 1011 Parsons Rd SW, Edmonton, AB T6X 0X2"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Google Maps URL</label>
+          <input type="url" id="contact_maps_url" placeholder="https://maps.app.goo.gl/..."
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+          <input type="text" id="contact_phone" placeholder="(587) 882-3202"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <input type="email" id="contact_email" placeholder="info@oiacedmonton.ca"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-gray-100" />
+
+    <!-- Social Links -->
+    <div>
+      <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">Social Links</h3>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Facebook URL</label>
+          <input type="url" id="contact_facebook_url" placeholder="http://www.facebook.com/oiacentre"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Instagram URL</label>
+          <input type="url" id="contact_instagram_url" placeholder="https://www.instagram.com/oiacentre/"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">YouTube URL</label>
+          <input type="url" id="contact_youtube_url" placeholder="https://www.youtube.com/channel/..."
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-gray-100" />
+
+    <!-- Contact Page Image -->
+    <div>
+      <h3 class="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">Page Photo</h3>
+      <p class="text-xs text-gray-500 mb-3">The large photo shown on the Contact Us page. Leave empty to use the default OIAC building photo.</p>
+      <div class="flex gap-2">
+        <input type="url" id="contact_image_url" placeholder="Paste image URL or use Browse"
+          class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+        <button type="button" id="browseImageBtn"
+          class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap">
+          Browse
+        </button>
+      </div>
+      <div id="imgPreview" class="mt-3 hidden">
+        <img id="imgPreviewImg" src="" alt="Preview" class="max-h-48 rounded-lg border border-gray-200 object-cover" />
+      </div>
+    </div>
+
+    <div class="pt-2">
+      <button id="saveBtn" type="button"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors">
+        Save Changes
+      </button>
+    </div>
+  </div>
+
+  <AdminMediaPicker />
+
+  <script is:inline>
+    const SETTINGS_KEYS = [
+      'contact_address',
+      'contact_phone',
+      'contact_email',
+      'contact_maps_url',
+      'contact_facebook_url',
+      'contact_instagram_url',
+      'contact_youtube_url',
+      'contact_image_url',
+    ];
+
+    async function loadSettings() {
+      for (const key of SETTINGS_KEYS) {
+        try {
+          const res = await fetch(`/api/cms/settings?key=${key}`);
+          const data = await res.json();
+          const el = document.getElementById(key);
+          if (el && data.value) {
+            el.value = data.value;
+            if (key === 'contact_image_url' && data.value) showImgPreview(data.value);
+          }
+        } catch (e) {
+          console.error('Failed to load setting:', key, e);
+        }
+      }
+    }
+
+    async function saveSettings() {
+      const btn = document.getElementById('saveBtn');
+      const status = document.getElementById('saveStatus');
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+
+      try {
+        for (const key of SETTINGS_KEYS) {
+          const el = document.getElementById(key);
+          const value = el ? el.value.trim() : '';
+          await fetch('/api/cms/settings', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key, value }),
+          });
+        }
+        status.className = 'px-4 py-3 rounded-lg text-sm font-medium bg-green-50 text-green-700 border border-green-200';
+        status.textContent = 'Changes saved successfully.';
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 3000);
+      } catch (e) {
+        status.className = 'px-4 py-3 rounded-lg text-sm font-medium bg-red-50 text-red-700 border border-red-200';
+        status.textContent = 'Error saving. Please try again.';
+        status.classList.remove('hidden');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Save Changes';
+      }
+    }
+
+    function showImgPreview(url) {
+      document.getElementById('imgPreview').classList.remove('hidden');
+      document.getElementById('imgPreviewImg').src = url;
+    }
+
+    document.getElementById('contact_image_url').addEventListener('input', function () {
+      if (this.value.trim()) showImgPreview(this.value.trim());
+      else document.getElementById('imgPreview').classList.add('hidden');
+    });
+
+    document.getElementById('browseImageBtn').addEventListener('click', () => {
+      openMediaPicker('image', (url) => {
+        document.getElementById('contact_image_url').value = url;
+        showImgPreview(url);
+      });
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', saveSettings);
+
+    document.addEventListener('DOMContentLoaded', loadSettings);
+  </script>
+</AdminLayout2>

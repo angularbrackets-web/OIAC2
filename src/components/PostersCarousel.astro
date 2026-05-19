@@ -36,19 +36,31 @@ const { posters, autoPlayInterval = 5000 } = Astro.props;
           loading={i === 0 ? "eager" : "lazy"}
         />
 
-        <!-- CTA overlay with bottom gradient — only rendered when the poster has a link -->
-        {poster.linkText && poster.linkUrl && (
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-16 pb-4 px-4 flex items-end">
-            <a
-              href={poster.linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="bg-terracottaRed hover:bg-terracottaRed-darker text-white px-5 py-2 rounded-lg transition-colors duration-200 text-sm font-semibold shadow-md"
-            >
-              {poster.linkText}
-            </a>
+        <!-- CTA overlay with bottom gradient — only rendered when the poster has at least one link -->
+        {(poster.linkText && poster.linkUrl) || (poster.link2Text && poster.link2Url) ? (
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-16 pb-4 px-4 flex items-end gap-2 flex-wrap">
+            {poster.linkText && poster.linkUrl && (
+              <a
+                href={poster.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-terracottaRed hover:bg-terracottaRed-darker text-white px-5 py-2 rounded-lg transition-colors duration-200 text-sm font-semibold shadow-md"
+              >
+                {poster.linkText}
+              </a>
+            )}
+            {poster.link2Text && poster.link2Url && (
+              <a
+                href={poster.link2Url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/60 text-white px-5 py-2 rounded-lg transition-colors duration-200 text-sm font-semibold shadow-md"
+              >
+                {poster.link2Text}
+              </a>
+            )}
           </div>
-        )}
+        ) : null}
       </div>
     ))}
 

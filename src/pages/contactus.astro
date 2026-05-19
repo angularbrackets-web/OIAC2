@@ -1,14 +1,29 @@
 ---
 import OIACLayout from "../layouts/oiac-layout.astro";
-import VolunteerComponent from "../components/Volunteer2.astro";
+import VolunteerComponent from "../components/Volunteer.astro";
 import NewsletterComponent from "../components/Newsletter2.astro";
 import OIACFrontImage from "../assets/OIAC.Front.png";
-import facebookIcon from "../assets/facebook-icon-outline.svg";
-import instagramIcon from "../assets/instagram-icon-outline.svg";
-import youtubeIcon from "../assets/youtube-icon-outline.svg";
-import locationIcon from "../assets/location-icon-outline.svg";
-import callIcon from "../assets/call-icon-outline.svg";
-import emailIcon from "../assets/email-icon-outline.svg";
+import { getSetting } from "../lib/db";
+
+const [address, phone, email, mapsUrl, facebookUrl, instagramUrl, youtubeUrl, contactImageUrl] = await Promise.all([
+  getSetting('contact_address'),
+  getSetting('contact_phone'),
+  getSetting('contact_email'),
+  getSetting('contact_maps_url'),
+  getSetting('contact_facebook_url'),
+  getSetting('contact_instagram_url'),
+  getSetting('contact_youtube_url'),
+  getSetting('contact_image_url'),
+]);
+
+const contactAddress = (address as string) || '110 - 1011 Parsons Rd SW, Edmonton , AB T6X 0X2';
+const contactPhone = (phone as string) || '(587) 882-3202';
+const contactEmail = (email as string) || 'info@oiacedmonton.ca';
+const contactMapsUrl = (mapsUrl as string) || 'https://maps.app.goo.gl/qmxXwbDDywmXibxW8';
+const contactFacebookUrl = (facebookUrl as string) || 'http://www.facebook.com/oiacentre';
+const contactInstagramUrl = (instagramUrl as string) || 'https://www.instagram.com/oiacentre/';
+const contactYoutubeUrl = (youtubeUrl as string) || 'https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA';
+const contactImage = (contactImageUrl as string) || '';
 ---
 
 <OIACLayout title="OIAC - Contact Us">
@@ -23,28 +38,28 @@ import emailIcon from "../assets/email-icon-outline.svg";
           </h4>
           <div class="flex flex-wrap">
             <a
-              href="https://maps.app.goo.gl/qmxXwbDDywmXibxW8"
+              href={contactMapsUrl}
               target="_blank"
               class="flex mb-3"
-              ><i class="lni lni-location-arrow-right mt-2 mr-3"></i><span class="text-xl mr-3">110 - 1011 Parsons Rd SW, Edmonton , AB T6X 0X2</span
+              ><i class="lni lni-location-arrow-right mt-2 mr-3"></i><span class="text-xl mr-3">{contactAddress}</span
               ><span class="hidden md:block text-sm mt-1 italic underline"
                 >👉 Open in Google Maps</span
               ></a
             >
             <a
-              href="https://maps.app.goo.gl/qmxXwbDDywmXibxW8"
+              href={contactMapsUrl}
               target="_blank"
               class="pl-10 mb-3 md:hidden md:mb-0 md:pl-0"
               >👉 Open in Google Maps</a
             >
           </div>
           <div class="flex text-xl mb-2">
-            <i class="lni lni-phone mt-2 mr-3"></i><span>Call us : </span><span class="ml-2">(587) 882-3202</span
+            <i class="lni lni-phone mt-2 mr-3"></i><span>Call us : </span><span class="ml-2">{contactPhone}</span
             >
           </div>
           <div class="flex text-xl">
             <i class="lni lni-envelope-1 mt-2 mr-3"></i><span>Email us : </span><span class="ml-2"
-              >info@oiacedmonton.ca</span
+              >{contactEmail}</span
             >
           </div>
         </div>
@@ -56,19 +71,19 @@ import emailIcon from "../assets/email-icon-outline.svg";
           </h4>
           
           <a
-            href="http://www.facebook.com/oiacentre"
+            href={contactFacebookUrl}
             target="_blank"
             class="flex mb-3"
             ><i class="lni lni-facebook mt-2 mr-3 text-2rem"></i><span class="text-xl">Facebook</span></a
           >
           <a
-            href="https://www.instagram.com/oiacentre/"
+            href={contactInstagramUrl}
             target="_blank"
             class="flex text-xl mb-3"
             ><i class="lni lni-instagram mt-2 mr-3 text-2rem"></i><span>Instagram</span></a
           >
           <a
-            href="https://www.youtube.com/channel/UChrQOLcHGkhjBmBM2k9uXQA"
+            href={contactYoutubeUrl}
             target="_blank"
             class="flex text-xl mb-3"
             ><i class="lni lni-youtube mt-2 mr-3 text-2rem"></i><span>Youtube</span></a
@@ -76,7 +91,7 @@ import emailIcon from "../assets/email-icon-outline.svg";
         </div>
       </div>
       <div class="mb-5">
-        <img src={OIACFrontImage.src} alt="OIAC" class="rounded-xl" />
+        <img src={contactImage || OIACFrontImage.src} alt="OIAC" class="rounded-xl" />
       </div>
       <VolunteerComponent />
       <NewsletterComponent />
