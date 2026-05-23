@@ -11,7 +11,7 @@ const { posters, autoPlayInterval = 5000 } = Astro.props;
 
 {posters.length > 0 && (
 <div
-  class="posters-carousel"
+  class="posters-carousel max-w-[420px] mx-auto"
   data-interval={autoPlayInterval}
   role="region"
   aria-label="Poster slideshow"

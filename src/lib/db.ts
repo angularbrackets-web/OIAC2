@@ -1024,6 +1024,8 @@ export type AnnouncementInput = {
   posterImageUrl?: string;
   linkUrl?: string;
   linkLabel?: string;
+  link2Url?: string;
+  link2Label?: string;
   contactPhone?: string;
   contactEmail?: string;
   isActive?: boolean;
@@ -1046,6 +1048,8 @@ function mapAnnouncementRecord(record: Record<string, any>): AnnouncementRecord 
     posterImageUrl: record.poster_image_url,
     linkUrl: record.link_url,
     linkLabel: record.link_label,
+    link2Url: record.link2_url,
+    link2Label: record.link2_label,
     contactPhone: record.contact_phone,
     contactEmail: record.contact_email,
     isActive: record.is_active,
@@ -1066,6 +1070,8 @@ export async function createAnnouncement(data: AnnouncementInput): Promise<Annou
       poster_image_url: data.posterImageUrl || null,
       link_url: data.linkUrl || null,
       link_label: data.linkLabel || 'Learn More',
+      link2_url: data.link2Url || null,
+      link2_label: data.link2Label || null,
       contact_phone: data.contactPhone || null,
       contact_email: data.contactEmail || null,
       is_active: data.isActive ?? false,
@@ -1133,6 +1139,8 @@ export async function updateAnnouncement(id: string, data: Partial<AnnouncementI
   if (data.posterImageUrl !== undefined) updateData.poster_image_url = data.posterImageUrl;
   if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
   if (data.linkLabel !== undefined) updateData.link_label = data.linkLabel;
+  if (data.link2Url !== undefined) updateData.link2_url = data.link2Url;
+  if (data.link2Label !== undefined) updateData.link2_label = data.link2Label;
   if (data.contactPhone !== undefined) updateData.contact_phone = data.contactPhone;
   if (data.contactEmail !== undefined) updateData.contact_email = data.contactEmail;
   if (data.isActive !== undefined) updateData.is_active = data.isActive;
@@ -1301,6 +1309,8 @@ export type FeaturedPosterInput = {
   title: string;
   imageUrl: string;
   linkUrl?: string;
+  link2Text?: string;
+  link2Url?: string;
   displayOrder?: number;
 };
 
@@ -1316,6 +1326,8 @@ function mapFeaturedPosterRecord(record: Record<string, any>): FeaturedPosterRec
     title: record.title,
     imageUrl: record.image_url,
     linkUrl: record.link_url,
+    link2Text: record.link2_text,
+    link2Url: record.link2_url,
     displayOrder: record.display_order,
     created_at: record.created_at,
     updated_at: record.updated_at,
@@ -1329,6 +1341,8 @@ export async function createFeaturedPoster(data: FeaturedPosterInput): Promise<F
       title: data.title,
       image_url: data.imageUrl,
       link_url: data.linkUrl || null,
+      link2_text: data.link2Text || null,
+      link2_url: data.link2Url || null,
       display_order: data.displayOrder || null,
     }])
     .select();
@@ -1367,6 +1381,8 @@ export async function updateFeaturedPoster(id: string, data: Partial<FeaturedPos
   if (data.title !== undefined) updateData.title = data.title;
   if (data.imageUrl !== undefined) updateData.image_url = data.imageUrl;
   if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.link2Text !== undefined) updateData.link2_text = data.link2Text;
+  if (data.link2Url !== undefined) updateData.link2_url = data.link2Url;
   if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;
 
   const { data: result, error } = await supabase
