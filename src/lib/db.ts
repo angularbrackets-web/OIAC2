@@ -1309,6 +1309,8 @@ export type FeaturedPosterInput = {
   title: string;
   imageUrl: string;
   linkUrl?: string;
+  link1Text?: string;
+  link1Url?: string;
   link2Text?: string;
   link2Url?: string;
   displayOrder?: number;
@@ -1326,6 +1328,8 @@ function mapFeaturedPosterRecord(record: Record<string, any>): FeaturedPosterRec
     title: record.title,
     imageUrl: record.image_url,
     linkUrl: record.link_url,
+    link1Text: record.link1_text,
+    link1Url: record.link1_url,
     link2Text: record.link2_text,
     link2Url: record.link2_url,
     displayOrder: record.display_order,
@@ -1341,6 +1345,8 @@ export async function createFeaturedPoster(data: FeaturedPosterInput): Promise<F
       title: data.title,
       image_url: data.imageUrl,
       link_url: data.linkUrl || null,
+      link1_text: data.link1Text || null,
+      link1_url: data.link1Url || null,
       link2_text: data.link2Text || null,
       link2_url: data.link2Url || null,
       display_order: data.displayOrder || null,
@@ -1381,6 +1387,8 @@ export async function updateFeaturedPoster(id: string, data: Partial<FeaturedPos
   if (data.title !== undefined) updateData.title = data.title;
   if (data.imageUrl !== undefined) updateData.image_url = data.imageUrl;
   if (data.linkUrl !== undefined) updateData.link_url = data.linkUrl;
+  if (data.link1Text !== undefined) updateData.link1_text = data.link1Text;
+  if (data.link1Url !== undefined) updateData.link1_url = data.link1Url;
   if (data.link2Text !== undefined) updateData.link2_text = data.link2Text;
   if (data.link2Url !== undefined) updateData.link2_url = data.link2Url;
   if (data.displayOrder !== undefined) updateData.display_order = data.displayOrder;

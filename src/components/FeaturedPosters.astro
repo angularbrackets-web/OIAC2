@@ -39,16 +39,28 @@ const showSection = sectionVisible !== false && posters.length > 0;
               />
             </div>
           )}
-          {poster.link2Text && poster.link2Url && (
-            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-8 pb-3 px-3">
-              <a
-                href={poster.link2Url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/60 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition-colors block text-center"
-              >
-                {poster.link2Text}
-              </a>
+          {((poster.link1Text && poster.link1Url) || (poster.link2Text && poster.link2Url)) && (
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent pt-8 pb-3 px-3 flex flex-col gap-2">
+              {poster.link1Text && poster.link1Url && (
+                <a
+                  href={poster.link1Url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-terracottaRed hover:bg-terracottaRed-darker text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition-colors block text-center"
+                >
+                  {poster.link1Text}
+                </a>
+              )}
+              {poster.link2Text && poster.link2Url && (
+                <a
+                  href={poster.link2Url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/60 text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-md transition-colors block text-center"
+                >
+                  {poster.link2Text}
+                </a>
+              )}
             </div>
           )}
         </div>
