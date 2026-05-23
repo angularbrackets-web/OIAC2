@@ -68,7 +68,7 @@ const posters: Array<PosterRecord> = await getPosters();
     <!-- Web View -->
     <div class={heroTemplate?.fullWidth ? "block" : "block lg:flex lg:gap-5"}>
       <!-- LEFT (Hero) -->
-      <div class={heroTemplate?.fullWidth ? "w-full mb-8" : "w-full mb-12 lg:mb-0 lg:w-[49%]"}>
+      <div class={heroTemplate?.fullWidth ? "w-full mb-8" : "w-full mb-12 lg:mb-0 lg:flex-1 lg:min-w-0"}>
         <!-- NEW CENTRE CARD -->
         <div
           class="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 group flex flex-col"
@@ -314,7 +314,7 @@ const posters: Array<PosterRecord> = await getPosters();
       </div>
 
       <!-- RIGHT (Carousel) -->
-      <div class={heroTemplate?.fullWidth ? "w-full" : "w-full lg:w-[49%] my-3"}>
+      <div class={heroTemplate?.fullWidth ? "w-full" : "w-full my-3 lg:w-[420px] lg:shrink-0"}>
         <PostersCarousel posters={posters} />
       </div>
     </div>
