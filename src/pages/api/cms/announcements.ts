@@ -34,7 +34,7 @@ export const GET: APIRoute = async ({ url }) => {
     });
   } catch (error) {
     console.error('Error fetching announcements:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -64,7 +64,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Error creating announcement:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -95,7 +95,7 @@ export const PUT: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Error updating announcement:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -121,7 +121,7 @@ export const DELETE: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Error deleting announcement:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });

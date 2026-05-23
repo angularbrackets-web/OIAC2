@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { supabase } from '../../../lib/db';
+import { supabase, getPosters } from '../../../lib/db';
 
 const BUCKET_NAME = 'media';
 
@@ -37,7 +37,7 @@ export const GET: APIRoute = async () => {
       });
     }
 
-    const mediaFiles = (files || [])
+    const bucketFiles = (files || [])
       .filter(file => file.name !== '.emptyFolderPlaceholder')
       .map(file => {
         const ext = file.name.split('.').pop()?.toLowerCase() || '';
@@ -57,13 +57,28 @@ export const GET: APIRoute = async () => {
         };
       });
 
+    // Also include images from the posters table so they're reusable across sections
+    const seenUrls = new Set(bucketFiles.map(f => f.url));
+    const posters = await getPosters().catch(() => []);
+    const posterFiles = posters
+      .filter(p => p.imageUrl && !seenUrls.has(p.imageUrl))
+      .map(p => ({
+        name: p.title || p.imageUrl.split('/').pop() || 'poster',
+        url: p.imageUrl,
+        type: 'image' as const,
+        size: 0,
+        modified: p.created_at || new Date().toISOString(),
+      }));
+
+    const mediaFiles = [...bucketFiles, ...posterFiles];
+
     return new Response(JSON.stringify(mediaFiles), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (error) {
     console.error('Error listing media:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -139,7 +154,7 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Error uploading media:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -182,7 +197,7 @@ export const DELETE: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Error deleting media:', error);
-    return new Response(JSON.stringify({ error: String(error) }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : JSON.stringify(error) }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
