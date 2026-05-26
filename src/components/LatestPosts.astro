@@ -10,20 +10,44 @@ const posters: Array<PosterRecord> = await getPosters();
     <div class="flex flex-wrap gap-4 md:gap-8 lg:gap-12">
       {
         posters.map((poster) => (
-          <div class="w-1/2 md:w-1/3 lg:w-1/4 p-1 mb-5 md:mb-10">
-            <a href={poster.linkUrl} target="_blank">
-              <div>
+          <div class="w-1/2 md:w-1/3 lg:w-1/4 p-1 mb-5 md:mb-10 flex flex-col">
+            {poster.linkUrl ? (
+              <a href={poster.linkUrl} target="_blank" rel="noopener noreferrer">
                 <img
                   src={poster.imageUrl}
                   alt={poster.title}
-                  class="rounded-lg"
+                  class="rounded-lg w-full"
                 />
-              </div>
-
-              <div class="my-1 bg-terracottaRed hover:bg-terracottaRed-darker text-white p-1 rounded-md w-full text-center text-[10px] md:text-lg">
-                {poster.linkText}
-              </div>
-            </a>
+              </a>
+            ) : (
+              <img
+                src={poster.imageUrl}
+                alt={poster.title}
+                class="rounded-lg w-full"
+              />
+            )}
+            <div class="flex flex-col gap-1 mt-1">
+              {poster.linkText && poster.linkUrl && (
+                <a
+                  href={poster.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-terracottaRed hover:bg-terracottaRed-darker text-white p-1 rounded-md w-full text-center text-[10px] md:text-lg block"
+                >
+                  {poster.linkText}
+                </a>
+              )}
+              {poster.link2Text && poster.link2Url && (
+                <a
+                  href={poster.link2Url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="border border-terracottaRed text-terracottaRed hover:bg-terracottaRed hover:text-white p-1 rounded-md w-full text-center text-[10px] md:text-lg block transition-colors duration-200"
+                >
+                  {poster.link2Text}
+                </a>
+              )}
+            </div>
           </div>
         ))
       }
